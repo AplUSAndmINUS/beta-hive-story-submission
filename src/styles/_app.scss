@@ -16,7 +16,7 @@ $desktop: 1200px;
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-color: #0a2941; // directly typed due to import issue with _colors.scss
+  background-color: transparent; // made transparent to allow WP backgrounds to come through
 }
 
 .App {
