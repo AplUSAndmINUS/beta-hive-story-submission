@@ -1,0 +1,33 @@
+name: Publish to Stage site
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+jobs:
+  publish-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.18.0'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: wpcom
+          path: |
+            .
+            |.git*
