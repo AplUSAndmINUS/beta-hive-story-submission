@@ -5,19 +5,19 @@ import { routes } from '../../routes/routes';
 
 export const Menu: React.FC = () => {
   return (
-    <>
-      <ul style={{ display: 'flex', flexDirection: 'row', paddingBottom: '1rem' }}>
+    <div className='container sticky-top'>
+      <ul className='nav'>
         {routes
           .filter((route) => route.path !== undefined && route.path !== '*')
           .map((route) => (
-            <li key={route.path}>
+            <li key={route.path} className='nav-item'>
               &nbsp;
               <Link to={route.path || '#'}>{route.name}</Link>
               {route.name !== 'Confirmation' ? ' | ' : ''}
             </li>
           ))}
       </ul>
-    </>
+    </div>
   );
 };
 
