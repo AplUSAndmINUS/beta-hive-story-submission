@@ -17,6 +17,11 @@ export const routes: Routes[] = [
     element: <Home />,
   },
   {
+    path: '*',
+    name: 'Not Found',
+    element: <NotFound />,
+  },
+  {
     path: '/genre-selection',
     name: 'Genre Selection',
     element: <GenreSelection />,
@@ -30,10 +35,5 @@ export const routes: Routes[] = [
     path: '/confirmation',
     name: 'Confirmation',
     element: <Confirmation />,
-  },
-  {
-    path: '*',
-    name: 'Not Found',
-    element: <NotFound />,
   },
 ];

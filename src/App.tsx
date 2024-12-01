@@ -1,13 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import { routes } from './routes/routes';
+
+import Menu from './components/menu/menu';
 
 import './styles/_app.scss';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className='App'>
-      <p>I am a React app!</p>
-    </div>
+    <Router>
+      <Menu />
+      <Routes>
+        {routes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
