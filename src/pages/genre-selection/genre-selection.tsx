@@ -1,11 +1,12 @@
 import React from 'react';
 
-import ProgressBar from '../../components/progress-bar/progress-bar';
+import HIVEGenreSquare from '../../components/hive-genre/hive-genre-square';
 
 export const GenreSelection: React.FC = () => {
   return (
     <div className="d-flex flex-column">
       <p>Genre Selection</p>
+      <HIVEGenreSquare />
     </div>
   );
 };
