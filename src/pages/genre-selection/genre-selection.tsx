@@ -9,7 +9,7 @@ export const GenreSelection: React.FC = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <p>Genre Selection</p>
+        <h1 className="bd-title pb-2">Choose your HIVE</h1>
       </div>
       <div className='row'>
         {images.map((image, index) => (

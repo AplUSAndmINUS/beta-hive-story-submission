@@ -8,7 +8,7 @@ export const Menu: React.FC = () => {
     <div className='container sticky-top pb-3'>
       <ul className='nav d-flex justify-content-start'>
         {routes
-          .filter((route) => route.path !== undefined && route.path !== '*')
+          .filter((route) => route.path !== undefined && route.path !== '*' && route.path !== '/')
           .map((route, index) => (
             <li
               key={route.path}
