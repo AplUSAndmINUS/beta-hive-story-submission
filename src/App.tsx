@@ -7,11 +7,13 @@ import NotFound from './pages/404/404';
 import Menu from './components/menu/menu';
 
 import './styles/_app.scss';
+import ProgressBar from './components/progress-bar/progress-bar';
 
 const App: React.FC = () => {
   return (
     <Router>
       <Menu />
+      <ProgressBar />
       <div className='App-Main'>
         <Routes>
           {routes.map((route) => (
