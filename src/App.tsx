@@ -12,9 +12,9 @@ import ProgressBar from './components/progress-bar/progress-bar';
 const App: React.FC = () => {
   return (
     <Router>
-      <Menu />
-      <ProgressBar />
       <div className='App-Main'>
+        <Menu />
+        <ProgressBar />
         <Routes>
           {routes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />

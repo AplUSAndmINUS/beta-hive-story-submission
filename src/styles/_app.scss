@@ -7,33 +7,32 @@
 // breakpoints
 $mobile: 600px;
 $tablet: 900px;
-$desktop: 1200px;
+$desktop: 1400px;
 $large-desktop: 1600px;
 
 // start styles
 #root {
-  height: 100vh;
-  width: 100vw;
   background-color: transparent; // made transparent to allow WP backgrounds to come through
 }
 
 .App-Main {
   max-width: $desktop;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding-top: 4rem;
+  margin: 0 auto;
 
   @media screen and (max-width: $mobile) {
     padding: 1rem;
   }
 
-  @media screen and (max-width: $tablet) {
+  @media screen and (min-width: $mobile) and (max-width: $tablet) {
+    padding: 2rem;
+  }
+
+  @media screen and (min-width: $tablet) and (max-width: $desktop) {
     padding: 5rem;
   }
 
-  @media screen and (max-width: $desktop) {
-    padding: 10rem;
+  @media screen and (min-width: $desktop) {
+    padding: 4rem;
   }
 }

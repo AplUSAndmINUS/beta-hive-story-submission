@@ -1,34 +1,22 @@
 import React from 'react';
 
-export const HIVEGenreSquare: React.FC = () => {
-  interface Image {
-    name: string;
-    url: string;
-  }
+interface HIVEGenreSquareProps {
+  imageName: string;
+  imageURL: string;
+}
 
-  const [ images, setImages ] = React.useState<Image[]>([]);
-
-  React.useEffect(() => {
-    const context = (require as any).context(
-      '../../assets/images',
-      false,
-      /\.png$/
-    );
-    context.keys().forEach((key: string) => {
-      const name = key.replace('./', '').replace('.png', '');
-      const url = context(key);
-      images.push({ name, url });
-    });
-
-    setImages(images);
-  }, [images]);
-
+export const HIVEGenreSquare: React.FC<HIVEGenreSquareProps> = ({
+  imageName,
+  imageURL,
+}) => {
   return (
-    <div className="d-flex flex-column">
-      <img src={images[0]?.url} alt={images[0]?.name} />
-      <p>Hive Genre</p>
+    <div className='col-12 col-sm-6 col-md-4 col-lg-3'>
+      <div className='d-flex flex-column'>
+        <img className='img-fluid' src={imageURL} alt={imageName} />
+        <p>{imageName}</p>
+      </div>
     </div>
   );
-}
+};
 
 export default HIVEGenreSquare;
