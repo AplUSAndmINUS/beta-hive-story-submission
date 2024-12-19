@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PromptCard from '../../components/prompt-card/prompt-card';
 
 export const PromptSelection: React.FC = () => {
