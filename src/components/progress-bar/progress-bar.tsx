@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const ProgressBar: React.FC = () => {
-  const [percentage, setPercentage] = React.useState(30);
+  const [percentage, setPercentage] = React.useState(25);
 
   const handleSetPercentage = (newPercentage: number) => {
     return newPercentage ? setPercentage(newPercentage) : setPercentage(60);
@@ -9,14 +9,16 @@ export const ProgressBar: React.FC = () => {
 
   const handleTitle = (percentage: number) => {
     switch (percentage) {
-      case 30:
-        return 'Step 1 of 3: Genre Selection';
-      case 60:
-        return 'Step 2 of 3: Submit Your Story';
+      case 25:
+        return 'Step 1 of 4: Genre selection';
+      case 50:
+        return 'Step 2 of 4: Select your prompts';
+      case 75:
+        return 'Step 3 of 4: Submit your story';
       case 100:
-        return 'Step 3 of 3: Confirmation';
+        return 'Step 4 of 4: Confirmation';
       default:
-        return 'Step 1 of 3: Genre Selection';
+        return 'Step 1 of 4: Genre selection';
     }
   };
 
