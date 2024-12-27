@@ -6,10 +6,10 @@ export const PromptSelection: React.FC = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <h1 className='bd-title pb-2 mb-4'>Choose two prompts</h1>
+        <h1 className='bd-title pb-2 mb-4 mt-4'>Choose two prompts</h1>
       </div>
       <div className='row'>
-        <h3 className='pb-2 mt-2'>Setting</h3>
+        <h3 className='pb-2 mt-2 mb-1'>Setting</h3>
         <PromptCard prompt="Prompt 1" />
         <PromptCard prompt="Prompt 2" />
         <PromptCard prompt="Prompt 3" />

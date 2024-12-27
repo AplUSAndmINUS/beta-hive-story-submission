@@ -4,15 +4,16 @@ export const StorySubmission: React.FC = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <h1 className='bd-title pb-2'>Write your story</h1>
-        <p className='text-muted pb-2 mt-2'>
+        <h1 className='bd-title pb-2 mt-4'>Write your story</h1>
+        <p className='text-muted pb-2 mt-2 fs-5'>
           Please write your story below. Don't worry: Your story will autosave
           every few minutes.
         </p>
       </div>
-      <div className='row'>
+      <div className='row m-auto'>
         <textarea
-          className='form-control'
+          autoFocus
+          className='form-control ml-2'
           rows={4}
           placeholder='Enter your story here'
         ></textarea>
@@ -26,7 +27,7 @@ export const StorySubmission: React.FC = () => {
               Submit
             </button>
             &nbsp;&nbsp;
-            <button type='reset' className='btn btn-primary mt-4'>
+            <button type='reset' className='btn btn-outline-danger mt-4'>
               Clear Form
             </button>
           </div>

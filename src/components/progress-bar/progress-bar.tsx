@@ -23,8 +23,10 @@ export const ProgressBar: React.FC = () => {
   };
 
   return (
-    <div className='container d-flex flex-column align-items-start mb-5'>
-      <p className='flex-fill text-left fs-4'>{handleTitle(percentage)}</p>
+    <div className='container d-flex flex-column align-items-start m-0 mb-5'>
+      <p className='flex-fill text-left fs-4 fw-medium'>
+        {handleTitle(percentage)}
+      </p>
       <div className='progress w-100' style={{ height: '10px' }}>
         <div
           className={`progress-bar pr-2 ${
