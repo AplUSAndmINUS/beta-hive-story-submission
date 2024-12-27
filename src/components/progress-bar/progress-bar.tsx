@@ -1,31 +1,17 @@
 import React from 'react';
+import { useLocation as location } from 'react-router-dom';
+
+import useProgressText from '../../utils/hooks/useProgressText';
+import useSetPercentage from '../../utils/hooks/useSetPercentage';
 
 export const ProgressBar: React.FC = () => {
-  const [percentage, setPercentage] = React.useState(25);
-
-  const handleSetPercentage = (newPercentage: number) => {
-    return newPercentage ? setPercentage(newPercentage) : setPercentage(60);
-  };
-
-  const handleTitle = (percentage: number) => {
-    switch (percentage) {
-      case 25:
-        return 'Step 1 of 4: Genre selection';
-      case 50:
-        return 'Step 2 of 4: Select your prompts';
-      case 75:
-        return 'Step 3 of 4: Submit your story';
-      case 100:
-        return 'Step 4 of 4: Confirmation';
-      default:
-        return 'Step 1 of 4: Genre selection';
-    }
-  };
+  const progressText = useProgressText();
+  const percentage = useSetPercentage();
 
   return (
     <div className='container d-flex flex-column align-items-start m-0 mb-5'>
       <p className='flex-fill text-left fs-4 fw-medium'>
-        {handleTitle(percentage)}
+        {progressText}
       </p>
       <div className='progress w-100' style={{ height: '10px' }}>
         <div

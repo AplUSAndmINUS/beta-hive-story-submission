@@ -6,7 +6,7 @@ export const StorySubmission: React.FC = () => {
       <div className='row'>
         <h1 className='bd-title pb-2 mt-4'>Write your story</h1>
         <p className='text-muted pb-2 mt-2 fs-5'>
-          Please write your story below. Don't worry: Your story will autosave
+          Please write your story below. <br />Don't worry: Your story will autosave
           every few minutes.
         </p>
       </div>
