@@ -12,6 +12,10 @@ export const StorySubmission: React.FC = () => {
   const [isSaved, setIsSaved] = React.useState(false);
 
   React.useEffect(() => {
+    if (text.trim() === '') {
+      return; // Don't save empty text
+    }
+
     const handleSave = () => {
       setIsLoading(true);
       setIsSaved(false);
@@ -45,7 +49,7 @@ export const StorySubmission: React.FC = () => {
         <textarea
           autoFocus
           className='form-control ml-2'
-          rows={4}
+          rows={10}
           placeholder='Enter your story here'
           value={text}
           onChange={handleChange}

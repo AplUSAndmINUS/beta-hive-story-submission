@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { GENRE_SELECTIONS } from '../../services/constants/constants';
+
 interface Image {
   name: string;
   url: string;

@@ -15,7 +15,7 @@ export const GenreSelection: React.FC = () => {
         {images.map((image, index) => (
           <HIVEGenreSquare
             key={image.name + index}
-            imageName={image.name}
+            imageName={image.name.toLowerCase()}
             imageURL={image.url}
           />
         ))}
