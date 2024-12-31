@@ -1,5 +1,4 @@
 @import url('./_colors.scss');
-// @import url('./_reset.scss');
 @import url('./_spacing.scss');
 @import url('./_typography.scss');
 @import 'bootstrap/dist/css/bootstrap.min.css';
@@ -54,4 +53,18 @@ div.w-100 > .card:hover {
 
 .hover-medium:hover {
   font-weight: 500;
+}
+
+// hive-genre-square.tsx
+.genre-square {
+  cursor: pointer;
+}
+
+.genre-image {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.genre-square:hover .genre-image {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
