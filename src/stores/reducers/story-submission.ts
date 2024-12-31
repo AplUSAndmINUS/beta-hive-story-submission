@@ -2,13 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface StorySubmissionState {
   genreSelection: string;
-  promptSelection: string;
+  characterSelection: string;
+  settingSelection: string;
   storySubmission: string;
 }
 
 const initialState: StorySubmissionState = {
   genreSelection: '',
-  promptSelection: '',
+  characterSelection: '',
+  settingSelection: '',
   storySubmission: '',
 };
 
@@ -19,8 +21,11 @@ const storySubmissionSlice = createSlice({
     setGenreSelection(state, action: PayloadAction<string>) {
       state.genreSelection = action.payload;
     },
-    setPromptSelection(state, action: PayloadAction<string>) {
-      state.promptSelection = action.payload;
+    setCharacterSelection(state, action: PayloadAction<string>) {
+      state.characterSelection = action.payload;
+    },
+    setSettingSelection(state, action: PayloadAction<string>) {
+      state.settingSelection = action.payload;
     },
     setStorySubmission(state, action: PayloadAction<string>) {
       state.storySubmission = action.payload;
@@ -28,7 +33,7 @@ const storySubmissionSlice = createSlice({
   },
 });
 
-export const { setGenreSelection, setPromptSelection, setStorySubmission } =
+export const { setGenreSelection, setCharacterSelection, setSettingSelection, setStorySubmission } =
   storySubmissionSlice.actions;
 
 export default storySubmissionSlice.reducer;

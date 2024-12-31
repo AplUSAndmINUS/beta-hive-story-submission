@@ -1,16 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import { setGenreSelection } from '../../stores/reducers/story-submission';
 import HIVEGenreSquare from '../../components/hive-genre/hive-genre-square';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
+import useNavigation from '../../utils/hooks/useNavigation';
 
 export const GenreSelection: React.FC = () => {
-  const images = useHIVEImages();
   const dispatch = useAppDispatch();
   const { genreSelection } = useAppSelector((state) => state.storySubmission);
-  const navigate = useNavigate();
+  const images = useHIVEImages();
+  const navigate = useNavigation();
 
   const handleGenreSelection = (genre: string) => {
     dispatch(setGenreSelection(genre));
