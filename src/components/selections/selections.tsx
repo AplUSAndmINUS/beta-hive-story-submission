@@ -17,7 +17,8 @@ export const Selections: React.FC = () => {
           <div className='pt-3 pb-0'>
             <p className='text-right'>
               <strong>Beta HIVE: </strong>
-              {genreSelection || 'None selected'}
+              {genreSelection || 'None selected'}{' '}
+              <i className='fas fa-pencil-alt' />
             </p>
           </div>
         </Link>
@@ -25,14 +26,16 @@ export const Selections: React.FC = () => {
       <Link to='/prompt-selection' className='text-decoration-none custom-link'>
         <div className='pt-0 pb-0'>
           <p>
-            <strong>Character: </strong> {characterSelection || 'None selected'}
+            <strong>Character: </strong> {characterSelection || 'None selected'}{' '}
+            <i className='fas fa-pencil-alt' />
           </p>
         </div>
       </Link>
       <Link to='/prompt-selection' className='text-decoration-none custom-link'>
         <div className='pt-0 pb-0'>
           <p>
-            <strong>Setting: </strong> {settingSelection || 'None selected'}
+            <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
+            <i className='fas fa-pencil-alt' />
           </p>
         </div>
       </Link>
