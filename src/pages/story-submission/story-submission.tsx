@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../stores/store';
+import useNavigation from '../../utils/hooks/useNavigation';
 import { setStorySubmission } from '../../stores/reducers/story-submission';
 import Selections from '../../components/selections/selections';
 
 export const StorySubmission: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigation();
   const { storySubmission } = useAppSelector((state) => state.storySubmission);
 
   const [storyText, setStoryText] = React.useState(storySubmission);
@@ -52,6 +54,12 @@ export const StorySubmission: React.FC = () => {
     setIsSaved(false);
   };
 
+  const handleSubmit = () => {
+    dispatch(setStorySubmission(storyText));
+    setIsSaved(false);
+    navigate('/confirmation');
+  };
+
   return (
     <div className='container-fluid'>
       <div className='row d-flex justify-content-between align-items-center'>
@@ -65,7 +73,7 @@ export const StorySubmission: React.FC = () => {
         <Selections />
       </div>
       <div className='row'>
-        <form onReset={handleReset}>
+        <form onReset={handleReset} onSubmit={handleSubmit}>
           <textarea
             autoFocus
             className='form-control ml-2'
