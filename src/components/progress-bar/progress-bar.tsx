@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation as location } from 'react-router-dom';
 
 import useProgressText from '../../utils/hooks/useProgressText';
 import useSetPercentage from '../../utils/hooks/useSetPercentage';

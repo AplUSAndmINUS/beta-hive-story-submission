@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useSetPercentage from '../../utils/hooks/useSetPercentage';
 
 export const useProgressText = () => {
