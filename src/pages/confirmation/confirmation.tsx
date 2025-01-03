@@ -2,18 +2,11 @@ import React from 'react';
 
 import { useAppSelector } from '../../stores/store';
 import Selections from '../../components/selections/selections';
+import useNavigation from '../../utils/hooks/useNavigation';
 
 export const Confirmation: React.FC = () => {
   const { storySubmission } = useAppSelector((state) => state.storySubmission);
-
-  const handleReset = () => {
-    // Reset the story submission
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Submit the story
-  };
+  const navigate = useNavigation();
 
   // console.log('New story: ', storySubmission);
   return (
