@@ -55,9 +55,13 @@ export const StorySubmission: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(setStorySubmission(storyText));
+    if (!storySubmission || storySubmission.trim() === '') {
+      dispatch(setStorySubmission(storyText));
+    }
     setIsSaved(false);
-    navigate('/confirmation');
+    setTimeout(() => {
+      navigate('/confirmation');
+    }, 500); // Delay navigation to ensure the story is saved
   };
 
   return (
@@ -94,7 +98,7 @@ export const StorySubmission: React.FC = () => {
                 </>
               ) : (
                 <p className='mt-4 ms-2 ml-0'>
-                  {isSaved ? 'Draft saved!' : ''} 
+                  {isSaved ? 'Draft saved!' : ''}
                 </p>
               )}
             </div>

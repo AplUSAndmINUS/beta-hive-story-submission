@@ -39,7 +39,7 @@ $large-desktop: 1600px;
 // start components styling
 
 // card- prompt-card.tsx
-div.w-100 > .card:hover {
+div.w-100 > .card:hover, .card-selected {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 0 0 2px rgb(13, 110, 253);
   transform: translate(3px, -3px);
   transition: all 0.2s ease-in-out;
