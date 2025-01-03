@@ -24,8 +24,8 @@ export const PromptCard: React.FC<PromptCardProps> = ({
       <div className='w-100'>
         <div
           className={`card p-2 mt-4 ${
-            characterSelection === prompt ||
-            (settingSelection === prompt && 'card-selected')
+            (characterSelection === prompt || settingSelection === prompt) &&
+            'card-selected'
           }`}
         >
           <div className='card-body'>

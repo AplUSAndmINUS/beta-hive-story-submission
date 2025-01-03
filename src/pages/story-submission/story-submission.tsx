@@ -8,11 +8,13 @@ import Selections from '../../components/selections/selections';
 export const StorySubmission: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigation();
-  const { storySubmission } = useAppSelector((state) => state.storySubmission);
+  const { characterSelection, genreSelection, settingSelection, storySubmission } = useAppSelector((state) => state.storySubmission);
 
   const [storyText, setStoryText] = React.useState(storySubmission);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
+  const isSubmitDisabled =
+    !characterSelection || !genreSelection || !settingSelection || storyText.trim().length < 10;
 
   React.useEffect(() => {
     if (storyText.trim() === '') {
@@ -34,16 +36,6 @@ export const StorySubmission: React.FC = () => {
     return () => clearTimeout(timer); // Clear timeout if user types again
   }, [storyText, dispatch]);
 
-  React.useEffect(() => {
-    // const oldStory = storySubmission;
-    if (isSaved) {
-      dispatch(setStorySubmission(storyText));
-    }
-
-    // console.log(oldStory);
-    console.log('New story: ', storySubmission);
-  }, [isSaved, storyText, dispatch, storySubmission]);
-
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setStoryText(e.target.value);
     setIsSaved(false); // Reset saved status on change
@@ -54,7 +46,8 @@ export const StorySubmission: React.FC = () => {
     setIsSaved(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent default form submission behavior
     if (!storySubmission || storySubmission.trim() === '') {
       dispatch(setStorySubmission(storyText));
     }
@@ -103,7 +96,7 @@ export const StorySubmission: React.FC = () => {
               )}
             </div>
             <div className='d-flex justify-content-between'>
-              <button type='submit' className='btn btn-primary mt-4 mr-4'>
+              <button type='submit' className='btn btn-primary mt-4 mr-4' disabled={isSubmitDisabled}>
                 Submit
               </button>
               &nbsp;&nbsp;

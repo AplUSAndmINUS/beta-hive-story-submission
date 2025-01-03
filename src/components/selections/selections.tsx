@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../stores/store';
 
-export const Selections: React.FC = () => {
+interface SelectionsProps {
+  isConfirmation?: boolean;
+}
+
+export const Selections: React.FC<SelectionsProps> = ({ isConfirmation = false }) => {
   const { genreSelection, characterSelection, settingSelection } =
     useAppSelector((state) => state.storySubmission);
 
   return (
-    <div className='container w-50 ml-auto text-end'>
+    <div className={`container ${!isConfirmation ? 'w-50 ml-auto text-end' : 'p-0 mx-0 mb-3'}`}>
       <div className='row d-flex justify-content-between align-items-center'>
         <Link
           to='/genre-selection'
