@@ -94,7 +94,7 @@ export const StorySubmission: React.FC = () => {
                 </>
               ) : (
                 <p className='mt-4 ms-2 ml-0'>
-                  {isSaved ? 'Draft saved!' : ''}
+                  {isSaved ? 'Draft saved!' : ''} 
                 </p>
               )}
             </div>
