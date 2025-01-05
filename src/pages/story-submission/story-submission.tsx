@@ -46,15 +46,45 @@ export const StorySubmission: React.FC = () => {
     setIsSaved(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission behavior
     if (!storySubmission || storySubmission.trim() === '') {
       dispatch(setStorySubmission(storyText));
     }
     setIsSaved(false);
-    setTimeout(() => {
+
+    const storyData = {
+      title: 'Your Story Title', // Replace with actual title
+      author: 'Author ID', // Replace with actual author ID
+      betaHive: genreSelection,
+      setting: settingSelection,
+      character: characterSelection,
+      story: storyText,
+      date: new Date().toISOString(),
+    };
+
+    try {
+      const response = await fetch(
+        'https://your-wordpress-site.com/wp-json/beta-hive/v1/submit-story', // update with actual URL
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(storyData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to submit story');
+      }
+
+      const result = await response.json();
+      console.log('Story submitted successfully:', result);
       navigate('/confirmation');
-    }, 500); // Delay navigation to ensure the story is saved
+    } catch (error) {
+      console.error('Error submitting story:', error);
+    }
   };
 
   return (
