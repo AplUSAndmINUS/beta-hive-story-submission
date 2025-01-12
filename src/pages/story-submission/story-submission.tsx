@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../stores/store';
+import useDraftSave from '../../utils/hooks/useDraftSave';
 import useNavigation from '../../utils/hooks/useNavigation';
 import { setStorySubmission } from '../../stores/reducers/story-submission';
 import Selections from '../../components/selections/selections';
@@ -8,42 +9,40 @@ import Selections from '../../components/selections/selections';
 export const StorySubmission: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigation();
+  const 
   const { characterSelection, genreSelection, settingSelection, storySubmission } = useAppSelector((state) => state.storySubmission);
 
   const [storyText, setStoryText] = React.useState(storySubmission);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isSaved, setIsSaved] = React.useState(false);
+  const { isLoading, isSaved } = useDraftSave(storyText, setStorySubmission);
   const isSubmitDisabled =
     !characterSelection || !genreSelection || !settingSelection || storyText.trim().length < 10;
 
-  React.useEffect(() => {
-    if (storyText.trim() === '') {
-      return; // Don't save empty storyText
-    }
+  // React.useEffect(() => {// now part of useDraftSave
+  //   if (storyText.trim() === '') {
+  //     return; // Don't save empty storyText
+  //   }
 
-    const handleSave = () => {
-      setIsLoading(true);
-      setIsSaved(false);
-      dispatch(setStorySubmission(storyText));
-      setTimeout(() => {
-        setIsLoading(false);
-        setIsSaved(true);
-      }, 2000); // Simulate save delay
-    };
+  //   const handleSave = () => {
+  //     setIsLoading(true);
+  //     setIsSaved(false);
+  //     dispatch(setStorySubmission(storyText));
+  //     setTimeout(() => {
+  //       setIsLoading(false);
+  //       setIsSaved(true);
+  //     }, 2000); // Simulate save delay
+  //   };
 
-    const timer = setTimeout(handleSave, 2500); // Auto-save after 5 seconds of inactivity
+  //   const timer = setTimeout(handleSave, 2500); // Auto-save after 5 seconds of inactivity
 
-    return () => clearTimeout(timer); // Clear timeout if user types again
-  }, [storyText, dispatch]);
+  //   return () => clearTimeout(timer); // Clear timeout if user types again
+  // }, [storyText, dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setStoryText(e.target.value);
-    setIsSaved(false); // Reset saved status on change
   };
 
   const handleReset = () => {
     setStoryText('');
-    setIsSaved(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,7 +50,6 @@ export const StorySubmission: React.FC = () => {
     if (!storySubmission || storySubmission.trim() === '') {
       dispatch(setStorySubmission(storyText));
     }
-    setIsSaved(false);
 
     const storyData = {
       title: 'Your Story Title', // Replace with actual title

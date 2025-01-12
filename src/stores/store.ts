@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
+import feedbackSubmissionReducer from './reducers/feedback-submission';
 import storySubmissionReducer from './reducers/story-submission';
 
 export const store = configureStore({
   reducer: {
+    feedbackStorySubmission: feedbackSubmissionReducer,
     storySubmission: storySubmissionReducer,
   },
 });
