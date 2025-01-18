@@ -25,14 +25,14 @@ export const routes: Routes[] = [
     element: <NotFound />,
   },
   {
-    path: '/arena',
-    name: 'Arena',
-    element: <Arena />,
-  },
-  {
     path: '/betaHIVE',
     name: 'Beta HIVE Page',
     element: <BetaHIVE />,
+  },
+  {
+    path: '/arena',
+    name: 'Arena',
+    element: <Arena />,
   },
   {
     path: '/story-view',

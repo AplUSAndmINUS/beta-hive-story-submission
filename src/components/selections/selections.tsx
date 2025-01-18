@@ -5,14 +5,22 @@ import { useAppSelector } from '../../stores/store';
 
 interface SelectionsProps {
   isConfirmation?: boolean;
+  isStoryView?: boolean;
 }
 
-export const Selections: React.FC<SelectionsProps> = ({ isConfirmation = false }) => {
+export const Selections: React.FC<SelectionsProps> = ({
+  isConfirmation = false,
+  isStoryView = false,
+}) => {
   const { genreSelection, characterSelection, settingSelection } =
     useAppSelector((state) => state.storySubmission);
 
   return (
-    <div className={`container ${!isConfirmation ? 'w-50 ml-auto text-end' : 'p-0 mx-0 mb-3'}`}>
+    <div
+      className={`container ${
+        isConfirmation ? 'p-0 mx-0 mb-3' : 'w-50 ml-auto'
+      } ${isStoryView ? 'text-start w-100' : 'text-end'}`}
+    >
       <div className='row d-flex justify-content-between align-items-center'>
         <Link
           to='/genre-selection'
@@ -22,7 +30,7 @@ export const Selections: React.FC<SelectionsProps> = ({ isConfirmation = false }
             <p className='text-right'>
               <strong>Beta HIVE: </strong>
               {genreSelection || 'None selected'}{' '}
-              <i className='fas fa-pencil-alt' />
+              {!isStoryView && <i className='fas fa-pencil-alt' />}
             </p>
           </div>
         </Link>
@@ -31,7 +39,7 @@ export const Selections: React.FC<SelectionsProps> = ({ isConfirmation = false }
         <div className='pt-0 pb-0'>
           <p>
             <strong>Character: </strong> {characterSelection || 'None selected'}{' '}
-            <i className='fas fa-pencil-alt' />
+            {!isStoryView && <i className='fas fa-pencil-alt' />}
           </p>
         </div>
       </Link>
@@ -39,7 +47,7 @@ export const Selections: React.FC<SelectionsProps> = ({ isConfirmation = false }
         <div className='pt-0 pb-0'>
           <p>
             <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
-            <i className='fas fa-pencil-alt' />
+            {!isStoryView && <i className='fas fa-pencil-alt' />}
           </p>
         </div>
       </Link>

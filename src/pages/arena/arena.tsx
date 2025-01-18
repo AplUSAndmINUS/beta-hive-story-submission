@@ -67,7 +67,7 @@ export const Arena: React.FC = () => {
                 innerText={statusText}
               />
             </div>
-            <h3 className='bd-subtitle p-4'>vs.</h3>
+            <h3 className='bd-subtitle p-4 mt-5'>vs.</h3>
             <div className='col-6 d-flex flex-column d-md-block'>
               <HIVEGenreSquare
                 key={images[1].name.toLowerCase()}
