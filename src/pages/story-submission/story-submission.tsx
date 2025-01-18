@@ -4,38 +4,26 @@ import { useAppDispatch, useAppSelector } from '../../stores/store';
 import useDraftSave from '../../utils/hooks/useDraftSave';
 import useNavigation from '../../utils/hooks/useNavigation';
 import { setStorySubmission } from '../../stores/reducers/story-submission';
+import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 import Selections from '../../components/selections/selections';
 
 export const StorySubmission: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigation();
-  const 
-  const { characterSelection, genreSelection, settingSelection, storySubmission } = useAppSelector((state) => state.storySubmission);
+  const {
+    characterSelection,
+    genreSelection,
+    settingSelection,
+    storySubmission,
+  } = useAppSelector((state) => state.storySubmission);
 
   const [storyText, setStoryText] = React.useState(storySubmission);
   const { isLoading, isSaved } = useDraftSave(storyText, setStorySubmission);
   const isSubmitDisabled =
-    !characterSelection || !genreSelection || !settingSelection || storyText.trim().length < 10;
-
-  // React.useEffect(() => {// now part of useDraftSave
-  //   if (storyText.trim() === '') {
-  //     return; // Don't save empty storyText
-  //   }
-
-  //   const handleSave = () => {
-  //     setIsLoading(true);
-  //     setIsSaved(false);
-  //     dispatch(setStorySubmission(storyText));
-  //     setTimeout(() => {
-  //       setIsLoading(false);
-  //       setIsSaved(true);
-  //     }, 2000); // Simulate save delay
-  //   };
-
-  //   const timer = setTimeout(handleSave, 2500); // Auto-save after 5 seconds of inactivity
-
-  //   return () => clearTimeout(timer); // Clear timeout if user types again
-  // }, [storyText, dispatch]);
+    !characterSelection ||
+    !genreSelection ||
+    !settingSelection ||
+    storyText.trim().length < 10;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setStoryText(e.target.value);
@@ -108,23 +96,13 @@ export const StorySubmission: React.FC = () => {
             onChange={handleChange}
           ></textarea>
           <div className='d-flex justify-content-between w-100'>
-            <div className='d-flex justify-content-flex-end'>
-              {isLoading ? (
-                <>
-                  <div
-                    className='spinner-border text-primary mt-4'
-                    role='status'
-                  />
-                  <p className='mt-4 ms-2'>Saving...</p>
-                </>
-              ) : (
-                <p className='mt-4 ms-2 ml-0'>
-                  {isSaved ? 'Draft saved!' : ''}
-                </p>
-              )}
-            </div>
+            <SaveSpinner isLoading={isLoading} isSaved={isSaved} />
             <div className='d-flex justify-content-between'>
-              <button type='submit' className='btn btn-primary mt-4 mr-4' disabled={isSubmitDisabled}>
+              <button
+                type='submit'
+                className='btn btn-primary mt-4 mr-4'
+                disabled={isSubmitDisabled}
+              >
                 Submit
               </button>
               &nbsp;&nbsp;

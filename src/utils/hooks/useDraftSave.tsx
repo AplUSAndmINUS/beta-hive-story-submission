@@ -1,13 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
-const useDraftSave = (
+import { useAppDispatch } from '../../stores/store';
+
+export const useDraftSave = (
   storyText: string,
   saveAction: (text: string) => { type: string; payload: string }
 ) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     if (storyText.trim() === '') {
