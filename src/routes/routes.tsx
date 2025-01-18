@@ -35,6 +35,11 @@ export const routes: Routes[] = [
     element: <BetaHIVE />,
   },
   {
+    path: '/story-view',
+    name: 'Story View',
+    element: <StoryView />,
+  },
+  {
     path: '/genre-selection',
     name: 'Genre Selection',
     element: <GenreSelection />,
@@ -43,11 +48,6 @@ export const routes: Routes[] = [
     path: '/prompt-selection',
     name: 'Prompt Selection',
     element: <PromptSelection />,
-  },
-  {
-    path: '/story-view',
-    name: 'Story View',
-    element: <StoryView />,
   },
   {
     path: '/story-submission',
