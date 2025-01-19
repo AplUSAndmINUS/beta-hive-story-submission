@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HIVEGenreSquare from '../../components/hive-genre/hive-genre-square';
+import HIVEStoryCard from '../../components/story-card/story-card';
 import Selections from '../../components/selections/selections';
 
 interface StoryViewProps {
@@ -23,7 +23,7 @@ export const StoryView: React.FC<StoryViewProps> = ({
 
       {/* This will be in a modal view in the arena page or when a story is clicked itself */}
       <h1>Story View</h1>
-      <HIVEGenreSquare />
+      <HIVEStoryCard isHover={false} setGenreSelection={() => { }}/>
       <Selections isStoryView />
       <p>
         {storySubmission ||

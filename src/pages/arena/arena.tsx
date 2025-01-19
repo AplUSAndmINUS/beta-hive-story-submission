@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import HIVEGenreSquare from '../../components/hive-genre/hive-genre-square';
+import HIVEStoryCard from '../../components/story-card/story-card';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
 import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
@@ -43,11 +43,12 @@ export const Arena: React.FC = () => {
             }`}
           >
             <div className='col-6 d-flex flex-column d-md-block'>
-              <HIVEGenreSquare
+              <HIVEStoryCard
                 key={images[0].name.toLowerCase()}
                 imageName={images[0].name.toLowerCase()}
                 imageURL={images[0].url}
                 imgFluid={false}
+                isHover
                 width={isMobile ? '250' : '400'}
                 height={isMobile ? '250' : '400'}
                 setGenreSelection={() => {}}
@@ -69,11 +70,12 @@ export const Arena: React.FC = () => {
             </div>
             <h3 className='bd-subtitle p-4 mt-5'>vs.</h3>
             <div className='col-6 d-flex flex-column d-md-block'>
-              <HIVEGenreSquare
+              <HIVEStoryCard
                 key={images[1].name.toLowerCase()}
                 imageName={images[1].name.toLowerCase()}
                 imageURL={images[1].url}
                 imgFluid={false}
+                isHover
                 width={isMobile ? '250' : '400'}
                 height={isMobile ? '250' : '400'}
                 setGenreSelection={() => {}}
