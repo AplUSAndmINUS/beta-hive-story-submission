@@ -23,8 +23,10 @@ export const StoryView: React.FC<StoryViewProps> = ({
 
       {/* This will be in a modal view in the arena page or when a story is clicked itself */}
       <h1>Story View</h1>
-      <HIVEStoryCard isHover={false} setGenreSelection={() => { }}/>
-      <Selections isStoryView />
+      <div className='d-flex justify-content-between align-items-center'>
+        <HIVEStoryCard isHover={false} onClick={() => {}} />
+        <Selections isStoryView />
+      </div>
       <p>
         {storySubmission ||
           `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec

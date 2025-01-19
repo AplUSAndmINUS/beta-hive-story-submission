@@ -4,6 +4,7 @@ import moment from 'moment';
 import HIVEStoryCard from '../../components/story-card/story-card';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
+import StoryView from '../story-view/story-view';
 import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 import { useIsMobile } from '../../utils/hooks/useIsMobile';
 
@@ -11,6 +12,8 @@ export const Arena: React.FC = () => {
   const [feedbackTextOne, setFeedbackTextOne] = React.useState('');
   const [feedbackTextTwo, setFeedbackTextTwo] = React.useState('');
   const [statusText, setStatusText] = React.useState('');
+  const [showModal, setShowModal] = React.useState(false);
+  const [selectedStory, setSelectedStory] = React.useState<string | null>(null);
   const startTime = moment().format('MMMM Do YYYY, h:mm:ss a');
   const endTime = moment().add(1, 'hour').format('MMMM Do YYYY, h:mm:ss a');
   const images = useHIVEImages();
@@ -22,6 +25,26 @@ export const Arena: React.FC = () => {
       feedbackTextTwo,
       setFeedbackTextTwo
     );
+
+  const handleModal = (story?: string) => {
+    console.log('handleModal being called with', story);
+    // setSelectedStory(story);
+    setShowModal(!showModal);
+  };
+
+  React.useEffect(() => {
+    const handleKeyDown = ($e: KeyboardEvent) => {
+      if ($e.key === 'Escape') {
+        setShowModal(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   if (!images || images.length === 0) {
     return <div>Loading...</div>;
@@ -51,7 +74,7 @@ export const Arena: React.FC = () => {
                 isHover
                 width={isMobile ? '250' : '400'}
                 height={isMobile ? '250' : '400'}
-                setGenreSelection={() => {}}
+                onClick={() => handleModal('story')}
               />
               <textarea
                 autoFocus
@@ -78,7 +101,7 @@ export const Arena: React.FC = () => {
                 isHover
                 width={isMobile ? '250' : '400'}
                 height={isMobile ? '250' : '400'}
-                setGenreSelection={() => {}}
+                onClick={() => handleModal('story')}
               />
               <textarea
                 autoFocus
@@ -116,6 +139,25 @@ export const Arena: React.FC = () => {
           </div>
         </div>
       </form>
+
+      {showModal && (
+        <>
+          <div
+            className={`modal ${isMobile && 'modal-fullscreen'} fade show`}
+            style={{ display: 'block' }}
+            onClick={() => setShowModal(false)}
+          >
+            <div className='modal-dialog modal-dialog-centered'>
+              <div className='modal-content'>
+                <div className='modal-body'>
+                  <StoryView onClose={() => handleModal('story')} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='modal-backdrop fade show'></div>
+        </>
+      )}
     </div>
   );
 };
