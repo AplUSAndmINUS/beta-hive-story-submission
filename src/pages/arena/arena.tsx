@@ -38,7 +38,7 @@ export const Arena: React.FC = () => {
         <div className='row d-flex justify-content-center'>
           <h2 className='bd-title'>Versus Mode</h2>
           <div
-            className={`d-flex align-items-flex-start ${
+            className={`d-flex align-items-flex-start justify-content-space-around ${
               isMobile ? 'flex-column' : 'flex-row'
             }`}
           >
@@ -48,8 +48,8 @@ export const Arena: React.FC = () => {
                 imageName={images[0].name.toLowerCase()}
                 imageURL={images[0].url}
                 imgFluid={false}
-                width='250'
-                height='250'
+                width={isMobile ? '250' : '400'}
+                height={isMobile ? '250' : '400'}
                 setGenreSelection={() => {}}
               />
               <textarea
@@ -74,8 +74,8 @@ export const Arena: React.FC = () => {
                 imageName={images[1].name.toLowerCase()}
                 imageURL={images[1].url}
                 imgFluid={false}
-                width='250'
-                height='250'
+                width={isMobile ? '250' : '400'}
+                height={isMobile ? '250' : '400'}
                 setGenreSelection={() => {}}
               />
               <textarea

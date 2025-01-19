@@ -37,7 +37,7 @@ export const routes: Routes[] = [
   {
     path: '/story-view',
     name: 'Story View',
-    element: <StoryView />,
+    element: <StoryView onClose={() => { }}/>,
   },
   {
     path: '/genre-selection',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../stores/store';
+import { useAppDispatch } from '../../stores/store';
 import { setGenreSelection } from '../../stores/reducers/story-submission';
 import HIVEGenreSquare from '../../components/hive-genre/hive-genre-square';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
@@ -8,7 +8,6 @@ import useNavigation from '../../utils/hooks/useNavigation';
 
 export const GenreSelection: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { genreSelection } = useAppSelector((state) => state.storySubmission);
   const images = useHIVEImages();
   const navigate = useNavigation();
 
@@ -17,7 +16,7 @@ export const GenreSelection: React.FC = () => {
     navigate('/prompt-selection');
   };
 
-  console.log(genreSelection);
+  console.log(images);
 
   return (
     <div className='container-fluid'>
