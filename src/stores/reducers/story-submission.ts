@@ -22,7 +22,7 @@ const storySubmissionSlice = createSlice({
   name: 'storySubmissionReducer',
   initialState,
   reducers: {
-    setContentWarning(state, action: PayloadAction<string>) {
+    setIsContentWarning(state, action: PayloadAction<string>) {
       state.contentWarning = action.payload;
     },
     setContentSensitivities(state, action: PayloadAction<string[]>) {
@@ -44,7 +44,7 @@ const storySubmissionSlice = createSlice({
 });
 
 export const {
-  setContentWarning,
+  setIsContentWarning,
   setContentSensitivities,
   setGenreSelection,
   setCharacterSelection,

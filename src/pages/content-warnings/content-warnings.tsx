@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../stores/store';
 import useNavigation from '../../utils/hooks/useNavigation';
 import {
   setContentSensitivities,
-  setContentWarning,
+  setIsContentWarning,
 } from '../../stores/reducers/story-submission';
 import { CONTENT_WARNINGS } from '../../services/constants/constants';
 
@@ -25,29 +25,21 @@ export const ContentWarnings: React.FC = () => {
   }, [contentWarning, contentSensitivities]);
 
   const handleContentWarningRadio = (label: string) => {
-    switch (label) {
-      case 'Yes':
-        dispatch(setContentWarning('Yes'));
-        break;
-      case 'No':
-        dispatch(setContentWarning('No'));
-        dispatch(setContentSensitivities([]));
-        break;
-      default:
-        break;
-    }
+    dispatch(setIsContentWarning(label));
   };
 
   const handleContentSensitivities = (content: string, isChecked?: boolean) => {
     if (isChecked) {
-      setContentSensitivities([...contentSensitivities, content]);
-      setIsNextDisabled(false);
+      dispatch(setContentSensitivities([...contentSensitivities, content]));
     } else {
-      setContentSensitivities(
-        contentSensitivities.filter((item) => item !== content)
+      dispatch(
+        setContentSensitivities(
+          contentSensitivities.filter((item) => item !== content)
+        )
       );
     }
   };
+
 
   return (
     <div className='container-fluid'>
@@ -107,7 +99,7 @@ export const ContentWarnings: React.FC = () => {
         <button
           className='btn btn-primary mt-4'
           disabled={isNextDisabled}
-          onClick={() => navigate('/prompt-submission')}
+          onClick={() => navigate('/prompt-selection')}
         >
           Next
         </button>

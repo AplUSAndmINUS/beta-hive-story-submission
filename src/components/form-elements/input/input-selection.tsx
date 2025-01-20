@@ -4,7 +4,6 @@ import { useAppSelector } from '../../../stores/store';
 
 interface InputSelectionCardProps {
   handleSelection: (selection: string, isChecked?: boolean) => void;
-  checkBoxLabel?: string;
   isDisabled: boolean;
   label: string;
   name: string;
@@ -24,10 +23,6 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
   const contentSensitivities = useAppSelector(
     (state) => state.storySubmission.contentSensitivities
   );
-  const isChecked =
-    inputType === 'radio'
-      ? selectedValue === label
-      : contentSensitivities.includes(label);
 
   const handleCardClick = () => {
     if (inputType === 'radio') {
@@ -37,6 +32,11 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
       handleSelection(label, !isChecked);
     }
   };
+
+    const isChecked =
+      inputType === 'radio'
+        ? selectedValue === label
+        : contentSensitivities.includes(label);
 
   return (
     <div
@@ -48,7 +48,7 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
       <div className='w-100'>
         <div
           className={`card p-2 mt-4 ${
-            selectedValue === label && 'card-selected'
+             isChecked && 'card-selected'
           }`}
         >
           <div className='card-body'>
@@ -61,7 +61,7 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
                   disabled={isDisabled}
                   name={name}
                   type={inputType}
-                  checked={selectedValue === label}
+                  checked={isChecked}
                   onChange={() => handleCardClick()}
                   onClick={($e) => $e.stopPropagation()}
                   style={{
