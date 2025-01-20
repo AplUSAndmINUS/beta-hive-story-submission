@@ -24,7 +24,6 @@ export const PromptSelection: React.FC = () => {
 
   const handleSettingSelection = (setting: string) => {
     dispatch(setSettingSelection(setting));
-    navigate('/story-submission');
   };
 
   return (

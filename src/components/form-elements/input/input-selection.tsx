@@ -23,6 +23,19 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
   const contentSensitivities = useAppSelector(
     (state) => state.storySubmission.contentSensitivities
   );
+  const [isChecked, setIsChecked] = React.useState(
+    inputType === 'radio'
+      ? selectedValue === label
+      : contentSensitivities.includes(label)
+  );
+
+  React.useEffect(() => {
+    if (inputType === 'radio') {
+      setIsChecked(selectedValue === label);
+    } else {
+      setIsChecked(contentSensitivities.includes(label));
+    }
+  }, [selectedValue, contentSensitivities, label, inputType]);
 
   const handleCardClick = () => {
     if (inputType === 'radio') {
@@ -32,11 +45,6 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
       handleSelection(label, !isChecked);
     }
   };
-
-    const isChecked =
-      inputType === 'radio'
-        ? selectedValue === label
-        : contentSensitivities.includes(label);
 
   return (
     <div

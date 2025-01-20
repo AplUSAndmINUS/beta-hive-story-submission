@@ -1,9 +1,9 @@
 import React from 'react';
 
+import NavigationButtons from '../../components/navigate-buttons/navigate-buttons';
 import InputSelectionCard from '../../components/form-elements/input/input-selection';
 import Selections from '../../components/selections/selections';
 import { useAppDispatch, useAppSelector } from '../../stores/store';
-import useNavigation from '../../utils/hooks/useNavigation';
 import {
   setContentSensitivities,
   setIsContentWarning,
@@ -12,7 +12,6 @@ import { CONTENT_WARNINGS } from '../../services/constants/constants';
 
 export const ContentWarnings: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigation();
   const [isNextDisabled, setIsNextDisabled] = React.useState(true);
   const { contentWarning, contentSensitivities } = useAppSelector(
     (state) => state.storySubmission
@@ -39,7 +38,6 @@ export const ContentWarnings: React.FC = () => {
       );
     }
   };
-
 
   return (
     <div className='container-fluid'>
@@ -88,22 +86,11 @@ export const ContentWarnings: React.FC = () => {
           />
         ))}
       </div>
-      <div className='d-flex justify-content-flex-start'>
-        <button
-          className='btn btn-outline-primary mt-4 mr-4'
-          onClick={() => navigate('/genre-selection')}
-        >
-          Back
-        </button>
-        &nbsp;&nbsp;
-        <button
-          className='btn btn-primary mt-4'
-          disabled={isNextDisabled}
-          onClick={() => navigate('/prompt-selection')}
-        >
-          Next
-        </button>
-      </div>
+      <NavigationButtons
+        backNavigation='/genre-selection'
+        isNextDisabled={isNextDisabled}
+        nextNavigation='/prompt-selection'
+      />
     </div>
   );
 };
