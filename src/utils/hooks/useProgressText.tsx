@@ -4,16 +4,18 @@ export const useProgressText = () => {
   const percentage = useSetPercentage();
 
   switch (percentage) {
-    case 25:
-      return 'Step 1 of 4: Genre Selection';
-    case 50:
-      return 'Step 2 of 4: Prompt Selection';
-    case 75:
-      return 'Step 3 of 4: Story Submission';
+    case 20:
+      return 'Step 1 of 5: Genre Selection';
+    case 40:
+      return 'Step 2 of 5: Content Warnings';
+    case 60:
+      return 'Step 3 of 5: Prompt Submission';
+    case 80:
+      return 'Step 4 of 5: Story Submission';
     case 100:
-      return 'Step 4 of 4: Confirmation';
+      return 'Step 4 of 5: Confirmation';
     default:
-      return 'Step 1 of 4: Genre Selection';
+      return 'Step 1 of 5: Genre Selection';
   }
 };
 

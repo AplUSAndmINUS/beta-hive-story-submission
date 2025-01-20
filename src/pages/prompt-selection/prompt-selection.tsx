@@ -33,7 +33,8 @@ export const PromptSelection: React.FC = () => {
         <div className='col'>
           <h1 className='bd-title pb-2 mt-4'>Choose two prompts</h1>
           <p className='text-muted pb-2 mt-2 fs-5'>
-            Select two prompts from the Setting and Character sections.<br />
+            Select two prompts from the Setting and Character sections.
+            <br />
             You'll use these in the next step to create your story.
           </p>
         </div>

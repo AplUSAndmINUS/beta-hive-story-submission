@@ -3,11 +3,11 @@ import { NonIndexRouteObject } from 'react-router-dom';
 import { Arena } from '../pages/arena/arena';
 import { BetaHIVE } from '../pages/beta-hive/beta-hive';
 import { Confirmation } from '../pages/confirmation/confirmation';
+import { ContentWarnings } from '../pages/content-warnings/content-warnings';
 import { GenreSelection } from '../pages/genre-selection/genre-selection';
 import { NotFound } from '../pages/404/404';
 import { PromptSelection } from '../pages/prompt-selection/prompt-selection';
 import { StorySubmission } from '../pages/story-submission/story-submission';
-import { StoryView } from '../pages/story-view/story-view';
 
 interface Routes extends NonIndexRouteObject {
   name: string;
@@ -38,6 +38,11 @@ export const routes: Routes[] = [
     path: '/genre-selection',
     name: 'Genre Selection',
     element: <GenreSelection />,
+  },
+  {
+    path: '/content-warning',
+    name: 'Content Warning',
+    element: <ContentWarnings />,
   },
   {
     path: '/prompt-selection',
