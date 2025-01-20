@@ -24,6 +24,7 @@ export const Arena: React.FC = () => {
     isSubmitDisabled,
     statusText,
   } = useFeedbackSubmission(feedbackText, setFeedbackText);
+  const logoPath = require('../../assets/images/logo/betaHIVE.png');
 
   const handleModal = (story?: string) => {
     console.log('handleModal being called with', story);
@@ -51,15 +52,20 @@ export const Arena: React.FC = () => {
 
   return (
     <div className='container'>
+      <div className='row d-flex justify-content-center align-items-center pt-4 pb-4 w-50 h-50 m-auto'>
+        <img src={logoPath} alt='Beta HIVE' />
+      </div>
       <div className='row d-flex justify-content-center'>
-        <h2 className='bd-title mt-2 mb-2'>Versus Mode</h2>
+        <div className='col-12 pt-4 pb-5'>
+          <h2 className='bd-title'>Versus Mode</h2>
+        </div>
         <form>
           <div
             className={`d-flex align-items-flex-start justify-content-space-between ${
               isMobile ? 'flex-column' : 'flex-row mb-auto'
             }`}
           >
-            <div className='col-4 d-flex flex-column d-md-block'>
+            <div className='col-12 col-md-4 d-flex flex-column align-items-center'>
               <HIVEStoryCard
                 key={images[0].name.toLowerCase()}
                 imageName={images[0].name.toLowerCase()}
@@ -71,10 +77,10 @@ export const Arena: React.FC = () => {
                 onClick={() => handleModal('story')}
               />
             </div>
-            <div className='col-2 mt-5'>
-              <h3 className='bd-subtitle p-4 mt-5 text-center'>vs.</h3>
+            <div className='col-12 col-md-2 d-flex justify-content-center align-items-center mt-5 mt-md-0'>
+              <h3 className='bd-subtitle text-center'>vs.</h3>
             </div>
-            <div className='col-3 d-flex flex-column d-md-block'>
+            <div className='col-12 col-md-4 d-flex flex-column align-items-center'>
               <HIVEStoryCard
                 key={images[1].name.toLowerCase()}
                 imageName={images[1].name.toLowerCase()}
