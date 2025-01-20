@@ -1,7 +1,6 @@
 import React from 'react';
 
-import InputCard from '../../components/form-elements/input/input';
-import PromptCard from '../../components/prompt-card/prompt-card';
+import InputCard from '../../components/form-elements/input/input-selection';
 import Selections from '../../components/selections/selections';
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import useNavigation from '../../utils/hooks/useNavigation';
@@ -13,22 +12,30 @@ import {
 export const ContentWarnings: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigation();
-  const [contentSensitivitiesArray, setContentSensitivitiesArray] =
-    React.useState<string[]>([]);
-  const characterSelection = useAppSelector(
-    (state) => state.storySubmission.characterSelection
+  const [ isNextDisabled, setIsNextDisabled ] = React.useState(true);
+  const { contentWarning, contentSensitivities } = useAppSelector(
+    (state) => state.storySubmission
   );
 
   const handleContentWarningRadio = (label: 'Yes' | 'No') => {
-    dispatch(setContentWarning(label));
+    switch (label) {
+      case 'Yes':
+        dispatch(setContentWarning('Yes'));
+        break;
+      case 'No':
+        dispatch(setContentWarning('No'));
+        dispatch(setContentSensitivities([]));
+        setIsNextDisabled(false);
+        break;
+    }
   };
 
   const handleContentSensitivities = (content: string, isChecked: boolean) => {
     if (isChecked) {
-      setContentSensitivitiesArray([...contentSensitivitiesArray, content]);
+      setContentSensitivities([...contentSensitivities, content]);
     } else {
-      setContentSensitivitiesArray(
-        contentSensitivitiesArray.filter((item) => item !== content)
+      setContentSensitivities(
+        contentSensitivities.filter((item) => item !== content)
       );
     }
   };
@@ -54,12 +61,14 @@ export const ContentWarnings: React.FC = () => {
         </h3>
         <InputCard
           name='isContentSensitive'
+          isDisabled={false}
           inputType='radio'
           label='Yes'
           handleSelection={handleContentWarningRadio}
         />
         <InputCard
           name='isContentSensitive'
+          isDisabled={false}
           inputType='radio'
           label='No'
           handleSelection={handleContentWarningRadio}
@@ -76,7 +85,7 @@ export const ContentWarnings: React.FC = () => {
           />
         ))} */}
       </div>
-      <div className={`row mt-5 ${!characterSelection && 'opacity-25'}`}>
+      <div className={`row mt-5 ${contentWarning === 'No' && 'opacity-25'}`}>
         <h3 className='pb-2 mt-2 mb-1'>Setting</h3>
         {/* {SETTING_SELECTIONS.map((setting, index) => (
           <PromptCard
@@ -86,6 +95,22 @@ export const ContentWarnings: React.FC = () => {
             handleSelection={handleSettingSelection}
           />
         ))} */}
+      </div>
+      <div className='d-flex justify-content-flex-start'>
+        <button
+          className='btn btn-outline-primary mt-4 mr-4'
+          onClick={() => navigate('/genre-selection')}
+        >
+          Back
+        </button>
+        &nbsp;&nbsp;
+        <button
+          className='btn btn-primary mt-4'
+          disabled={isNextDisabled}
+          onClick={() => navigate('/prompt-submission')}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

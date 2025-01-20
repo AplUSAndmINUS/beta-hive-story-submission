@@ -4,13 +4,15 @@ import { useAppSelector } from '../../../stores/store';
 
 interface InputCardProps {
   handleSelection: (selection: 'Yes' | 'No') => void;
+  isDisabled: boolean;
   label: 'Yes' | 'No';
   name: string;
-  inputType: 'checkbox' | 'input' | 'radio';
+  inputType: 'checkbox' | 'radio';
 }
 
 export const InputCard: React.FC<InputCardProps> = ({
   handleSelection,
+  isDisabled,
   name,
   label,
   inputType,
@@ -18,14 +20,16 @@ export const InputCard: React.FC<InputCardProps> = ({
   const selectedValue = useAppSelector(
     (state) => state.storySubmission.contentWarning
   );
-  
+
   const handleCardClick = () => {
     handleSelection(label);
   };
 
   return (
     <div
-      className='col-6 d-flex flex-wrap justify-content-between cursor-pointer'
+      className={`col-6 d-flex flex-wrap justify-content-between ${
+        !isDisabled && 'cursor-pointer'
+      }`}
       onClick={handleCardClick}
     >
       <div className='w-100'>
@@ -36,9 +40,12 @@ export const InputCard: React.FC<InputCardProps> = ({
         >
           <div className='card-body'>
             <h5 className='card-title'>
-              <label className='d-flex align-items-center cursor-pointer'>
+              <label
+                className='d-flex align-items-center'
+                style={{ cursor: !isDisabled ? 'pointer' : 'auto' }}
+              >
                 <input
-                  className='cursor-pointer'
+                  disabled={isDisabled}
                   name={name}
                   type={inputType}
                   checked={selectedValue === label}
