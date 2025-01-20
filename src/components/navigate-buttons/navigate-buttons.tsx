@@ -26,7 +26,7 @@ export const NavigateButtons: React.FC<NavigateButtonsProps> = ({
       &nbsp;&nbsp;
       <button
         className='btn btn-primary mt-4'
-        disabled={isNextDisabled}
+        disabled={!isNextDisabled}
         onClick={() => navigate(nextNavigation)}
       >
         Next

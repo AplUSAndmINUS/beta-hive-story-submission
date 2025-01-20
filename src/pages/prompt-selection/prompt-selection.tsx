@@ -1,9 +1,9 @@
 import React from 'react';
 
+import NavigateButtons from '../../components/navigate-buttons/navigate-buttons';
 import PromptCard from '../../components/prompt-card/prompt-card';
 import Selections from '../../components/selections/selections';
 import { useAppDispatch, useAppSelector } from '../../stores/store';
-import useNavigation from '../../utils/hooks/useNavigation';
 import {
   setCharacterSelection,
   setSettingSelection,
@@ -13,9 +13,8 @@ import { SETTING_SELECTIONS } from '../../services/constants/constants';
 
 export const PromptSelection: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigation();
-  const characterSelection = useAppSelector(
-    (state) => state.storySubmission.characterSelection
+  const { characterSelection, settingSelection } = useAppSelector(
+    (state) => state.storySubmission
   );
 
   const handleCharacterSelection = (character: string) => {
@@ -61,6 +60,13 @@ export const PromptSelection: React.FC = () => {
           />
         ))}
       </div>
+      <div className='row'>
+      <NavigateButtons
+        isNextDisabled={!!characterSelection && !!settingSelection}
+        backNavigation='/content-warnings'
+        nextNavigation='/story-submission'
+        />
+        </div>
     </div>
   );
 };
