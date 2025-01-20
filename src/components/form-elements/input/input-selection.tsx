@@ -2,15 +2,16 @@ import React from 'react';
 
 import { useAppSelector } from '../../../stores/store';
 
-interface InputCardProps {
-  handleSelection: (selection: 'Yes' | 'No') => void;
+interface InputSelectionCardProps {
+  handleSelection: (selection: string, isChecked?: boolean) => void;
+  checkBoxLabel?: string;
   isDisabled: boolean;
-  label: 'Yes' | 'No';
+  label: string;
   name: string;
   inputType: 'checkbox' | 'radio';
 }
 
-export const InputCard: React.FC<InputCardProps> = ({
+export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
   handleSelection,
   isDisabled,
   name,
@@ -20,9 +21,21 @@ export const InputCard: React.FC<InputCardProps> = ({
   const selectedValue = useAppSelector(
     (state) => state.storySubmission.contentWarning
   );
+  const contentSensitivities = useAppSelector(
+    (state) => state.storySubmission.contentSensitivities
+  );
+  const isChecked =
+    inputType === 'radio'
+      ? selectedValue === label
+      : contentSensitivities.includes(label);
 
   const handleCardClick = () => {
-    handleSelection(label);
+    if (inputType === 'radio') {
+      handleSelection(label);
+    } else if (inputType === 'checkbox') {
+      const isChecked = contentSensitivities.includes(label);
+      handleSelection(label, !isChecked);
+    }
   };
 
   return (
@@ -49,7 +62,7 @@ export const InputCard: React.FC<InputCardProps> = ({
                   name={name}
                   type={inputType}
                   checked={selectedValue === label}
-                  onChange={() => handleSelection(label)}
+                  onChange={() => handleCardClick()}
                   onClick={($e) => $e.stopPropagation()}
                   style={{
                     marginRight: '1rem',
@@ -67,4 +80,4 @@ export const InputCard: React.FC<InputCardProps> = ({
   );
 };
 
-export default InputCard;
+export default InputSelectionCard;
