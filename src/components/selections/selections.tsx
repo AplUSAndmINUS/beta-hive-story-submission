@@ -10,8 +10,12 @@ interface SelectionsProps {
 export const Selections: React.FC<SelectionsProps> = ({
   isStoryView = false,
 }) => {
-  const { genreSelection, characterSelection, settingSelection } =
-    useAppSelector((state) => state.storySubmission);
+  const {
+    genreSelection,
+    characterSelection,
+    settingSelection,
+    contentSensitivities,
+  } = useAppSelector((state) => state.storySubmission);
 
   return isStoryView ? (
     <div className='container ml-auto text-start w-100'>
@@ -47,6 +51,20 @@ export const Selections: React.FC<SelectionsProps> = ({
             <p className='text-right'>
               <strong>Beta HIVE: </strong>
               {genreSelection || 'None selected'}{' '}
+              <i className='fas fa-pencil-alt' />
+            </p>
+          </div>
+        </Link>
+
+        <Link
+          to='/content-warnings'
+          className='text-decoration-none custom-link'
+          style={{ paddingLeft: 0 }}
+        >
+          <div className='pt-0 pb-0'>
+            <p>
+              <strong>Content Warnings: </strong>{' '}
+              {contentSensitivities.join(', ') || 'None selected'}{' '}
               <i className='fas fa-pencil-alt' />
             </p>
           </div>
