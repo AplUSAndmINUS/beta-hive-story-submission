@@ -9,7 +9,7 @@ export const Menu: React.FC = () => {
 
   return (
     <div className='container sticky-top m-0 p-0'>
-      <ul className='nav d-flex justify-content-start flex-wrap m-0 p-0'>
+      <ul className='nav d-flex justify-content-start flex-nowrap m-0 p-0'>
         {routes
           .filter(
             (route) =>
@@ -20,7 +20,7 @@ export const Menu: React.FC = () => {
           .map((route, index) => (
             <li
               key={route.path}
-              className={`nav-item ${isMobile ? 'p-0' : 'p-3'} ${
+              className={`nav-item ${isMobile ? 'p-0' : 'p-2'} ${
                 index === 0 ? 'pl-0' : ''
               }`}
               style={{

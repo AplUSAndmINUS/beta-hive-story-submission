@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../stores/store';
 import useNavigation from '../../utils/hooks/useNavigation';
 import {
   setContentSensitivities,
-  setIsContentWarning,
+  setContentWarning,
 } from '../../stores/reducers/story-submission';
 
 export const ContentWarnings: React.FC = () => {
@@ -19,17 +19,8 @@ export const ContentWarnings: React.FC = () => {
     (state) => state.storySubmission.characterSelection
   );
 
-  const handleContentWarningRadio = (label: string) => {
-    switch (label) {
-      case 'Yes':
-        dispatch(setIsContentWarning(true));
-        break;
-      case 'No':
-        dispatch(setIsContentWarning(false));
-        break;
-      default:
-        break;
-    }
+  const handleContentWarningRadio = (label: 'Yes' | 'No') => {
+    dispatch(setContentWarning(label));
   };
 
   const handleContentSensitivities = (content: string, isChecked: boolean) => {

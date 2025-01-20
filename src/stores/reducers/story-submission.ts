@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface StorySubmissionState {
-  isContentWarning: boolean;
+  contentWarning: string;
   contentSensitivities: string[];
   genreSelection: string;
   characterSelection: string;
@@ -10,7 +10,7 @@ interface StorySubmissionState {
 }
 
 const initialState: StorySubmissionState = {
-  isContentWarning: false,
+  contentWarning: '',
   contentSensitivities: [],
   genreSelection: '',
   characterSelection: '',
@@ -22,8 +22,8 @@ const storySubmissionSlice = createSlice({
   name: 'storySubmissionReducer',
   initialState,
   reducers: {
-    setIsContentWarning(state, action: PayloadAction<boolean>) {
-      state.isContentWarning = action.payload;
+    setContentWarning(state, action: PayloadAction<string>) {
+      state.contentWarning = action.payload;
     },
     setContentSensitivities(state, action: PayloadAction<string[]>) {
       state.contentSensitivities = action.payload;
@@ -44,7 +44,7 @@ const storySubmissionSlice = createSlice({
 });
 
 export const {
-  setIsContentWarning,
+  setContentWarning,
   setContentSensitivities,
   setGenreSelection,
   setCharacterSelection,

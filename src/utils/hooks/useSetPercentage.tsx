@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation as location } from 'react-router-dom';
 
 export const useSetPercentage = () => {
-  const [percentage, setPercentage] = React.useState(25);
+  const [percentage, setPercentage] = React.useState(20);
   const path = location().pathname;
 
   const handleSetPercentage = (percentage: number) => {
@@ -12,22 +12,25 @@ export const useSetPercentage = () => {
   React.useEffect(() => {
     switch (path) {
       case '/':
-        handleSetPercentage(25);
+        handleSetPercentage(20);
         break;
       case '/genre-selection':
-        handleSetPercentage(25);
+        handleSetPercentage(20);
+        break;
+      case '/content-warning':
+        handleSetPercentage(40);
         break;
       case '/prompt-selection':
-        handleSetPercentage(50);
+        handleSetPercentage(60);
         break;
       case '/story-submission':
-        handleSetPercentage(75);
+        handleSetPercentage(80);
         break;
       case '/confirmation':
         handleSetPercentage(100);
         break;
       default:
-        handleSetPercentage(25);
+        handleSetPercentage(20);
         break;
     }
   }, [path]);

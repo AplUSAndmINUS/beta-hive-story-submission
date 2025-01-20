@@ -12,6 +12,7 @@ export const ProgressBar: React.FC = () => {
   React.useEffect(() => {
     const storySubmissionRoutes = [
       '/genre-selection',
+      '/content-warning',
       '/prompt-selection',
       '/story-submission',
       '/confirmation',
