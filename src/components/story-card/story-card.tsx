@@ -36,7 +36,6 @@ export const HIVEStoryCard: React.FC<HIVEStoryCardProps> = ({
           height={`${height} && ${height}`}
           width={`${width} && ${width}`}
         />
-        <p className='fs-4 mb-4'>{imageName}</p>
       </div>
     </div>
   );

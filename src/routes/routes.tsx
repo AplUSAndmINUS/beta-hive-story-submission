@@ -35,11 +35,6 @@ export const routes: Routes[] = [
     element: <Arena />,
   },
   {
-    path: '/story-view',
-    name: 'Story View',
-    element: <StoryView onClose={() => { }}/>,
-  },
-  {
     path: '/genre-selection',
     name: 'Genre Selection',
     element: <GenreSelection />,

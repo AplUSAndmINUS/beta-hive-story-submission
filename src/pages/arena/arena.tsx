@@ -5,26 +5,25 @@ import HIVEStoryCard from '../../components/story-card/story-card';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
 import StoryView from '../story-view/story-view';
-import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 import { useIsMobile } from '../../utils/hooks/useIsMobile';
 
 export const Arena: React.FC = () => {
-  const [feedbackTextOne, setFeedbackTextOne] = React.useState('');
-  const [feedbackTextTwo, setFeedbackTextTwo] = React.useState('');
-  const [statusText, setStatusText] = React.useState('');
+  const [feedbackText, setFeedbackText] = React.useState('');
   const [showModal, setShowModal] = React.useState(false);
   const [selectedStory, setSelectedStory] = React.useState<string | null>(null);
   const startTime = moment().format('MMMM Do YYYY, h:mm:ss a');
   const endTime = moment().add(1, 'hour').format('MMMM Do YYYY, h:mm:ss a');
   const images = useHIVEImages();
   const isMobile = useIsMobile();
-  const { handleChange, handleReset, handleSubmit, isLoading, isSaved } =
-    useFeedbackSubmission(
-      feedbackTextOne,
-      setFeedbackTextOne,
-      feedbackTextTwo,
-      setFeedbackTextTwo
-    );
+  const {
+    handleChange,
+    handleReset,
+    handleSubmit,
+    isLoading,
+    isSaved,
+    isSubmitDisabled,
+    statusText,
+  } = useFeedbackSubmission(feedbackText, setFeedbackText);
 
   const handleModal = (story?: string) => {
     console.log('handleModal being called with', story);
@@ -52,20 +51,15 @@ export const Arena: React.FC = () => {
 
   return (
     <div className='container'>
-      <div className='row'>
-        <h1 className='bd-title'>Current Arena</h1>
-        <p className='text-muted'>Start Time: {startTime}</p>
-        <p className='text-muted'>End Time: {endTime}</p>
-      </div>
-      <form>
-        <div className='row d-flex justify-content-center'>
-          <h2 className='bd-title'>Versus Mode</h2>
+      <div className='row d-flex justify-content-center'>
+        <h2 className='bd-title mt-2 mb-2'>Versus Mode</h2>
+        <form>
           <div
-            className={`d-flex align-items-flex-start justify-content-space-around ${
-              isMobile ? 'flex-column' : 'flex-row'
+            className={`d-flex align-items-flex-start justify-content-space-between ${
+              isMobile ? 'flex-column' : 'flex-row mb-auto'
             }`}
           >
-            <div className='col-6 d-flex flex-column d-md-block'>
+            <div className='col-4 d-flex flex-column d-md-block'>
               <HIVEStoryCard
                 key={images[0].name.toLowerCase()}
                 imageName={images[0].name.toLowerCase()}
@@ -76,23 +70,11 @@ export const Arena: React.FC = () => {
                 height={isMobile ? '250' : '400'}
                 onClick={() => handleModal('story')}
               />
-              <textarea
-                autoFocus
-                className='form-control ml-2'
-                rows={4}
-                placeholder='Submit your feedback on this story here'
-                value={feedbackTextOne}
-                required
-                onChange={($e) => handleChange($e, 1)}
-              />
-              <SaveSpinner
-                isLoading={isLoading}
-                isSaved={isSaved}
-                innerText={statusText}
-              />
             </div>
-            <h3 className='bd-subtitle p-4 mt-5'>vs.</h3>
-            <div className='col-6 d-flex flex-column d-md-block'>
+            <div className='col-2 mt-5'>
+              <h3 className='bd-subtitle p-4 mt-5 text-center'>vs.</h3>
+            </div>
+            <div className='col-3 d-flex flex-column d-md-block'>
               <HIVEStoryCard
                 key={images[1].name.toLowerCase()}
                 imageName={images[1].name.toLowerCase()}
@@ -103,42 +85,10 @@ export const Arena: React.FC = () => {
                 height={isMobile ? '250' : '400'}
                 onClick={() => handleModal('story')}
               />
-              <textarea
-                autoFocus
-                className='form-control ml-2'
-                rows={4}
-                placeholder='Submit your feedback on this story here'
-                value={feedbackTextTwo}
-                required
-                onChange={($e) => handleChange($e, 2)}
-              />
-              <SaveSpinner
-                isLoading={isLoading}
-                isSaved={isSaved}
-                innerText={statusText}
-              />
-              <div className='row d-flex justify-content-center align-items-flex-end w-auto'>
-                <button
-                  type='submit'
-                  className='btn btn-primary mt-4'
-                  onClick={handleSubmit}
-                  disabled={isLoading}
-                >
-                  Submit
-                </button>
-                <button
-                  type='reset'
-                  className='btn btn-outline-danger mt-4'
-                  onClick={handleReset}
-                  disabled={isLoading}
-                >
-                  Reset
-                </button>
-              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
 
       {showModal && (
         <>
@@ -150,7 +100,17 @@ export const Arena: React.FC = () => {
             <div className='modal-dialog modal-dialog-centered'>
               <div className='modal-content'>
                 <div className='modal-body'>
-                  <StoryView onClose={() => handleModal('story')} />
+                  <StoryView
+                    onClose={() => handleModal('story')}
+                    handleChange={handleChange}
+                    handleReset={handleReset}
+                    handleSubmit={handleSubmit}
+                    isLoading={isLoading}
+                    isSaved={isSaved}
+                    isSubmitDisabled={isSubmitDisabled}
+                    statusText={statusText}
+                    feedbackText={feedbackText}
+                  />
                 </div>
               </div>
             </div>

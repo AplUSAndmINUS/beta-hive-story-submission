@@ -4,53 +4,79 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../stores/store';
 
 interface SelectionsProps {
-  isConfirmation?: boolean;
   isStoryView?: boolean;
 }
 
 export const Selections: React.FC<SelectionsProps> = ({
-  isConfirmation = false,
   isStoryView = false,
 }) => {
   const { genreSelection, characterSelection, settingSelection } =
     useAppSelector((state) => state.storySubmission);
 
-  return (
-    <div
-      className={`container ${
-        isConfirmation ? 'p-0 mx-0 mb-3' : 'w-50 ml-auto'
-      } ${isStoryView ? 'text-start w-100' : 'text-end'}`}
-    >
+  return isStoryView ? (
+    <div className='container ml-auto text-start w-100'>
       <div className='row d-flex justify-content-between align-items-center'>
+        <div className='pt-3 pb-0'>
+          <p className='text-right'>
+            <strong>Beta HIVE: </strong>
+            {genreSelection || 'None selected'}{' '}
+            {!isStoryView && <i className='fas fa-pencil-alt' />}
+          </p>
+        </div>
+      </div>
+      <div className='pt-0 pb-0'>
+        <p>
+          <strong>Character: </strong> {characterSelection || 'None selected'}{' '}
+        </p>
+      </div>
+      <div className='pt-0 pb-0'>
+        <p>
+          <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
+        </p>
+      </div>
+    </div>
+  ) : (
+    <div className='container'>
+      <div className='row d-flex justify-content-flex-start align-items-center w-50 p-0 mx-0 mb-3 text-start'>
         <Link
           to='/genre-selection'
           className='text-decoration-none custom-link'
+          style={{ paddingLeft: 0 }}
         >
           <div className='pt-3 pb-0'>
             <p className='text-right'>
               <strong>Beta HIVE: </strong>
               {genreSelection || 'None selected'}{' '}
-              {!isStoryView && <i className='fas fa-pencil-alt' />}
+              <i className='fas fa-pencil-alt' />
+            </p>
+          </div>
+        </Link>
+        <Link
+          to='/prompt-selection'
+          className='text-decoration-none custom-link'
+          style={{ paddingLeft: 0 }}
+        >
+          <div className='pt-0 pb-0'>
+            <p>
+              <strong>Character: </strong>{' '}
+              {characterSelection || 'None selected'}{' '}
+              <i className='fas fa-pencil-alt' />
+            </p>
+          </div>
+        </Link>
+        <Link
+          to='/prompt-selection'
+          className='text-decoration-none custom-link'
+          style={{ paddingLeft: 0 }}
+        >
+          <div className='pt-0 pb-0'>
+            <p>
+              <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
+              <i className='fas fa-pencil-alt' />
             </p>
           </div>
         </Link>
       </div>
-      <Link to='/prompt-selection' className='text-decoration-none custom-link'>
-        <div className='pt-0 pb-0'>
-          <p>
-            <strong>Character: </strong> {characterSelection || 'None selected'}{' '}
-            {!isStoryView && <i className='fas fa-pencil-alt' />}
-          </p>
-        </div>
-      </Link>
-      <Link to='/prompt-selection' className='text-decoration-none custom-link'>
-        <div className='pt-0 pb-0'>
-          <p>
-            <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
-            {!isStoryView && <i className='fas fa-pencil-alt' />}
-          </p>
-        </div>
-      </Link>
     </div>
   );
 };

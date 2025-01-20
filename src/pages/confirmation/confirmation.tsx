@@ -17,7 +17,7 @@ export const Confirmation: React.FC = () => {
           <p className='text-muted pb-2 mt-2 fs-5'>
             Thank you! Your story has been submitted and is pending review.
           </p>
-          <Selections isConfirmation />
+          <Selections />
         </div>
         <div className='row'>
           <h3 className='text-muted pb-2 mt-2 fs-5'>Story:</h3>

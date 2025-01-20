@@ -2,54 +2,65 @@ import React from 'react';
 
 import { useAppDispatch } from '../../stores/store';
 import {
-  setVSFeedbackOneSelection,
-  setVSFeedbackTwoSelection,
+  setVSFeedbackSelection,
 } from '../../stores/reducers/versus-feedback-submission';
 
 export const useFeedbackSubmission = (
-  feedbackTextOne: string,
-  setFeedbackTextOne: React.Dispatch<React.SetStateAction<string>>,
-  feedbackTextTwo: string,
-  setFeedbackTextTwo: React.Dispatch<React.SetStateAction<string>>
+  feedbackText: string,
+  setFeedbackText: React.Dispatch<React.SetStateAction<string>>,
 ) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
+  const [statusText, setStatusText] = React.useState('');
+  const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
   const dispatch = useAppDispatch();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
-    feedbackText: number
+    feedbackText: string
   ) => {
     handleSave();
 
-    switch (feedbackText) {
-      case 1:
-        setFeedbackTextOne(e.target.value);
-        setTimeout(() => {
-          dispatch(setVSFeedbackOneSelection(feedbackTextOne));
-        }, 2500);
-        break;
-      case 2:
-        setFeedbackTextTwo(e.target.value);
-        setTimeout(() => {
-          dispatch(setVSFeedbackTwoSelection(feedbackTextTwo));
-        }, 2500);
-        break;
+    if (feedbackText.length > 0) {
+      setIsSubmitDisabled(false);
+      setFeedbackText(e.target.value);
+
+      // simulate longer save time
+      setTimeout(() => {
+        setVSFeedbackSelection(feedbackText);
+      }, 2500);
     }
+
+    // switch (feedbackText) {
+    //   case 1:
+    //     setFeedbackTextOne(e.target.value);
+    //     setTimeout(() => {
+    //       dispatch(setVSFeedbackOneSelection(feedbackTextOne));
+    //     }, 2500);
+    //     break;
+    //   case 2:
+    //     setStatusText('Saving...');
+    //     setFeedbackTextTwo(e.target.value);
+    //     setTimeout(() => {
+    //       dispatch(setVSFeedbackTwoSelection(feedbackTextTwo));
+    //     }, 2500);
+    //     break;
+    // }
   };
 
   const handleReset = () => {
-    setFeedbackTextOne('');
-    setFeedbackTextTwo('');
+    setFeedbackText('');
   };
 
   const handleSave = () => {
+    setStatusText('Saving...');
     setIsLoading(true);
     setIsSaved(false);
 
     setTimeout(() => {
       setIsLoading(false);
       setIsSaved(true);
+      setStatusText('Saved!');
     }, 4000); // Simulate save delay
   };
 
@@ -57,12 +68,11 @@ export const useFeedbackSubmission = (
     e.preventDefault(); // Prevent default form submission behavior
     setIsLoading(true);
     setIsSaved(false);
-    if (!feedbackTextOne || !feedbackTextTwo) {
+    if (!feedbackText) {
       return;
     }
 
-    dispatch(setVSFeedbackOneSelection(feedbackTextOne));
-    dispatch(setVSFeedbackTwoSelection(feedbackTextTwo));
+    dispatch(setVSFeedbackSelection(feedbackText));
 
     try {
       const response = await fetch(
@@ -72,7 +82,7 @@ export const useFeedbackSubmission = (
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ feedbackTextOne, feedbackTextTwo }),
+          body: JSON.stringify({ feedbackText }),
         }
       );
 
@@ -94,6 +104,8 @@ export const useFeedbackSubmission = (
     handleSubmit,
     isLoading,
     isSaved,
+    isSubmitDisabled,
+    statusText,
   };
 };
 
