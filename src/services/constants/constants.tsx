@@ -1,4 +1,5 @@
 import { characterSchema } from '../../pages/prompt-selection/prompt-selection.types';
+import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
 import { genreSchema } from '../../pages/genre-selection/genre-selection.types';
 import { settingSchema } from '../../pages/prompt-selection/prompt-selection.types';
 
@@ -86,6 +87,29 @@ export const CHARACTER_SELECTIONS: characterSchema[] = [
     name: 'Huckleberry Finn',
     description:
       'A mischievous boy who embarks on adventures along the Mississippi River.',
+  },
+];
+
+export const CONTENT_WARNINGS: contentWarningsSchema[] = [
+  {
+    id: 1,
+    name: 'Violence',
+    description: 'Scenes of violence or harm to characters.',
+  },
+  {
+    id: 2,
+    name: 'Death',
+    description: 'Themes of death or dying.',
+  },
+  {
+    id: 3,
+    name: 'Sexual Content',
+    description: 'Scenes of a sexual nature.',
+  },
+  {
+    id: 4,
+    name: 'Substance Abuse',
+    description: 'References to drug or alcohol use.',
   },
 ];
 
