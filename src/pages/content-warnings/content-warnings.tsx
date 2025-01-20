@@ -13,10 +13,16 @@ import { CONTENT_WARNINGS } from '../../services/constants/constants';
 export const ContentWarnings: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigation();
-  const [ isNextDisabled, setIsNextDisabled ] = React.useState(true);
+  const [isNextDisabled, setIsNextDisabled] = React.useState(true);
   const { contentWarning, contentSensitivities } = useAppSelector(
     (state) => state.storySubmission
   );
+
+  React.useEffect(() => {
+    if (contentWarning === 'Yes' && contentSensitivities.length > 0) {
+      setIsNextDisabled(false);
+    }
+  }, [contentWarning, contentSensitivities]);
 
   const handleContentWarningRadio = (label: string) => {
     switch (label) {
@@ -26,7 +32,6 @@ export const ContentWarnings: React.FC = () => {
       case 'No':
         dispatch(setContentWarning('No'));
         dispatch(setContentSensitivities([]));
-        setIsNextDisabled(false);
         break;
       default:
         break;
@@ -41,9 +46,6 @@ export const ContentWarnings: React.FC = () => {
       setContentSensitivities(
         contentSensitivities.filter((item) => item !== content)
       );
-      if (contentSensitivities.length === 0) {
-        setIsNextDisabled(true);
-      }
     }
   };
 
@@ -81,7 +83,7 @@ export const ContentWarnings: React.FC = () => {
           handleSelection={handleContentWarningRadio}
         />
       </div>
-      <div className='row'>
+      <div className={`row mt-5 ${contentWarning !== 'Yes' && 'opacity-25'}`}>
         <h3 className='pb-2 mt-5'>Content Sensitivities</h3>
         {CONTENT_WARNINGS.map((content, index) => (
           <InputSelectionCard
