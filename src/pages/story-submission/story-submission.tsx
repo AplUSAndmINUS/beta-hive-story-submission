@@ -50,23 +50,23 @@ export const StorySubmission: React.FC = () => {
     };
 
     try {
-      const response = await fetch(
-        'https://your-wordpress-site.com/wp-json/beta-hive/v1/submit-story', // update with actual URL
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(storyData),
-        }
-      );
+      // const response = await fetch(
+      //   'https://your-wordpress-site.com/wp-json/beta-hive/v1/submit-story', // update with actual URL
+      //   {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(storyData),
+      //   }
+      // );
 
-      if (!response.ok) {
-        throw new Error('Failed to submit story');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Failed to submit story');
+      // }
 
-      const result = await response.json();
-      console.log('Story submitted successfully:', result);
+      // const result = await response.json();
+      // console.log('Story submitted successfully:', result);
       navigate('/confirmation');
     } catch (error) {
       console.error('Error submitting story:', error);
