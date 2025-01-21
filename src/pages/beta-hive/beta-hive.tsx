@@ -115,6 +115,11 @@ export const BetaHIVE: React.FC = () => {
       <div className='row'>
         <Arena />
       </div>
+      <div className='row mt-5'>
+        <p>
+          &copy; Copyright {moment().year()} Beta HIVE - All Rights Reserved
+        </p>
+      </div>
     </div>
   );
 };
