@@ -3,12 +3,14 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 import feedbackSubmissionReducer from './reducers/feedback-submission';
 import storySubmissionReducer from './reducers/story-submission';
+import VoteSubmissionReducer from './reducers/vote-submission';
 import VSFeedbackSubmissionReducer from './reducers/versus-feedback-submission';
 
 export const store = configureStore({
   reducer: {
     feedbackStorySubmission: feedbackSubmissionReducer,
     storySubmission: storySubmissionReducer,
+    voteSubmission: VoteSubmissionReducer,
     VSFeedbackSubmission: VSFeedbackSubmissionReducer,
   },
 });

@@ -16,8 +16,6 @@ export const GenreSelection: React.FC = () => {
     navigate('/content-warning');
   };
 
-  console.log(images);
-
   return (
     <div className='container-fluid'>
       <div className='row'>

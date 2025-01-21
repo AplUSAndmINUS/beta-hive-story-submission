@@ -45,7 +45,7 @@ export const ContentWarnings: React.FC = () => {
         <div className='col'>
           <h1 className='bd-title pb-2 mt-4'>Content warnings</h1>
           <p className='text-muted pb-2 mt-2 fs-5'>
-            Specify if your story will include any content sensitivities or
+            Specify if your story will include any sensitive content or
             objectionable material.
             <br />
             These are used to allow readers to filter stories based on their
@@ -56,7 +56,7 @@ export const ContentWarnings: React.FC = () => {
       </div>
       <div className='row'>
         <h3 className='pb-2 mt-5'>
-          Will your story have any content warnings?
+          Will your story have any content sensitive to certain groups?
         </h3>
         <InputSelectionCard
           name='isContentSensitive'
@@ -88,7 +88,7 @@ export const ContentWarnings: React.FC = () => {
       </div>
       <NavigationButtons
         backNavigation='/genre-selection'
-        isNextDisabled={isNextDisabled}
+        isNextDisabled={!isNextDisabled}
         nextNavigation='/prompt-selection'
       />
     </div>

@@ -3,12 +3,14 @@ import React from 'react';
 import { useAppSelector } from '../../stores/store';
 interface PromptCardProps {
   handleSelection: (selection: string) => void;
+  isStorySelection?: boolean;
   prompt: string;
   promptText?: string;
 }
 
 export const PromptCard: React.FC<PromptCardProps> = ({
   handleSelection,
+  isStorySelection,
   prompt,
   promptText,
 }) => {
@@ -16,15 +18,22 @@ export const PromptCard: React.FC<PromptCardProps> = ({
     (state) => state.storySubmission
   );
 
+const voteSubmission = useAppSelector(
+  (state) => state.voteSubmission.selectedPrompt
+);
   return (
     <div
       className='col-6 d-flex flex-wrap justify-content-between'
-      onClick={() => handleSelection(prompt)}
+      onClick={
+        isStorySelection ? () => handleSelection : () => handleSelection(prompt)
+      }
     >
       <div className='w-100'>
         <div
           className={`card p-2 mt-4 ${
-            (characterSelection === prompt || settingSelection === prompt) &&
+            (characterSelection === prompt ||
+              settingSelection === prompt ||
+              voteSubmission === prompt) &&
             'card-selected'
           }`}
         >

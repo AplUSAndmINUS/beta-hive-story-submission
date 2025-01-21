@@ -74,28 +74,28 @@ export const useFeedbackSubmission = (
 
     dispatch(setVSFeedbackSelection(feedbackText));
 
-    try {
-      const response = await fetch(
-        'https://your-wordpress-site.com/wp-json/beta-hive/v1/submit-feedback', // update with actual URL
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ feedbackText }),
-        }
-      );
+    // try {
+    //   const response = await fetch(
+    //     'https://your-wordpress-site.com/wp-json/beta-hive/v1/submit-feedback', // update with actual URL
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({ feedbackText }),
+    //     }
+    //   );
 
-      if (!response.ok) {
-        throw new Error('Failed to submit feedback');
-      }
+    //   if (!response.ok) {
+    //     throw new Error('Failed to submit feedback');
+    //   }
 
-      const result = await response.json();
-      console.log('Feedback submitted successfully:', result);
-      // navigate('/confirmation'); // Uncomment if you have navigation logic
-    } catch (error) {
-      console.error('Error submitting feedback:', error);
-    }
+    //   const result = await response.json();
+    //   console.log('Feedback submitted successfully:', result);
+    //   navigate('/confirmation'); // Uncomment if you have navigation logic
+    // } catch (error) {
+    //   console.error('Error submitting feedback:', error);
+    // }
   };
 
   return {
