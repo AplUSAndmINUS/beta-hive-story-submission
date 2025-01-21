@@ -16,8 +16,8 @@ interface Routes extends NonIndexRouteObject {
 export const routes: Routes[] = [
   {
     path: '/',
-    name: 'Genre Selection',
-    element: <GenreSelection />,
+    name: 'Beta HIVE Page',
+    element: <BetaHIVE />,
   },
   {
     path: '*',
