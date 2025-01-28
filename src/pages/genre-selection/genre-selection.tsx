@@ -13,7 +13,7 @@ export const GenreSelection: React.FC = () => {
 
   const handleGenreSelection = (genre: string) => {
     dispatch(setGenreSelection(genre));
-    navigate('/content-warning');
+    navigate('Prompt Selection');
   };
 
   return (

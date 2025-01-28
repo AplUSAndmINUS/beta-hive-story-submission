@@ -17,13 +17,13 @@ export const useSetPercentage = () => {
       case '/genre-selection':
         handleSetPercentage(20);
         break;
-      case '/content-warning':
+      case '/prompt-selection':
         handleSetPercentage(40);
         break;
-      case '/prompt-selection':
+      case '/story-submission':
         handleSetPercentage(60);
         break;
-      case '/story-submission':
+      case '/content-warning':
         handleSetPercentage(80);
         break;
       case '/confirmation':

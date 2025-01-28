@@ -9,7 +9,7 @@ import { NotFound } from '../pages/404/404';
 import { PromptSelection } from '../pages/prompt-selection/prompt-selection';
 import { StorySubmission } from '../pages/story-submission/story-submission';
 
-interface Routes extends NonIndexRouteObject {
+export interface Routes extends NonIndexRouteObject {
   name: string;
 }
 
@@ -40,11 +40,6 @@ export const routes: Routes[] = [
     element: <GenreSelection />,
   },
   {
-    path: '/content-warning',
-    name: 'Content Warning',
-    element: <ContentWarnings />,
-  },
-  {
     path: '/prompt-selection',
     name: 'Prompt Selection',
     element: <PromptSelection />,
@@ -53,6 +48,11 @@ export const routes: Routes[] = [
     path: '/story-submission',
     name: 'Story Submission',
     element: <StorySubmission />,
+  },
+  {
+    path: '/content-warning',
+    name: 'Content Warning',
+    element: <ContentWarnings />,
   },
   {
     path: '/confirmation',

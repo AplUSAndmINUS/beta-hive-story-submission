@@ -63,8 +63,8 @@ export const PromptSelection: React.FC = () => {
       <div className='row'>
       <NavigateButtons
         isNextDisabled={!!characterSelection && !!settingSelection}
-        backNavigation='/content-warnings'
-        nextNavigation='/story-submission'
+        backNavigation='Genre Selection'
+        nextNavigation='Story Submission'
         />
         </div>
     </div>

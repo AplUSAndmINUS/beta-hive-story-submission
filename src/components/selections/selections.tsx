@@ -57,19 +57,6 @@ export const Selections: React.FC<SelectionsProps> = ({
         </Link>
 
         <Link
-          to='/content-warnings'
-          className='text-decoration-none custom-link'
-          style={{ paddingLeft: 0 }}
-        >
-          <div className='pt-0 pb-0'>
-            <p>
-              <strong>Content Warnings: </strong>{' '}
-              {contentSensitivities.join(', ') || 'None selected'}{' '}
-              <i className='fas fa-pencil-alt' />
-            </p>
-          </div>
-        </Link>
-        <Link
           to='/prompt-selection'
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
@@ -90,6 +77,19 @@ export const Selections: React.FC<SelectionsProps> = ({
           <div className='pt-0 pb-0'>
             <p>
               <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
+              <i className='fas fa-pencil-alt' />
+            </p>
+          </div>
+        </Link>
+        <Link
+          to='/content-warnings'
+          className='text-decoration-none custom-link'
+          style={{ paddingLeft: 0 }}
+        >
+          <div className='pt-0 pb-0'>
+            <p>
+              <strong>Content Warnings: </strong>{' '}
+              {contentSensitivities.join(', ') || 'None selected'}{' '}
               <i className='fas fa-pencil-alt' />
             </p>
           </div>

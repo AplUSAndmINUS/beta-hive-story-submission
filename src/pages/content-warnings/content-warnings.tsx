@@ -87,9 +87,10 @@ export const ContentWarnings: React.FC = () => {
         ))}
       </div>
       <NavigationButtons
-        backNavigation='/genre-selection'
+        backNavigation='Story Submission'
         isNextDisabled={!isNextDisabled}
-        nextNavigation='/prompt-selection'
+        isNextDisplayed={false}
+        isSubmitDisplayed={true}
       />
     </div>
   );
