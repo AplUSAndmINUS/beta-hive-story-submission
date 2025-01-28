@@ -22,11 +22,18 @@ const storySubmissionSlice = createSlice({
   name: 'storySubmissionReducer',
   initialState,
   reducers: {
-    setIsContentWarning(state, action: PayloadAction<string>) {
-      state.contentWarning = action.payload;
-    },
     setContentSensitivities(state, action: PayloadAction<string[]>) {
       state.contentSensitivities = action.payload;
+    },
+    setIsContentWarning(state, action: PayloadAction<string>) {
+      state.contentWarning = action.payload;
+      if (action.payload.includes('Yes')) {
+        state.contentSensitivities = state.contentSensitivities.filter(
+          (sensitivity) => sensitivity !== 'None'
+        );
+      } else {
+        state.contentSensitivities = ['None'];
+      }
     },
     setGenreSelection(state, action: PayloadAction<string>) {
       state.genreSelection = action.payload;

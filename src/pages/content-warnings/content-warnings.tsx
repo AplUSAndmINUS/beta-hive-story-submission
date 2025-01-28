@@ -1,5 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 
+import useNavigation from '../../utils/hooks/useNavigation';
 import NavigationButtons from '../../components/navigate-buttons/navigate-buttons';
 import InputSelectionCard from '../../components/form-elements/input/input-selection';
 import Selections from '../../components/selections/selections';
@@ -12,16 +14,77 @@ import { CONTENT_WARNINGS } from '../../services/constants/constants';
 
 export const ContentWarnings: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [isNextDisabled, setIsNextDisabled] = React.useState(true);
-  const { contentWarning, contentSensitivities } = useAppSelector(
-    (state) => state.storySubmission
-  );
+  const navigate = useNavigation();
+  const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
+  const {
+    characterSelection,
+    contentSensitivities,
+    contentWarning,
+    genreSelection,
+    settingSelection,
+    storySubmission,
+  } = useAppSelector((state) => state.storySubmission);
 
   React.useEffect(() => {
-    if (contentWarning === 'Yes' && contentSensitivities.length > 0) {
-      setIsNextDisabled(false);
+    if (
+      characterSelection &&
+      genreSelection &&
+      settingSelection &&
+      storySubmission.trim().length >= 10 &&
+      contentWarning !== '' &&
+      (contentWarning === 'No' || contentSensitivities.length > 0)
+    ) {
+      setIsSubmitDisabled(false);
+    } else {
+      setIsSubmitDisabled(true);
     }
-  }, [contentWarning, contentSensitivities]);
+  }, [
+    characterSelection,
+    genreSelection,
+    settingSelection,
+    storySubmission,
+    contentSensitivities.length,
+    contentWarning,
+  ]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    const storyData = {
+      title: 'Your Story Title', // Replace with actual title
+      author: 'Author ID', // Replace with actual author ID
+      betaHive: genreSelection,
+      setting: settingSelection,
+      character: characterSelection,
+      contentSensitivities: contentSensitivities,
+      contentWarning: contentWarning,
+      story: storySubmission,
+      date: moment().toISOString(),
+    };
+
+    try {
+      // const response = await fetch(
+      //   'https://your-wordpress-site.com/wp-json/beta-hive/v1/submit-story', // update with actual URL
+      //   {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(storyData),
+      //   }
+      // );
+
+      // if (!response.ok) {
+      //   throw new Error('Failed to submit story');
+      // }
+
+      // const result = await response.json();
+      // console.log('Story submitted successfully:', result);
+      navigate('Confirmation');
+    } catch (error) {
+      console.error('Error submitting story:', error);
+    }
+  };
 
   const handleContentWarningRadio = (label: string) => {
     dispatch(setIsContentWarning(label));
@@ -88,8 +151,10 @@ export const ContentWarnings: React.FC = () => {
       </div>
       <NavigationButtons
         backNavigation='Story Submission'
-        isNextDisabled={!isNextDisabled}
+        handleSubmit={handleSubmit}
+        isNextDisabled={true}
         isNextDisplayed={false}
+        isSubmitDisabled={isSubmitDisabled}
         isSubmitDisplayed={true}
       />
     </div>

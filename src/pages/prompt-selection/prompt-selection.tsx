@@ -33,7 +33,7 @@ export const PromptSelection: React.FC = () => {
           <p className='text-muted pb-2 mt-2 fs-5'>
             Select two prompts from the Setting and Character sections.
             <br />
-            You'll use these in the next step to create your story.
+            You'll use these to create your story.
           </p>
         </div>
         <Selections />
@@ -62,7 +62,7 @@ export const PromptSelection: React.FC = () => {
       </div>
       <div className='row'>
       <NavigateButtons
-        isNextDisabled={!!characterSelection && !!settingSelection}
+        isNextDisabled={!characterSelection || !settingSelection}
         backNavigation='Genre Selection'
         nextNavigation='Story Submission'
         />

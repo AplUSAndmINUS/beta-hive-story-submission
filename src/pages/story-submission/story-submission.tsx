@@ -9,13 +9,21 @@ import NavigateButtons from '../../components/navigate-buttons/navigate-buttons'
 
 export const StorySubmission: React.FC = () => {
   const { storySubmission } = useAppSelector((state) => state.storySubmission);
-  const [storyText, setStoryText] = React.useState(storySubmission || '');
+  const [isNextDisabled, setIsNextDisabled] = React.useState(true);
+  const [storyText, setStoryText] = React.useState('');
   const { isLoading, isSaved } = useDraftSave(storyText, setStorySubmission);
-  const isNextDisabled = storyText.trim().length < 10;
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setStoryText(e.target.value);
   };
+
+  React.useEffect(() => {
+    if (storyText.trim().length >= 10) {
+      setIsNextDisabled(false);
+    } else {
+      setIsNextDisabled(true);
+    }
+  }, [storyText]);
 
   return (
     <div className='container-fluid'>
@@ -24,8 +32,8 @@ export const StorySubmission: React.FC = () => {
           <h1 className='bd-title pb-2 mt-4'>Write your story</h1>
           <p className='text-muted pb-2 mt-2 fs-5'>
             Please write your story below, then click "Submit Story". <br />
-            Don't worry: Your story will autosave every few minutes. <br />
-            You can also edit your story after submitting it.
+            Don't worry: Your story will autosave, and you can edit it anytime
+            after submission.
           </p>
         </div>
         <Selections />
@@ -40,14 +48,13 @@ export const StorySubmission: React.FC = () => {
           onChange={handleChange}
         ></textarea>
         <div className='d-flex justify-content-between w-100'>
-          <div className='d-flex justify-content-start'>
-            <SaveSpinner isLoading={isLoading} isSaved={isSaved} />
-            <NavigateButtons
-              backNavigation='Prompt Selection'
-              isNextDisabled={isNextDisabled}
-              nextButtonText='Submit Story'
-            />
-          </div>
+          <SaveSpinner isLoading={isLoading} isSaved={isSaved} />
+          <NavigateButtons
+            backNavigation='Prompt Selection'
+            isNextDisabled={isNextDisabled}
+            nextButtonText='Submit Story'
+            nextNavigation='Content Warning'
+          />
         </div>
       </div>
     </div>
