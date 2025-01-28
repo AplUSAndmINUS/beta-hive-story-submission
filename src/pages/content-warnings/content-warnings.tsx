@@ -34,7 +34,7 @@ export const ContentWarnings: React.FC = () => {
       contentWarning !== '' &&
       (contentWarning === 'No' || contentSensitivities.length > 0)
     ) {
-      setIsSubmitDisabled(false);
+      setIsSubmitDisabled(false);g
     } else {
       setIsSubmitDisabled(true);
     }
