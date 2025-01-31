@@ -9,6 +9,8 @@ export const AdminPage: React.FC = () => {
         <h1 className='bd-title pb-2 mt-4 mb-4'>Admin</h1>
       </div>
 
+      {/* Specify the prompts, then add image upload options */}
+      {/* Next need to do the beta hive options with image upload */}
       <div className='row'>
         <h3 className='bd-title pb-2'>Specify the prompts</h3>
         <div className='d-flex flex-row flex-wrap justify-content-between'>
