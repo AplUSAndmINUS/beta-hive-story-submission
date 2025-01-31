@@ -1,5 +1,6 @@
 import { NonIndexRouteObject } from 'react-router-dom';
 
+import { AdminPage } from '../pages/admin/admin';
 import { Arena } from '../pages/arena/arena';
 import { BetaHIVE } from '../pages/beta-hive/beta-hive';
 import { Confirmation } from '../pages/confirmation/confirmation';
@@ -23,6 +24,11 @@ export const routes: Routes[] = [
     path: '*',
     name: 'Not Found',
     element: <NotFound />,
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    element: <AdminPage />,
   },
   {
     path: '/betaHIVE',

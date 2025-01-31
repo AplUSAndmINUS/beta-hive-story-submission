@@ -54,11 +54,7 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
       onClick={handleCardClick}
     >
       <div className='w-100'>
-        <div
-          className={`card p-2 mt-4 ${
-             isChecked && 'card-selected'
-          }`}
-        >
+        <div className={`card p-2 mt-4 ${isChecked && 'card-selected'}`}>
           <div className='card-body'>
             <h5 className='card-title'>
               <label
