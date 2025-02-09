@@ -42,7 +42,7 @@ export const routes: Routes[] = [
   },
   {
     path: '/genre-selection',
-    name: 'Genre Selection',
+    name: 'Beta HIVE Selection',
     element: <GenreSelection />,
   },
   {
