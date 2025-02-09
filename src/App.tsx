@@ -8,6 +8,7 @@ import store from './stores/store';
 import Menu from './components/menu/menu';
 
 import './styles/_app.scss';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import ProgressBar from './components/progress-bar/progress-bar';
 
 const App: React.FC = () => {

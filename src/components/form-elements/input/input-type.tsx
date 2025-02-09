@@ -2,12 +2,14 @@ import React from 'react';
 
 interface InputTypeProps {
   isDisabled: boolean;
+  isImageUpload?: boolean;
   name: string;
   label: string;
 }
 
 export const InputType: React.FC<InputTypeProps> = ({
   isDisabled = false,
+  isImageUpload = false,
   name,
   label,
 }) => {
@@ -30,6 +32,16 @@ export const InputType: React.FC<InputTypeProps> = ({
                 />
               </label>
             </h5>
+            {isImageUpload && (
+              <div className='input-group mb-3'>
+                <button
+                  className='btn btn-primary'
+                  type='button'
+                >
+                  Upload
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
