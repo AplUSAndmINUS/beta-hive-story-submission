@@ -15,11 +15,14 @@ export const SaveSpinner: React.FC<SaveSpinnerProps> = ({
     <div className='d-flex justify-content-flex-end'>
       {isLoading ? (
         <>
-          <div className='spinner-border text-primary mt-4' role='status' />
-          <p className='mt-4 ms-2'>{innerText || 'Saving...'}</p>
+          <div
+            className='spinner-border text-primary mt-4 mb-2 me-2'
+            role='status'
+          />
+          <p className='mt-4 me-3'>{innerText || 'Saving...'}</p>
         </>
       ) : (
-        <p className='mt-4 ms-2 ml-0'>{isSaved ? 'Draft saved!' : ''}</p>
+        <p className='mt-4 me-3'>{isSaved ? 'Draft saved!' : ''}</p>
       )}
     </div>
   );

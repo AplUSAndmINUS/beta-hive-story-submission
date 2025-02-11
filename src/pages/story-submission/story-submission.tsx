@@ -1,17 +1,18 @@
 import React from 'react';
 
-import { useAppSelector } from '../../stores/store';
 import useDraftSave from '../../utils/hooks/useDraftSave';
 import { setStorySubmission } from '../../stores/reducers/story-submission';
 import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 import Selections from '../../components/selections/selections';
 import NavigateButtons from '../../components/navigate-buttons/navigate-buttons';
+import WordCount from '../../components/word-count/word-count';
+import useWordCount from '../../utils/hooks/useWordCount';
 
 export const StorySubmission: React.FC = () => {
-  const { storySubmission } = useAppSelector((state) => state.storySubmission);
   const [isNextDisabled, setIsNextDisabled] = React.useState(true);
   const [storyText, setStoryText] = React.useState('');
   const { isLoading, isSaved } = useDraftSave(storyText, setStorySubmission);
+  const wordCount = useWordCount(storyText);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setStoryText(e.target.value);
@@ -48,13 +49,16 @@ export const StorySubmission: React.FC = () => {
           onChange={handleChange}
         ></textarea>
         <div className='d-flex justify-content-between w-100'>
-          <SaveSpinner isLoading={isLoading} isSaved={isSaved} />
-          <NavigateButtons
-            backNavigation='Prompt Selection'
-            isNextDisabled={isNextDisabled}
-            nextButtonText='Submit Story'
-            nextNavigation='Content Warning'
-          />
+          <WordCount wordCount={wordCount} />
+          <div className='d-flex justify-content-start'>
+            <SaveSpinner isLoading={isLoading} isSaved={isSaved} />
+            <NavigateButtons
+              backNavigation='Prompt Selection'
+              isNextDisabled={isNextDisabled}
+              nextButtonText='Submit Story'
+              nextNavigation='Content Warning'
+            />
+          </div>
         </div>
       </div>
     </div>
