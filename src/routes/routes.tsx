@@ -36,8 +36,8 @@ export const routes: Routes[] = [
     element: <BetaHIVE />,
   },
   {
-    path: '/arena',
-    name: 'Arena',
+    path: '/battleHIVE',
+    name: 'Battle HIVE',
     element: <Arena />,
   },
   {

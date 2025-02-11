@@ -28,11 +28,9 @@ export const Confirmation: React.FC = () => {
             ultricies aliquam.`}
           </p>
           <div className='d-flex justify-content-start'>
-            <button className='btn btn-primary mt-4 mr-4'>
-              Leave Feedback
+            <button className='btn btn-primary mt-4 mr-4' onClick={() => navigate('/betaHIVE')}>
+              Go to your Beta HIVE
             </button>
-            &nbsp;&nbsp;
-            <button className='btn btn-primary mt-4 mr-4'>Versus Mode</button>
           </div>
         </div>
       </div>

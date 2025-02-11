@@ -62,7 +62,7 @@ export const Arena: React.FC = () => {
       </div> */}
       <div className='row d-flex justify-content-center'>
         <div className='col-12 pt-4 pb-5'>
-          <h2 className='bd-title'>Arena</h2>
+          <h2 className='bd-title'>Battle HIVE</h2>
         </div>
         <form onSubmit={(e) => e.preventDefault()}>
           <div
