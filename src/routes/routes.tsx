@@ -6,6 +6,7 @@ import { BetaHIVE } from '../pages/beta-hive/beta-hive';
 import { Confirmation } from '../pages/confirmation/confirmation';
 import { ContentWarnings } from '../pages/content-warnings/content-warnings';
 import { GenreSelection } from '../pages/genre-selection/genre-selection';
+import { HomePage } from '../pages/home/home';
 import { NotFound } from '../pages/404/404';
 import { PromptSelection } from '../pages/prompt-selection/prompt-selection';
 import { StorySubmission } from '../pages/story-submission/story-submission';
@@ -17,8 +18,8 @@ export interface Routes extends NonIndexRouteObject {
 export const routes: Routes[] = [
   {
     path: '/',
-    name: 'Beta HIVE Page',
-    element: <BetaHIVE />,
+    name: 'Home',
+    element: <HomePage />,
   },
   {
     path: '*',

@@ -49,6 +49,7 @@ export const Arena: React.FC = () => {
 
   const handleStorySelection = (prompt: string) => {
     setSelectedStory(prompt);
+    console.log('Selected story:', selectedStory);
   }
 
   if (!images || images.length === 0) {

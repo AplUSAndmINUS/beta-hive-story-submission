@@ -61,6 +61,7 @@ export const ContentWarnings: React.FC = () => {
       story: storySubmission,
       date: moment().toISOString(),
     };
+    console.log('Story data:', storyData);
 
     try {
       // const response = await fetch(
