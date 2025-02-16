@@ -38,7 +38,10 @@ export const InputType: React.FC<InputTypeProps> = ({
           <div className='card-body'>
             <h5 className='card-title'>
               <label className='d-flex flex-column align-items-start'>
-                {label}
+                <span>
+                  {label}
+                  {isRequired && <span className='text-danger'> *</span>}
+                </span>
                 <input
                   className='form-control mt-3'
                   disabled={isDisabled}

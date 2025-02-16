@@ -1,9 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
+interface BetaHIVEPrompt {
+  name: string;
+  image: string;
+}
+
 interface AdminSubmissionState {
   adminPrompts: string[];
-  betaHIVEs: string[];
+  betaHIVEs: BetaHIVEPrompt[];
   contentWarnings: string[];
   countdownDate: moment.Moment;
 }
@@ -22,7 +27,7 @@ const adminSubmissionSlice = createSlice({
     setAdminPrompts(state, action: PayloadAction<string[]>) {
       state.adminPrompts = [...action.payload];
     },
-    setBetaHIVEs(state, action: PayloadAction<string[]>) {
+    setBetaHIVEs(state, action: PayloadAction<BetaHIVEPrompt[]>) {
       state.betaHIVEs = [...action.payload];
     },
     setContentWarnings(state, action: PayloadAction<string[]>) {

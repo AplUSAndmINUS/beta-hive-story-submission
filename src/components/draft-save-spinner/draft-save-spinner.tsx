@@ -4,12 +4,14 @@ interface SaveSpinnerProps {
   innerText?: string;
   isLoading: boolean;
   isSaved: boolean;
+  savedText?: string;
 }
 
 export const SaveSpinner: React.FC<SaveSpinnerProps> = ({
   innerText,
   isLoading,
   isSaved,
+  savedText,
 }) => {
   return (
     <div className='d-flex justify-content-flex-end'>
@@ -22,7 +24,9 @@ export const SaveSpinner: React.FC<SaveSpinnerProps> = ({
           <p className='mt-4 me-3'>{innerText || 'Saving...'}</p>
         </>
       ) : (
-        <p className='mt-4 me-3'>{isSaved ? 'Draft saved!' : ''}</p>
+        <p className='mt-4 me-3'>
+          {isSaved ? (savedText ? savedText : 'Draft saved!') : ''}
+        </p>
       )}
     </div>
   );

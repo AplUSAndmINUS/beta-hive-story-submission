@@ -3,6 +3,7 @@ import React from 'react';
 import Accordion from '../../components/accordion/accordion';
 import InputType from '../../components/form-elements/input/input-type';
 import ButtonsRow from '../../components/form-elements/buttons/buttons-row';
+import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 
 export const AdminPage: React.FC = () => {
   const [betaHiveOptions, setBetaHiveOptions] = React.useState<number>(4);
@@ -33,6 +34,55 @@ export const AdminPage: React.FC = () => {
     }
   };
 
+  const handleClear = () => {
+    setBetaHiveOptions(4);
+    setContentWarnings(4);
+    setPrompts(10);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log('Form submitted');
+    console.log('Beta HIVE options:', betaHiveOptions);
+    console.log('Prompts:', prompts);
+    console.log('Content warnings:', contentWarnings);
+  };
+
+  const generateAccordion = (
+    title: string,
+    collapseNumber: string,
+    value: number,
+    handleOptions: (
+      e: React.ChangeEvent<HTMLInputElement>,
+      inputType: string
+    ) => void,
+    inputType: string,
+    labelPrefix: string,
+    max: string
+  ) => {
+    return (
+      <Accordion accordionTerms={title} collapseNumber={collapseNumber}>
+        <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+          <InputType
+            name='input'
+            value={value}
+            isDisabled={false}
+            label={`How many ${title.toLowerCase()} would you like?`}
+            isRequired
+            onChange={(e) => handleOptions(e, inputType)}
+            type='number'
+            pattern='[0-9]*'
+            min='1'
+            max={max}
+          />
+        </div>
+        {generateInputFields(value, labelPrefix)}
+        <SaveSpinner isLoading={false} isSaved={false} savedText='Changes saved!' />
+      </Accordion>
+    );
+  };
+
   const generateInputFields = (count: number, labelPrefix: string) => {
     return Array.from({ length: Math.ceil(count / 2) }).map((_, rowIndex) => (
       <div
@@ -47,6 +97,7 @@ export const AdminPage: React.FC = () => {
                 key={index}
                 name={`${labelPrefix}${index + 1}`}
                 isDisabled={false}
+                isRequired
                 label={`${labelPrefix} ${index + 1}`}
               />
             );
@@ -62,75 +113,47 @@ export const AdminPage: React.FC = () => {
       <div className='row'>
         <h1 className='bd-title pb-2 mt-4 mb-4'>Admin</h1>
       </div>
-      {/* Specify the prompts, then add image upload options */}
-      {/* Next need to do the beta hive options with image upload */}
-      <div className='row'>
-        <Accordion
-          accordionTerms='Beta HIVE options'
-          collapseNumber='collapseTwo'
-        >
-          <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
-            <InputType
-              name='input'
-              value={betaHiveOptions}
-              isDisabled={false}
-              label='How many Beta HIVE options would you like?'
-              isRequired
-              onChange={(e) => handleOptions(e, 'betaHiveOptions')}
-              type='number'
-              pattern='[0-9]*'
-              min='1'
-              max='100'
-            />
-          </div>
-          {generateInputFields(betaHiveOptions, 'Beta HIVE')}
-          <ButtonsRow />
-        </Accordion>
-      </div>{' '}
-      <div className='row'>
-        <Accordion
-          accordionTerms='Specify prompts'
-          collapseNumber='collapseOne'
-        >
-          <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
-            <InputType
-              name='input'
-              value={prompts}
-              isDisabled={false}
-              label='How many prompts would you like?'
-              isRequired
-              type='number'
-              pattern='[0-9]*'
-              min='1'
-              max='255'
-            />
-          </div>
-          {generateInputFields(prompts, 'Prompt')}
-          <ButtonsRow />
-        </Accordion>
-      </div>
-      <div className='row'>
-        <Accordion
-          accordionTerms='Content warnings'
-          collapseNumber='collapseThree'
-        >
-          <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
-            <InputType
-              name='input'
-              value={contentWarnings}
-              isDisabled={false}
-              label='How many content warnings would you like?'
-              isRequired
-              type='number'
-              pattern='[0-9]*'
-              min='1'
-              max='255'
-            />
-          </div>
-          {generateInputFields(contentWarnings, 'CW')}
-          <ButtonsRow />
-        </Accordion>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className='row'>
+          {generateAccordion(
+            'Beta HIVE options',
+            'collapseTwo',
+            betaHiveOptions,
+            handleOptions,
+            'betaHiveOptions',
+            'Beta HIVE',
+            '100'
+          )}
+        </div>
+        <div className='row'>
+          {generateAccordion(
+            'Prompts',
+            'collapseOne',
+            prompts,
+            handleOptions,
+            'prompts',
+            'Prompt',
+            '255'
+          )}
+        </div>
+        <div className='row'>
+          {generateAccordion(
+            'Content warnings',
+            'collapseThree',
+            contentWarnings,
+            handleOptions,
+            'contentWarnings',
+            'CW',
+            '255'
+          )}
+        </div>
+        <div className='row'>
+          <ButtonsRow
+            handleClear={() => handleClear}
+            handleSubmit={() => handleSubmit}
+          />
+        </div>
+      </form>
     </div>
   );
 };
