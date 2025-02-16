@@ -14,9 +14,9 @@ export const InputType: React.FC<InputTypeProps> = ({
   label,
 }) => {
   return (
-    <div className='col-6 d-flex flex-wrap justify-content-between'>
+    <div className='col-6 d-flex flex-wrap justify-content-center'>
       <div className='w-100'>
-        <div className='card mt-4'>
+        <div className='card mt-4 me-3'>
           <div className='card-body'>
             <h5 className='card-title'>
               <label className='d-flex flex-column align-items-start'>

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Accordion from '../../components/accordion/accordion';
 import InputType from '../../components/form-elements/input/input-type';
+import ButtonsRow from '../../components/form-elements/buttons/buttons-row';
 
 const PromptsFC: React.FC = () => {
   return (
@@ -71,6 +72,7 @@ export const AdminPage: React.FC = () => {
               isImageUpload
             />
           </div>
+          <ButtonsRow />
         </Accordion>
       </div>{' '}
       <div className='row'>
@@ -79,6 +81,7 @@ export const AdminPage: React.FC = () => {
           collapseNumber='collapseOne'
         >
           <PromptsFC />
+          <ButtonsRow />
         </Accordion>
       </div>
       <div className='row'>
@@ -94,6 +97,7 @@ export const AdminPage: React.FC = () => {
             <InputType name='input' isDisabled={false} label='CW 3' />
             <InputType name='input' isDisabled={false} label='CW 4' />
           </div>
+          <ButtonsRow />
         </Accordion>
       </div>
     </div>

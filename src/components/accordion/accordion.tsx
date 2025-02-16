@@ -12,9 +12,9 @@ const Accordion: React.FC<AccordionProps> = ({
   children,
 }) => {
   return (
-    <div className='accordion' id={`accordionExample${collapseNumber}`}>
-      <div className='accordion-item'>
-        <h3 className='bd-title pb-2'>
+    <div className='accordion mt-3' id={`accordionExample${collapseNumber}`}>
+      <div className='accordion-item' style={{ borderRadius: '0' }}>
+        <h3 className='bd-title mb-0'>
           <button
             className='accordion-button fs-4'
             type='button'
