@@ -4,34 +4,59 @@ import Accordion from '../../components/accordion/accordion';
 import InputType from '../../components/form-elements/input/input-type';
 import ButtonsRow from '../../components/form-elements/buttons/buttons-row';
 
-const PromptsFC: React.FC = () => {
-  return (
-    <>
-      <div className='d-flex flex-row flex-wrap justify-content-between'>
-        <InputType name='input' isDisabled={false} label='Prompt 1' />
-        <InputType name='input' isDisabled={false} label='Prompt 2' />
-      </div>
-      <div className='d-flex flex-row flex-wrap justify-content-between'>
-        <InputType name='input' isDisabled={false} label='Prompt 3' />
-        <InputType name='input' isDisabled={false} label='Prompt 4' />
-      </div>
-      <div className='d-flex flex-row flex-wrap justify-content-between'>
-        <InputType name='input' isDisabled={false} label='Prompt 5' />
-        <InputType name='input' isDisabled={false} label='Prompt 6' />
-      </div>
-      <div className='d-flex flex-row flex-wrap justify-content-between'>
-        <InputType name='input' isDisabled={false} label='Prompt 7' />
-        <InputType name='input' isDisabled={false} label='Prompt 8' />
-      </div>
-      <div className='d-flex flex-row flex-wrap justify-content-between'>
-        <InputType name='input' isDisabled={false} label='Prompt 9' />
-        <InputType name='input' isDisabled={false} label='Prompt 10' />
-      </div>
-    </>
-  );
-};
-
 export const AdminPage: React.FC = () => {
+  const [betaHiveOptions, setBetaHiveOptions] = React.useState<number>(4);
+  const [contentWarnings, setContentWarnings] = React.useState<number>(4);
+  const [prompts, setPrompts] = React.useState<number>(10);
+
+  const handleOptions = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    inputType: string
+  ) => {
+    let value = parseInt(e.target.value);
+    if (value < 1) {
+      value = 1;
+    }
+
+    switch (inputType) {
+      case 'prompts':
+        setPrompts(value);
+        break;
+      case 'betaHiveOptions':
+        setBetaHiveOptions(value);
+        break;
+      case 'contentWarnings':
+        setContentWarnings(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const generateInputFields = (count: number, labelPrefix: string) => {
+    return Array.from({ length: Math.ceil(count / 2) }).map((_, rowIndex) => (
+      <div
+        key={rowIndex}
+        className='d-flex flex-row flex-wrap justify-content-between'
+      >
+        {Array.from({ length: 2 }).map((_, colIndex) => {
+          const index = rowIndex * 2 + colIndex;
+          if (index < count) {
+            return (
+              <InputType
+                key={index}
+                name={`${labelPrefix}${index + 1}`}
+                isDisabled={false}
+                label={`${labelPrefix} ${index + 1}`}
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
+    ));
+  };
+
   return (
     <div className='container-fluid'>
       <div className='row'>
@@ -41,62 +66,68 @@ export const AdminPage: React.FC = () => {
       {/* Next need to do the beta hive options with image upload */}
       <div className='row'>
         <Accordion
-          accordionTerms='Beta HIVE Options'
+          accordionTerms='Beta HIVE options'
           collapseNumber='collapseTwo'
         >
-          <div className='d-flex flex-row flex-wrap justify-content-between'>
+          <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
             <InputType
               name='input'
+              value={betaHiveOptions}
               isDisabled={false}
-              label='Beta HIVE 1'
-              isImageUpload
-            />
-            <InputType
-              name='input'
-              isDisabled={false}
-              label='Beta HIVE 2'
-              isImageUpload
-            />
-          </div>
-          <div className='d-flex flex-row flex-wrap justify-content-between'>
-            <InputType
-              name='input'
-              isDisabled={false}
-              label='Beta HIVE 3'
-              isImageUpload
-            />
-            <InputType
-              name='input'
-              isDisabled={false}
-              label='Beta HIVE 4'
-              isImageUpload
+              label='How many Beta HIVE options would you like?'
+              isRequired
+              onChange={(e) => handleOptions(e, 'betaHiveOptions')}
+              type='number'
+              pattern='[0-9]*'
+              min='1'
+              max='100'
             />
           </div>
+          {generateInputFields(betaHiveOptions, 'Beta HIVE')}
           <ButtonsRow />
         </Accordion>
       </div>{' '}
       <div className='row'>
         <Accordion
-          accordionTerms='Specify Prompts'
+          accordionTerms='Specify prompts'
           collapseNumber='collapseOne'
         >
-          <PromptsFC />
+          <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+            <InputType
+              name='input'
+              value={prompts}
+              isDisabled={false}
+              label='How many prompts would you like?'
+              isRequired
+              type='number'
+              pattern='[0-9]*'
+              min='1'
+              max='255'
+            />
+          </div>
+          {generateInputFields(prompts, 'Prompt')}
           <ButtonsRow />
         </Accordion>
       </div>
       <div className='row'>
         <Accordion
-          accordionTerms='Content Warnings'
+          accordionTerms='Content warnings'
           collapseNumber='collapseThree'
         >
-          <div className='d-flex flex-row flex-wrap justify-content-between'>
-            <InputType name='input' isDisabled={false} label='CW 1' />
-            <InputType name='input' isDisabled={false} label='CW 2' />
+          <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+            <InputType
+              name='input'
+              value={contentWarnings}
+              isDisabled={false}
+              label='How many content warnings would you like?'
+              isRequired
+              type='number'
+              pattern='[0-9]*'
+              min='1'
+              max='255'
+            />
           </div>
-          <div className='d-flex flex-row flex-wrap justify-content-between'>
-            <InputType name='input' isDisabled={false} label='CW 3' />
-            <InputType name='input' isDisabled={false} label='CW 4' />
-          </div>
+          {generateInputFields(contentWarnings, 'CW')}
           <ButtonsRow />
         </Accordion>
       </div>
