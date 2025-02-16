@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
+import { routes } from '../../routes/routes';
 import useProgressText from '../../utils/hooks/useProgressText';
 import useSetPercentage from '../../utils/hooks/useSetPercentage';
 
@@ -9,17 +10,16 @@ export const ProgressBar: React.FC = () => {
   const percentage = useSetPercentage();
   const location = useLocation();
   const [isStorySubmission, setIsStorySubmission] = React.useState(false);
+
   React.useEffect(() => {
-    const storySubmissionRoutes = [
-      '/genre-selection',
-      '/content-warning',
-      '/prompt-selection',
-      '/story-submission',
-      '/confirmation',
-    ];
+    const storySubmissionRoutes = routes.filter((route) => {
+      return route.storySubmission === true;
+    });
     const currentPath = location.pathname;
 
-    setIsStorySubmission(storySubmissionRoutes.includes(currentPath));
+    setIsStorySubmission(
+      storySubmissionRoutes.some((route) => route.path === currentPath)
+    );
   }, [location.pathname]);
 
   return (

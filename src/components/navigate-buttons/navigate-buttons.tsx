@@ -6,6 +6,7 @@ interface NavigateButtonsProps {
   backNavigation?: string;
   handleSubmit?: (e: React.FormEvent) => void;
   isBackDisplayed?: boolean;
+  isGoBack?: boolean;
   isNextDisabled: boolean;
   isNextDisplayed?: boolean;
   isSubmitDisabled?: boolean;
@@ -18,6 +19,7 @@ export const NavigateButtons: React.FC<NavigateButtonsProps> = ({
   backNavigation,
   handleSubmit,
   isBackDisplayed = true,
+  isGoBack = false,
   isNextDisabled,
   isNextDisplayed = true,
   isSubmitDisabled = true,
@@ -32,7 +34,11 @@ export const NavigateButtons: React.FC<NavigateButtonsProps> = ({
       {isBackDisplayed && backNavigation && (
         <button
           className='btn btn-outline-primary mt-4 mr-4'
-          onClick={() => navigate(backNavigation)}
+          onClick={
+            isGoBack
+              ? () => window.history.back()
+              : () => navigate(backNavigation)
+          }
         >
           Go Back
         </button>

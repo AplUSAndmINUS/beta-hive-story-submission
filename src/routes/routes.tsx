@@ -13,6 +13,7 @@ import { StorySubmission } from '../pages/story-submission/story-submission';
 
 export interface Routes extends NonIndexRouteObject {
   name: string;
+  storySubmission?: boolean;
 }
 
 export const routes: Routes[] = [
@@ -45,25 +46,30 @@ export const routes: Routes[] = [
     path: '/genre-selection',
     name: 'Beta HIVE Selection',
     element: <GenreSelection />,
+    storySubmission: true,
   },
   {
     path: '/prompt-selection',
     name: 'Prompt Selection',
     element: <PromptSelection />,
+    storySubmission: true,
   },
   {
     path: '/story-submission',
     name: 'Story Submission',
     element: <StorySubmission />,
+    storySubmission: true,
   },
   {
     path: '/content-warning',
     name: 'Content Warning',
     element: <ContentWarnings />,
+    storySubmission: true,
   },
   {
     path: '/confirmation',
     name: 'Confirmation',
     element: <Confirmation />,
+    storySubmission: true,
   },
 ];
