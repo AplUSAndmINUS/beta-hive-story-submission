@@ -3,7 +3,7 @@ import React from 'react';
 interface ButtonsRowProps {
   children?: React.ReactNode;
   handleClear: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const ButtonsRow: React.FC<ButtonsRowProps> = ({ children, handleClear, handleSubmit }) => {
@@ -16,7 +16,7 @@ const ButtonsRow: React.FC<ButtonsRowProps> = ({ children, handleClear, handleSu
           <button
             type='submit'
             className='btn btn-primary mt-3'
-            onClick={handleSubmit}
+            onClick={() => handleSubmit}
           >
             Save Changes
           </button>

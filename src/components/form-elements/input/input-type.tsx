@@ -33,7 +33,7 @@ export const InputType: React.FC<InputTypeProps> = ({
         type === 'number' ? 'justify-content-start' : 'justify-content-between'
       }`}
     >
-      <div className={type === 'number' ? 'w-50' : 'w-100'}>
+      <div className={type === 'number' ? 'w-75' : 'w-100'}>
         <div className='card mt-4 me-3'>
           <div className='card-body'>
             <h5 className='card-title'>
