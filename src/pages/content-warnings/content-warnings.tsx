@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 import useNavigation from '../../utils/hooks/useNavigation';
+import Modal from '../../components/modal/modal';
 import NavigationButtons from '../../components/navigate-buttons/navigate-buttons';
 import InputSelectionCard from '../../components/form-elements/input/input-selection';
 import Selections from '../../components/selections/selections';
@@ -16,6 +17,7 @@ export const ContentWarnings: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigation();
   const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
+  const [showModal, setShowModal] = React.useState(false);
   const {
     characterSelection,
     contentSensitivities,
@@ -158,6 +160,12 @@ export const ContentWarnings: React.FC = () => {
         isSubmitDisabled={isSubmitDisabled}
         isSubmitDisplayed={true}
       />
+      {showModal && (
+        <Modal
+          alertMessage='Are you sure you want to submit your story? Once you submit, you cannot change your HIVE selection. (You can edit your story after submission.)'
+          onDismiss={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };

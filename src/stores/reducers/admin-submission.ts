@@ -47,27 +47,3 @@ export const {
 } = adminSubmissionSlice.actions;
 
 export default adminSubmissionSlice.reducer;
-
-// Validation function
-const validateSubmission = (state: AdminSubmissionState): boolean => {
-  const { adminPrompts, betaHIVEs, contentWarnings } = state;
-
-  if (adminPrompts.length === 0 || betaHIVEs.length === 0 || contentWarnings.length === 0) {
-    alert('All fields must be filled out.');
-    return false;
-  }
-
-  // Add more specific validation logic if needed
-  return true;
-};
-
-// handleSubmit function
-const handleSubmit = (state: AdminSubmissionState) => {
-  if (validateSubmission(state)) {
-    // Proceed with submission
-    console.log('Submission is valid. Proceeding with submission...');
-    // Add your submission logic here
-  } else {
-    console.log('Submission is invalid. Please fill out all fields.');
-  }
-};
