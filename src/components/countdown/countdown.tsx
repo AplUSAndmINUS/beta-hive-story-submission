@@ -1,14 +1,18 @@
 import React from 'react';
 import moment from 'moment';
 
+import { useAppSelector } from '../../stores/store';
+
 export const Countdown: React.FC = () => {
-  const targetDate = moment('2025-03-01');
+  const countdownDate = useAppSelector(
+    (state) => state.adminSubmission.countdownDate
+  );
   const [countdown, setCountdown] = React.useState<string>('');
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       const now = moment();
-      const diff = targetDate.diff(now);
+      const diff = countdownDate.diff(now);
       const duration = moment.duration(diff);
 
       const formatDuration = (value: number, unit: string) => {
@@ -30,13 +34,13 @@ export const Countdown: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [targetDate]);
-  
+  }, [countdownDate]);
+
   return (
     <p className='text-muted pb-2 mt-2 fs-5'>
       <strong>Countdown to the date:</strong> {countdown}
     </p>
-  )
+  );
 };
 
 export default Countdown;

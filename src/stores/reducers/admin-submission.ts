@@ -17,7 +17,7 @@ const initialState: AdminSubmissionState = {
   adminPrompts: [],
   betaHIVEs: [],
   contentWarnings: [],
-  countdownDate: moment(),
+  countdownDate: moment().add(20, 'days'),
 };
 
 const adminSubmissionSlice = createSlice({

@@ -80,3 +80,18 @@ div.w-100 > .card:hover, .card-selected {
   color: inherit;
   text-decoration: none;
 }
+
+// table styling
+.table-fixed {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table-fixed tbody tr td {
+  height: 100px; /* Set a fixed height for table cells */
+  vertical-align: top; /* Align content to the top */
+}
+
+.table-fixed thead th {
+  width: 14.28%; /* Ensure equal width for each column */
+}
