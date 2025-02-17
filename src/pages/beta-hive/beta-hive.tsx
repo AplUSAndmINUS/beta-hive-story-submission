@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 
 import Arena from '../arena/arena';
 import HIVEStoryCard from '../../components/story-card/story-card';
@@ -82,11 +81,6 @@ export const BetaHIVE: React.FC = () => {
       </div>
       <div className='row'>
         <Arena />
-      </div>
-      <div className='row mt-5'>
-        <p>
-          &copy; Copyright {moment().year()} Beta HIVE - All Rights Reserved
-        </p>
       </div>
     </div>
   );

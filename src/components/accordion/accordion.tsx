@@ -31,7 +31,7 @@ const Accordion: React.FC<AccordionProps> = ({
           className='accordion-collapse collapse show'
           data-bs-parent={`#accordionExample${collapseNumber}`}
         >
-          <div className='accordion-body'>{children}</div>
+          <div className='accordion-body bg-light'>{children}</div>
         </div>
       </div>
     </div>

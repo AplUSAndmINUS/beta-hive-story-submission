@@ -37,8 +37,8 @@ export const Countdown: React.FC = () => {
   }, [countdownDate]);
 
   return (
-    <p className='text-muted pb-2 mt-2 fs-5'>
-      <strong>Countdown to the date:</strong> {countdown}
+    <p className='text-muted text-center pb-2 mt-2 fs-5'>
+      <strong>Countdown to the date:</strong><br /> {countdown}
     </p>
   );
 };

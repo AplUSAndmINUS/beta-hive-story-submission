@@ -20,6 +20,9 @@ export const AdminPage: React.FC = () => {
   const [countdownDate, setCountdownDate] = React.useState<moment.Moment>(
     moment()
   );
+  const [calendarEvent, setCalendarEvent] = React.useState<moment.Moment>(
+    moment()
+  );
 
   const [betaHiveValues, setBetaHiveValues] = React.useState<
     { name: string; image: string }[]
@@ -236,6 +239,31 @@ export const AdminPage: React.FC = () => {
                 isRequired
                 onChange={(e) =>
                   setCountdownDate(moment(e.target.value, 'YYYY-MM-DD'))
+                }
+                type='date'
+              />
+            </div>
+            <SaveSpinner
+              isLoading={false}
+              isSaved={false}
+              savedText='Changes saved!'
+            />
+          </Accordion>
+        </div>
+        <div className='row'>
+          <Accordion
+            accordionTerms='Calendar Events'
+            collapseNumber='collapseFive'
+          >
+            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+              <InputType
+                name='calendarEvents'
+                value={countdownDate.format('YYYY-MM-DD')}
+                isDisabled={false}
+                label='Calendar event'
+                isRequired
+                onChange={(e) =>
+                  setCalendarEvent(moment(e.target.value, 'YYYY-MM-DD'))
                 }
                 type='date'
               />

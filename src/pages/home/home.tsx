@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 import { Calendar } from '../../components/calendar/calendar';
 import { Countdown } from '../../components/countdown/countdown';
@@ -22,7 +23,7 @@ export const HomePage: React.FC = () => {
       </div>
       <div className='row'>
         <div className='col mt-4'>
-          <p>Welcome to the home page!</p>
+          <h3 className='bd-title mb-4'>Beta HIVE Countdown</h3>
           <Countdown />
         </div>
       </div>
@@ -31,6 +32,11 @@ export const HomePage: React.FC = () => {
           <p>More content will be added here.</p>
           <p>Stay tuned!</p>
         </div>
+      </div>
+      <div className='row mt-5'>
+        <p>
+          &copy; Copyright {moment().year()} Beta HIVE - All Rights Reserved
+        </p>
       </div>
     </div>
   );

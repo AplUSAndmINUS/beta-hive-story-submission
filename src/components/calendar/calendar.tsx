@@ -74,7 +74,7 @@ export const Calendar: React.FC = () => {
         </div>
       </div>
       <div className='row'>
-        <table className='table table-bordered table-fixed'>
+        <table className='table table-bordered table-fixed mb-4'>
           <thead className='thead-dark'>
             <tr>
               <th className='bg-light text-dark'>Su</th>
