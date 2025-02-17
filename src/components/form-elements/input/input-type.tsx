@@ -61,10 +61,13 @@ export const InputType: React.FC<InputTypeProps> = ({
               </label>
             </h5>
             {isImageUpload && (
-              <div className='input-group mb-3'>
+              <div className='d-flex justify-content-start align-items-center input-group mb-3'>
                 <button className='btn btn-primary' type='button'>
-                  Upload
+                  Upload Image
                 </button>
+                <p className='text-muted ps-4 pt-2'>
+                  Image name: placeholder_image.jpeg
+                </p>
               </div>
             )}
           </div>

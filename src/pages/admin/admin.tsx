@@ -21,6 +21,14 @@ export const AdminPage: React.FC = () => {
     moment()
   );
 
+  const [betaHiveValues, setBetaHiveValues] = React.useState<
+    { name: string; image: string }[]
+  >([]);
+  const [contentWarningValues, setContentWarningValues] = React.useState<
+    string[]
+  >([]);
+  const [promptValues, setPromptValues] = React.useState<string[]>([]);
+
   const [isBetaHiveLoading, setIsBetaHiveLoading] =
     React.useState<boolean>(false);
   const [isBetaHiveSaved, setIsBetaHiveSaved] = React.useState<boolean>(false);
@@ -73,9 +81,38 @@ export const AdminPage: React.FC = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, label: string) => {
-    console.log(`Value for ${label}:`, e.target.value);
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+    inputType: string
+  ) => {
+    const { value } = e.target;
+    switch (inputType) {
+      case 'prompts':
+        setPromptValues((prev) => {
+          const newValues = [...prev];
+          newValues[index] = value;
+          return newValues;
+        });
+        break;
+      case 'betaHiveOptions':
+        setBetaHiveValues((prev) => {
+          const newValues = [...prev];
+          newValues[index] = { ...newValues[index], name: value };
+          return newValues;
+        });
+        break;
+      case 'contentWarnings':
+        setContentWarningValues((prev) => {
+          const newValues = [...prev];
+          newValues[index] = value;
+          return newValues;
+        });
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleClear = () => {
     setBetaHiveOptions(4);
@@ -106,7 +143,12 @@ export const AdminPage: React.FC = () => {
     labelPrefix: string,
     max: string,
     isLoading: boolean,
-    isSaved: boolean
+    isSaved: boolean,
+    values: any[],
+    handleChange: (
+      e: React.ChangeEvent<HTMLInputElement>,
+      index: number
+    ) => void
   ) => {
     return (
       <Accordion accordionTerms={title} collapseNumber={collapseNumber}>
@@ -124,7 +166,7 @@ export const AdminPage: React.FC = () => {
             max={max}
           />
         </div>
-        {generateInputFields(value, labelPrefix)}
+        {generateInputFields(value, labelPrefix, values, handleChange)}
         <SaveSpinner
           isLoading={isLoading}
           isSaved={isSaved}
@@ -134,7 +176,15 @@ export const AdminPage: React.FC = () => {
     );
   };
 
-  const generateInputFields = (count: number, labelPrefix: string) => {
+  const generateInputFields = (
+    count: number,
+    labelPrefix: string,
+    values: any[],
+    handleChange: (
+      e: React.ChangeEvent<HTMLInputElement>,
+      index: number
+    ) => void
+  ) => {
     return Array.from({ length: Math.ceil(count / 2) }).map((_, rowIndex) => (
       <div
         key={rowIndex}
@@ -143,15 +193,20 @@ export const AdminPage: React.FC = () => {
         {Array.from({ length: 2 }).map((_, colIndex) => {
           const index = rowIndex * 2 + colIndex;
           if (index < count) {
+            const value =
+              typeof values[index] === 'object'
+                ? values[index]?.name
+                : values[index];
             return (
               <InputType
                 key={index}
                 name={`${labelPrefix}${index + 1}`}
-                value={''}
-                onChange={(e) => handleChange(e, `${labelPrefix}${index + 1}`)}
+                value={value || ''}
+                onChange={(e) => handleChange(e, index)}
                 isDisabled={false}
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
+                isImageUpload={labelPrefix === 'Beta HIVE'}
               />
             );
           }
@@ -202,7 +257,9 @@ export const AdminPage: React.FC = () => {
             'Beta HIVE',
             '100',
             isBetaHiveLoading,
-            isBetaHiveSaved
+            isBetaHiveSaved,
+            betaHiveValues,
+            (e, index) => handleChange(e, index, 'betaHiveOptions')
           )}
         </div>
         <div className='row'>
@@ -215,7 +272,9 @@ export const AdminPage: React.FC = () => {
             'Prompt',
             '255',
             isPromptsLoading,
-            isPromptsSaved
+            isPromptsSaved,
+            promptValues,
+            (e, index) => handleChange(e, index, 'prompts')
           )}
         </div>
         <div className='row'>
@@ -228,7 +287,9 @@ export const AdminPage: React.FC = () => {
             'CW',
             '255',
             isContentWarningsLoading,
-            isContentWarningsSaved
+            isContentWarningsSaved,
+            contentWarningValues,
+            (e, index) => handleChange(e, index, 'contentWarnings')
           )}
         </div>
         <div className='row'>
