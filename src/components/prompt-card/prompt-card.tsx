@@ -28,7 +28,7 @@ const voteSubmission = useAppSelector(
         isStorySelection ? () => handleSelection : () => handleSelection(prompt)
       }
     >
-      <div className='w-100'>
+      <div className='w-100 me-3'>
         <div
           className={`card p-2 mt-4 ${
             (characterSelection === prompt ||

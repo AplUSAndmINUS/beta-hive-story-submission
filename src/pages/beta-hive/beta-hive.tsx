@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Arena from '../arena/arena';
 import HIVEStoryCard from '../../components/story-card/story-card';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 
@@ -23,9 +22,6 @@ export const BetaHIVE: React.FC = () => {
           Beta HIVE is a platform for writers to create, share, and vote on
           stories. We're currently in development and will be launching soon.
         </p>
-      </div>
-      <div className='row'>
-        <h3 className='bd-subtitle pb-2'>Countdown counter</h3>
       </div>
       <div className='row'>
         <h3 className='bd-subtitle pb-2 mt-5'>Check out our newest stories!</h3>
@@ -78,9 +74,6 @@ export const BetaHIVE: React.FC = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
           purus et nunc fermentum aliquam. Nam nec turpis nec eros tincidunt.
         </p>
-      </div>
-      <div className='row'>
-        <Arena />
       </div>
     </div>
   );

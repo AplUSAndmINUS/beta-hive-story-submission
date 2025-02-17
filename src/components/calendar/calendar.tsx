@@ -64,7 +64,7 @@ export const Calendar: React.FC = () => {
             &lt;Prev
           </button>
         </div>
-        <div className='col-md-3 text-center'>
+        <div className='col-xs-1 col-sm-2 col-md-3 text-center'>
           <h2 className='bd-title'>{currentDate.format('MMMM YYYY')}</h2>
         </div>
         <div className='col-md-1'>
