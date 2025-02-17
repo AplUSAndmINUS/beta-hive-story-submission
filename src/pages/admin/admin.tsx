@@ -11,6 +11,7 @@ import {
 import Accordion from '../../components/accordion/accordion';
 import InputType from '../../components/form-elements/input/input-type';
 import ButtonsRow from '../../components/form-elements/buttons/buttons-row';
+import Modal from '../../components/modal/modal';
 import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 
 export const AdminPage: React.FC = () => {
@@ -23,6 +24,8 @@ export const AdminPage: React.FC = () => {
   const [calendarEvent, setCalendarEvent] = React.useState<moment.Moment>(
     moment()
   );
+  const [alertMessage, setAlertMessage] = React.useState<string>('');
+  const [showModal, setShowModal] = React.useState<boolean>(false);
 
   const [betaHiveValues, setBetaHiveValues] = React.useState<
     { name: string; image: string }[]
@@ -84,6 +87,45 @@ export const AdminPage: React.FC = () => {
     }
   };
 
+  const validateSubmission = (): boolean => {
+    if (
+      betaHiveValues.length === 0 ||
+      promptValues.length === 0 ||
+      contentWarningValues.length === 0
+    ) {
+      setAlertMessage('All fields must be filled out.');
+      setShowModal(true);
+      return false;
+    }
+
+    if (betaHiveOptions !== betaHiveValues.length) {
+      setAlertMessage(
+        'The number of Beta HIVE options does not match the expected length.'
+      );
+      setShowModal(true);
+      return false;
+    }
+
+    if (prompts !== promptValues.length) {
+      setAlertMessage(
+        'The number of prompts does not match the expected length.'
+      );
+      setShowModal(true);
+      return false;
+    }
+
+    if (contentWarnings !== contentWarningValues.length) {
+      setAlertMessage(
+        'The number of content warnings does not match the expected length.'
+      );
+      setShowModal(true);
+      return false;
+    }
+
+    // Add more specific validation logic if needed
+    return true;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
@@ -126,12 +168,17 @@ export const AdminPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted');
-    console.log('Beta HIVE options:', betaHiveOptions);
-    console.log('Prompts:', prompts);
-    console.log('Content warnings:', contentWarnings);
-    console.log('Countdown date:', countdownDate.format('YYYY-MM-DD'));
+
+    if (validateSubmission()) {
+      // Proceed with submission
+      console.log('Form submitted');
+      console.log('Beta HIVE options:', betaHiveOptions);
+      console.log('Prompts:', prompts);
+      console.log('Content warnings:', contentWarnings);
+      console.log('Countdown date:', countdownDate.format('YYYY-MM-DD'));
+    } else {
+      console.log('Submission is invalid. Please fill out all fields.');
+    }
   };
 
   const generateAccordion = (
@@ -324,6 +371,13 @@ export const AdminPage: React.FC = () => {
           <ButtonsRow handleClear={handleClear} handleSubmit={handleSubmit} />
         </div>
       </form>
+
+      {showModal && (
+        <Modal
+          alertMessage={alertMessage}
+          onDismiss={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };
