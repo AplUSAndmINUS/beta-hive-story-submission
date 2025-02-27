@@ -19,11 +19,19 @@ export const HomePage: React.FC = () => {
       <div className='row'>
         <div className='col'>
           <h1 className='bd-title mb-4'>Home Page</h1>
-          <p className='text-muted pb-4 mt-2 fs-5'>
-            Welcome to the Beta HIVE! We're glad you're here!
+          <p className='text-muted pb-2 mt-2 fs-5'>
+            Welcome! We're glad you're here!
           </p>
         </div>
       </div>
+      <div className='row'>
+        <h3 className='bd-subtitle mb-2 mt-5'>How it works</h3>
+        <p className='text-muted pb-2 mt-2 fs-5'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
+          purus et nunc fermentum aliquam. Nam nec turpis nec eros tincidunt.
+        </p>
+      </div>
+      {!genreSelection && <BetaHIVE />}
       {countdownDate >= moment() ? (
         <>
           <div className='row'>
@@ -36,8 +44,7 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
           <div className='row'>
-            <div className='col mt-4'>
-            </div>
+            <div className='col mt-4'></div>
           </div>
         </>
       ) : (
@@ -54,7 +61,6 @@ export const HomePage: React.FC = () => {
           <Calendar />
         </div>
       </div>
-      {genreSelection && <BetaHIVE />}
       <div className='row mt-5'>
         <p>
           &copy; Copyright {moment().year()} Beta HIVE - All Rights Reserved

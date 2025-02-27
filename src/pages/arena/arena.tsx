@@ -57,10 +57,7 @@ export const Arena: React.FC = () => {
   }
 
   return (
-    <div className='container'>
-      {/* <div className='row d-flex justify-content-center align-items-center pt-4 pb-4 w-50 h-50 m-auto'>
-        <img src={logoPath} alt='Beta HIVE' className='w-100 h-100' />
-      </div> */}
+    <div className='container'> 
       <div className='row d-flex justify-content-center'>
         <div className='col-12 pt-4 pb-5'>
           <h2 className='bd-title'>Battle HIVE</h2>
