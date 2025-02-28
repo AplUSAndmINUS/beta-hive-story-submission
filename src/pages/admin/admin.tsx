@@ -357,7 +357,7 @@ export const AdminPage: React.FC = () => {
                 isDisabled={false}
                 label='Word Count'
                 isRequired
-                onChange={(e) => setWordCount(parseInt(e.target.value))}
+                onChange={(e) => dispatch(setWordCount(parseInt(e.target.value)))}
                 type='number'
               />
             </div>
