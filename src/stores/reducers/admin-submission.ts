@@ -1,34 +1,55 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
-interface BetaHIVEPrompt {
+export interface BetaHIVEPrompt {
   name: string;
   image: string;
 }
 
 interface AdminSubmissionState {
-  adminPrompts: string[];
+  betaHIVECount: number;
   betaHIVEs: BetaHIVEPrompt[];
+  calendarEventCount: number;
+  calendarEvents: string[];
+  contentWarningCount: number;
   contentWarnings: string[];
   countdownDate: moment.Moment;
+  promptsCount: number;
+  prompts: string[];
+  wordCount: number;
 }
 
 const initialState: AdminSubmissionState = {
-  adminPrompts: [],
+  betaHIVECount: 4,
   betaHIVEs: [],
+  calendarEventCount: 4,
+  calendarEvents: [],
+  contentWarningCount: 4,
   contentWarnings: [],
   countdownDate: moment().add(20, 'days'),
+  promptsCount: 10,
+  prompts: [],
+  wordCount: 500,
 };
 
 const adminSubmissionSlice = createSlice({
   name: 'adminSubmissionReducer',
   initialState,
   reducers: {
-    setAdminPrompts(state, action: PayloadAction<string[]>) {
-      state.adminPrompts = [...action.payload];
+    setBetaHIVECount(state, action: PayloadAction<number>) {
+      state.betaHIVECount = action.payload;
     },
     setBetaHIVEs(state, action: PayloadAction<BetaHIVEPrompt[]>) {
       state.betaHIVEs = [...action.payload];
+    },
+    setCalendarEventCount(state, action: PayloadAction<number>) {
+      state.calendarEventCount = action.payload;
+    },
+    setCalendarEvents(state, action: PayloadAction<string[]>) {
+      state.calendarEvents = [...action.payload];
+    },
+    setContentWarningCount(state, action: PayloadAction<number>) {
+      state.contentWarningCount = action.payload;
     },
     setContentWarnings(state, action: PayloadAction<string[]>) {
       state.contentWarnings = [...action.payload];
@@ -36,14 +57,29 @@ const adminSubmissionSlice = createSlice({
     setCountdownDate(state, action: PayloadAction<moment.Moment>) {
       state.countdownDate = action.payload;
     },
+    setPromptCount(state, action: PayloadAction<number>) {
+      state.promptsCount = action.payload;
+    },
+    setPrompts(state, action: PayloadAction<string[]>) {
+      state.prompts = [...action.payload];
+    },
+    setWordCount(state, action: PayloadAction<number>) {
+      state.wordCount = action.payload
+    },
   },
 });
 
 export const {
-  setAdminPrompts,
   setBetaHIVEs,
+  setBetaHIVECount,
+  setCalendarEventCount,
+  setCalendarEvents,
+  setContentWarningCount,
   setContentWarnings,
   setCountdownDate,
+  setPromptCount,
+  setPrompts,
+  setWordCount,
 } = adminSubmissionSlice.actions;
 
 export default adminSubmissionSlice.reducer;

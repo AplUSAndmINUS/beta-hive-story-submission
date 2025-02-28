@@ -1,12 +1,19 @@
 import React from 'react';
 import moment from 'moment';
 
-import { useAppDispatch } from '../../stores/store';
+import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
-  setAdminPrompts,
+  BetaHIVEPrompt,
+  setBetaHIVECount,
   setBetaHIVEs,
+  setCalendarEventCount,
+  setCalendarEvents,
+  setContentWarningCount,
   setContentWarnings,
   setCountdownDate,
+  setPromptCount,
+  setPrompts,
+  setWordCount,
 } from '../../stores/reducers/admin-submission';
 import Accordion from '../../components/accordion/accordion';
 import InputType from '../../components/form-elements/input/input-type';
@@ -15,29 +22,28 @@ import Modal from '../../components/modal/modal';
 import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 
 export const AdminPage: React.FC = () => {
-  const [betaHiveOptions, setBetaHiveOptions] = React.useState<number>(4);
-  const [contentWarnings, setContentWarnings] = React.useState<number>(4);
-  const [prompts, setPrompts] = React.useState<number>(10);
-  const [countdownDate, setCountdownDate] = React.useState<moment.Moment>(
-    moment()
-  );
-  const [calendarEvent, setCalendarEvent] = React.useState<moment.Moment>(
-    moment()
-  );
+  const {
+    betaHIVECount,
+    betaHIVEs,
+    calendarEventCount,
+    calendarEvents,
+    contentWarningCount,
+    contentWarnings,
+    countdownDate,
+    promptsCount,
+    prompts,
+    wordCount,
+  } = useAppSelector((state) => state.adminSubmission);
   const [alertMessage, setAlertMessage] = React.useState<string>('');
   const [showModal, setShowModal] = React.useState<boolean>(false);
-
-  const [betaHiveValues, setBetaHiveValues] = React.useState<
-    { name: string; image: string }[]
-  >([]);
-  const [contentWarningValues, setContentWarningValues] = React.useState<
-    string[]
-  >([]);
-  const [promptValues, setPromptValues] = React.useState<string[]>([]);
 
   const [isBetaHiveLoading, setIsBetaHiveLoading] =
     React.useState<boolean>(false);
   const [isBetaHiveSaved, setIsBetaHiveSaved] = React.useState<boolean>(false);
+  const [isCalendarEventsLoading, setIsCalendarEventsLoading] =
+    React.useState<boolean>(false);
+  const [isCalendarEventsSaved, setIsCalendarEventsSaved] =
+    React.useState<boolean>(false);
   const [isContentWarningsLoading, setIsContentWarningsLoading] =
     React.useState<boolean>(false);
   const [isContentWarningsSaved, setIsContentWarningsSaved] =
@@ -58,29 +64,37 @@ export const AdminPage: React.FC = () => {
     }
 
     switch (inputType) {
-      case 'prompts':
-        setPrompts(value);
-        setIsPromptsLoading(true);
-        setTimeout(() => {
-          setIsPromptsLoading(false);
-          setIsPromptsSaved(true);
-        }, 1000); // Simulate saving delay
-        break;
       case 'betaHiveOptions':
-        setBetaHiveOptions(value);
+        dispatch(setBetaHIVECount(value));
         setIsBetaHiveLoading(true);
         setTimeout(() => {
           setIsBetaHiveLoading(false);
           setIsBetaHiveSaved(true);
-        }, 1000); // Simulate saving delay
+        }, 2500); // Simulate saving delay
+        break;
+      case 'calendarEvents':
+        dispatch(setCalendarEventCount(value));
+        setIsCalendarEventsLoading(true);
+        setTimeout(() => {
+          setIsCalendarEventsLoading(false);
+          setIsCalendarEventsSaved(true);
+        }, 2500); // Simulate saving delay
         break;
       case 'contentWarnings':
-        setContentWarnings(value);
+        dispatch(setContentWarningCount(value));
         setIsContentWarningsLoading(true);
         setTimeout(() => {
           setIsContentWarningsLoading(false);
           setIsContentWarningsSaved(true);
-        }, 1000); // Simulate saving delay
+        }, 2500); // Simulate saving delay
+        break;
+      case 'prompts':
+        dispatch(setPromptCount(value));
+        setIsPromptsLoading(true);
+        setTimeout(() => {
+          setIsPromptsLoading(false);
+          setIsPromptsSaved(true);
+        }, 2500); // Simulate saving delay
         break;
       default:
         break;
@@ -89,16 +103,16 @@ export const AdminPage: React.FC = () => {
 
   const validateSubmission = (): boolean => {
     if (
-      betaHiveValues.length === 0 ||
-      promptValues.length === 0 ||
-      contentWarningValues.length === 0
+      betaHIVEs.length === 0 ||
+      prompts.length === 0 ||
+      contentWarnings.length === 0
     ) {
       setAlertMessage('All fields must be filled out.');
       setShowModal(true);
       return false;
     }
 
-    if (betaHiveOptions !== betaHiveValues.length) {
+    if (betaHIVECount !== betaHIVEs.length) {
       setAlertMessage(
         'The number of Beta HIVE options does not match the expected length.'
       );
@@ -106,7 +120,7 @@ export const AdminPage: React.FC = () => {
       return false;
     }
 
-    if (prompts !== promptValues.length) {
+    if (promptsCount !== prompts.length) {
       setAlertMessage(
         'The number of prompts does not match the expected length.'
       );
@@ -114,7 +128,15 @@ export const AdminPage: React.FC = () => {
       return false;
     }
 
-    if (contentWarnings !== contentWarningValues.length) {
+    if (calendarEventCount !== calendarEvents.length) {
+      setAlertMessage(
+        'The number of calendar events does not match the expected length.'
+      );
+      setShowModal(true);
+      return false;
+    }
+
+    if (contentWarningCount !== contentWarnings.length) {
       setAlertMessage(
         'The number of content warnings does not match the expected length.'
       );
@@ -122,7 +144,11 @@ export const AdminPage: React.FC = () => {
       return false;
     }
 
-    // Add more specific validation logic if needed
+    if (wordCount <= 4) {
+      setAlertMessage('Word count must be at least 5.');
+      setShowModal(true);
+      return false;
+    }
     return true;
   };
 
@@ -133,26 +159,35 @@ export const AdminPage: React.FC = () => {
   ) => {
     const { value } = e.target;
     switch (inputType) {
-      case 'prompts':
-        setPromptValues((prev) => {
-          const newValues = [...prev];
-          newValues[index] = value;
-          return newValues;
-        });
-        break;
       case 'betaHiveOptions':
-        setBetaHiveValues((prev) => {
-          const newValues = [...prev];
-          newValues[index] = { ...newValues[index], name: value };
-          return newValues;
-        });
+        dispatch(
+          setBetaHIVEs(
+            betaHIVEs.map((item, i) =>
+              i === index ? { ...item, name: value } : item
+            )
+          )
+        );
+        break;
+      case 'calendarEvents':
+        dispatch(
+          setCalendarEvents(
+            calendarEvents.map((item, i) => (i === index ? value : item))
+          )
+        );
         break;
       case 'contentWarnings':
-        setContentWarningValues((prev) => {
-          const newValues = [...prev];
-          newValues[index] = value;
-          return newValues;
-        });
+        dispatch(
+          setContentWarnings(
+            contentWarnings.map((item, i) => (i === index ? value : item))
+          )
+        );
+        break;
+      case 'prompts':
+        dispatch(
+          setPrompts(
+            prompts.map((item, i) => (i === index ? value : item))
+          )
+        );
         break;
       default:
         break;
@@ -160,10 +195,13 @@ export const AdminPage: React.FC = () => {
   };
 
   const handleClear = () => {
-    setBetaHiveOptions(4);
-    setContentWarnings(4);
-    setPrompts(10);
-    setCountdownDate(moment());
+    dispatch(
+      setBetaHIVECount(4),
+      setContentWarningCount(4),
+      setPromptCount(10),
+      setCountdownDate(moment()),
+      setWordCount(500)
+    );
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -172,7 +210,7 @@ export const AdminPage: React.FC = () => {
     if (validateSubmission()) {
       // Proceed with submission
       console.log('Form submitted');
-      console.log('Beta HIVE options:', betaHiveOptions);
+      console.log('Beta HIVE options:', betaHIVEs);
       console.log('Prompts:', prompts);
       console.log('Content warnings:', contentWarnings);
       console.log('Countdown date:', countdownDate.format('YYYY-MM-DD'));
@@ -201,28 +239,30 @@ export const AdminPage: React.FC = () => {
     ) => void
   ) => {
     return (
-      <Accordion accordionTerms={title} collapseNumber={collapseNumber}>
-        <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
-          <InputType
-            name='input'
-            value={value}
-            isDisabled={false}
-            label={`How many ${title.toLowerCase()} would you like?`}
-            isRequired
-            onChange={(e) => handleOptions(e, inputType)}
-            type='number'
-            pattern='[0-9]*'
-            min='1'
-            max={max}
+      <div className='row'>
+        <Accordion accordionTerms={title} collapseNumber={collapseNumber}>
+          <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+            <InputType
+              name='input'
+              value={value}
+              isDisabled={false}
+              label={`How many ${title.toLowerCase()} would you like?`}
+              isRequired
+              onChange={(e) => handleOptions(e, inputType)}
+              type='number'
+              pattern='[0-9]*'
+              min='1'
+              max={max}
+            />
+          </div>
+          {generateInputFields(value, labelPrefix, values, handleChange)}
+          <SaveSpinner
+            isLoading={isLoading}
+            isSaved={isSaved}
+            savedText='Changes saved!'
           />
-        </div>
-        {generateInputFields(value, labelPrefix, values, handleChange)}
-        <SaveSpinner
-          isLoading={isLoading}
-          isSaved={isSaved}
-          savedText='Changes saved!'
-        />
-      </Accordion>
+        </Accordion>
+      </div>
     );
   };
 
@@ -307,10 +347,10 @@ export const AdminPage: React.FC = () => {
                 name='calendarEvents'
                 value={countdownDate.format('YYYY-MM-DD')}
                 isDisabled={false}
-                label='Calendar event'
+                label='Calendar data'
                 isRequired
                 onChange={(e) =>
-                  setCalendarEvent(moment(e.target.value, 'YYYY-MM-DD'))
+                  setCountdownDate(moment(e.target.value, 'YYYY-MM-DD'))
                 }
                 type='date'
               />
@@ -322,50 +362,80 @@ export const AdminPage: React.FC = () => {
             />
           </Accordion>
         </div>
+        {generateAccordion(
+          'Beta HIVE options',
+          'collapseTwo',
+          betaHIVECount,
+          handleOptions,
+          'betaHiveOptions',
+          'Beta HIVE',
+          '100',
+          isBetaHiveLoading,
+          isBetaHiveSaved,
+          betaHIVEs,
+          (e, index) => handleChange(e, index, 'betaHiveOptions')
+        )}
+        {generateAccordion(
+          'Prompts',
+          'collapseOne',
+          promptsCount,
+          handleOptions,
+          'prompts',
+          'Prompt',
+          '255',
+          isPromptsLoading,
+          isPromptsSaved,
+          prompts,
+          (e, index) => handleChange(e, index, 'prompts')
+        )}
+        {generateAccordion(
+          'Calendar Events',
+          'collapseSix',
+          calendarEventCount,
+          handleOptions,
+          'calendarEvents',
+          'Calendar Event',
+          '255',
+          isCalendarEventsLoading,
+          isCalendarEventsSaved,
+          calendarEvents,
+          (e, index) => handleChange(e, index, 'calendarEvents')
+        )}
+        {generateAccordion(
+          'Content warnings',
+          'collapseThree',
+          contentWarningCount,
+          handleOptions,
+          'contentWarnings',
+          'CW',
+          '255',
+          isContentWarningsLoading,
+          isContentWarningsSaved,
+          contentWarnings,
+          (e, index) => handleChange(e, index, 'contentWarnings')
+        )}
         <div className='row'>
-          {generateAccordion(
-            'Beta HIVE options',
-            'collapseTwo',
-            betaHiveOptions,
-            handleOptions,
-            'betaHiveOptions',
-            'Beta HIVE',
-            '100',
-            isBetaHiveLoading,
-            isBetaHiveSaved,
-            betaHiveValues,
-            (e, index) => handleChange(e, index, 'betaHiveOptions')
-          )}
-        </div>
-        <div className='row'>
-          {generateAccordion(
-            'Prompts',
-            'collapseOne',
-            prompts,
-            handleOptions,
-            'prompts',
-            'Prompt',
-            '255',
-            isPromptsLoading,
-            isPromptsSaved,
-            promptValues,
-            (e, index) => handleChange(e, index, 'prompts')
-          )}
-        </div>
-        <div className='row'>
-          {generateAccordion(
-            'Content warnings',
-            'collapseThree',
-            contentWarnings,
-            handleOptions,
-            'contentWarnings',
-            'CW',
-            '255',
-            isContentWarningsLoading,
-            isContentWarningsSaved,
-            contentWarningValues,
-            (e, index) => handleChange(e, index, 'contentWarnings')
-          )}
+          <Accordion
+            accordionTerms='Word Counts'
+            collapseNumber='collapseSeven'
+          >
+            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+              <InputType
+                name='wordCount'
+                value={wordCount}
+                isDisabled={false}
+                label='Word Count'
+                isRequired
+                onChange={(e) => setWordCount(parseInt(e.target.value))}
+                type='number'
+              />
+            </div>
+            <SaveSpinner
+              isLoading={false}
+              isSaved={false}
+              savedText='Changes saved!'
+            />
+          </Accordion>
         </div>
         <div className='row'>
           <ButtonsRow handleClear={handleClear} handleSubmit={handleSubmit} />
