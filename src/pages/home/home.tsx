@@ -32,7 +32,7 @@ export const HomePage: React.FC = () => {
         </p>
       </div>
       {!genreSelection && <BetaHIVE />}
-      {countdownDate >= moment() ? (
+      {moment(countdownDate) >= moment() ? (
         <>
           <div className='row'>
             <div className='col mt-4'>

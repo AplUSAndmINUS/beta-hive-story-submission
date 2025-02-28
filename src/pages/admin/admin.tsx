@@ -3,11 +3,10 @@ import moment from 'moment';
 
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
-  BetaHIVEPrompt,
   setBetaHIVECount,
   setBetaHIVEs,
-  setCalendarEventCount,
-  setCalendarEvents,
+  // setCalendarEventCount,
+  // setCalendarEvents,
   setContentWarningCount,
   setContentWarnings,
   setCountdownDate,
@@ -16,8 +15,8 @@ import {
   setWordCount,
 } from '../../stores/reducers/admin-submission';
 import Accordion from '../../components/accordion/accordion';
-import InputType from '../../components/form-elements/input/input-type';
 import ButtonsRow from '../../components/form-elements/buttons/buttons-row';
+import InputType from '../../components/form-elements/input/input-type';
 import Modal from '../../components/modal/modal';
 import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
 
@@ -25,8 +24,8 @@ export const AdminPage: React.FC = () => {
   const {
     betaHIVECount,
     betaHIVEs,
-    calendarEventCount,
-    calendarEvents,
+    // calendarEventCount,
+    // calendarEvents,
     contentWarningCount,
     contentWarnings,
     countdownDate,
@@ -40,10 +39,10 @@ export const AdminPage: React.FC = () => {
   const [isBetaHiveLoading, setIsBetaHiveLoading] =
     React.useState<boolean>(false);
   const [isBetaHiveSaved, setIsBetaHiveSaved] = React.useState<boolean>(false);
-  const [isCalendarEventsLoading, setIsCalendarEventsLoading] =
-    React.useState<boolean>(false);
-  const [isCalendarEventsSaved, setIsCalendarEventsSaved] =
-    React.useState<boolean>(false);
+  // const [isCalendarEventsLoading, setIsCalendarEventsLoading] =
+  //   React.useState<boolean>(false);
+  // const [isCalendarEventsSaved, setIsCalendarEventsSaved] =
+  //   React.useState<boolean>(false);
   const [isContentWarningsLoading, setIsContentWarningsLoading] =
     React.useState<boolean>(false);
   const [isContentWarningsSaved, setIsContentWarningsSaved] =
@@ -72,14 +71,14 @@ export const AdminPage: React.FC = () => {
           setIsBetaHiveSaved(true);
         }, 2500); // Simulate saving delay
         break;
-      case 'calendarEvents':
-        dispatch(setCalendarEventCount(value));
-        setIsCalendarEventsLoading(true);
-        setTimeout(() => {
-          setIsCalendarEventsLoading(false);
-          setIsCalendarEventsSaved(true);
-        }, 2500); // Simulate saving delay
-        break;
+      // case 'calendarEvents':
+      //   dispatch(setCalendarEventCount(value));
+      //   setIsCalendarEventsLoading(true);
+      //   setTimeout(() => {
+      //     setIsCalendarEventsLoading(false);
+      //     setIsCalendarEventsSaved(true);
+      //   }, 2500); // Simulate saving delay
+      //   break;
       case 'contentWarnings':
         dispatch(setContentWarningCount(value));
         setIsContentWarningsLoading(true);
@@ -128,10 +127,16 @@ export const AdminPage: React.FC = () => {
       return false;
     }
 
-    if (calendarEventCount !== calendarEvents.length) {
-      setAlertMessage(
-        'The number of calendar events does not match the expected length.'
-      );
+    // if (calendarEventCount !== calendarEvents.length) {
+    //   setAlertMessage(
+    //     'The number of calendar events does not match the expected length.'
+    //   );
+    //   setShowModal(true);
+    //   return false;
+    // }
+
+    if (moment(countdownDate) <= moment()) {
+      setAlertMessage('Countdown date must be in the future.');
       setShowModal(true);
       return false;
     }
@@ -168,13 +173,13 @@ export const AdminPage: React.FC = () => {
           )
         );
         break;
-      case 'calendarEvents':
-        dispatch(
-          setCalendarEvents(
-            calendarEvents.map((item, i) => (i === index ? value : item))
-          )
-        );
-        break;
+      // case 'calendarEvents':
+      //   dispatch(
+      //     setCalendarEvents(
+      //       calendarEvents.map((item, i) => (i === index ? value : item))
+      //     )
+      //   );
+      //   break;
       case 'contentWarnings':
         dispatch(
           setContentWarnings(
@@ -189,6 +194,9 @@ export const AdminPage: React.FC = () => {
           )
         );
         break;
+      case 'wordCount':
+        dispatch(setWordCount(parseInt(value)));
+        break;
       default:
         break;
     }
@@ -199,7 +207,7 @@ export const AdminPage: React.FC = () => {
       setBetaHIVECount(4),
       setContentWarningCount(4),
       setPromptCount(10),
-      setCountdownDate(moment()),
+      setCountdownDate(moment().format('YYYY-MM-DD')),
       setWordCount(500)
     );
   };
@@ -213,7 +221,8 @@ export const AdminPage: React.FC = () => {
       console.log('Beta HIVE options:', betaHIVEs);
       console.log('Prompts:', prompts);
       console.log('Content warnings:', contentWarnings);
-      console.log('Countdown date:', countdownDate.format('YYYY-MM-DD'));
+      console.log('Word count:', wordCount);
+      console.log('Countdown date:', countdownDate);
     } else {
       console.log('Submission is invalid. Please fill out all fields.');
     }
@@ -255,7 +264,7 @@ export const AdminPage: React.FC = () => {
               max={max}
             />
           </div>
-          {generateInputFields(value, labelPrefix, values, handleChange)}
+          {generateInputFields(value, labelPrefix, values, handleChange, inputType)}
           <SaveSpinner
             isLoading={isLoading}
             isSaved={isSaved}
@@ -272,8 +281,10 @@ export const AdminPage: React.FC = () => {
     values: any[],
     handleChange: (
       e: React.ChangeEvent<HTMLInputElement>,
-      index: number
-    ) => void
+      index: number,
+      inputType: string
+    ) => void,
+    inputType: string
   ) => {
     return Array.from({ length: Math.ceil(count / 2) }).map((_, rowIndex) => (
       <div
@@ -292,7 +303,7 @@ export const AdminPage: React.FC = () => {
                 key={index}
                 name={`${labelPrefix}${index + 1}`}
                 value={value || ''}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e) => handleChange(e, index, inputType)}
                 isDisabled={false}
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
@@ -320,12 +331,12 @@ export const AdminPage: React.FC = () => {
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
                 name='countdownDate'
-                value={countdownDate.format('YYYY-MM-DD')}
+                value={moment(countdownDate).format('YYYY-MM-DD')}
                 isDisabled={false}
                 label='Countdown date'
                 isRequired
                 onChange={(e) =>
-                  setCountdownDate(moment(e.target.value, 'YYYY-MM-DD'))
+                  dispatch(setCountdownDate(e.target.value))
                 }
                 type='date'
               />
@@ -338,21 +349,16 @@ export const AdminPage: React.FC = () => {
           </Accordion>
         </div>
         <div className='row'>
-          <Accordion
-            accordionTerms='Calendar Events'
-            collapseNumber='collapseFive'
-          >
+          <Accordion accordionTerms='Word Count' collapseNumber='collapseSeven'>
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
-                name='calendarEvents'
-                value={countdownDate.format('YYYY-MM-DD')}
+                name='wordCount'
+                value={wordCount}
                 isDisabled={false}
-                label='Calendar data'
+                label='Word Count'
                 isRequired
-                onChange={(e) =>
-                  setCountdownDate(moment(e.target.value, 'YYYY-MM-DD'))
-                }
-                type='date'
+                onChange={(e) => setWordCount(parseInt(e.target.value))}
+                type='number'
               />
             </div>
             <SaveSpinner
@@ -362,6 +368,27 @@ export const AdminPage: React.FC = () => {
             />
           </Accordion>
         </div>
+        {/******POST-MVP option-- will show just countdown date in calendar -TW
+        <div className='row'>
+          <Accordion accordionTerms='Calendar events' collapseNumber='collapseSeven'>
+            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+              <InputType
+                name='wordCount'
+                value={wordCount}
+                isDisabled={false}
+                label='Word Count'
+                isRequired
+                onChange={(e) => setWordCount(parseInt(e.target.value))}
+                type='number'
+              />
+            </div>
+            <SaveSpinner
+              isLoading={false}
+              isSaved={false}
+              savedText='Changes saved!'
+            />
+          </Accordion>
+        </div> */}
         {generateAccordion(
           'Beta HIVE options',
           'collapseTwo',
@@ -389,19 +416,6 @@ export const AdminPage: React.FC = () => {
           (e, index) => handleChange(e, index, 'prompts')
         )}
         {generateAccordion(
-          'Calendar Events',
-          'collapseSix',
-          calendarEventCount,
-          handleOptions,
-          'calendarEvents',
-          'Calendar Event',
-          '255',
-          isCalendarEventsLoading,
-          isCalendarEventsSaved,
-          calendarEvents,
-          (e, index) => handleChange(e, index, 'calendarEvents')
-        )}
-        {generateAccordion(
           'Content warnings',
           'collapseThree',
           contentWarningCount,
@@ -414,29 +428,6 @@ export const AdminPage: React.FC = () => {
           contentWarnings,
           (e, index) => handleChange(e, index, 'contentWarnings')
         )}
-        <div className='row'>
-          <Accordion
-            accordionTerms='Word Counts'
-            collapseNumber='collapseSeven'
-          >
-            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
-              <InputType
-                name='wordCount'
-                value={wordCount}
-                isDisabled={false}
-                label='Word Count'
-                isRequired
-                onChange={(e) => setWordCount(parseInt(e.target.value))}
-                type='number'
-              />
-            </div>
-            <SaveSpinner
-              isLoading={false}
-              isSaved={false}
-              savedText='Changes saved!'
-            />
-          </Accordion>
-        </div>
         <div className='row'>
           <ButtonsRow handleClear={handleClear} handleSubmit={handleSubmit} />
         </div>

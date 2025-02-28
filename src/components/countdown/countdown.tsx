@@ -12,7 +12,8 @@ export const Countdown: React.FC = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       const now = moment();
-      const diff = countdownDate.diff(now);
+      const targetDate = moment(countdownDate);
+      const diff = targetDate.diff(now);
       const duration = moment.duration(diff);
 
       const formatDuration = (value: number, unit: string) => {
