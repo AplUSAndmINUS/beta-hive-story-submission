@@ -1,52 +1,57 @@
-import React, { useState } from 'react';
+import React from 'react';
 import moment from 'moment';
 
+import { useAppSelector } from '../../stores/store';
+
 export const Calendar: React.FC = () => {
-  const [currentDate, setCurrentDate] = useState(moment());
+  const [currentDate, setCurrentDate] = React.useState(moment());
+  const { countdownDate } = useAppSelector((state) => state.adminSubmission);
 
   const startOfMonth = currentDate.clone().startOf('month');
   const endOfMonth = currentDate.clone().endOf('month');
   const startOfWeek = startOfMonth.clone().startOf('week');
   const endOfWeek = endOfMonth.clone().endOf('week');
 
-  const generateCalendar = () => {
-    const calendar = [];
-    let day = startOfWeek.clone();
+ const generateCalendar = () => {
+   const calendar = [];
+   let day = startOfWeek.clone();
+   const countdownMoment = moment(countdownDate);
 
-    while (day.isBefore(endOfWeek, 'day')) {
-      calendar.push(
-        <tr key={day.format('YYYY-MM-DD')}>
-          {[...Array(7)].map((_, i) => {
-            const currentDay = day.clone();
-            day.add(1, 'day');
-            const isCurrentMonth = currentDay.isSame(currentDate, 'month');
-            return (
-              <td
-                key={i}
-                className={`${isCurrentMonth ? '' : 'bg-light'} ${
-                  currentDay.date() === 21 ? 'bg-primary' : ''
-                }`}
-                style={isCurrentMonth ? {} : { opacity: 0.25 }}
-              >
-                {currentDay.date() === 21 ? (
-                  <strong className='text-white'>21</strong>
-                ) : (
-                  currentDay.date()
-                )}
-                {currentDay.date() === 21 && (
-                  <p>
-                    <strong className='text-white'>The big day!</strong>
-                  </p>
-                )}
-              </td>
-            );
-          })}
-        </tr>
-      );
-    }
+   while (day.isBefore(endOfWeek, 'day')) {
+     calendar.push(
+       <tr key={day.format('YYYY-MM-DD')}>
+         {[...Array(7)].map((_, i) => {
+           const currentDay = day.clone();
+           day.add(1, 'day');
+           const isCurrentMonth = currentDay.isSame(currentDate, 'month');
+           const isCountdownDay = currentDay.isSame(countdownMoment, 'day');
+           return (
+             <td
+               key={i}
+               className={`${isCurrentMonth ? '' : 'bg-light'} ${
+                 isCountdownDay ? 'bg-primary' : ''
+               }`}
+               style={isCurrentMonth ? {} : { opacity: 0.25 }}
+             >
+               {isCountdownDay ? (
+                 <strong className='text-white'>{currentDay.date()}</strong>
+               ) : (
+                 currentDay.date()
+               )}
+               {isCountdownDay && (
+                 <p>
+                   <strong className='text-white'>The big day!</strong>
+                 </p>
+               )}
+             </td>
+           );
+         })}
+       </tr>
+     );
+   }
 
-    return calendar;
-  };
+   return calendar;
+ };
 
   const handlePrevMonth = () => {
     setCurrentDate(currentDate.clone().subtract(1, 'month'));
