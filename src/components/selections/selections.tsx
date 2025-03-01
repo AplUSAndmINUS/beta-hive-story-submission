@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { routes } from '../../routes/routes';
 import { useAppSelector } from '../../stores/store';
 
 interface SelectionsProps {
@@ -38,53 +39,71 @@ export const Selections: React.FC<SelectionsProps> = ({
     <div className='container'>
       <div className='row d-flex justify-content-flex-start align-items-center w-50 p-0 mx-0 mb-3 text-start'>
         <Link
-          to='/genre-selection'
+          to={
+            routes.filter((route) => route.name === 'Beta HIVE Page')[0].path ||
+            '/'
+          }
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
         >
           <div className='pt-3 pb-0'>
             <p className='text-right'>
               <strong>Beta HIVE: </strong>
-              {betaHIVESelection || 'None selected'}{' '}
+              <span className={`${!betaHIVESelection && 'text-warning'}`}>
+                {betaHIVESelection || 'None selected'}{' '}
+              </span>
               <i className='fas fa-pencil-alt' />
             </p>
           </div>
         </Link>
 
         <Link
-          to='/prompt-selection'
+          to={
+            routes.filter((route) => route.name === 'Prompt Selection')[0]
+              ?.path || '/'
+          }
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
         >
           <div className='pt-0 pb-0'>
-            <p>
+            <p className='text-right'>
               <strong>Prompts: </strong>{' '}
-              {promptSelections.join(', ') || 'None selected'}{' '}
+              <span className={`${!betaHIVESelection && 'text-warning'}`}>
+                {promptSelections.join(', ') || 'None selected'}{' '}
+              </span>
               <i className='fas fa-pencil-alt' />
             </p>
           </div>
         </Link>
-        {/* <Link
+        <Link
           to='/prompt-selection'
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
         >
           <div className='pt-0 pb-0'>
-            <p>
-              <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
+            <p className='text-right'>
+              <strong>Story Submission: </strong>{' '}
+              <span className={`${!betaHIVESelection && 'text-warning'}`}>
+                {storySubmission ? 'Submitted' : 'Not submitted'}{' '}
+              </span>
               <i className='fas fa-pencil-alt' />
             </p>
           </div>
-        </Link> */}
+        </Link>
         <Link
-          to='/content-warnings'
+          to={
+            routes.filter((route) => route.name === 'Content Warning')[0]
+              ?.path || '/'
+          }
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
         >
           <div className='pt-0 pb-0'>
-            <p>
+            <p className='text-right'>
               <strong>Content Warnings: </strong>{' '}
-              {contentSensitivities.join(', ') || 'None selected'}{' '}
+              <span className={`${!betaHIVESelection && 'text-warning'}`}>
+                {contentSensitivities.join(', ') || 'None selected'}{' '}
+              </span>
               <i className='fas fa-pencil-alt' />
             </p>
           </div>
