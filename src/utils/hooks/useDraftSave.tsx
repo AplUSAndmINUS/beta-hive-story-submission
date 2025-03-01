@@ -17,8 +17,8 @@ export const useDraftSave = (
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    if (storyText.trim() === '') {
-      return; // Don't save empty storyText
+    if (storyText.trim() === '' || storyTitle.trim() === '') {
+      return; // Don't save empty storyText or storyTitle
     }
 
     const handleSave = async () => {

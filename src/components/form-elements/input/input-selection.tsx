@@ -23,23 +23,26 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
   const contentSensitivities: { name: string }[] = useAppSelector(
     (state) => state.storySubmission.contentSensitivities.map((name: string) => ({ name }))
   );
-  const [isChecked, setIsChecked] = React.useState<boolean>(
-    inputType === 'radio'
+  const isInitiallyChecked = React.useMemo(() => {
+    return inputType === 'radio'
       ? selectedValue === label
-      : contentSensitivities.some((item: { name: string }) => item.name === label)
-  );
-
-  React.useEffect(() => {
-    if (inputType === 'radio') {
-      setIsChecked(selectedValue === label);
-    } else {
-      setIsChecked(
-        contentSensitivities.some(
+      : contentSensitivities.some(
           (item: { name: string }) => item.name === label
-        )
-      );
-    }
-  }, [selectedValue, contentSensitivities, label, inputType]);
+        );
+  }, [inputType, selectedValue, contentSensitivities, label]);
+  const [isChecked, setIsChecked] = React.useState<boolean>(isInitiallyChecked);
+
+   React.useEffect(() => {
+     if (inputType === 'radio') {
+       setIsChecked(selectedValue === label);
+     } else {
+       setIsChecked(
+         contentSensitivities.some(
+           (item: { name: string }) => item.name === label
+         )
+       );
+     }
+   }, [selectedValue, contentSensitivities, label, inputType]);
 
   const handleCardClick = () => {
     if (inputType === 'radio') {
@@ -60,7 +63,7 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
       onClick={handleCardClick}
     >
       <div className='w-100'>
-        <div className={`card p-2 mt-4 ${isChecked && 'card-selected'}`}>
+        <div className={`card p-2 mt-4 ${isChecked ? 'card-selected' : ''}`}>
           <div className='card-body'>
             <h5 className='card-title'>
               <label

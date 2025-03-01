@@ -10,24 +10,29 @@ import { useAppSelector } from '../../stores/store';
 import InputType from '../../components/form-elements/input/input-type';
 
 export const StorySubmission: React.FC = () => {
+  const { storySubmission, storyTitle } = useAppSelector(
+    (state) => state.storySubmission
+  );
   const [isNextDisabled, setIsNextDisabled] = React.useState(true);
   // using useStates for the word count and useDraftSave to help with Redux store save
   const [storyText, setStoryText] = React.useState('');
-  const [storyTitle, setStoryTitle] = React.useState('');
+  const [storyTitleState, setStoryTitle] = React.useState('');
   const { error, isLoading, isSaved } = useDraftSave(
     storyText,
-    storyTitle
+    storyTitleState
   );
   const userWordCount = useWordCount(storyText);
   const { wordCount } = useAppSelector((state) => state.adminSubmission);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target instanceof HTMLTextAreaElement) {
-      setStoryText(e.target.value);
-    } else {
-      setStoryTitle(e.target.value);
+  React.useEffect(() => {
+    if (storySubmission && !storyText) {
+      setStoryText(storySubmission);
     }
-  };
+
+    if (storyTitle && !storyTitleState) {
+      setStoryTitle(storyTitle);
+    }
+  }, [storySubmission, storyText, storyTitle, storyTitleState]);
 
   React.useEffect(() => {
     if (
@@ -40,13 +45,26 @@ export const StorySubmission: React.FC = () => {
     }
   }, [storyText, wordCount]);
 
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (e.target instanceof HTMLTextAreaElement) {
+      setStoryText(e.target.value);
+    } else {
+      setStoryTitle(e.target.value);
+    }
+  };
+
   return (
     <div className='container-fluid'>
       <div className='row d-flex justify-content-between align-items-center'>
         <div className='col'>
           <h1 className='bd-title pb-2 mt-4'>Write your story</h1>
           <p className='text-muted pb-2 mt-2 fs-5'>
-            Please write your story below, then click &quot;Submit Story&quot;. <br />
+            Please write your story below, then click &quot;Submit Story&quot;.{' '}
+            <br />
             Don't worry: Your story will autosave, and you can edit it anytime
             after submission.
           </p>
@@ -56,7 +74,7 @@ export const StorySubmission: React.FC = () => {
       <div className='row'>
         <InputType
           name='storyTitle'
-          value={storyTitle}
+          value={storyTitleState}
           isDisabled={false}
           label={'Story title'}
           isRequired
@@ -79,7 +97,11 @@ export const StorySubmission: React.FC = () => {
         <div className='d-flex justify-content-between w-100'>
           <WordCount wordCount={userWordCount} />
           <div className='d-flex justify-content-start'>
-            <SaveSpinner error={error} isLoading={isLoading} isSaved={isSaved} />
+            <SaveSpinner
+              error={error}
+              isLoading={isLoading}
+              isSaved={isSaved}
+            />
             <NavigateButtons
               backNavigation='Prompt Selection'
               isNextDisabled={isNextDisabled}
