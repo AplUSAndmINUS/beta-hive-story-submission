@@ -125,16 +125,20 @@ export const Arena: React.FC = () => {
 
       {showModal && (
         <Modal
-          onClose={() => handleModal('story')}
-          isStoryView
-          handleChange={handleChange}
-          handleReset={handleReset}
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
-          isSaved={isSaved}
-          isSubmitDisabled={isSubmitDisabled}
-          statusText={statusText}
-          feedbackText={feedbackText}
+          onDismiss={() => handleModal('story')}
+          children={
+            <StoryView
+              onClose={() => handleModal('story')}
+              handleChange={handleChange}
+              handleReset={handleReset}
+              handleSubmit={handleSubmit}
+              isLoading={isLoading}
+              isSaved={isSaved}
+              isSubmitDisabled={isSubmitDisabled}
+              statusText={statusText}
+              feedbackText={feedbackText}
+            />
+          }
         />
       )}
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ModalProps {
-  alertMessage: string;
+  alertMessage?: string;
   isConfirmation?: boolean;
   onConfirm?: () => void;
   onDismiss: () => void;
@@ -15,6 +15,36 @@ export const Modal: React.FC<ModalProps> = ({
   onDismiss,
   children,
 }) => {
+  const modalRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        onDismiss();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [onDismiss]);
+
+  React.useEffect(() => {
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.classList.add('dimmed');
+    }
+    return () => {
+      if (rootElement) {
+        rootElement.classList.remove('dimmed');
+      }
+    };
+  }, []);
+
   return (
     <>
       <div className='modal-backdrop fade show'></div>
@@ -26,54 +56,60 @@ export const Modal: React.FC<ModalProps> = ({
         aria-hidden='true'
         style={{ display: 'block', bottom: 0, position: 'fixed' }}
       >
-        <div className='modal-dialog modal-dialog-centered'>
+        <div className='modal-dialog modal-dialog-centered' ref={modalRef}>
           <div className='modal-content'>
-            <div className='modal-header'>
-              <h5 className='modal-title' id='exampleModalLabel'>
-                Alert
-              </h5>
-              <button
-                type='button'
-                className='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-                onClick={onDismiss}
-              ></button>
-            </div>
-            <div className='modal-body'>
-              <p>{alertMessage}</p>
-              {children}
-            </div>
-            <div className='modal-footer'>
-              {isConfirmation ? (
-                <div className='d-flex justify-content-between'>
-                  <button
-                    type='button'
-                    className='btn btn-danger'
-                    onClick={onConfirm}
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    type='button'
-                    className='btn btn-primary'
-                    data-bs-dismiss='modal'
-                    onClick={onDismiss}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              ) : (
+            {alertMessage && (
+              <div className='modal-header'>
+                <h5 className='modal-title' id='exampleModalLabel'>
+                  Alert
+                </h5>
                 <button
                   type='button'
-                  className='btn btn-primary'
+                  className='btn-close'
                   data-bs-dismiss='modal'
+                  aria-label='Close'
                   onClick={onDismiss}
-                >
-                  Close
-                </button>
-              )}
+                ></button>
+              </div>
+            )}
+            <div className='modal-body'>
+              {alertMessage ? <p>{alertMessage}</p> : children || null}
             </div>
+            {isConfirmation ||
+              (alertMessage && (
+                <div className='modal-footer'>
+                  {isConfirmation && (
+                    <div className='d-flex justify-content-between'>
+                      <button
+                        type='button'
+                        className='btn btn-danger'
+                        onClick={onConfirm}
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        type='button'
+                        className='btn btn-primary'
+                        data-bs-dismiss='modal'
+                        onClick={onDismiss}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+
+                  {alertMessage && (
+                    <button
+                      type='button'
+                      className='btn btn-primary'
+                      data-bs-dismiss='modal'
+                      onClick={onDismiss}
+                    >
+                      Close
+                    </button>
+                  )}
+                </div>
+              ))}
           </div>
         </div>
       </div>

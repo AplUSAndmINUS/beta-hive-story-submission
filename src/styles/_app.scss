@@ -39,16 +39,6 @@ $large-desktop: 1600px;
 
 // start components styling
 
-// modal slide up and down
-.modal-dialog-slide-up {
-  transform: translateY(100%);
-  transition: transform 0.3s ease-out;
-}
-
-.modal.fade.show .modal-dialog-slide-up {
-  transform: translateY(0);
-}
-
 // menu button icon
 .custom-icon {
   background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%280, 0, 0, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
