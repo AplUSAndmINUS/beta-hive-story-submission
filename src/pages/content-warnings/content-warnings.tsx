@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 
-import useNavigation from '../../utils/hooks/useNavigation';
 import Modal from '../../components/modal/modal';
 import NavigationButtons from '../../components/navigate-buttons/navigate-buttons';
 import InputSelectionCard from '../../components/form-elements/input/input-selection';
@@ -12,6 +11,7 @@ import {
   setIsContentWarning,
 } from '../../stores/reducers/story-submission';
 import { CONTENT_WARNINGS } from '../../services/constants/constants';
+import useNavigation from '../../utils/hooks/useNavigation';
 
 export const ContentWarnings: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -154,7 +154,7 @@ export const ContentWarnings: React.FC = () => {
       </div>
       <NavigationButtons
         backNavigation='Story Submission'
-        handleSubmit={handleSubmit}
+        handleSubmit={() => setShowModal(true)}
         isNextDisabled={true}
         isNextDisplayed={false}
         isSubmitDisabled={isSubmitDisabled}
@@ -163,6 +163,7 @@ export const ContentWarnings: React.FC = () => {
       {showModal && (
         <Modal
           alertMessage='Are you sure you want to submit your story? Once you submit, you cannot change your HIVE selection. (You can edit your story after submission.)'
+          onConfirm={() => handleSubmit}
           onDismiss={() => setShowModal(false)}
         />
       )}

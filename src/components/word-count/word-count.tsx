@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface WordCountProps {
-  wordCount: number;
+  wordCount: JSX.Element;
 }
 
 export const WordCount: React.FC<WordCountProps> = ({ wordCount }) => {

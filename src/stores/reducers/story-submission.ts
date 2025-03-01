@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface StorySubmissionState {
+  isHIVEConfirmation: boolean;
   contentWarning: string;
   contentSensitivities: string[];
   genreSelection: string;
@@ -10,6 +11,7 @@ interface StorySubmissionState {
 }
 
 const initialState: StorySubmissionState = {
+  isHIVEConfirmation: false,
   contentWarning: '',
   contentSensitivities: [],
   genreSelection: '',
@@ -22,6 +24,9 @@ const storySubmissionSlice = createSlice({
   name: 'storySubmissionReducer',
   initialState,
   reducers: {
+    setBetaHIVEConfirmation(state, action: PayloadAction<boolean>) {
+      state.isHIVEConfirmation = action.payload;
+    },
     setContentSensitivities(state, action: PayloadAction<string[]>) {
       state.contentSensitivities = action.payload;
     },

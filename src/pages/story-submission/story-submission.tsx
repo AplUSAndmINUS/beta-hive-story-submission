@@ -7,24 +7,26 @@ import Selections from '../../components/selections/selections';
 import NavigateButtons from '../../components/navigate-buttons/navigate-buttons';
 import WordCount from '../../components/word-count/word-count';
 import useWordCount from '../../utils/hooks/useWordCount';
+import { useAppSelector } from '../../stores/store';
 
 export const StorySubmission: React.FC = () => {
   const [isNextDisabled, setIsNextDisabled] = React.useState(true);
   const [storyText, setStoryText] = React.useState('');
   const { isLoading, isSaved } = useDraftSave(storyText, setStorySubmission);
-  const wordCount = useWordCount(storyText);
+  const userWordCount = useWordCount(storyText);
+  const { wordCount } = useAppSelector((state) => state.adminSubmission);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setStoryText(e.target.value);
   };
 
   React.useEffect(() => {
-    if (storyText.trim().length >= 10) {
+    if (storyText.trim().length >= 10 || storyText.trim().length > wordCount) {
       setIsNextDisabled(false);
     } else {
       setIsNextDisabled(true);
     }
-  }, [storyText]);
+  }, [storyText, wordCount]);
 
   return (
     <div className='container-fluid'>
@@ -49,7 +51,7 @@ export const StorySubmission: React.FC = () => {
           onChange={handleChange}
         ></textarea>
         <div className='d-flex justify-content-between w-100'>
-          <WordCount wordCount={wordCount} />
+          <WordCount wordCount={userWordCount} />
           <div className='d-flex justify-content-start'>
             <SaveSpinner isLoading={isLoading} isSaved={isSaved} />
             <NavigateButtons

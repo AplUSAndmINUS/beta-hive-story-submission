@@ -2,10 +2,17 @@ import React from 'react';
 
 interface ModalProps {
   alertMessage: string;
+  isConfirmation?: boolean;
+  onConfirm?: () => void;
   onDismiss: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({ alertMessage, onDismiss }) => {
+export const Modal: React.FC<ModalProps> = ({
+  alertMessage,
+  isConfirmation = false,
+  onConfirm,
+  onDismiss,
+}) => {
   return (
     <div
       className='modal fade'
@@ -33,14 +40,34 @@ export const Modal: React.FC<ModalProps> = ({ alertMessage, onDismiss }) => {
             <p>{alertMessage}</p>
           </div>
           <div className='modal-footer'>
-            <button
-              type='button'
-              className='btn btn-primary'
-              data-bs-dismiss='modal'
-              onClick={onDismiss}
-            >
-              Close
-            </button>
+            {isConfirmation ? (
+              <div className='d-flex justify-content-between'>
+                <button
+                  type='button'
+                  className='btn btn-danger'
+                  onClick={onConfirm}
+                >
+                  Confirm
+                </button>
+                <button
+                  type='button'
+                  className='btn btn-primary'
+                  data-bs-dismiss='modal'
+                  onClick={onDismiss}
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                type='button'
+                className='btn btn-primary'
+                data-bs-dismiss='modal'
+                onClick={onDismiss}
+              >
+                Close
+              </button>
+            )}
           </div>
         </div>
       </div>
