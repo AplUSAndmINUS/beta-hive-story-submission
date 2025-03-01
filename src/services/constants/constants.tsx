@@ -1,7 +1,7 @@
 import { characterSchema } from '../../pages/prompt-selection/prompt-selection.types';
 import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
 import { genreSchema } from '../../pages/genre-selection/genre-selection.types';
-import { settingSchema } from '../../pages/prompt-selection/prompt-selection.types';
+import { promptsSchema, settingSchema } from '../../pages/prompt-selection/prompt-selection.types';
 
 // GENRE_SELECTIONS aren't used in the code, but they are used in the tests
 export const GENRE_SELECTIONS: genreSchema[] = [
@@ -136,4 +136,18 @@ export const SETTING_SELECTIONS: settingSchema[] = [
     name: 'Wonderland',
     description: 'A whimsical and nonsensical world where anything can happen.',
   },
+];
+
+// customer requested these be listed all under prompts and not separated -TW
+export const PROMPT_SELECTIONS: promptsSchema[] = [
+  CHARACTER_SELECTIONS[0],
+  CHARACTER_SELECTIONS[1],
+  CHARACTER_SELECTIONS[2],
+  CHARACTER_SELECTIONS[3],
+  CHARACTER_SELECTIONS[4],
+  CHARACTER_SELECTIONS[5],
+  SETTING_SELECTIONS[0],
+  SETTING_SELECTIONS[1],
+  SETTING_SELECTIONS[2],
+  SETTING_SELECTIONS[3],
 ];

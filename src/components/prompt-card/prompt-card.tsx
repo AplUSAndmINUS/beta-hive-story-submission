@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAppSelector } from '../../stores/store';
 interface PromptCardProps {
-  handleSelection: (selection: string) => void;
+  handleSelection: (selection: string | string[]) => void;
   isStorySelection?: boolean;
   prompt: string;
   promptText?: string;
@@ -25,7 +25,7 @@ const voteSubmission = useAppSelector(
     <div
       className='col-6 d-flex flex-wrap justify-content-between'
       onClick={
-        isStorySelection ? () => handleSelection : () => handleSelection(prompt)
+        isStorySelection ? () => handleSelection('') : () => handleSelection(prompt)
       }
     >
       <div className='w-100 me-3'>

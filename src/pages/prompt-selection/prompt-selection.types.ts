@@ -9,3 +9,9 @@ export interface settingSchema {
   name: string;
   description: string;
 }
+
+export interface promptsSchema {
+  id: number;
+  name: string;
+  description: string;
+}

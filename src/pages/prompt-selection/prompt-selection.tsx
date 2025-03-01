@@ -5,11 +5,12 @@ import PromptCard from '../../components/prompt-card/prompt-card';
 import Selections from '../../components/selections/selections';
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
-  setCharacterSelection,
-  setSettingSelection,
+  // setCharacterSelection,
+  // setSettingSelection,
+  setPromptSelections
 } from '../../stores/reducers/story-submission';
-import { CHARACTER_SELECTIONS } from '../../services/constants/constants';
-import { SETTING_SELECTIONS } from '../../services/constants/constants';
+import { PROMPT_SELECTIONS } from '../../services/constants/constants';
+// import { CHARACTER_SELECTIONS, SETTING_SELECTIONS } from '../../services/constants/constants'; 
 
 export const PromptSelection: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -17,13 +18,19 @@ export const PromptSelection: React.FC = () => {
     (state) => state.storySubmission
   );
 
-  const handleCharacterSelection = (character: string) => {
-    dispatch(setCharacterSelection(character));
+  const handlePromptSelection = (prompt: string | string[]) => {
+    const promptArray = Array.isArray(prompt) ? prompt : [prompt];
+    dispatch(setPromptSelections(promptArray));
   };
 
-  const handleSettingSelection = (setting: string) => {
-    dispatch(setSettingSelection(setting));
-  };
+  // customer requested these be listed all under prompts and not separated -TW
+  // const handleCharacterSelection = (character: string) => {
+  //   dispatch(setCharacterSelection(character));
+  // };
+
+  // const handleSettingSelection = (setting: string) => {
+  //   dispatch(setSettingSelection(setting));
+  // };
 
   return (
     <div className='container-fluid'>
@@ -40,7 +47,7 @@ export const PromptSelection: React.FC = () => {
       </div>
       <div className='row'>
         <h3 className='pb-2 mt-3'>Prompts</h3>
-        {CHARACTER_SELECTIONS.map((character, index) => (
+        {/* {CHARACTER_SELECTIONS.map((character, index) => (
           <PromptCard
             key={character.name + index}
             prompt={character.name}
@@ -54,6 +61,14 @@ export const PromptSelection: React.FC = () => {
             prompt={setting.name}
             promptText={setting.description}
             handleSelection={handleSettingSelection}
+          />
+        ))} */}
+        {PROMPT_SELECTIONS.map((setting, index) => (
+          <PromptCard
+            key={setting.name + index}
+            prompt={setting.name}
+            promptText={setting.description}
+            handleSelection={handlePromptSelection}
           />
         ))}
       </div>

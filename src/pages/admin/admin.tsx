@@ -10,6 +10,7 @@ import {
   setContentWarningCount,
   setContentWarnings,
   setCountdownDate,
+  setMinPromptSelections,
   setPromptCount,
   setPrompts,
   setWordCount,
@@ -29,6 +30,7 @@ export const AdminPage: React.FC = () => {
     contentWarningCount,
     contentWarnings,
     countdownDate,
+    minPromptSelections,
     promptsCount,
     prompts,
     wordCount,
@@ -357,6 +359,28 @@ export const AdminPage: React.FC = () => {
                 value={wordCount}
                 isDisabled={false}
                 label='Word Count'
+                isRequired
+                onChange={(e) =>
+                  dispatch(setWordCount(parseInt(e.target.value)))
+                }
+                type='number'
+              />
+            </div>
+            <SaveSpinner
+              isLoading={false}
+              isSaved={false}
+              savedText='Changes saved!'
+            />
+          </Accordion>
+        </div>
+        <div className='row'>
+          <Accordion accordionTerms='Minimum prompt selections' collapseNumber='collapseSeven'>
+            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+              <InputType
+                name='wordCount'
+                value={wordCount}
+                isDisabled={false}
+                label='How many prompts at minimum must be selected?'
                 isRequired
                 onChange={(e) =>
                   dispatch(setWordCount(parseInt(e.target.value)))
