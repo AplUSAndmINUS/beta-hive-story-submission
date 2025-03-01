@@ -8,6 +8,7 @@ interface StorySubmissionState {
   characterSelection: string;
   settingSelection: string;
   promptSelections: string[];
+  storyTitle: string;
   storySubmission: string;
 }
 
@@ -19,6 +20,7 @@ const initialState: StorySubmissionState = {
   characterSelection: '',
   settingSelection: '',
   promptSelections: [],
+  storyTitle: '',
   storySubmission: '',
 };
 
@@ -53,6 +55,9 @@ const storySubmissionSlice = createSlice({
     setStorySubmission(state, action: PayloadAction<string>) {
       state.storySubmission = action.payload;
     },
+    setStoryTitle(state, action: PayloadAction<string>) {
+      state.storyTitle = action.payload;
+    },
   },
 });
 
@@ -65,6 +70,7 @@ export const {
   setPromptSelections,
   setSettingSelection,
   setStorySubmission,
+  setStoryTitle,
 } = storySubmissionSlice.actions;
 
 export default storySubmissionSlice.reducer;

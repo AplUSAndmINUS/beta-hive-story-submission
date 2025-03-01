@@ -19,21 +19,18 @@ export const ContentWarnings: React.FC = () => {
   const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
   const [showModal, setShowModal] = React.useState(false);
   const {
-    characterSelection,
     contentSensitivities,
     contentWarning,
     betaHIVESelection,
-    settingSelection,
+    promptSelections,
     storySubmission,
   } = useAppSelector((state) => state.storySubmission);
 
   React.useEffect(() => {
     if (
-      characterSelection &&
       betaHIVESelection &&
-      settingSelection &&
+      promptSelections &&
       storySubmission.trim().length >= 10 &&
-      contentWarning !== '' &&
       (contentWarning === 'No' || contentSensitivities.length > 0)
     ) {
       setIsSubmitDisabled(false);
@@ -41,12 +38,11 @@ export const ContentWarnings: React.FC = () => {
       setIsSubmitDisabled(true);
     }
   }, [
-    characterSelection,
     betaHIVESelection,
-    settingSelection,
+    promptSelections,
     storySubmission,
-    contentSensitivities.length,
     contentWarning,
+    contentSensitivities.length,
   ]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,10 +52,9 @@ export const ContentWarnings: React.FC = () => {
       title: 'Your Story Title', // Replace with actual title
       author: 'Author ID', // Replace with actual author ID
       betaHive: betaHIVESelection,
-      setting: settingSelection,
-      character: characterSelection,
-      contentSensitivities: contentSensitivities,
+      prompts: promptSelections,
       contentWarning: contentWarning,
+      contentSensitivities: contentSensitivities,
       story: storySubmission,
       date: moment().toISOString(),
     };
@@ -92,7 +87,7 @@ export const ContentWarnings: React.FC = () => {
   const handleContentWarningRadio = (label: string) => {
     dispatch(setIsContentWarning(label));
     if (label === 'No') {
-      dispatch(setContentSensitivities([]));
+      dispatch(setContentSensitivities(['None']));
     }
   };
 
@@ -180,7 +175,9 @@ export const ContentWarnings: React.FC = () => {
       />
       {showModal && (
         <Modal
-          alertMessage='Are you sure you want to submit your story? Once you submit, you cannot change your HIVE selection. (You can edit your story after submission.)'
+          alertMessage='Are you sure you want to submit your story? Once you submit, you cannot change your HIVE selection.'
+          alertMessage2='(You can edit your story after submission.)'
+          isConfirmation={true}
           onConfirm={() => handleSubmit}
           onDismiss={() => setShowModal(false)}
         />

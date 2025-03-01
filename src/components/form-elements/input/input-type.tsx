@@ -6,6 +6,7 @@ interface InputTypeProps {
   isContentWarning?: boolean;
   isPrompts?: boolean;
   name: string;
+  flex?: string;
   value?: any;
   label: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +14,7 @@ interface InputTypeProps {
   min?: string;
   max?: string;
   pattern?: string;
+  placeholder?: string;
   type?: string;
 }
 
@@ -22,6 +24,7 @@ export const InputType: React.FC<InputTypeProps> = ({
   isContentWarning = false,
   isPrompts = false,
   name,
+  flex,
   value,
   isRequired = false,
   label,
@@ -29,11 +32,12 @@ export const InputType: React.FC<InputTypeProps> = ({
   min,
   max,
   pattern,
+  placeholder,
   type,
 }) => {
   return (
     <div
-      className={`col-6 d-flex flex-wrap ${
+      className={`col-6 d-flex flex-wrap ${flex === 'start' && 'ps-0'} ${
         type === 'number' ? 'justify-content-start' : 'justify-content-between'
       }`}
     >
@@ -58,6 +62,7 @@ export const InputType: React.FC<InputTypeProps> = ({
                   min={min}
                   max={max}
                   pattern={pattern}
+                  placeholder={placeholder}
                   required={isRequired}
                   name={name}
                   id={name}

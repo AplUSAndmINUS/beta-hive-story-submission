@@ -15,6 +15,7 @@ export const Selections: React.FC<SelectionsProps> = ({
     betaHIVESelection,
     promptSelections,
     storySubmission,
+    storyTitle,
     contentSensitivities,
   } = useAppSelector((state) => state.storySubmission);
 
@@ -87,7 +88,7 @@ export const Selections: React.FC<SelectionsProps> = ({
             <p className='text-right'>
               <strong>Story Submission: </strong>{' '}
               <span className={`${!storySubmission && 'text-warning'}`}>
-                {storySubmission ? 'Submitted' : 'Not submitted'}{' '}
+                {(storySubmission && storyTitle) ? 'Submitted' : 'Not submitted'}{' '}
               </span>
               <i className='fas fa-pencil-alt' />
             </p>

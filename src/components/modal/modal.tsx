@@ -2,6 +2,7 @@ import React from 'react';
 
 interface ModalProps {
   alertMessage?: string;
+  alertMessage2?: string;
   isConfirmation?: boolean;
   onConfirm?: () => void;
   onDismiss: () => void;
@@ -10,6 +11,7 @@ interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({
   alertMessage,
+  alertMessage2,
   isConfirmation = false,
   onConfirm,
   onDismiss,
@@ -60,9 +62,10 @@ export const Modal: React.FC<ModalProps> = ({
           <div className='modal-content'>
             {alertMessage && (
               <div className='modal-header'>
-                <h5 className='modal-title' id='exampleModalLabel'>
-                  Alert
-                </h5>
+                <h4 className='modal-title' id='exampleModalLabel'>
+                  <i className='fas fa-exclamation-triangle text-warning' />
+                  &nbsp; Just to confirm
+                </h4>
                 <button
                   type='button'
                   className='btn-close'
@@ -73,43 +76,53 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
             )}
             <div className='modal-body'>
-              {alertMessage ? <p>{alertMessage}</p> : children || null}
+              {alertMessage ? (
+                <p>
+                  {alertMessage}
+                  {alertMessage2 && (
+                    <>
+                      <br />
+                      <br />
+                      {alertMessage2}
+                    </>
+                  )}
+                </p>
+              ) : (
+                children || null
+              )}
             </div>
-            {isConfirmation ||
-              (alertMessage && (
-                <div className='modal-footer'>
-                  {isConfirmation && (
-                    <div className='d-flex justify-content-between'>
-                      <button
-                        type='button'
-                        className='btn btn-danger'
-                        onClick={onConfirm}
-                      >
-                        Confirm
-                      </button>
-                      <button
-                        type='button'
-                        className='btn btn-primary'
-                        data-bs-dismiss='modal'
-                        onClick={onDismiss}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
-
-                  {alertMessage && (
-                    <button
-                      type='button'
-                      className='btn btn-primary'
-                      data-bs-dismiss='modal'
-                      onClick={onDismiss}
-                    >
-                      Close
-                    </button>
-                  )}
+            <div className='modal-footer'>
+              {isConfirmation && (
+                <div className='d-flex justify-content-between'>
+                  <button
+                    type='button'
+                    className='btn btn-danger'
+                    onClick={onConfirm}
+                  >
+                    Confirm
+                  </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button
+                    type='button'
+                    className='btn btn-primary'
+                    data-bs-dismiss='modal'
+                    onClick={onDismiss}
+                  >
+                    Cancel
+                  </button>
                 </div>
-              ))}
+              )}
+
+              {((alertMessage && !isConfirmation) || (!alertMessage)) && (
+                <button
+                  type='button'
+                  className='btn btn-primary'
+                  data-bs-dismiss='modal'
+                  onClick={onDismiss}
+                >
+                  Close
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
