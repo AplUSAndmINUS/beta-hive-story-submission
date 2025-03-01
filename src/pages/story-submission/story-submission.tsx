@@ -21,7 +21,7 @@ export const StorySubmission: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (storyText.trim().length >= 10 || storyText.trim().length > wordCount) {
+    if (storyText.trim().length >= 10 && storyText.split(' ').length <= wordCount) {
       setIsNextDisabled(false);
     } else {
       setIsNextDisabled(true);

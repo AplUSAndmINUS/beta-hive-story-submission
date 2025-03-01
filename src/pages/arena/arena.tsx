@@ -4,6 +4,7 @@ import React from 'react';
 import HIVEStoryCard from '../../components/story-card/story-card';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
+import Modal from '../../components/modal/modal';
 import PromptCard from '../../components/prompt-card/prompt-card';
 import StoryView from '../story-view/story-view';
 import { useIsMobile } from '../../utils/hooks/useIsMobile';
@@ -50,14 +51,14 @@ export const Arena: React.FC = () => {
   const handleStorySelection = (prompt: string) => {
     setSelectedStory(prompt);
     console.log('Selected story:', selectedStory);
-  }
+  };
 
   if (!images || images.length === 0) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className='container'> 
+    <div className='container'>
       <div className='row d-flex justify-content-center'>
         <div className='col-12 pt-4 pb-5'>
           <h2 className='bd-title'>Battle HIVE</h2>
@@ -104,8 +105,7 @@ export const Arena: React.FC = () => {
                 prompt='Story 1'
                 promptText='This is story 1 and its description'
                 handleSelection={() => handleStorySelection('Story 1')}
-              />
-              {' '}
+              />{' '}
               <PromptCard
                 isStorySelection
                 prompt='Story 2'
@@ -113,7 +113,10 @@ export const Arena: React.FC = () => {
                 handleSelection={() => handleStorySelection('Story 2')}
               />
             </div>
-            <button className='btn btn-primary mt-4 w-25' onClick={handleSubmit}>
+            <button
+              className='btn btn-primary mt-4 w-25'
+              onClick={handleSubmit}
+            >
               Submit
             </button>
           </div>
@@ -121,32 +124,18 @@ export const Arena: React.FC = () => {
       </div>
 
       {showModal && (
-        <>
-          <div
-            className={`modal ${isMobile && 'modal-fullscreen'} fade show`}
-            style={{ display: 'block' }}
-            onClick={() => setShowModal(false)}
-          >
-            <div className='modal-dialog modal-dialog-centered'>
-              <div className='modal-content'>
-                <div className='modal-body'>
-                  <StoryView
-                    onClose={() => handleModal('story')}
-                    handleChange={handleChange}
-                    handleReset={handleReset}
-                    handleSubmit={handleSubmit}
-                    isLoading={isLoading}
-                    isSaved={isSaved}
-                    isSubmitDisabled={isSubmitDisabled}
-                    statusText={statusText}
-                    feedbackText={feedbackText}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='modal-backdrop fade show'></div>
-        </>
+        <Modal
+          onClose={() => handleModal('story')}
+          isStoryView
+          handleChange={handleChange}
+          handleReset={handleReset}
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+          isSaved={isSaved}
+          isSubmitDisabled={isSubmitDisabled}
+          statusText={statusText}
+          feedbackText={feedbackText}
+        />
       )}
     </div>
   );

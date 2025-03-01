@@ -31,7 +31,7 @@ export const PromptSelection: React.FC = () => {
         <div className='col'>
           <h1 className='bd-title pb-2 mt-4'>Choose two prompts</h1>
           <p className='text-muted pb-2 mt-2 fs-5'>
-            Select two prompts from the Setting and Character sections.
+            Select two prompts from the following prompts.
             <br />
             You'll use these to create your story.
           </p>
@@ -39,7 +39,7 @@ export const PromptSelection: React.FC = () => {
         <Selections />
       </div>
       <div className='row'>
-        <h3 className='pb-2 mt-5'>Prompts</h3>
+        <h3 className='pb-2 mt-3'>Prompts</h3>
         {CHARACTER_SELECTIONS.map((character, index) => (
           <PromptCard
             key={character.name + index}
@@ -48,9 +48,6 @@ export const PromptSelection: React.FC = () => {
             handleSelection={handleCharacterSelection}
           />
         ))}
-      </div>
-      <div className={`row mt-5 ${!characterSelection && 'opacity-25'}`}>
-        <h3 className='pb-2 mt-2 mb-1'>Setting</h3>
         {SETTING_SELECTIONS.map((setting, index) => (
           <PromptCard
             key={setting.name + index}
@@ -61,12 +58,12 @@ export const PromptSelection: React.FC = () => {
         ))}
       </div>
       <div className='row'>
-      <NavigateButtons
-        isNextDisabled={!characterSelection || !settingSelection}
-        backNavigation='Genre Selection'
-        nextNavigation='Story Submission'
+        <NavigateButtons
+          isNextDisabled={!characterSelection || !settingSelection}
+          backNavigation='Beta HIVE Selection'
+          nextNavigation='Story Submission'
         />
-        </div>
+      </div>
     </div>
   );
 };
