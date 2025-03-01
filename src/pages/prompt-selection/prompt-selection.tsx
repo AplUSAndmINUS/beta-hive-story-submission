@@ -10,6 +10,7 @@ import {
   setPromptSelections
 } from '../../stores/reducers/story-submission';
 import { PROMPT_SELECTIONS } from '../../services/constants/constants';
+import { promptsSchema } from './prompt-selection.types';
 // import { CHARACTER_SELECTIONS, SETTING_SELECTIONS } from '../../services/constants/constants'; 
 
 export const PromptSelection: React.FC = () => {
@@ -18,9 +19,10 @@ export const PromptSelection: React.FC = () => {
     (state) => state.storySubmission
   );
 
-  const handlePromptSelection = (prompt: string | string[]) => {
-    const promptArray = Array.isArray(prompt) ? prompt : [prompt];
-    dispatch(setPromptSelections(promptArray));
+  const handlePromptSelection = (selection: string | promptsSchema[]) => {
+    if (Array.isArray(selection)) {
+      dispatch(setPromptSelections(selection));
+    }
   };
 
   // customer requested these be listed all under prompts and not separated -TW
@@ -63,11 +65,11 @@ export const PromptSelection: React.FC = () => {
             handleSelection={handleSettingSelection}
           />
         ))} */}
-        {PROMPT_SELECTIONS.map((setting, index) => (
+        {PROMPT_SELECTIONS.map((prompt, index) => (
           <PromptCard
-            key={setting.name + index}
-            prompt={setting.name}
-            promptText={setting.description}
+            key={prompt.name + index}
+            prompt={prompt.name}
+            promptText={prompt.description}
             handleSelection={handlePromptSelection}
           />
         ))}

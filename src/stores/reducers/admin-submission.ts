@@ -43,7 +43,7 @@ const adminSubmissionSlice = createSlice({
     setBetaHIVECount(state, action: PayloadAction<number>) {
       state.betaHIVECount = action.payload;
     },
-    setBetaHIVEs(state, action: PayloadAction<BetaHIVEPrompt[]>) {
+    setBetaHIVEs(state, action: PayloadAction<betaHIVESchema[]>) {
       state.betaHIVEs = [...action.payload];
     },
     setCalendarEventCount(state, action: PayloadAction<number>) {

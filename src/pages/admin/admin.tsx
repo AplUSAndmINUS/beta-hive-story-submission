@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import moment, { min } from 'moment';
 
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
@@ -377,13 +377,13 @@ export const AdminPage: React.FC = () => {
           <Accordion accordionTerms='Minimum prompt selections' collapseNumber='collapseSeven'>
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
-                name='wordCount'
-                value={wordCount}
+                name='minPromptSelections'
+                value={minPromptSelections}
                 isDisabled={false}
                 label='How many prompts at minimum must be selected?'
                 isRequired
                 onChange={(e) =>
-                  dispatch(setWordCount(parseInt(e.target.value)))
+                  dispatch(setMinPromptSelections(parseInt(e.target.value)))
                 }
                 type='number'
               />

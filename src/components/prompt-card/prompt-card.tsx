@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { useAppSelector } from '../../stores/store';
+import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
 interface PromptCardProps {
-  handleSelection: (selection: string | string[]) => void;
+  handleSelection: (selection: string | promptsSchema[]) => void;
   isStorySelection?: boolean;
   prompt: string;
   promptText?: string;
@@ -25,7 +26,7 @@ const voteSubmission = useAppSelector(
     <div
       className='col-6 d-flex flex-wrap justify-content-between'
       onClick={
-        isStorySelection ? () => handleSelection('') : () => handleSelection(prompt)
+        isStorySelection ? () => handleSelection('') : () => handleSelection(prompt)  
       }
     >
       <div className='w-100 me-3'>
