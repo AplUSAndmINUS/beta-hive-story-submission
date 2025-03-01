@@ -1,7 +1,7 @@
 import { NonIndexRouteObject } from 'react-router-dom';
 
 import { AdminPage } from '../pages/admin/admin';
-import { Arena } from '../pages/arena/arena';
+import { BattleHIVE } from '../pages/battleHIVE/battleHIVE';
 import { BetaHIVE } from '../pages/beta-hive/beta-hive';
 import { Confirmation } from '../pages/confirmation/confirmation';
 import { ContentWarnings } from '../pages/content-warnings/content-warnings';
@@ -33,17 +33,17 @@ export const routes: Routes[] = [
     element: <AdminPage />,
   },
   {
-    path: '/betaHIVE',
+    path: '/BetaHIVE',
     name: 'Beta HIVE Page',
     element: <BetaHIVE />,
   },
   {
-    path: '/battleHIVE',
+    path: '/BattleHIVE',
     name: 'Battle HIVE',
-    element: <Arena />,
+    element: <BattleHIVE />,
   },
   {
-    path: '/betaHIVE-selection',
+    path: '/BetaHIVE-selection',
     name: 'Beta HIVE Selection',
     element: <BetaHIVESelection />,
     storySubmission: true,

@@ -5,7 +5,10 @@ import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner'
 import Selections from '../../components/selections/selections';
 
 interface StoryViewProps {
-  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>, string: string) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    string: string
+  ) => void;
   feedbackText: string;
   handleReset: () => void;
   handleSubmit: ($e: React.FormEvent) => void;
@@ -29,7 +32,6 @@ export const StoryView: React.FC<StoryViewProps> = ({
   statusText,
   onClose,
 }) => {
-
   return (
     <div className='container position-relative p-4'>
       <button
@@ -39,7 +41,7 @@ export const StoryView: React.FC<StoryViewProps> = ({
         onClick={onClose}
       ></button>
 
-      {/* This will be in a modal view in the arena page or when a story is clicked itself */}
+      {/* This will be in a modal view in the BattleHIVE page or when a story is clicked itself */}
       <h1>Story View</h1>
       <div className='d-flex justify-content-between align-items-center'>
         <HIVEStoryCard isHover={false} onClick={() => {}} />

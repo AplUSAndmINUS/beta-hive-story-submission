@@ -5,7 +5,7 @@ import { useAppSelector } from '../../stores/store';
 import { Calendar } from '../../components/calendar/calendar';
 import { Countdown } from '../../components/countdown/countdown';
 
-import Arena from '../arena/arena';
+import BattleHIVE from '../battleHIVE/battleHIVE';
 import BetaHIVE from '../beta-hive/beta-hive';
 
 export const HomePage: React.FC = () => {
@@ -51,7 +51,7 @@ export const HomePage: React.FC = () => {
         <div className='row'>
           <div className='col mt-4'>
             <h3 className='bd-title pb-2'>The Battle HIVE is open!</h3>
-            <button className='btn btn-primary'>Enter the Arena</button>
+            <button className='btn btn-primary'>Enter the BattleHIVE</button>
           </div>
         </div>
       )}

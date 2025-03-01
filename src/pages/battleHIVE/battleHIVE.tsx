@@ -9,7 +9,7 @@ import PromptCard from '../../components/prompt-card/prompt-card';
 import StoryView from '../story-view/story-view';
 import { useIsMobile } from '../../utils/hooks/useIsMobile';
 
-export const Arena: React.FC = () => {
+export const BattleHIVE: React.FC = () => {
   const [feedbackText, setFeedbackText] = React.useState('');
   const [showModal, setShowModal] = React.useState(false);
   const [selectedStory, setSelectedStory] = React.useState<string>('');
@@ -145,4 +145,4 @@ export const Arena: React.FC = () => {
   );
 };
 
-export default Arena;
+export default BattleHIVE;

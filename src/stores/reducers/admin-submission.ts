@@ -23,7 +23,7 @@ interface AdminSubmissionState {
 }
 
 const initialState: AdminSubmissionState = {
-  betaHIVECount: 4,
+  betaHIVECount: 8,
   betaHIVEs: [...BETAHIVE_SELECTIONS],
   calendarEventCount: 4,
   calendarEvents: [],

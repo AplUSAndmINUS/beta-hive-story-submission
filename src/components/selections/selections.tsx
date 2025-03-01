@@ -12,8 +12,8 @@ export const Selections: React.FC<SelectionsProps> = ({
 }) => {
   const {
     betaHIVESelection,
-    characterSelection,
-    settingSelection,
+    promptSelections,
+    storySubmission,
     contentSensitivities,
   } = useAppSelector((state) => state.storySubmission);
 
@@ -30,12 +30,7 @@ export const Selections: React.FC<SelectionsProps> = ({
       </div>
       <div className='pt-0 pb-0'>
         <p>
-          <strong>Character: </strong> {characterSelection || 'None selected'}{' '}
-        </p>
-      </div>
-      <div className='pt-0 pb-0'>
-        <p>
-          <strong>Setting: </strong> {settingSelection || 'None selected'}{' '}
+          <strong>Prompts: </strong> {promptSelections || 'None selected'}{' '}
         </p>
       </div>
     </div>
@@ -63,13 +58,13 @@ export const Selections: React.FC<SelectionsProps> = ({
         >
           <div className='pt-0 pb-0'>
             <p>
-              <strong>Character: </strong>{' '}
-              {characterSelection || 'None selected'}{' '}
+              <strong>Prompts: </strong>{' '}
+              {promptSelections.join(', ') || 'None selected'}{' '}
               <i className='fas fa-pencil-alt' />
             </p>
           </div>
         </Link>
-        <Link
+        {/* <Link
           to='/prompt-selection'
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
@@ -80,7 +75,7 @@ export const Selections: React.FC<SelectionsProps> = ({
               <i className='fas fa-pencil-alt' />
             </p>
           </div>
-        </Link>
+        </Link> */}
         <Link
           to='/content-warnings'
           className='text-decoration-none custom-link'
