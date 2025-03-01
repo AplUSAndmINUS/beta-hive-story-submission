@@ -66,6 +66,7 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
               <label
                 className='d-flex align-items-center'
                 style={{ cursor: !isDisabled ? 'pointer' : 'auto' }}
+                onClick={($e) => $e.stopPropagation()}
               >
                 <input
                   disabled={isDisabled}

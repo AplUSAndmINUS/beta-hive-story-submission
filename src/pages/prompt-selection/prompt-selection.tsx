@@ -22,16 +22,14 @@ export const PromptSelection: React.FC = () => {
   );
 
   const handlePromptSelection = (selection: string) => {
-    if (Array.isArray(selection)) {
-      if (promptSelections.includes(selection)) {
-        dispatch(
-          setPromptSelections(
-            promptSelections.filter((prompt) => prompt !== selection)
-          )
-        );
-      } else {
-        dispatch(setPromptSelections([selection, ...promptSelections]));
-      }
+    if (promptSelections.includes(selection)) {
+      dispatch(
+        setPromptSelections(
+          promptSelections.filter((prompt) => prompt !== selection)
+        )
+      );
+    } else {
+      dispatch(setPromptSelections([...promptSelections, selection]));
     }
   };
 

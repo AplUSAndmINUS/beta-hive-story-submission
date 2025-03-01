@@ -91,24 +91,35 @@ export const ContentWarnings: React.FC = () => {
 
   const handleContentWarningRadio = (label: string) => {
     dispatch(setIsContentWarning(label));
+    if (label === 'No') {
+      dispatch(setContentSensitivities([]));
+    }
   };
 
   const handleContentSensitivities = (
     contentName: string,
     isChecked?: boolean
   ) => {
-    if (isChecked) {
-      dispatch(
-        setContentSensitivities([contentName, ...contentSensitivities])
-      );
-    } else if (contentSensitivities.includes(contentName)) {
-      dispatch(
-        setContentSensitivities(
-          contentSensitivities.filter((item) => item !== contentName)
-        )
-      );
-    } else {
-      dispatch(setContentSensitivities([]));
+    if (contentWarning === 'Yes') {
+      if (isChecked) {
+        if (contentSensitivities.includes(contentName)) {
+          dispatch(
+            setContentSensitivities(
+              contentSensitivities.filter((content) => content !== contentName)
+            )
+          );
+        } else {
+          dispatch(
+            setContentSensitivities([...contentSensitivities, contentName])
+          );
+        }
+      } else {
+        dispatch(
+          setContentSensitivities(
+            contentSensitivities.filter((content) => content !== contentName)
+          )
+        );
+      }
     }
   };
 

@@ -6,7 +6,6 @@ import {
   settingSchema,
 } from '../../pages/prompt-selection/prompt-selection.types';
 
-// GENRE_SELECTIONS aren't used in the code, but they are used in the tests
 export const BETAHIVE_SELECTIONS: betaHIVESchema[] = [
   {
     id: 1,
@@ -118,24 +117,24 @@ export const CONTENT_WARNINGS: contentWarningsSchema[] = [
 
 export const SETTING_SELECTIONS: settingSchema[] = [
   {
-    id: 1,
+    id: 7,
     name: 'Baker Street',
     description:
       'The home of Sherlock Holmes and the site of many of his investigations.',
   },
   {
-    id: 2,
+    id: 8,
     name: 'Regency England',
     description: 'A time of elegance, manners, and social conventions.',
   },
   {
-    id: 3,
+    id: 9,
     name: 'Transylvania',
     description:
       'A mysterious and eerie region known for its supernatural occurrences.',
   },
   {
-    id: 4,
+    id: 10,
     name: 'Wonderland',
     description: 'A whimsical and nonsensical world where anything can happen.',
   },
