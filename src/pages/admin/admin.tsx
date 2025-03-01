@@ -308,6 +308,8 @@ export const AdminPage: React.FC = () => {
                 isDisabled={false}
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
+                isContentWarning={inputType === 'contentWarnings'}
+                isPrompts={inputType === 'prompts'}
                 isImageUpload={labelPrefix === 'Beta HIVE'}
               />
             );

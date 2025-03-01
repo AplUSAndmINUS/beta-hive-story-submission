@@ -39,7 +39,7 @@ export const PromptSelection: React.FC = () => {
         <Selections />
       </div>
       <div className='row'>
-        <h3 className='pb-2 mt-5'>Character</h3>
+        <h3 className='pb-2 mt-5'>Prompts</h3>
         {CHARACTER_SELECTIONS.map((character, index) => (
           <PromptCard
             key={character.name + index}

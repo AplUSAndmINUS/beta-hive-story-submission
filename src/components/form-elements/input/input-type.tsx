@@ -3,6 +3,8 @@ import React from 'react';
 interface InputTypeProps {
   isDisabled: boolean;
   isImageUpload?: boolean;
+  isContentWarning?: boolean;
+  isPrompts?: boolean;
   name: string;
   value?: any;
   label: string;
@@ -17,6 +19,8 @@ interface InputTypeProps {
 export const InputType: React.FC<InputTypeProps> = ({
   isDisabled = false,
   isImageUpload = false,
+  isContentWarning = false,
+  isPrompts = false,
   name,
   value,
   isRequired = false,
@@ -37,7 +41,10 @@ export const InputType: React.FC<InputTypeProps> = ({
         <div className='card mt-4 me-3'>
           <div className='card-body'>
             <h5 className='card-title'>
-              <label htmlFor={name} className='d-flex flex-column align-items-start'>
+              <label
+                htmlFor={name}
+                className='d-flex flex-column align-items-start'
+              >
                 <span>
                   {label}
                   {isRequired && <span className='text-danger'> *</span>}
@@ -61,6 +68,29 @@ export const InputType: React.FC<InputTypeProps> = ({
                 />
               </label>
             </h5>
+            {(isPrompts || isContentWarning) && (
+              <label
+                htmlFor={`${name}2`}
+                className='d-flex flex-column align-items-start'
+              >
+                <span>
+                  Description
+                  {isRequired && <span className='text-danger'> *</span>}
+                </span>
+                <input
+                  className='form-control mt-3'
+                  disabled={isDisabled}
+                  value={value || ''}
+                  onChange={onChange}
+                  required={isRequired}
+                  name={`${name}2`}
+                  id={`${name}2`}
+                  style={{
+                    marginRight: '1rem',
+                  }}
+                />
+              </label>
+            )}
             {isImageUpload && (
               <div className='d-flex justify-content-start align-items-center input-group mb-3'>
                 <button className='btn btn-primary' type='button'>
