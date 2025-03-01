@@ -1,12 +1,12 @@
 import React from 'react';
-import moment, { min } from 'moment';
+import moment from 'moment';
 
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
   setBetaHIVECount,
   setBetaHIVEs,
-  // setCalendarEventCount,
-  // setCalendarEvents,
+  setCalendarEventCount,
+  setCalendarEvents,
   setContentWarningCount,
   setContentWarnings,
   setCountdownDate,
@@ -25,8 +25,8 @@ export const AdminPage: React.FC = () => {
   const {
     betaHIVECount,
     betaHIVEs,
-    // calendarEventCount,
-    // calendarEvents,
+    calendarEventCount,
+    calendarEvents,
     contentWarningCount,
     contentWarnings,
     countdownDate,
@@ -42,10 +42,10 @@ export const AdminPage: React.FC = () => {
   const [isBetaHiveLoading, setIsBetaHiveLoading] =
     React.useState<boolean>(false);
   const [isBetaHiveSaved, setIsBetaHiveSaved] = React.useState<boolean>(false);
-  // const [isCalendarEventsLoading, setIsCalendarEventsLoading] =
-  //   React.useState<boolean>(false);
-  // const [isCalendarEventsSaved, setIsCalendarEventsSaved] =
-  //   React.useState<boolean>(false);
+  const [isCalendarEventsLoading, setIsCalendarEventsLoading] =
+    React.useState<boolean>(false);
+  const [isCalendarEventsSaved, setIsCalendarEventsSaved] =
+    React.useState<boolean>(false);
   const [isContentWarningsLoading, setIsContentWarningsLoading] =
     React.useState<boolean>(false);
   const [isContentWarningsSaved, setIsContentWarningsSaved] =
@@ -72,14 +72,14 @@ export const AdminPage: React.FC = () => {
           setIsBetaHiveSaved(true);
         }, 2500); // Simulate saving delay
         break;
-      // case 'calendarEvents':
-      //   dispatch(setCalendarEventCount(value));
-      //   setIsCalendarEventsLoading(true);
-      //   setTimeout(() => {
-      //     setIsCalendarEventsLoading(false);
-      //     setIsCalendarEventsSaved(true);
-      //   }, 2500); // Simulate saving delay
-      //   break;
+      case 'calendarEvents':
+        dispatch(setCalendarEventCount(value));
+        setIsCalendarEventsLoading(true);
+        setTimeout(() => {
+          setIsCalendarEventsLoading(false);
+          setIsCalendarEventsSaved(true);
+        }, 2500); // Simulate saving delay
+        break;
       case 'contentWarnings':
         dispatch(setContentWarningCount(value));
         setIsContentWarningsLoading(true);
@@ -128,13 +128,13 @@ export const AdminPage: React.FC = () => {
       return false;
     }
 
-    // if (calendarEventCount !== calendarEvents.length) {
-    //   setAlertMessage(
-    //     'The number of calendar events does not match the expected length.'
-    //   );
-    //   setShowModal(true);
-    //   return false;
-    // }
+    if (calendarEventCount !== calendarEvents.length) {
+      setAlertMessage(
+        'The number of calendar events does not match the expected length.'
+      );
+      setShowModal(true);
+      return false;
+    }
 
     if (moment(countdownDate) <= moment()) {
       setAlertMessage('Countdown date must be in the future.');
@@ -174,13 +174,13 @@ export const AdminPage: React.FC = () => {
           )
         );
         break;
-      // case 'calendarEvents':
-      //   dispatch(
-      //     setCalendarEvents(
-      //       calendarEvents.map((item, i) => (i === index ? value : item))
-      //     )
-      //   );
-      //   break;
+      case 'calendarEvents':
+        dispatch(
+          setCalendarEvents(
+            calendarEvents.map((item, i) => (i === index ? { ...item, name: value } : item))
+          )
+        );
+        break;
       case 'contentWarnings':
         dispatch(
           setContentWarnings(
@@ -306,10 +306,12 @@ export const AdminPage: React.FC = () => {
                 key={`${labelPrefix}${index + 1}`}
                 name={`${labelPrefix}${index + 1}`}
                 value={value || ''}
+                valueDesc={inputType === 'prompts' ? values[index]?.description : ''}
                 onChange={(e) => handleChange(e, index, inputType)}
                 isDisabled={false}
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
+                imgName={labelPrefix === 'Beta HIVE' ? values[index]?.imgSource : ''}
                 isContentWarning={inputType === 'contentWarnings'}
                 isPrompts={inputType === 'prompts'}
                 isImageUpload={labelPrefix === 'Beta HIVE'}
@@ -395,7 +397,6 @@ export const AdminPage: React.FC = () => {
             />
           </Accordion>
         </div>
-        {/******POST-MVP option-- will show just countdown date in calendar -TW
         <div className='row'>
           <Accordion accordionTerms='Calendar events' collapseNumber='collapseSeven'>
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
@@ -415,7 +416,7 @@ export const AdminPage: React.FC = () => {
               savedText='Changes saved!'
             />
           </Accordion>
-        </div> */}
+        </div>
         {generateAccordion(
           'Beta HIVE options',
           'collapseTwo',

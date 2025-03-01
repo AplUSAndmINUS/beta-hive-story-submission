@@ -2,9 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
 import { BETAHIVE_SELECTIONS } from '../../services/constants/constants';
+import { CALENDAR_EVENTS } from '../../services/constants/constants';
 import { CONTENT_WARNINGS } from '../../services/constants/constants';
 import { PROMPT_SELECTIONS } from '../../services/constants/constants';
 import { betaHIVESchema } from '../../pages/betaHIVE-selection/betaHIVE-selection.types';
+import { calendarSchema } from '../../components/calendar/calendar.types';
 import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
 import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
 
@@ -12,7 +14,7 @@ interface AdminSubmissionState {
   betaHIVECount: number;
   betaHIVEs: betaHIVESchema[];
   calendarEventCount: number;
-  calendarEvents: string[];
+  calendarEvents: calendarSchema[];
   contentWarningCount: number;
   contentWarnings: contentWarningsSchema[];
   countdownDate: string;
@@ -26,7 +28,7 @@ const initialState: AdminSubmissionState = {
   betaHIVECount: 8,
   betaHIVEs: [...BETAHIVE_SELECTIONS],
   calendarEventCount: 4,
-  calendarEvents: [],
+  calendarEvents: [...CALENDAR_EVENTS],
   contentWarningCount: 4,
   contentWarnings: [...CONTENT_WARNINGS],
   countdownDate: moment().add(20, 'days').format('YYYY-MM-DD'),
@@ -49,7 +51,7 @@ const adminSubmissionSlice = createSlice({
     setCalendarEventCount(state, action: PayloadAction<number>) {
       state.calendarEventCount = action.payload;
     },
-    setCalendarEvents(state, action: PayloadAction<string[]>) {
+    setCalendarEvents(state, action: PayloadAction<calendarSchema[]>) {
       state.calendarEvents = [...action.payload];
     },
     setContentWarningCount(state, action: PayloadAction<number>) {

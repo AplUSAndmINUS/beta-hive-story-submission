@@ -5,6 +5,7 @@ interface InputTypeProps {
   isImageUpload?: boolean;
   isContentWarning?: boolean;
   isPrompts?: boolean;
+  imgName?: string;
   name: string;
   flex?: string;
   value?: any;
@@ -15,6 +16,7 @@ interface InputTypeProps {
   max?: string;
   pattern?: string;
   placeholder?: string;
+  valueDesc?: string;
   type?: string;
 }
 
@@ -23,6 +25,7 @@ export const InputType: React.FC<InputTypeProps> = ({
   isImageUpload = false,
   isContentWarning = false,
   isPrompts = false,
+  imgName,
   name,
   flex,
   value,
@@ -33,6 +36,7 @@ export const InputType: React.FC<InputTypeProps> = ({
   max,
   pattern,
   placeholder,
+  valueDesc,
   type,
 }) => {
   return (
@@ -73,21 +77,18 @@ export const InputType: React.FC<InputTypeProps> = ({
                 />
               </label>
             </h5>
-            {(isPrompts || isContentWarning) && (
+            {isPrompts && (
               <label
                 htmlFor={`${name}2`}
                 className='d-flex flex-column align-items-start'
               >
-                <span>
-                  Description
-                  {isRequired && <span className='text-danger'> *</span>}
-                </span>
+                <span>Description</span>
                 <input
                   className='form-control mt-3'
                   disabled={isDisabled}
-                  value={value || ''}
+                  value={valueDesc || ''}
                   onChange={onChange}
-                  required={isRequired}
+                  required={false}
                   name={`${name}2`}
                   id={`${name}2`}
                   style={{
@@ -101,9 +102,7 @@ export const InputType: React.FC<InputTypeProps> = ({
                 <button className='btn btn-primary' type='button'>
                   Upload Image
                 </button>
-                <p className='text-muted ps-4 pt-2'>
-                  Image name: placeholder_image.jpeg
-                </p>
+                <p className='text-muted ps-4 pt-2'>Image name: {imgName}</p>
               </div>
             )}
           </div>

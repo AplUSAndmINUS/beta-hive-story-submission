@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useAppSelector } from '../../stores/store';
 
 export const Calendar: React.FC = () => {
-  const { countdownDate } = useAppSelector((state) => state.adminSubmission);
+  const { calendarEvents, countdownDate } = useAppSelector((state) => state.adminSubmission);
   const [currentDate, setCurrentDate] = React.useState(moment(countdownDate));
 
   const startOfMonth = currentDate.clone().startOf('month');

@@ -1,3 +1,4 @@
+import { calendarSchema } from '../../components/calendar/calendar.types';
 import { characterSchema } from '../../pages/prompt-selection/prompt-selection.types';
 import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
 import { betaHIVESchema } from '../../pages/betaHIVE-selection/betaHIVE-selection.types';
@@ -55,6 +56,29 @@ export const BETAHIVE_SELECTIONS: betaHIVESchema[] = [
     imgSource: 'suspense.png',
     description: 'Suspenseful and thrilling stories.',
   },
+];
+
+export const CALENDAR_EVENTS: calendarSchema[] = [
+  {
+    eventName: 'BetaHIVE Selection',
+    eventDate: '2025-03-01',
+    eventDescription: 'Choose your BetaHIVE genre!',
+  },
+  {
+    eventName: 'Prompt Selection',
+    eventDate: '2025-03-08',
+    eventDescription: 'Select your character and setting!',
+  },
+  {
+    eventName: 'Content Warnings',
+    eventDate: '2025-03-15',
+    eventDescription: 'Choose your content warnings!',
+  },
+  {
+    eventName: 'Story Submission',
+    eventDate: '2025-04-22',
+    eventDescription: 'Submit your story for review!',
+  }
 ];
 
 export const CHARACTER_SELECTIONS: characterSchema[] = [
