@@ -1,10 +1,10 @@
 import { characterSchema } from '../../pages/prompt-selection/prompt-selection.types';
 import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
-import { genreSchema } from '../../pages/genre-selection/genre-selection.types';
+import { betaHIVESchema } from '../../pages/genre-selection/genre-selection.types';
 import { promptsSchema, settingSchema } from '../../pages/prompt-selection/prompt-selection.types';
 
 // GENRE_SELECTIONS aren't used in the code, but they are used in the tests
-export const GENRE_SELECTIONS: genreSchema[] = [
+export const BETAHIVE_SELECTIONS: betaHIVESchema[] = [
   {
     id: 1,
     name: 'Fantasy',

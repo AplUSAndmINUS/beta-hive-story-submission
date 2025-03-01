@@ -1,36 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
-export interface BetaHIVEPrompt {
-  name: string;
-  image: string;
-}
+import { BETAHIVE_SELECTIONS } from '../../services/constants/constants';
+import { CONTENT_WARNINGS } from '../../services/constants/constants';
+import { PROMPT_SELECTIONS } from '../../services/constants/constants';
+import { betaHIVESchema } from '../../pages/genre-selection/genre-selection.types';
+import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
+import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
 
 interface AdminSubmissionState {
   betaHIVECount: number;
-  betaHIVEs: BetaHIVEPrompt[];
+  betaHIVEs: betaHIVESchema[];
   calendarEventCount: number;
   calendarEvents: string[];
   contentWarningCount: number;
-  contentWarnings: string[];
+  contentWarnings: contentWarningsSchema[];
   countdownDate: string;
   minPromptSelections: number;
   promptsCount: number;
-  prompts: string[];
+  prompts: promptsSchema[];
   wordCount: number;
 }
 
 const initialState: AdminSubmissionState = {
   betaHIVECount: 4,
-  betaHIVEs: [],
+  betaHIVEs: [...BETAHIVE_SELECTIONS],
   calendarEventCount: 4,
   calendarEvents: [],
   contentWarningCount: 4,
-  contentWarnings: [],
+  contentWarnings: [...CONTENT_WARNINGS],
   countdownDate: moment().add(20, 'days').format('YYYY-MM-DD'),
   minPromptSelections: 2,
   promptsCount: 10,
-  prompts: [],
+  prompts: [...PROMPT_SELECTIONS],
   wordCount: 500,
 };
 
@@ -53,7 +55,7 @@ const adminSubmissionSlice = createSlice({
     setContentWarningCount(state, action: PayloadAction<number>) {
       state.contentWarningCount = action.payload;
     },
-    setContentWarnings(state, action: PayloadAction<string[]>) {
+    setContentWarnings(state, action: PayloadAction<contentWarningsSchema[]>) {
       state.contentWarnings = [...action.payload];
     },
     setCountdownDate(state, action: PayloadAction<string>) {
@@ -65,7 +67,7 @@ const adminSubmissionSlice = createSlice({
     setPromptCount(state, action: PayloadAction<number>) {
       state.promptsCount = action.payload;
     },
-    setPrompts(state, action: PayloadAction<string[]>) {
+    setPrompts(state, action: PayloadAction<promptsSchema[]>) {
       state.prompts = [...action.payload];
     },
     setWordCount(state, action: PayloadAction<number>) {

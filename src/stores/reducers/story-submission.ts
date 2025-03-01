@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
+import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
+
 interface StorySubmissionState {
   isHIVEConfirmation: boolean;
   contentWarning: string;
-  contentSensitivities: string[];
+  contentSensitivities: contentWarningsSchema[];
   genreSelection: string;
   characterSelection: string;
   settingSelection: string;
-  promptSelections: string[];
+  promptSelections: promptsSchema[];
   storySubmission: string;
 }
 
@@ -29,17 +32,13 @@ const storySubmissionSlice = createSlice({
     setBetaHIVEConfirmation(state, action: PayloadAction<boolean>) {
       state.isHIVEConfirmation = action.payload;
     },
-    setContentSensitivities(state, action: PayloadAction<string[]>) {
+    setContentSensitivities(state, action: PayloadAction<contentWarningsSchema[]>) {
       state.contentSensitivities = action.payload;
     },
     setIsContentWarning(state, action: PayloadAction<string>) {
       state.contentWarning = action.payload;
-      if (action.payload.includes('Yes')) {
-        state.contentSensitivities = state.contentSensitivities.filter(
-          (sensitivity) => sensitivity !== 'None'
-        );
-      } else {
-        state.contentSensitivities = ['None'];
+      if (action.payload.includes('No')) {
+        state.contentSensitivities = [];
       }
     },
     setGenreSelection(state, action: PayloadAction<string>) {
@@ -48,7 +47,7 @@ const storySubmissionSlice = createSlice({
     setCharacterSelection(state, action: PayloadAction<string>) {
       state.characterSelection = action.payload;
     },
-    setPromptSelections(state, action: PayloadAction<string[]>) {
+    setPromptSelections(state, action: PayloadAction<promptsSchema[]>) {
       state.promptSelections = action.payload;
     },
     setSettingSelection(state, action: PayloadAction<string>) {
