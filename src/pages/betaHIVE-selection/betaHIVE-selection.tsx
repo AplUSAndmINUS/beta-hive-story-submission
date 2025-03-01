@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { useAppDispatch } from '../../stores/store';
-import { setbetaHIVESelection } from '../../stores/reducers/story-submission';
+import { setBetaHIVESelection } from '../../stores/reducers/story-submission';
 import HIVEGenreSquare from '../../components/hive-genre/hive-genre-square';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useNavigation from '../../utils/hooks/useNavigation';
 
-export const betaHIVESelection: React.FC = () => {
+export const BetaHIVESelection: React.FC = () => {
   const dispatch = useAppDispatch();
   const images = useHIVEImages();
   const navigate = useNavigation();
 
   const handlebetaHIVESelection = (genre: string) => {
-    dispatch(setbetaHIVESelection(genre));
+    dispatch(setBetaHIVESelection(genre));
     navigate('Prompt Selection');
   };
 
@@ -36,4 +36,4 @@ export const betaHIVESelection: React.FC = () => {
   );
 };
 
-export default betaHIVESelection;
+export default BetaHIVESelection;

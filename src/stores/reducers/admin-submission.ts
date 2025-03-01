@@ -4,7 +4,7 @@ import moment from 'moment';
 import { BETAHIVE_SELECTIONS } from '../../services/constants/constants';
 import { CONTENT_WARNINGS } from '../../services/constants/constants';
 import { PROMPT_SELECTIONS } from '../../services/constants/constants';
-import { betaHIVESchema } from '../../pages/genre-selection/genre-selection.types';
+import { betaHIVESchema } from '../../pages/betaHIVE-selection/betaHIVE-selection.types';
 import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
 import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
 
@@ -71,7 +71,7 @@ const adminSubmissionSlice = createSlice({
       state.prompts = [...action.payload];
     },
     setWordCount(state, action: PayloadAction<number>) {
-      state.wordCount = action.payload
+      state.wordCount = action.payload;
     },
   },
 });

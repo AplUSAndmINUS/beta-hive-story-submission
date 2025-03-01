@@ -5,7 +5,7 @@ import { Arena } from '../pages/arena/arena';
 import { BetaHIVE } from '../pages/beta-hive/beta-hive';
 import { Confirmation } from '../pages/confirmation/confirmation';
 import { ContentWarnings } from '../pages/content-warnings/content-warnings';
-import { betaHIVESelection } from '../pages/genre-selection/genre-selection';
+import { BetaHIVESelection } from '../pages/betaHIVE-selection/betaHIVE-selection';
 import { HomePage } from '../pages/home/home';
 import { NotFound } from '../pages/404/404';
 import { PromptSelection } from '../pages/prompt-selection/prompt-selection';
@@ -43,9 +43,9 @@ export const routes: Routes[] = [
     element: <Arena />,
   },
   {
-    path: '/genre-selection',
+    path: '/betaHIVE-selection',
     name: 'Beta HIVE Selection',
-    element: <betaHIVESelection />,
+    element: <BetaHIVESelection />,
     storySubmission: true,
   },
   {

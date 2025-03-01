@@ -5,7 +5,6 @@ import Modal from '../../components/modal/modal';
 import NavigationButtons from '../../components/navigate-buttons/navigate-buttons';
 import InputSelectionCard from '../../components/form-elements/input/input-selection';
 import Selections from '../../components/selections/selections';
-import { contentWarningsSchema } from './content-warnings.types';
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
   setContentSensitivities,
@@ -95,17 +94,17 @@ export const ContentWarnings: React.FC = () => {
   };
 
   const handleContentSensitivities = (
-    content: contentWarningsSchema,
+    contentName: string,
     isChecked?: boolean
   ) => {
     if (isChecked) {
       dispatch(
-        setContentSensitivities([content.name, ...contentSensitivities])
+        setContentSensitivities([contentName, ...contentSensitivities])
       );
-    } else if (contentSensitivities.includes(content.name)) {
+    } else if (contentSensitivities.includes(contentName)) {
       dispatch(
         setContentSensitivities(
-          contentSensitivities.filter((item) => item !== content.name)
+          contentSensitivities.filter((item) => item !== contentName)
         )
       );
     } else {

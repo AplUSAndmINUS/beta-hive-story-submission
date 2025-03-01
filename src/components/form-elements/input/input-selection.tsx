@@ -20,8 +20,8 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
   const selectedValue = useAppSelector(
     (state) => state.storySubmission.contentWarning
   );
-  const contentSensitivities = useAppSelector(
-    (state) => state.storySubmission.contentSensitivities
+  const contentSensitivities: { name: string }[] = useAppSelector(
+    (state) => state.storySubmission.contentSensitivities.map((name: string) => ({ name }))
   );
   const [isChecked, setIsChecked] = React.useState<boolean>(
     inputType === 'radio'
