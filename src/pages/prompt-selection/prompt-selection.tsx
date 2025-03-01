@@ -10,18 +10,28 @@ import {
   setPromptSelections
 } from '../../stores/reducers/story-submission';
 import { PROMPT_SELECTIONS } from '../../services/constants/constants';
-import { promptsSchema } from './prompt-selection.types';
 // import { CHARACTER_SELECTIONS, SETTING_SELECTIONS } from '../../services/constants/constants'; 
 
 export const PromptSelection: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { characterSelection, settingSelection } = useAppSelector(
+  const { promptSelections } = useAppSelector(
     (state) => state.storySubmission
   );
+  const { minPromptSelections } = useAppSelector(
+    (state) => state.adminSubmission
+  );
 
-  const handlePromptSelection = (selection: string | promptsSchema[]) => {
+  const handlePromptSelection = (selection: string) => {
     if (Array.isArray(selection)) {
-      dispatch(setPromptSelections(selection));
+      if (promptSelections.includes(selection)) {
+        dispatch(
+          setPromptSelections(
+            promptSelections.filter((prompt) => prompt !== selection)
+          )
+        );
+      } else {
+        dispatch(setPromptSelections([selection, ...promptSelections]));
+      }
     }
   };
 
@@ -76,7 +86,7 @@ export const PromptSelection: React.FC = () => {
       </div>
       <div className='row'>
         <NavigateButtons
-          isNextDisabled={!characterSelection || !settingSelection}
+          isNextDisabled={promptSelections.length < minPromptSelections}
           backNavigation='Beta HIVE Selection'
           nextNavigation='Story Submission'
         />

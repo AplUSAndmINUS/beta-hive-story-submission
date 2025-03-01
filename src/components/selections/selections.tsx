@@ -11,7 +11,7 @@ export const Selections: React.FC<SelectionsProps> = ({
   isStoryView = false,
 }) => {
   const {
-    genreSelection,
+    betaHIVESelection,
     characterSelection,
     settingSelection,
     contentSensitivities,
@@ -23,7 +23,7 @@ export const Selections: React.FC<SelectionsProps> = ({
         <div className='pt-3 pb-0'>
           <p className='text-right'>
             <strong>Beta HIVE: </strong>
-            {genreSelection || 'None selected'}{' '}
+            {betaHIVESelection || 'None selected'}{' '}
             {!isStoryView && <i className='fas fa-pencil-alt' />}
           </p>
         </div>
@@ -50,7 +50,7 @@ export const Selections: React.FC<SelectionsProps> = ({
           <div className='pt-3 pb-0'>
             <p className='text-right'>
               <strong>Beta HIVE: </strong>
-              {genreSelection || 'None selected'}{' '}
+              {betaHIVESelection || 'None selected'}{' '}
               <i className='fas fa-pencil-alt' />
             </p>
           </div>

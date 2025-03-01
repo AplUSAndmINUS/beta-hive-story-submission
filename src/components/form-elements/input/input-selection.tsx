@@ -23,17 +23,21 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
   const contentSensitivities = useAppSelector(
     (state) => state.storySubmission.contentSensitivities
   );
-  const [isChecked, setIsChecked] = React.useState(
+  const [isChecked, setIsChecked] = React.useState<boolean>(
     inputType === 'radio'
       ? selectedValue === label
-      : contentSensitivities.includes(label)
+      : contentSensitivities.some((item: { name: string }) => item.name === label)
   );
 
   React.useEffect(() => {
     if (inputType === 'radio') {
       setIsChecked(selectedValue === label);
     } else {
-      setIsChecked(contentSensitivities.includes(label));
+      setIsChecked(
+        contentSensitivities.some(
+          (item: { name: string }) => item.name === label
+        )
+      );
     }
   }, [selectedValue, contentSensitivities, label, inputType]);
 
@@ -41,7 +45,9 @@ export const InputSelectionCard: React.FC<InputSelectionCardProps> = ({
     if (inputType === 'radio') {
       handleSelection(label);
     } else if (inputType === 'checkbox') {
-      const isChecked = contentSensitivities.includes(label);
+      const isChecked = contentSensitivities.some(
+        (item: { name: string }) => item.name === label
+      );
       handleSelection(label, !isChecked);
     }
   };

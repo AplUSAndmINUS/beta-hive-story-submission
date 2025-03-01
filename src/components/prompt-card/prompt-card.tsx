@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { useAppSelector } from '../../stores/store';
-import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
 interface PromptCardProps {
-  handleSelection: (selection: string | promptsSchema[]) => void;
+  handleSelection: (selection: string) => void;
   isStorySelection?: boolean;
   prompt: string;
   promptText?: string;

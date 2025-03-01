@@ -5,6 +5,7 @@ import Modal from '../../components/modal/modal';
 import NavigationButtons from '../../components/navigate-buttons/navigate-buttons';
 import InputSelectionCard from '../../components/form-elements/input/input-selection';
 import Selections from '../../components/selections/selections';
+import { contentWarningsSchema } from './content-warnings.types';
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
   setContentSensitivities,
@@ -22,7 +23,7 @@ export const ContentWarnings: React.FC = () => {
     characterSelection,
     contentSensitivities,
     contentWarning,
-    genreSelection,
+    betaHIVESelection,
     settingSelection,
     storySubmission,
   } = useAppSelector((state) => state.storySubmission);
@@ -30,7 +31,7 @@ export const ContentWarnings: React.FC = () => {
   React.useEffect(() => {
     if (
       characterSelection &&
-      genreSelection &&
+      betaHIVESelection &&
       settingSelection &&
       storySubmission.trim().length >= 10 &&
       contentWarning !== '' &&
@@ -42,7 +43,7 @@ export const ContentWarnings: React.FC = () => {
     }
   }, [
     characterSelection,
-    genreSelection,
+    betaHIVESelection,
     settingSelection,
     storySubmission,
     contentSensitivities.length,
@@ -55,7 +56,7 @@ export const ContentWarnings: React.FC = () => {
     const storyData = {
       title: 'Your Story Title', // Replace with actual title
       author: 'Author ID', // Replace with actual author ID
-      betaHive: genreSelection,
+      betaHive: betaHIVESelection,
       setting: settingSelection,
       character: characterSelection,
       contentSensitivities: contentSensitivities,
@@ -93,15 +94,22 @@ export const ContentWarnings: React.FC = () => {
     dispatch(setIsContentWarning(label));
   };
 
-  const handleContentSensitivities = (content: string, isChecked?: boolean) => {
+  const handleContentSensitivities = (
+    content: contentWarningsSchema,
+    isChecked?: boolean
+  ) => {
     if (isChecked) {
-      dispatch(setContentSensitivities([...contentSensitivities, content]));
-    } else {
+      dispatch(
+        setContentSensitivities([content.name, ...contentSensitivities])
+      );
+    } else if (contentSensitivities.includes(content.name)) {
       dispatch(
         setContentSensitivities(
-          contentSensitivities.filter((item) => item !== content)
+          contentSensitivities.filter((item) => item !== content.name)
         )
       );
+    } else {
+      dispatch(setContentSensitivities([]));
     }
   };
 

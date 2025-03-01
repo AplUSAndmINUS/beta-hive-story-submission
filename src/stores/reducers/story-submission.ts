@@ -1,24 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
-import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
-
 interface StorySubmissionState {
-  isHIVEConfirmation: boolean;
+  betaHIVESelection: string;
+  isBetaHIVEConfirmation: boolean;
   contentWarning: string;
-  contentSensitivities: contentWarningsSchema[];
-  genreSelection: string;
+  contentSensitivities: string[];
   characterSelection: string;
   settingSelection: string;
-  promptSelections: promptsSchema[];
+  promptSelections: string[];
   storySubmission: string;
 }
 
 const initialState: StorySubmissionState = {
-  isHIVEConfirmation: false,
+  betaHIVESelection: '',
+  isBetaHIVEConfirmation: false,
   contentWarning: '',
   contentSensitivities: [],
-  genreSelection: '',
   characterSelection: '',
   settingSelection: '',
   promptSelections: [],
@@ -30,9 +27,12 @@ const storySubmissionSlice = createSlice({
   initialState,
   reducers: {
     setBetaHIVEConfirmation(state, action: PayloadAction<boolean>) {
-      state.isHIVEConfirmation = action.payload;
+      state.isBetaHIVEConfirmation = action.payload;
     },
-    setContentSensitivities(state, action: PayloadAction<contentWarningsSchema[]>) {
+    setBetaHIVESelection(state, action: PayloadAction<string>) {
+      state.betaHIVESelection = action.payload;
+    },
+    setContentSensitivities(state, action: PayloadAction<string[]>) {
       state.contentSensitivities = action.payload;
     },
     setIsContentWarning(state, action: PayloadAction<string>) {
@@ -41,13 +41,10 @@ const storySubmissionSlice = createSlice({
         state.contentSensitivities = [];
       }
     },
-    setGenreSelection(state, action: PayloadAction<string>) {
-      state.genreSelection = action.payload;
-    },
     setCharacterSelection(state, action: PayloadAction<string>) {
       state.characterSelection = action.payload;
     },
-    setPromptSelections(state, action: PayloadAction<promptsSchema[]>) {
+    setPromptSelections(state, action: PayloadAction<string[]>) {
       state.promptSelections = action.payload;
     },
     setSettingSelection(state, action: PayloadAction<string>) {
@@ -61,9 +58,9 @@ const storySubmissionSlice = createSlice({
 
 export const {
   setBetaHIVEConfirmation,
+  setBetaHIVESelection,
   setContentSensitivities,
   setIsContentWarning,
-  setGenreSelection,
   setCharacterSelection,
   setPromptSelections,
   setSettingSelection,

@@ -9,7 +9,7 @@ import Arena from '../arena/arena';
 import BetaHIVE from '../beta-hive/beta-hive';
 
 export const HomePage: React.FC = () => {
-  const { genreSelection, storySubmission } = useAppSelector(
+  const { betaHIVESelection, storySubmission } = useAppSelector(
     (state) => state.storySubmission
   );
   const { countdownDate } = useAppSelector((state) => state.adminSubmission);
@@ -31,7 +31,7 @@ export const HomePage: React.FC = () => {
           purus et nunc fermentum aliquam. Nam nec turpis nec eros tincidunt.
         </p>
       </div>
-      {!genreSelection && <BetaHIVE />}
+      {!betaHIVESelection && <BetaHIVE />}
       {moment(countdownDate) >= moment() ? (
         <>
           <div className='row'>

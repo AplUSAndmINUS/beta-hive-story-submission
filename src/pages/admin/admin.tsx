@@ -184,13 +184,13 @@ export const AdminPage: React.FC = () => {
       case 'contentWarnings':
         dispatch(
           setContentWarnings(
-            contentWarnings.map((item, i) => (i === index ? value : item))
+            contentWarnings.map((item, i) => (i === index ? { ...item, name: value } : item))
           )
         );
         break;
       case 'prompts':
         dispatch(
-          setPrompts(prompts.map((item, i) => (i === index ? value : item)))
+          setPrompts(prompts.map((item, i) => (i === index ? { ...item, name: value } : item)))
         );
         break;
       default:
