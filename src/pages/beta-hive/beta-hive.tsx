@@ -30,7 +30,7 @@ export const BetaHIVE: React.FC = () => {
         <HIVEStoryCard
           key={images[0].name.toLowerCase()}
           imageName={images[0].name.toLowerCase()}
-          imageURL={images[0].url}
+          imageURL={images[0].imgSource}
           imgFluid={false}
           isHover
           width='300'
@@ -40,7 +40,7 @@ export const BetaHIVE: React.FC = () => {
         <HIVEStoryCard
           key={images[1].name.toLowerCase()}
           imageName={images[1].name.toLowerCase()}
-          imageURL={images[1].url}
+          imageURL={images[1].imgSource}
           imgFluid={false}
           isHover
           width='300'
@@ -50,7 +50,7 @@ export const BetaHIVE: React.FC = () => {
         <HIVEStoryCard
           key={images[2].name.toLowerCase()}
           imageName={images[2].name.toLowerCase()}
-          imageURL={images[2].url}
+          imageURL={images[2].imgSource}
           imgFluid={false}
           isHover
           width='300'
@@ -60,7 +60,7 @@ export const BetaHIVE: React.FC = () => {
         <HIVEStoryCard
           key={images[3].name.toLowerCase()}
           imageName={images[3].name.toLowerCase()}
-          imageURL={images[3].url}
+          imageURL={images[3].imgSource}
           imgFluid={false}
           isHover
           width='300'

@@ -40,8 +40,8 @@ export const Selections: React.FC<SelectionsProps> = ({
       <div className='row d-flex justify-content-flex-start align-items-center w-50 p-0 mx-0 mb-3 text-start'>
         <Link
           to={
-            routes.filter((route) => route.name === 'Beta HIVE Page')[0].path ||
-            '/'
+            routes.filter((route) => route.name === 'Beta HIVE Selection')[0]
+              .path || '/'
           }
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
@@ -68,7 +68,7 @@ export const Selections: React.FC<SelectionsProps> = ({
           <div className='pt-0 pb-0'>
             <p className='text-right'>
               <strong>Prompts: </strong>{' '}
-              <span className={`${!betaHIVESelection && 'text-warning'}`}>
+              <span className={`${promptSelections.length < 1 && 'text-warning'}`}>
                 {promptSelections.join(', ') || 'None selected'}{' '}
               </span>
               <i className='fas fa-pencil-alt' />
@@ -76,14 +76,17 @@ export const Selections: React.FC<SelectionsProps> = ({
           </div>
         </Link>
         <Link
-          to='/prompt-selection'
+          to={
+            routes.filter((route) => route.name === 'Story Submission')[0]
+              .path || '/'
+          }
           className='text-decoration-none custom-link'
           style={{ paddingLeft: 0 }}
         >
           <div className='pt-0 pb-0'>
             <p className='text-right'>
               <strong>Story Submission: </strong>{' '}
-              <span className={`${!betaHIVESelection && 'text-warning'}`}>
+              <span className={`${!storySubmission && 'text-warning'}`}>
                 {storySubmission ? 'Submitted' : 'Not submitted'}{' '}
               </span>
               <i className='fas fa-pencil-alt' />
@@ -101,7 +104,7 @@ export const Selections: React.FC<SelectionsProps> = ({
           <div className='pt-0 pb-0'>
             <p className='text-right'>
               <strong>Content Warnings: </strong>{' '}
-              <span className={`${!betaHIVESelection && 'text-warning'}`}>
+              <span className={`${contentSensitivities.length < 1 && 'text-warning'}`}>
                 {contentSensitivities.join(', ') || 'None selected'}{' '}
               </span>
               <i className='fas fa-pencil-alt' />

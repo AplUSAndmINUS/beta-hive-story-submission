@@ -1,11 +1,14 @@
 import React from 'react';
 
+import { useAppSelector } from '../../stores/store';
+
 interface Image {
   name: string;
-  url: string;
+  imgSource: string;
 }
 
 export const useHIVEImages = () => {
+  const betaHIVEs = useAppSelector((state) => state.adminSubmission.betaHIVEs);
   const [images, setImages] = React.useState<Image[]>([]);
 
   React.useEffect(() => {
@@ -14,14 +17,20 @@ export const useHIVEImages = () => {
       false,
       /\.png$/
     );
-    const imageArray: Image[] = context.keys().map((key: string) => {
+
+    const imageMap: { [key: string]: string } = {};
+    context.keys().forEach((key: string) => {
       const name = key.replace('./', '').replace('.png', '');
-      const url = context(key);
-      return { name, url };
+      imageMap[name] = context(key);
     });
 
+    const imageArray: Image[] = betaHIVEs.map((hive) => ({
+      name: hive.name,
+      imgSource: imageMap[hive.imgSource.replace('.png', '')] || '',
+    }));
+
     setImages(imageArray);
-  }, []);
+  }, [betaHIVEs]);
 
   return images;
 };

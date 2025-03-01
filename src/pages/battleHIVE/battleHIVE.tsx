@@ -73,7 +73,7 @@ export const BattleHIVE: React.FC = () => {
               <HIVEStoryCard
                 key={images[0].name.toLowerCase()}
                 imageName={images[0].name.toLowerCase()}
-                imageURL={images[0].url}
+                imageURL={images[0].imgSource}
                 imgFluid={false}
                 isHover
                 width={isMobile ? '250' : '400'}
@@ -88,7 +88,7 @@ export const BattleHIVE: React.FC = () => {
               <HIVEStoryCard
                 key={images[1].name.toLowerCase()}
                 imageName={images[1].name.toLowerCase()}
-                imageURL={images[1].url}
+                imageURL={images[1].imgSource}
                 imgFluid={false}
                 isHover
                 width={isMobile ? '250' : '400'}

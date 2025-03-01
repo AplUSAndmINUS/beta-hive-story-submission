@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { useAppDispatch } from '../../stores/store';
+import { useAppDispatch, useAppSelector } from '../../stores/store';
 import { setBetaHIVESelection } from '../../stores/reducers/story-submission';
 import HIVEGenreSquare from '../../components/hive-genre/hive-genre-square';
-import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useNavigation from '../../utils/hooks/useNavigation';
 
 export const BetaHIVESelection: React.FC = () => {
   const dispatch = useAppDispatch();
-  const images = useHIVEImages();
   const navigate = useNavigation();
+  const { betaHIVEs } = useAppSelector((state) => state.adminSubmission);
 
   const handlebetaHIVESelection = (genre: string) => {
     dispatch(setBetaHIVESelection(genre));
@@ -22,12 +21,12 @@ export const BetaHIVESelection: React.FC = () => {
         <h1 className='bd-title pb-2 mt-4'>Choose your HIVE</h1>
       </div>
       <div className='row'>
-        {images.map((image, index) => (
+        {betaHIVEs.map((image, index) => (
           <HIVEGenreSquare
             key={image.name + index}
             imgFluid
             imageName={image.name.toLowerCase()}
-            imageURL={image.url}
+            imageURL={image.imgSource}
             setbetaHIVESelection={handlebetaHIVESelection}
           />
         ))}
