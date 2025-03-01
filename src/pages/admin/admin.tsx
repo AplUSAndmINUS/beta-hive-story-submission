@@ -33,6 +33,7 @@ export const AdminPage: React.FC = () => {
     prompts,
     wordCount,
   } = useAppSelector((state) => state.adminSubmission);
+  const dispatch = useAppDispatch();
   const [alertMessage, setAlertMessage] = React.useState<string>('');
   const [showModal, setShowModal] = React.useState<boolean>(false);
 
@@ -51,9 +52,7 @@ export const AdminPage: React.FC = () => {
     React.useState<boolean>(false);
   const [isPromptsSaved, setIsPromptsSaved] = React.useState<boolean>(false);
 
-  const dispatch = useAppDispatch();
-
-  const handleOptions = (
+  const handleCountOptions = (
     e: React.ChangeEvent<HTMLInputElement>,
     inputType: string
   ) => {
@@ -189,13 +188,8 @@ export const AdminPage: React.FC = () => {
         break;
       case 'prompts':
         dispatch(
-          setPrompts(
-            prompts.map((item, i) => (i === index ? value : item))
-          )
+          setPrompts(prompts.map((item, i) => (i === index ? value : item)))
         );
-        break;
-      case 'wordCount':
-        dispatch(setWordCount(parseInt(value)));
         break;
       default:
         break;
@@ -217,12 +211,12 @@ export const AdminPage: React.FC = () => {
 
     if (validateSubmission()) {
       // Proceed with submission
-      console.log('Form submitted');
       console.log('Beta HIVE options:', betaHIVEs);
       console.log('Prompts:', prompts);
       console.log('Content warnings:', contentWarnings);
       console.log('Word count:', wordCount);
       console.log('Countdown date:', countdownDate);
+      console.log('Form submitted');
     } else {
       console.log('Submission is invalid. Please fill out all fields.');
     }
@@ -232,7 +226,7 @@ export const AdminPage: React.FC = () => {
     title: string,
     collapseNumber: string,
     value: number,
-    handleOptions: (
+    handleCountOptions: (
       e: React.ChangeEvent<HTMLInputElement>,
       inputType: string
     ) => void,
@@ -244,7 +238,8 @@ export const AdminPage: React.FC = () => {
     values: any[],
     handleChange: (
       e: React.ChangeEvent<HTMLInputElement>,
-      index: number
+      index: number,
+      inputType: string
     ) => void
   ) => {
     return (
@@ -257,14 +252,20 @@ export const AdminPage: React.FC = () => {
               isDisabled={false}
               label={`How many ${title.toLowerCase()} would you like?`}
               isRequired
-              onChange={(e) => handleOptions(e, inputType)}
+              onChange={(e) => handleCountOptions(e, inputType)}
               type='number'
               pattern='[0-9]*'
               min='1'
               max={max}
             />
           </div>
-          {generateInputFields(value, labelPrefix, values, handleChange, inputType)}
+          {generateInputFields(
+            value,
+            labelPrefix,
+            values,
+            handleChange,
+            inputType
+          )}
           <SaveSpinner
             isLoading={isLoading}
             isSaved={isSaved}
@@ -300,7 +301,7 @@ export const AdminPage: React.FC = () => {
                 : values[index];
             return (
               <InputType
-                key={index}
+                key={`${labelPrefix}${index + 1}`}
                 name={`${labelPrefix}${index + 1}`}
                 value={value || ''}
                 onChange={(e) => handleChange(e, index, inputType)}
@@ -335,9 +336,7 @@ export const AdminPage: React.FC = () => {
                 isDisabled={false}
                 label='Countdown date'
                 isRequired
-                onChange={(e) =>
-                  dispatch(setCountdownDate(e.target.value))
-                }
+                onChange={(e) => dispatch(setCountdownDate(e.target.value))}
                 type='date'
               />
             </div>
@@ -357,7 +356,9 @@ export const AdminPage: React.FC = () => {
                 isDisabled={false}
                 label='Word Count'
                 isRequired
-                onChange={(e) => dispatch(setWordCount(parseInt(e.target.value)))}
+                onChange={(e) =>
+                  dispatch(setWordCount(parseInt(e.target.value)))
+                }
                 type='number'
               />
             </div>
@@ -393,40 +394,40 @@ export const AdminPage: React.FC = () => {
           'Beta HIVE options',
           'collapseTwo',
           betaHIVECount,
-          handleOptions,
+          handleCountOptions,
           'betaHiveOptions',
           'Beta HIVE',
           '100',
           isBetaHiveLoading,
           isBetaHiveSaved,
           betaHIVEs,
-          (e, index) => handleChange(e, index, 'betaHiveOptions')
+          handleChange
         )}
         {generateAccordion(
           'Prompts',
           'collapseOne',
           promptsCount,
-          handleOptions,
+          handleCountOptions,
           'prompts',
           'Prompt',
           '255',
           isPromptsLoading,
           isPromptsSaved,
           prompts,
-          (e, index) => handleChange(e, index, 'prompts')
+          handleChange
         )}
         {generateAccordion(
           'Content warnings',
           'collapseThree',
           contentWarningCount,
-          handleOptions,
+          handleCountOptions,
           'contentWarnings',
           'CW',
           '255',
           isContentWarningsLoading,
           isContentWarningsSaved,
           contentWarnings,
-          (e, index) => handleChange(e, index, 'contentWarnings')
+          handleChange
         )}
         <div className='row'>
           <ButtonsRow handleClear={handleClear} handleSubmit={handleSubmit} />

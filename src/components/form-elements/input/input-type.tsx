@@ -37,7 +37,7 @@ export const InputType: React.FC<InputTypeProps> = ({
         <div className='card mt-4 me-3'>
           <div className='card-body'>
             <h5 className='card-title'>
-              <label className='d-flex flex-column align-items-start'>
+              <label htmlFor={name} className='d-flex flex-column align-items-start'>
                 <span>
                   {label}
                   {isRequired && <span className='text-danger'> *</span>}
@@ -53,6 +53,7 @@ export const InputType: React.FC<InputTypeProps> = ({
                   pattern={pattern}
                   required={isRequired}
                   name={name}
+                  id={name}
                   style={{
                     marginRight: '1rem',
                     height: '2rem',
