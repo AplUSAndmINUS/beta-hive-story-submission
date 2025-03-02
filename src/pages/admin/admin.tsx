@@ -316,17 +316,20 @@ export const AdminPage: React.FC = () => {
               <InputType
                 key={`${labelPrefix}${index + 1}`}
                 name={`${labelPrefix}${index + 1}`}
+                calendarDate={
+                  inputType === 'calendarEvents' ? values[index]?.date : ''
+                }
                 value={value || ''}
                 valueDesc={
-                  inputType === 'prompts' ? values[index]?.description : ''
+                  inputType === 'prompts' || inputType === 'calendarEvents'
+                    ? values[index]?.description
+                    : ''
                 }
                 onChange={(e) => handleChange(e, index, inputType)}
                 isDisabled={false}
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
-                imgName={
-                  labelPrefix === 'HIVE' ? values[index]?.imgSource : ''
-                }
+                imgName={labelPrefix === 'HIVE' ? values[index]?.imgSource : ''}
                 isCalendar={inputType === 'calendarEvents'}
                 isPrompts={inputType === 'prompts'}
                 isImageUpload={labelPrefix === 'HIVE'}
@@ -375,7 +378,10 @@ export const AdminPage: React.FC = () => {
           </Accordion>
         </div>
         <div className='row'>
-          <Accordion accordionTerms='Max word count' collapseNumber='collapseTwo'>
+          <Accordion
+            accordionTerms='Max word count'
+            collapseNumber='collapseTwo'
+          >
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
                 name='wordCount'

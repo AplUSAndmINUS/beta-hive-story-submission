@@ -1,5 +1,5 @@
 export interface calendarSchema {
-  eventName: string;
-  eventDate: string;
-  eventDescription: string;
+  name: string;
+  date: string;
+  description: string;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface InputTypeProps {
+  calendarDate?: string;
   isDisabled: boolean;
   isImageUpload?: boolean;
   isCalendar?: boolean;
@@ -21,6 +22,7 @@ interface InputTypeProps {
 }
 
 export const InputType: React.FC<InputTypeProps> = ({
+  calendarDate,
   isDisabled = false,
   isImageUpload = false,
   isCalendar = false,
@@ -77,6 +79,27 @@ export const InputType: React.FC<InputTypeProps> = ({
                 />
               </label>
             </h5>
+            {isCalendar && (
+              <label
+                htmlFor={`${name}1`}
+                className='d-flex flex-column align-items-start'
+              >
+                <span>Date</span>
+                <input
+                  className='form-control mt-3'
+                  disabled={isDisabled}
+                  value={calendarDate}
+                  onChange={onChange}
+                  type='date'
+                  required={isRequired}
+                  name={`${name}1`}
+                  id={`${name}1`}
+                  style={{
+                    marginRight: '1rem',
+                  }}
+                />
+              </label>
+            )}
             {(isPrompts || isCalendar) && (
               <label
                 htmlFor={`${name}2`}
