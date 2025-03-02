@@ -312,7 +312,6 @@ export const AdminPage: React.FC = () => {
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
                 imgName={labelPrefix === 'Beta HIVE' ? values[index]?.imgSource : ''}
-                isContentWarning={inputType === 'contentWarnings'}
                 isPrompts={inputType === 'prompts'}
                 isImageUpload={labelPrefix === 'Beta HIVE'}
               />
@@ -333,7 +332,7 @@ export const AdminPage: React.FC = () => {
         <div className='row'>
           <Accordion
             accordionTerms='Countdown date'
-            collapseNumber='collapseFour'
+            collapseNumber='collapseOne'
           >
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
@@ -354,7 +353,7 @@ export const AdminPage: React.FC = () => {
           </Accordion>
         </div>
         <div className='row'>
-          <Accordion accordionTerms='Word Count' collapseNumber='collapseSeven'>
+          <Accordion accordionTerms='Word Count' collapseNumber='collapseTwo'>
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
                 name='wordCount'
@@ -376,7 +375,10 @@ export const AdminPage: React.FC = () => {
           </Accordion>
         </div>
         <div className='row'>
-          <Accordion accordionTerms='Minimum prompt selections' collapseNumber='collapseSeven'>
+          <Accordion
+            accordionTerms='Minimum prompt selections'
+            collapseNumber='collapseThree'
+          >
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
                 name='minPromptSelections'
@@ -397,29 +399,22 @@ export const AdminPage: React.FC = () => {
             />
           </Accordion>
         </div>
-        <div className='row'>
-          <Accordion accordionTerms='Calendar events' collapseNumber='collapseSeven'>
-            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
-              <InputType
-                name='wordCount'
-                value={wordCount}
-                isDisabled={false}
-                label='Word Count'
-                isRequired
-                onChange={(e) => setWordCount(parseInt(e.target.value))}
-                type='number'
-              />
-            </div>
-            <SaveSpinner
-              isLoading={false}
-              isSaved={false}
-              savedText='Changes saved!'
-            />
-          </Accordion>
-        </div>
+        {generateAccordion(
+          'Calendar events',
+          'collapseFour',
+          calendarEventCount,
+          handleCountOptions,
+          'calendarEvents',
+          'Event',
+          '4',
+          isCalendarEventsLoading,
+          isCalendarEventsSaved,
+          calendarEvents,
+          handleChange
+        )}
         {generateAccordion(
           'Beta HIVE options',
-          'collapseTwo',
+          'collapseFive',
           betaHIVECount,
           handleCountOptions,
           'betaHiveOptions',
@@ -432,7 +427,7 @@ export const AdminPage: React.FC = () => {
         )}
         {generateAccordion(
           'Prompts',
-          'collapseOne',
+          'collapseSix',
           promptsCount,
           handleCountOptions,
           'prompts',
@@ -445,7 +440,7 @@ export const AdminPage: React.FC = () => {
         )}
         {generateAccordion(
           'Content warnings',
-          'collapseThree',
+          'collapseSeven',
           contentWarningCount,
           handleCountOptions,
           'contentWarnings',

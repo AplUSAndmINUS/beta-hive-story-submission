@@ -14,21 +14,27 @@ const Accordion: React.FC<AccordionProps> = ({
   return (
     <div className='accordion mt-3' id={`accordionExample${collapseNumber}`}>
       <div className='accordion-item' style={{ borderRadius: '0' }}>
-        <h3 className='bd-title mb-0'>
+        <h3
+          className='accordion-header bd-title mb-0'
+          id={`heading${collapseNumber}`}
+        >
           <button
             className='accordion-button fs-4'
             type='button'
             data-bs-toggle='collapse'
-            data-bs-target={`#${collapseNumber}`}
+            data-bs-target={`#collapse${collapseNumber}`}
             aria-expanded='true'
-            aria-controls={collapseNumber}
+            aria-controls={`collapse${collapseNumber}`}
           >
             {accordionTerms}
           </button>
         </h3>
         <div
-          id={collapseNumber}
-          className='accordion-collapse collapse show'
+          id={`collapse${collapseNumber}`}
+          className={`accordion-collapse collapse ${
+            collapseNumber === 'collapseOne' ? 'show' : ''
+          }`}
+          aria-labelledby={`heading${collapseNumber}`}
           data-bs-parent={`#accordionExample${collapseNumber}`}
         >
           <div className='accordion-body bg-light'>{children}</div>

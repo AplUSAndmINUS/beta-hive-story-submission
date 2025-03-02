@@ -3,7 +3,6 @@ import React from 'react';
 interface InputTypeProps {
   isDisabled: boolean;
   isImageUpload?: boolean;
-  isContentWarning?: boolean;
   isPrompts?: boolean;
   imgName?: string;
   name: string;
@@ -23,7 +22,6 @@ interface InputTypeProps {
 export const InputType: React.FC<InputTypeProps> = ({
   isDisabled = false,
   isImageUpload = false,
-  isContentWarning = false,
   isPrompts = false,
   imgName,
   name,
