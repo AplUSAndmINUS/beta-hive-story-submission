@@ -22,7 +22,8 @@ interface AdminSubmissionState {
   numOfLosses: number;
   promptsCount: number;
   prompts: promptsSchema[];
-  wordCount: number;
+  minWordCount: number;
+  maxWordCount: number;
 }
 
 const initialState: AdminSubmissionState = {
@@ -37,7 +38,8 @@ const initialState: AdminSubmissionState = {
   numOfLosses: 3,
   promptsCount: 10,
   prompts: [...PROMPT_SELECTIONS],
-  wordCount: 500,
+  minWordCount: 500,
+  maxWordCount: 1000, 
 };
 
 const adminSubmissionSlice = createSlice({
@@ -77,9 +79,12 @@ const adminSubmissionSlice = createSlice({
     setPrompts(state, action: PayloadAction<promptsSchema[]>) {
       state.prompts = [...action.payload];
     },
-    setWordCount(state, action: PayloadAction<number>) {
-      state.wordCount = action.payload;
+    setMinWordCount(state, action: PayloadAction<number>) {
+      state.minWordCount = action.payload;
     },
+    setMaxWordCount(state, action: PayloadAction<number>) {
+      state.maxWordCount = action.payload
+    }
   },
 });
 
@@ -95,7 +100,8 @@ export const {
   setNumOfLosses,
   setPromptCount,
   setPrompts,
-  setWordCount,
+  setMinWordCount,
+  setMaxWordCount
 } = adminSubmissionSlice.actions;
 
 export default adminSubmissionSlice.reducer;

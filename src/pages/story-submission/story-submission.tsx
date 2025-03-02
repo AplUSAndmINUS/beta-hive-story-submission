@@ -10,9 +10,8 @@ import { useAppSelector } from '../../stores/store';
 import InputType from '../../components/form-elements/input/input-type';
 
 export const StorySubmission: React.FC = () => {
-  const { storySubmission, storyTitle } = useAppSelector(
-    (state) => state.storySubmission
-  );
+  const { storySubmission, storySubmissionWordCount, storyTitle } =
+    useAppSelector((state) => state.storySubmission);
   const [isNextDisabled, setIsNextDisabled] = React.useState(true);
   // using useStates for the word count and useDraftSave to help with Redux store save
   const [storyText, setStoryText] = React.useState('');
@@ -22,7 +21,9 @@ export const StorySubmission: React.FC = () => {
     storyTitleState
   );
   const userWordCount = useWordCount(storyText);
-  const { wordCount } = useAppSelector((state) => state.adminSubmission);
+  const { minWordCount, maxWordCount } = useAppSelector(
+    (state) => state.adminSubmission
+  );
 
   React.useEffect(() => {
     if (storySubmission && !storyText) {
@@ -36,14 +37,22 @@ export const StorySubmission: React.FC = () => {
 
   React.useEffect(() => {
     if (
-      storyText.trim().length >= 10 &&
-      storyText.split(' ').length <= wordCount
+      storySubmissionWordCount >= 10 &&
+      storySubmissionWordCount <= maxWordCount &&
+      storySubmissionWordCount >= minWordCount &&
+      storyTitle !== ''
     ) {
       setIsNextDisabled(false);
     } else {
       setIsNextDisabled(true);
     }
-  }, [storyText, wordCount]);
+  }, [
+    storyText,
+    storySubmissionWordCount,
+    storyTitle,
+    minWordCount,
+    maxWordCount,
+  ]);
 
   const handleChange = (
     e:
@@ -94,21 +103,22 @@ export const StorySubmission: React.FC = () => {
           value={storyText}
           onChange={handleChange}
         ></textarea>
-        <div className='d-flex justify-content-between w-100'>
-          <WordCount wordCount={userWordCount} />
-          <div className='d-flex justify-content-start'>
+        <div className='d-flex flex-row justify-content-between align-items-center w-100'>
+          <div className='d-flex flex-row justify-content-space-between'>
+            <WordCount wordCount={userWordCount} />
             <SaveSpinner
               error={error}
               isLoading={isLoading}
               isSaved={isSaved}
             />
-            <NavigateButtons
-              backNavigation='Prompt Selection'
-              isNextDisabled={isNextDisabled}
-              nextButtonText='Next'
-              nextNavigation='Content Warning'
-            />
           </div>
+          <NavigateButtons
+            backNavigation='Prompt Selection'
+            isNextDisabled={isNextDisabled}
+            isStorySubmission
+            nextButtonText='Next'
+            nextNavigation='Content Warning'
+          />
         </div>
       </div>
     </div>

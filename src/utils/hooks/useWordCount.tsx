@@ -3,7 +3,9 @@ import { useAppSelector } from '../../stores/store';
 
 export const useWordCount = (story: string) => {
   const [userWordCount, setWordCount] = React.useState(0);
-  const { wordCount } = useAppSelector((state) => state.adminSubmission);
+  const { minWordCount, maxWordCount } = useAppSelector(
+    (state) => state.adminSubmission
+  );
 
   React.useEffect(() => {
     if (story) {
@@ -11,14 +13,22 @@ export const useWordCount = (story: string) => {
     }
   }, [story]);
 
-  const isExceeding = userWordCount > wordCount;
+  const isLowerThanMin = userWordCount < minWordCount;
+  const isExceeding = userWordCount > maxWordCount;
 
   return (
-    <span>
-      <span className={isExceeding ? 'text-danger' : ''}>{userWordCount}</span>
+    <>
+      <span>Story word count: </span>
+      <span className={isExceeding || isLowerThanMin ? 'text-warning' : ''}>
+        {userWordCount}
+      </span>
       {' / '}
-      {wordCount}
-    </span>
+      {maxWordCount || 1000}
+      <br />
+      <span className={isLowerThanMin ? 'text-warning' : ''}>
+        Minimum word count: {minWordCount}
+      </span>
+    </>
   );
 };
 

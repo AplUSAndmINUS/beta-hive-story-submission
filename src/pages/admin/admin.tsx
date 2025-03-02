@@ -14,7 +14,8 @@ import {
   setNumOfLosses,
   setPromptCount,
   setPrompts,
-  setWordCount,
+  setMinWordCount,
+  setMaxWordCount,
 } from '../../stores/reducers/admin-submission';
 import Accordion from '../../components/accordion/accordion';
 import ButtonsRow from '../../components/form-elements/buttons/buttons-row';
@@ -35,7 +36,8 @@ export const AdminPage: React.FC = () => {
     numOfLosses,
     promptsCount,
     prompts,
-    wordCount,
+    minWordCount,
+    maxWordCount,
   } = useAppSelector((state) => state.adminSubmission);
   const dispatch = useAppDispatch();
   const [alertMessage, setAlertMessage] = React.useState<string>('');
@@ -152,8 +154,8 @@ export const AdminPage: React.FC = () => {
       return false;
     }
 
-    if (wordCount <= 4) {
-      setAlertMessage('Word count must be at least 5.');
+    if (minWordCount <= 9) {
+      setAlertMessage('Min word count must be at least 10.');
       setShowModal(true);
       return false;
     }
@@ -215,7 +217,8 @@ export const AdminPage: React.FC = () => {
       setNumOfLosses(3),
       setPromptCount(10),
       setCountdownDate(moment().format('YYYY-MM-DD')),
-      setWordCount(500)
+      setMinWordCount(500),
+      setMaxWordCount(1000)
     );
   };
 
@@ -227,7 +230,8 @@ export const AdminPage: React.FC = () => {
       console.log('HIVE options:', betaHIVEs);
       console.log('Prompts:', prompts);
       console.log('Content warnings:', contentWarnings);
-      console.log('Word count:', wordCount);
+      console.log('Min word count:', minWordCount);
+      console.log('Max word count:', maxWordCount);
       console.log('Countdown date:', countdownDate);
       console.log('Form submitted');
     } else {
@@ -379,18 +383,39 @@ export const AdminPage: React.FC = () => {
         </div>
         <div className='row'>
           <Accordion
-            accordionTerms='Max word count'
+            accordionTerms='Min / Max word counts'
             collapseNumber='collapseTwo'
           >
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
-                name='wordCount'
-                value={wordCount}
+                name='minWordCount'
+                value={minWordCount}
                 isDisabled={false}
-                label='Word Count'
+                label='What is the minimum word count for stories?'
                 isRequired
                 onChange={(e) =>
-                  dispatch(setWordCount(parseInt(e.target.value)))
+                  dispatch(
+                    parseInt(e.target.value) <= 9
+                      ? setMinWordCount(10)
+                      : setMinWordCount(parseInt(e.target.value))
+                  )
+                }
+                type='number'
+              />
+            </div>
+            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+              <InputType
+                name='maxWordCount'
+                value={maxWordCount}
+                isDisabled={false}
+                label='What is the maximum word count for stories?'
+                isRequired
+                onChange={(e) =>
+                  dispatch(
+                    parseInt(e.target.value) > 10000
+                      ? setMaxWordCount(1000)
+                      : setMaxWordCount(parseInt(e.target.value))
+                  )
                 }
                 type='number'
               />

@@ -14,29 +14,27 @@ export const PromptCard: React.FC<PromptCardProps> = ({
   prompt,
   promptText,
 }) => {
-  const { characterSelection, settingSelection } = useAppSelector(
-    (state) => state.storySubmission
+  const { promptSelections } = useAppSelector((state) => state.storySubmission);
+
+  const voteSubmission = useAppSelector(
+    (state) => state.voteSubmission.selectedPrompt
   );
 
-const voteSubmission = useAppSelector(
-  (state) => state.voteSubmission.selectedPrompt
-);
+  const isSelected =
+    promptSelections.find((selection) => selection === prompt) ||
+    voteSubmission === prompt;
+
   return (
     <div
       className='col-6 d-flex flex-wrap justify-content-between'
       onClick={
-        isStorySelection ? () => handleSelection('') : () => handleSelection(prompt)  
+        isStorySelection
+          ? () => handleSelection('')
+          : () => handleSelection(prompt)
       }
     >
       <div className='w-100 me-3'>
-        <div
-          className={`card p-2 mt-4 ${
-            (characterSelection === prompt ||
-              settingSelection === prompt ||
-              voteSubmission === prompt) &&
-            'card-selected'
-          }`}
-        >
+        <div className={`card p-2 mt-4 ${isSelected && 'card-selected'}`}>
           <div className='card-body'>
             <h5 className='card-title'>{prompt}</h5>
             <p className='card-text'>

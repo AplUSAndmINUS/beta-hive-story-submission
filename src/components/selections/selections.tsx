@@ -11,10 +11,15 @@ interface SelectionsProps {
 export const Selections: React.FC<SelectionsProps> = ({
   isStoryView = false,
 }) => {
+  const { minWordCount, maxWordCount } = useAppSelector(
+    (state) => state.adminSubmission
+  );
   const {
     betaHIVESelection,
     promptSelections,
     storySubmission,
+    storySubmissionCharacterCount,
+    storySubmissionWordCount,
     storyTitle,
     contentSensitivities,
   } = useAppSelector((state) => state.storySubmission);
@@ -69,7 +74,9 @@ export const Selections: React.FC<SelectionsProps> = ({
           <div className='pt-0 pb-0'>
             <p className='text-right'>
               <strong>Prompts: </strong>{' '}
-              <span className={`${promptSelections.length < 1 && 'text-warning'}`}>
+              <span
+                className={`${promptSelections.length < 1 && 'text-warning'}`}
+              >
                 {promptSelections.join(', ') || 'None selected'}{' '}
               </span>
               <i className='fas fa-pencil-alt' />
@@ -88,7 +95,12 @@ export const Selections: React.FC<SelectionsProps> = ({
             <p className='text-right'>
               <strong>Story Submission: </strong>{' '}
               <span className={`${!storySubmission && 'text-warning'}`}>
-                {(storySubmission && storyTitle) ? 'Submitted' : 'Not submitted'}{' '}
+                {storySubmission && storyTitle
+                  ? storySubmissionWordCount <= maxWordCount &&
+                    storySubmissionWordCount >= minWordCount
+                    ? 'Submitted'
+                    : 'In progress'
+                  : 'Not submitted'}{' '}
               </span>
               <i className='fas fa-pencil-alt' />
             </p>
@@ -105,7 +117,11 @@ export const Selections: React.FC<SelectionsProps> = ({
           <div className='pt-0 pb-0'>
             <p className='text-right'>
               <strong>Content Warnings: </strong>{' '}
-              <span className={`${contentSensitivities.length < 1 && 'text-warning'}`}>
+              <span
+                className={`${
+                  contentSensitivities.length < 1 && 'text-warning'
+                }`}
+              >
                 {contentSensitivities.join(', ') || 'None selected'}{' '}
               </span>
               <i className='fas fa-pencil-alt' />

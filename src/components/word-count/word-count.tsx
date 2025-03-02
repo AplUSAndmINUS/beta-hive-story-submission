@@ -6,9 +6,9 @@ interface WordCountProps {
 
 export const WordCount: React.FC<WordCountProps> = ({ wordCount }) => {
   return (
-    <div className='mt-4'>
+    <div className='mt-3'>
       <p>
-        <span className='fw-bold'>Word Count: {wordCount}</span>
+        <span className='fw-bold'>{wordCount}</span>
       </p>
     </div>
   );

@@ -16,7 +16,7 @@ export const SaveSpinner: React.FC<SaveSpinnerProps> = ({
   savedText,
 }) => {
   return (
-    <div className='d-flex justify-content-flex-end'>
+    <div className='d-flex justify-content-flex-end ms-3'>
       {isLoading ? (
         <>
           <div
@@ -26,7 +26,7 @@ export const SaveSpinner: React.FC<SaveSpinnerProps> = ({
           <p className='mt-4 me-3'>{innerText || 'Saving your draft...'}</p>
         </>
       ) : !error ? (
-        <p className='mt-4 me-3'>
+        <p className='mt-4 me-3 fw-bold'>
           {isSaved ? (savedText ? savedText : 'Draft saved!') : ''}
         </p>
       ) : (
