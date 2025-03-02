@@ -10,7 +10,7 @@ import {
   setContentSensitivities,
   setIsContentWarning,
 } from '../../stores/reducers/story-submission';
-import { CONTENT_WARNINGS } from '../../services/constants/constants';
+import { CONTENT_WARNINGS } from '../../services/constants/admin-constants';
 import useNavigation from '../../utils/hooks/useNavigation';
 
 export const ContentWarnings: React.FC = () => {

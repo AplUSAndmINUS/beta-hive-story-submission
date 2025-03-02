@@ -1,62 +1,11 @@
 import { calendarSchema } from '../../components/calendar/calendar.types';
-import { characterSchema } from '../../pages/prompt-selection/prompt-selection.types';
-import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
-import { betaHIVESchema } from '../../pages/betaHIVE-selection/betaHIVE-selection.types';
+import { characterSchema } from '../data-interfaces/prompt-selection.types';
+import { contentWarningsSchema } from '../data-interfaces/content-warnings.types';
 import {
   promptsSchema,
   settingSchema,
-} from '../../pages/prompt-selection/prompt-selection.types';
-
-export const BETAHIVE_SELECTIONS: betaHIVESchema[] = [
-  {
-    id: 1,
-    name: 'Fantasy',
-    imgSource: 'fantasy.png',
-    description: 'Magic, dragons, and other fantastical elements.',
-  },
-  {
-    id: 2,
-    name: 'Horror',
-    imgSource: 'horror.png',
-    description: 'Scary stories that will keep you up at night.',
-  },
-  {
-    id: 3,
-    name: 'Sci-Fi',
-    imgSource: 'sci-fi.png',
-    description: 'Stories set in the future or in space.',
-  },
-  {
-    id: 4,
-    name: 'Mystery',
-    imgSource: 'mystery.png',
-    description: 'Puzzles and enigmas to solve.',
-  },
-  {
-    id: 5,
-    name: 'Romance',
-    imgSource: 'romance.png',
-    description: 'Love stories and romantic adventures.',
-  },
-  {
-    id: 6,
-    name: 'Historical Fiction',
-    imgSource: 'non-fiction.png',
-    description: 'Stories set in the past.',
-  },
-  {
-    id: 7,
-    name: 'Adventure',
-    imgSource: 'adventure.png',
-    description: 'Exciting journeys and daring escapades.',
-  },
-  {
-    id: 8,
-    name: 'Suspense',
-    imgSource: 'suspense.png',
-    description: 'Suspenseful and thrilling stories.',
-  },
-];
+} from '../data-interfaces/prompt-selection.types';
+import { feedbackSchema } from '../data-interfaces/battleHIVE.types';
 
 export const CALENDAR_EVENTS: calendarSchema[] = [
   {
@@ -78,7 +27,7 @@ export const CALENDAR_EVENTS: calendarSchema[] = [
     name: 'Story Submission',
     date: '2025-04-22',
     description: 'Submit your story for review!',
-  }
+  },
 ];
 
 export const CHARACTER_SELECTIONS: characterSchema[] = [
@@ -176,4 +125,115 @@ export const PROMPT_SELECTIONS: promptsSchema[] = [
   SETTING_SELECTIONS[1],
   SETTING_SELECTIONS[2],
   SETTING_SELECTIONS[3],
+];
+
+export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
+  {
+    id: 1,
+    title: 'Feedback 1',
+    story: 'Story 1',
+    feedbackAuthor: 'Author 1',
+    feedback: 'Great story!',
+    isPositive: true,
+    isPublic: true,
+  },
+  {
+    id: 2,
+    title: 'Feedback 2',
+    story: 'Story 1',
+    feedbackAuthor: 'Author 2',
+    feedback: 'Needs more detail. Please hide me!',
+    isPositive: false,
+    isPublic: false,
+  },
+  {
+    id: 3,
+    title: 'Feedback 3',
+    story: 'Story 1',
+    feedbackAuthor: 'Author 3',
+    feedback: 'Loved the characters!',
+    isPositive: true,
+    isPublic: true,
+  },
+  {
+    id: 4,
+    title: 'Feedback 1',
+    story: 'Story 2',
+    feedbackAuthor: 'Author 1',
+    feedback: 'Great story!',
+    isPositive: true,
+    isPublic: true,
+  },
+  {
+    id: 5,
+    title: 'Feedback 2',
+    story: 'Story 2',
+    feedbackAuthor: 'Author 2',
+    feedback: 'Story two: Needs again more detail. Please hide me!',
+    isPositive: false,
+    isPublic: false,
+  },
+  {
+    id: 6,
+    title: 'Feedback 3',
+    story: 'Story 2',
+    feedbackAuthor: 'Author 3',
+    feedback: "Loved the characters! I just do not understand the story's plot",
+    isPositive: false,
+    isPublic: true,
+  },
+  {
+    id: 7,
+    title: 'Feedback 1',
+    story: 'Story 3',
+    feedbackAuthor: 'Author 1',
+    feedback: "I've read better...",
+    isPositive: false,
+    isPublic: true,
+  },
+  {
+    id: 8,
+    title: 'Feedback 2',
+    story: 'Story 3',
+    feedbackAuthor: 'Author 2',
+    feedback: 'HUH????: Needs again more detail. Please hide me!',
+    isPositive: false,
+    isPublic: false,
+  },
+  {
+    id: 9,
+    title: 'Feedback 3',
+    story: 'Story 3',
+    feedbackAuthor: 'Author 3',
+    feedback: "Let's retry doing better at this, shall we? Don't show me.",
+    isPositive: false,
+    isPublic: false,
+  },
+  {
+    id: 10,
+    title: 'Feedback 1',
+    story: 'Story 4',
+    feedbackAuthor: 'Author 1',
+    feedback: "WINNER WINNER, CHIKKIN DINNER! I'm a winner!",
+    isPositive: true,
+    isPublic: true,
+  },
+  {
+    id: 11,
+    title: 'Feedback 2',
+    story: 'Story 4',
+    feedbackAuthor: 'Author 2',
+    feedback: 'You win!! Please hide me.',
+    isPositive: true,
+    isPublic: false,
+  },
+  {
+    id: 12,
+    title: 'Feedback 3',
+    story: 'Story 4',
+    feedbackAuthor: 'Author 3',
+    feedback: 'I am not worthy!',
+    isPositive: true,
+    isPublic: true,
+  },
 ];

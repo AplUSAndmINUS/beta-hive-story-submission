@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import moment from 'moment';
 
-import { BETAHIVE_SELECTIONS } from '../../services/constants/constants';
-import { CALENDAR_EVENTS } from '../../services/constants/constants';
-import { CONTENT_WARNINGS } from '../../services/constants/constants';
-import { PROMPT_SELECTIONS } from '../../services/constants/constants';
-import { betaHIVESchema } from '../../pages/betaHIVE-selection/betaHIVE-selection.types';
+import { BETAHIVE_SELECTIONS } from '../../services/constants/betaHIVE-constants';
+import {
+  CALENDAR_EVENTS,
+  CONTENT_WARNINGS,
+  PROMPT_SELECTIONS
+} from '../../services/constants/admin-constants';
+import { betaHIVESchema } from '../../services/data-interfaces/betaHIVE-selection.types';
 import { calendarSchema } from '../../components/calendar/calendar.types';
-import { contentWarningsSchema } from '../../pages/content-warnings/content-warnings.types';
-import { promptsSchema } from '../../pages/prompt-selection/prompt-selection.types';
+import { contentWarningsSchema } from '../../services/data-interfaces/content-warnings.types';
+import { promptsSchema } from '../../services/data-interfaces/prompt-selection.types';
 
 interface AdminSubmissionState {
   betaHIVECount: number;
@@ -39,7 +41,7 @@ const initialState: AdminSubmissionState = {
   promptsCount: 10,
   prompts: [...PROMPT_SELECTIONS],
   minWordCount: 500,
-  maxWordCount: 1000, 
+  maxWordCount: 1000,
 };
 
 const adminSubmissionSlice = createSlice({
@@ -83,8 +85,8 @@ const adminSubmissionSlice = createSlice({
       state.minWordCount = action.payload;
     },
     setMaxWordCount(state, action: PayloadAction<number>) {
-      state.maxWordCount = action.payload
-    }
+      state.maxWordCount = action.payload;
+    },
   },
 });
 
@@ -101,7 +103,7 @@ export const {
   setPromptCount,
   setPrompts,
   setMinWordCount,
-  setMaxWordCount
+  setMaxWordCount,
 } = adminSubmissionSlice.actions;
 
 export default adminSubmissionSlice.reducer;

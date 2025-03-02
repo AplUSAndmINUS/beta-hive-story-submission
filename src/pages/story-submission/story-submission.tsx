@@ -30,7 +30,7 @@ export const StorySubmission: React.FC = () => {
       setStoryText(storySubmission);
     }
 
-    if (storyTitle && !storyTitleState) {
+    if (!storyTitle && !storyTitleState) {
       setStoryTitle(storyTitle);
     }
   }, [storySubmission, storyText, storyTitle, storyTitleState]);

@@ -50,7 +50,7 @@ export const Calendar: React.FC = () => {
                   </p>
                 )}
                 {eventsForDay.map((event, index) => (
-                  <div key={index} className='event'>
+                  <div key={index}>
                     <strong>{event.name}</strong>
                     <p>{event.description}</p>
                   </div>

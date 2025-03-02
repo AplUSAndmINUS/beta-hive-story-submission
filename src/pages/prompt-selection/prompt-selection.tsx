@@ -7,16 +7,14 @@ import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
   // setCharacterSelection,
   // setSettingSelection,
-  setPromptSelections
+  setPromptSelections,
 } from '../../stores/reducers/story-submission';
-import { PROMPT_SELECTIONS } from '../../services/constants/constants';
-// import { CHARACTER_SELECTIONS, SETTING_SELECTIONS } from '../../services/constants/constants'; 
+import { PROMPT_SELECTIONS } from '../../services/constants/admin-constants';
+// import { CHARACTER_SELECTIONS, SETTING_SELECTIONS } from '../../services/constants/constants';
 
 export const PromptSelection: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { promptSelections } = useAppSelector(
-    (state) => state.storySubmission
-  );
+  const { promptSelections } = useAppSelector((state) => state.storySubmission);
   const { minPromptSelections } = useAppSelector(
     (state) => state.adminSubmission
   );
