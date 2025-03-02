@@ -423,7 +423,7 @@ export const AdminPage: React.FC = () => {
         </div>
         <div className='row'>
           <Accordion
-            accordionTerms='Minimum prompt selections'
+            accordionTerms='Story losses count'
             collapseNumber='collapseThree'
           >
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
