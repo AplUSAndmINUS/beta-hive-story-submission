@@ -17,14 +17,16 @@ export const BetaHIVE: React.FC = () => {
         <img src={logoPath} alt='Beta HIVE' className='w-100 h-100' />
       </div>
       <div className='row'>
-        <h1 className='bd-title pb-2'>Welcome to the fiction Beta HIVE</h1>
+        <h1 className='bd-title pb-2'>Welcome to the HIVE</h1>
         <p className='text-muted pb-2 mt-2 mb-5 fs-5'>
           Beta HIVE is a platform for writers to create, share, and vote on
           stories. We're currently in development and will be launching soon.
         </p>
       </div>
       <div className='row'>
-        <h3 className='bd-subtitle pb-2 mt-5'>Check out the HIVE's newest stories!</h3>
+        <h3 className='bd-subtitle pb-2 mt-5'>
+          Check out your HIVE's newest stories!
+        </h3>
       </div>
       <div className='row d-flex justify-content-center'>
         <HIVEStoryCard
@@ -67,6 +69,13 @@ export const BetaHIVE: React.FC = () => {
           height='300'
           onClick={() => console.log('story')}
         />
+      </div>
+      <div className='row'>
+        <h3 className='bd-subtitle mb-2 mt-5'>How it works</h3>
+        <p className='text-muted pb-2 mt-2 fs-5'>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
+          purus et nunc fermentum aliquam. Nam nec turpis nec eros tincidunt.
+        </p>
       </div>
     </div>
   );

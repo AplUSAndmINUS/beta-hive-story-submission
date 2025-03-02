@@ -24,14 +24,6 @@ export const HomePage: React.FC = () => {
           </p>
         </div>
       </div>
-      <div className='row'>
-        <h3 className='bd-subtitle mb-2 mt-5'>How it works</h3>
-        <p className='text-muted pb-2 mt-2 fs-5'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
-          purus et nunc fermentum aliquam. Nam nec turpis nec eros tincidunt.
-        </p>
-      </div>
-      {!betaHIVESelection && <BetaHIVE />}
       {moment(countdownDate) >= moment() ? (
         <>
           <div className='row'>
@@ -55,6 +47,7 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       )}
+      {!betaHIVESelection && <BetaHIVE />}
       <div className='row'>
         <div className='col'>
           <h3 className='bd-title mb-4'>Events Calendar</h3>
