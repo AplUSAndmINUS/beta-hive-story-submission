@@ -11,6 +11,7 @@ import {
   setContentWarnings,
   setCountdownDate,
   setMinPromptSelections,
+  setNumOfLosses,
   setPromptCount,
   setPrompts,
   setWordCount,
@@ -31,6 +32,7 @@ export const AdminPage: React.FC = () => {
     contentWarnings,
     countdownDate,
     minPromptSelections,
+    numOfLosses,
     promptsCount,
     prompts,
     wordCount,
@@ -114,7 +116,7 @@ export const AdminPage: React.FC = () => {
 
     if (betaHIVECount !== betaHIVEs.length) {
       setAlertMessage(
-        'The number of Beta HIVE options does not match the expected length.'
+        'The number of HIVE options does not match the expected length.'
       );
       setShowModal(true);
       return false;
@@ -210,6 +212,7 @@ export const AdminPage: React.FC = () => {
     dispatch(
       setBetaHIVECount(4),
       setContentWarningCount(4),
+      setNumOfLosses(3),
       setPromptCount(10),
       setCountdownDate(moment().format('YYYY-MM-DD')),
       setWordCount(500)
@@ -221,7 +224,7 @@ export const AdminPage: React.FC = () => {
 
     if (validateSubmission()) {
       // Proceed with submission
-      console.log('Beta HIVE options:', betaHIVEs);
+      console.log('HIVE options:', betaHIVEs);
       console.log('Prompts:', prompts);
       console.log('Content warnings:', contentWarnings);
       console.log('Word count:', wordCount);
@@ -322,10 +325,11 @@ export const AdminPage: React.FC = () => {
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
                 imgName={
-                  labelPrefix === 'Beta HIVE' ? values[index]?.imgSource : ''
+                  labelPrefix === 'HIVE' ? values[index]?.imgSource : ''
                 }
+                isCalendar={inputType === 'calendarEvents'}
                 isPrompts={inputType === 'prompts'}
-                isImageUpload={labelPrefix === 'Beta HIVE'}
+                isImageUpload={labelPrefix === 'HIVE'}
               />
             );
           }
@@ -339,6 +343,12 @@ export const AdminPage: React.FC = () => {
     <div className='container-fluid'>
       <div className='row'>
         <h1 className='bd-title pb-2 mt-4 mb-4'>Admin</h1>
+        <p>
+          Fill out all the fields marked with a red asterisk in each of the
+          sections. <br />
+          You may close each accordion once completed to help you as you fill
+          out the form.
+        </p>
       </div>
       <form onSubmit={handleSubmit}>
         <div className='row'>
@@ -365,7 +375,7 @@ export const AdminPage: React.FC = () => {
           </Accordion>
         </div>
         <div className='row'>
-          <Accordion accordionTerms='Word Count' collapseNumber='collapseTwo'>
+          <Accordion accordionTerms='Max word count' collapseNumber='collapseTwo'>
             <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
               <InputType
                 name='wordCount'
@@ -411,6 +421,31 @@ export const AdminPage: React.FC = () => {
             />
           </Accordion>
         </div>
+        <div className='row'>
+          <Accordion
+            accordionTerms='Minimum prompt selections'
+            collapseNumber='collapseThree'
+          >
+            <div className='d-flex flex-row flex-wrap justify-content-start mb-4'>
+              <InputType
+                name='numOfLosses'
+                value={numOfLosses}
+                isDisabled={false}
+                label='How many losses until the story is taken out of the battle?'
+                isRequired
+                onChange={(e) =>
+                  dispatch(setNumOfLosses(parseInt(e.target.value)))
+                }
+                type='number'
+              />
+            </div>
+            <SaveSpinner
+              isLoading={false}
+              isSaved={false}
+              savedText='Changes saved!'
+            />
+          </Accordion>
+        </div>
         {generateAccordion(
           'Calendar events',
           'collapseFour',
@@ -425,12 +460,12 @@ export const AdminPage: React.FC = () => {
           handleChange
         )}
         {generateAccordion(
-          'Beta HIVE options',
+          'HIVE options',
           'collapseFive',
           betaHIVECount,
           handleCountOptions,
           'betaHiveOptions',
-          'Beta HIVE',
+          'HIVE',
           '100',
           isBetaHiveLoading,
           isBetaHiveSaved,

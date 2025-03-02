@@ -19,6 +19,7 @@ interface AdminSubmissionState {
   contentWarnings: contentWarningsSchema[];
   countdownDate: string;
   minPromptSelections: number;
+  numOfLosses: number;
   promptsCount: number;
   prompts: promptsSchema[];
   wordCount: number;
@@ -33,6 +34,7 @@ const initialState: AdminSubmissionState = {
   contentWarnings: [...CONTENT_WARNINGS],
   countdownDate: moment().add(20, 'days').format('YYYY-MM-DD'),
   minPromptSelections: 2,
+  numOfLosses: 3,
   promptsCount: 10,
   prompts: [...PROMPT_SELECTIONS],
   wordCount: 500,
@@ -66,6 +68,9 @@ const adminSubmissionSlice = createSlice({
     setMinPromptSelections(state, action: PayloadAction<number>) {
       state.minPromptSelections = action.payload;
     },
+    setNumOfLosses(state, action: PayloadAction<number>) {
+      state.numOfLosses = action.payload;
+    },
     setPromptCount(state, action: PayloadAction<number>) {
       state.promptsCount = action.payload;
     },
@@ -87,6 +92,7 @@ export const {
   setContentWarnings,
   setCountdownDate,
   setMinPromptSelections,
+  setNumOfLosses,
   setPromptCount,
   setPrompts,
   setWordCount,

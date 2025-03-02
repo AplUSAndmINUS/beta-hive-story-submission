@@ -3,6 +3,7 @@ import React from 'react';
 interface InputTypeProps {
   isDisabled: boolean;
   isImageUpload?: boolean;
+  isCalendar?: boolean;
   isPrompts?: boolean;
   imgName?: string;
   name: string;
@@ -22,6 +23,7 @@ interface InputTypeProps {
 export const InputType: React.FC<InputTypeProps> = ({
   isDisabled = false,
   isImageUpload = false,
+  isCalendar = false,
   isPrompts = false,
   imgName,
   name,
@@ -75,7 +77,7 @@ export const InputType: React.FC<InputTypeProps> = ({
                 />
               </label>
             </h5>
-            {isPrompts && (
+            {(isPrompts || isCalendar) && (
               <label
                 htmlFor={`${name}2`}
                 className='d-flex flex-column align-items-start'
