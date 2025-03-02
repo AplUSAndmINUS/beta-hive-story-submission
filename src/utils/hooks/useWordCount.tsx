@@ -13,19 +13,19 @@ export const useWordCount = (story: string) => {
     }
   }, [story]);
 
-  const isLowerThanMin = userWordCount < minWordCount;
-  const isExceeding = userWordCount > maxWordCount;
+  const isOutOfBounds =
+    userWordCount < minWordCount || userWordCount > maxWordCount;
 
   return (
     <>
       <span>Story word count: </span>
-      <span className={isExceeding || isLowerThanMin ? 'text-warning' : ''}>
+      <span className={isOutOfBounds ? 'text-warning' : 'text-success'}>
         {userWordCount}
       </span>
       {' / '}
       {maxWordCount || 1000}
       <br />
-      <span className={isLowerThanMin ? 'text-warning' : ''}>
+      <span className={isOutOfBounds ? 'text-warning' : ''}>
         Minimum word count: {minWordCount}
       </span>
     </>
