@@ -11,6 +11,14 @@ const Accordion: React.FC<AccordionProps> = ({
   collapseNumber,
   children,
 }) => {
+  const [isOpen, setIsOpen] = React.useState(
+    collapseNumber === 'collapseOne' ? true : false
+  );
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className='accordion mt-3' id={`accordionExample${collapseNumber}`}>
       <div className='accordion-item' style={{ borderRadius: '0' }}>
@@ -19,21 +27,18 @@ const Accordion: React.FC<AccordionProps> = ({
           id={`heading${collapseNumber}`}
         >
           <button
-            className='accordion-button fs-4'
+            className={`accordion-button fs-4 ${isOpen ? '' : 'collapsed'}`}
             type='button'
-            data-bs-toggle='collapse'
-            data-bs-target={`#collapse${collapseNumber}`}
-            aria-expanded='true'
+            aria-expanded={isOpen}
             aria-controls={`collapse${collapseNumber}`}
+            onClick={handleToggle}
           >
             {accordionTerms}
           </button>
         </h3>
         <div
           id={`collapse${collapseNumber}`}
-          className={`accordion-collapse collapse ${
-            collapseNumber === 'collapseOne' ? 'show' : ''
-          }`}
+          className={`accordion-collapse collapse ${isOpen ? 'show' : ''}`}
           aria-labelledby={`heading${collapseNumber}`}
           data-bs-parent={`#accordionExample${collapseNumber}`}
         >

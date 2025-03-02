@@ -177,20 +177,28 @@ export const AdminPage: React.FC = () => {
       case 'calendarEvents':
         dispatch(
           setCalendarEvents(
-            calendarEvents.map((item, i) => (i === index ? { ...item, name: value } : item))
+            calendarEvents.map((item, i) =>
+              i === index ? { ...item, name: value } : item
+            )
           )
         );
         break;
       case 'contentWarnings':
         dispatch(
           setContentWarnings(
-            contentWarnings.map((item, i) => (i === index ? { ...item, name: value } : item))
+            contentWarnings.map((item, i) =>
+              i === index ? { ...item, name: value } : item
+            )
           )
         );
         break;
       case 'prompts':
         dispatch(
-          setPrompts(prompts.map((item, i) => (i === index ? { ...item, name: value } : item)))
+          setPrompts(
+            prompts.map((item, i) =>
+              i === index ? { ...item, name: value } : item
+            )
+          )
         );
         break;
       default:
@@ -306,12 +314,16 @@ export const AdminPage: React.FC = () => {
                 key={`${labelPrefix}${index + 1}`}
                 name={`${labelPrefix}${index + 1}`}
                 value={value || ''}
-                valueDesc={inputType === 'prompts' ? values[index]?.description : ''}
+                valueDesc={
+                  inputType === 'prompts' ? values[index]?.description : ''
+                }
                 onChange={(e) => handleChange(e, index, inputType)}
                 isDisabled={false}
                 isRequired
                 label={`${labelPrefix} ${index + 1}`}
-                imgName={labelPrefix === 'Beta HIVE' ? values[index]?.imgSource : ''}
+                imgName={
+                  labelPrefix === 'Beta HIVE' ? values[index]?.imgSource : ''
+                }
                 isPrompts={inputType === 'prompts'}
                 isImageUpload={labelPrefix === 'Beta HIVE'}
               />
