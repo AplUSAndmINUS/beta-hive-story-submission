@@ -11,11 +11,6 @@ import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
 
 export const BattleHIVE: React.FC = () => {
-  const [feedbackText, setFeedbackText] = React.useState('');
-  const [storyNumber, setStoryNumber] = React.useState<1 | 2>(1);
-  const [isAnonymous, setIsAnonymous] = React.useState(false);
-  const [isPositive, setIsPositive] = React.useState(false);
-  const [isPublic, setIsPublic] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [selectedStory, setSelectedStory] = React.useState<string>('');
   const versus = require('../../assets/images/logo/versus-mode.png');
@@ -23,19 +18,22 @@ export const BattleHIVE: React.FC = () => {
   const images = useHIVEImages();
   const isMobile = useIsMobile();
   const {
-    handleChange,
-    handleReset,
+    storyNumber,
+    feedbackText,
     isLoading,
+    isAnonymous,
+    isPositive,
+    isPublic,
     isSaved,
     isSubmitDisabled,
     statusText,
-  } = useFeedbackSubmission(
-    feedbackText,
-    storyNumber,
-    isAnonymous,
-    isPositive,
-    isPublic
-  );
+    setStoryNumber,
+    handleAnonymousChange,
+    handlePositiveChange,
+    handlePublicChange,
+    handleTextChange,
+    handleReset,
+  } = useFeedbackSubmission();
 
   React.useEffect(() => {
     const handleKeyDown = ($e: KeyboardEvent) => {
@@ -154,15 +152,21 @@ export const BattleHIVE: React.FC = () => {
           isFeedbackSubmit
           children={
             <StoryView
+              storyNumber={storyNumber}
+              feedbackText={feedbackText}
+              isAnonymous={isAnonymous}
+              isPositive={isPositive}
+              isPublic={isPublic}
               onClose={() => handleModal('story')}
-              handleChange={handleChange}
               handleReset={handleReset}
-              handleSubmit={handleSubmit}
+              handleAnonymousChange={handleAnonymousChange}
+              handlePositiveChange={handlePositiveChange}
+              handlePublicChange={handlePublicChange}
+              handleTextChange={$e => handleTextChange($e)}
               isLoading={isLoading}
               isSaved={isSaved}
               isSubmitDisabled={isSubmitDisabled}
               statusText={statusText}
-              feedbackText={feedbackText}
             />
           }
         />

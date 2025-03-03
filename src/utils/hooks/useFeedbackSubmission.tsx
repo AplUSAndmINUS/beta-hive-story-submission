@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
   setFeedbackStoryOneText,
@@ -12,45 +11,76 @@ import {
   setFeedbackStoryTwoIsPublic,
 } from '../../stores/reducers/feedback-submission';
 
-export const useFeedbackSubmission = (
-  feedbackText: string,
-  storyNumber: 1 | 2,
-  isAnonymous: boolean,
-  isPositive: boolean,
-  isPublic: boolean
-) => {
+export const useFeedbackSubmission = (initialStoryNumber: 1 | 2 = 1) => {
+  // Local UI state
+  const [storyNumber, setStoryNumber] = React.useState<1 | 2>(
+    initialStoryNumber
+  );
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
   const [statusText, setStatusText] = React.useState('');
-  const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
-  const { feedbackStoryOneText, feedbackStoryTwoText } = useAppSelector(
-    (state) => state.feedbackStorySubmission
-  );
+
+  // Redux state
+  const {
+    feedbackStoryOneText,
+    feedbackStoryOneIsAnonymous,
+    feedbackStoryOneIsPositive,
+    feedbackStoryOneIsPublic,
+    feedbackStoryTwoText,
+    feedbackStoryTwoIsAnonymous,
+    feedbackStoryTwoIsPositive,
+    feedbackStoryTwoIsPublic,
+  } = useAppSelector((state) => state.feedbackStorySubmission);
   const dispatch = useAppDispatch();
 
-  React.useEffect(() => {
-    if (feedbackStoryOneText || feedbackStoryTwoText) {
-      setIsSubmitDisabled(false);
-    };
-  }, [feedbackStoryOneText, feedbackStoryTwoText]);
+  // Derived state
+  const isSubmitDisabled =
+    storyNumber === 1 ? !feedbackStoryOneText : !feedbackStoryTwoText;
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    handleSave();
+  const feedbackText =
+    storyNumber === 1 ? feedbackStoryOneText : feedbackStoryTwoText;
 
-    const text = e.target.value;
+  const isAnonymous =
+    storyNumber === 1
+      ? feedbackStoryOneIsAnonymous
+      : feedbackStoryTwoIsAnonymous;
 
+  const isPositive =
+    storyNumber === 1 ? feedbackStoryOneIsPositive : feedbackStoryTwoIsPositive;
+
+  const isPublic =
+    storyNumber === 1 ? feedbackStoryOneIsPublic : feedbackStoryTwoIsPublic;
+
+  const handleTextChange = ($e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (storyNumber === 1) {
-      dispatch(setFeedbackStoryOneText(text));
-      dispatch(setFeedbackStoryOneIsAnonymous(isAnonymous));
-      dispatch(setFeedbackStoryOneIsPositive(isPositive));
-      dispatch(setFeedbackStoryOneIsPublic(isPublic));
+      dispatch(setFeedbackStoryOneText($e.target.value));
     } else {
-      dispatch(setFeedbackStoryTwoText(text));
-      dispatch(setFeedbackStoryTwoIsAnonymous(isAnonymous));
-      dispatch(setFeedbackStoryTwoIsPositive(isPositive));
-      dispatch(setFeedbackStoryTwoIsPublic(isPublic));
+      dispatch(setFeedbackStoryTwoText($e.target.value));
     }
+    handleSave();
   };
+
+  const handleAnonymousChange = (value: boolean) => {
+    storyNumber === 1
+      ? dispatch(setFeedbackStoryOneIsAnonymous(value))
+      : dispatch(setFeedbackStoryTwoIsAnonymous(value));
+
+    handleSave();
+  };
+
+  const handlePositiveChange = (value: boolean) => {
+    storyNumber === 1
+      ? dispatch(setFeedbackStoryOneIsPositive(value))
+      : dispatch(setFeedbackStoryTwoIsPositive(value));
+  };
+
+  const handlePublicChange = (value: boolean) => {
+    storyNumber === 1
+      ? dispatch(setFeedbackStoryOneIsPublic(value))
+      : dispatch(setFeedbackStoryTwoIsPublic(value));
+  };
+
+  // Similar methods for isPositive and isPublic
 
   const handleReset = () => {
     if (storyNumber === 1) {
@@ -75,16 +105,29 @@ export const useFeedbackSubmission = (
       setIsLoading(false);
       setIsSaved(true);
       setStatusText('Saved!');
-    }, 2500); // Simulate save delay
+    }, 2500);
   };
 
   return {
-    handleChange,
-    handleReset,
+    // State
+    storyNumber,
+    feedbackText,
+    isAnonymous,
+    isPositive,
+    isPublic,
     isLoading,
     isSaved,
     isSubmitDisabled,
     statusText,
+
+    // Actions
+    setStoryNumber,
+    handleAnonymousChange,
+    handlePositiveChange,
+    handlePublicChange,
+    handleReset,
+    handleSave,
+    handleTextChange,
   };
 };
 

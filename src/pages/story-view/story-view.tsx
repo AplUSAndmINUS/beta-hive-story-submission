@@ -5,37 +5,42 @@ import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner'
 import Selections from '../../components/selections/selections';
 
 interface StoryViewProps {
-  handleChange: (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    string: string
-  ) => void;
   feedbackText: string;
+  isAnonymous: boolean;
+  isPositive: boolean;
+  isPublic: boolean;
   handleReset: () => void;
-  handleSubmit: ($e: React.FormEvent) => void;
+  handleTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleAnonymousChange: (value: boolean) => void;
+  handlePositiveChange: (value: boolean) => void;
+  handlePublicChange: (value: boolean) => void;
   isLoading: boolean;
   isSaved: boolean;
   isSubmitDisabled: boolean;
   statusText: string;
+  storyNumber: number;
   storySubmission?: string;
-  onClose: () => void; // Add a prop for the close button handler
+  onClose: () => void;
 }
 
 export const StoryView: React.FC<StoryViewProps> = ({
   feedbackText,
-  handleChange,
+  isAnonymous,
+  isPositive,
+  isPublic,
   handleReset,
-  handleSubmit,
+  handleTextChange,
+  handleAnonymousChange,
+  handlePositiveChange,
+  handlePublicChange,
   isLoading,
   isSaved,
   isSubmitDisabled,
-  storySubmission,
   statusText,
+  storyNumber,
+  storySubmission,
   onClose,
 }) => {
-  const [isPositiveChecked, setIsPositiveChecked] = React.useState(true);
-  const [isAnonymousChecked, setIsAnonymousChecked] = React.useState(false);
-  const [isPublicChecked, setIsPublicChecked] = React.useState(true);
-
   return (
     <div className='container position-relative p-4'>
       <button
@@ -73,7 +78,7 @@ export const StoryView: React.FC<StoryViewProps> = ({
           placeholder='Submit your feedback on this story here'
           value={feedbackText}
           required
-          onChange={($e) => handleChange($e, feedbackText)}
+          onChange={handleTextChange}
         />
       </div>
       <SaveSpinner
@@ -86,13 +91,11 @@ export const StoryView: React.FC<StoryViewProps> = ({
           className='form-check-input'
           type='checkbox'
           id='flexSwitchPositiveDefault'
-          title='Disabled switch checkbox input'
-          checked={isPositiveChecked}
-          onChange={() => setIsPositiveChecked(!isPositiveChecked)}
+          title='Positive feedback indicator'
+          checked={isPositive}
+          onChange={() => handlePositiveChange(!isPositive)}
         />
-        <label className='form-check-label'>
-          This feedback is positive
-        </label>
+        <label className='form-check-label'>This feedback is positive</label>
       </div>
       <div className='form-check form-switch cursor-pointer-hover'>
         <input
@@ -100,12 +103,10 @@ export const StoryView: React.FC<StoryViewProps> = ({
           type='checkbox'
           id='flexSwitchAnonymousDefault'
           title='Submit feedback as anonymous'
-          checked={isAnonymousChecked}
-          onChange={() => setIsAnonymousChecked(!isAnonymousChecked)}
+          checked={isAnonymous}
+          onChange={() => handleAnonymousChange(!isAnonymous)}
         />
-        <label className='form-check-label'>
-          Submit feedback anonymously
-        </label>
+        <label className='form-check-label'>Submit feedback anonymously</label>
       </div>
       <div className='form-check form-switch mb-4 cursor-pointer-hover'>
         <input
@@ -113,8 +114,8 @@ export const StoryView: React.FC<StoryViewProps> = ({
           type='checkbox'
           id='flexSwitchPublicDefault'
           title='Show my feedback publicly on this story'
-          checked={isPublicChecked}
-          onChange={() => setIsPublicChecked(!isPublicChecked)}
+          checked={isPublic}
+          onChange={() => handlePublicChange(!isPublic)}
         />
         <label className='form-check-label'>
           Allow my feedback to show on the site
