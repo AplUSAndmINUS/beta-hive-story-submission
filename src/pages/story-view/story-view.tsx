@@ -47,6 +47,56 @@ export const StoryView: React.FC<StoryViewProps> = ({
         <HIVEStoryCard isHover={false} onClick={() => {}} />
         <Selections isStoryView />
       </div>
+      <div className='form-check form-switch'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          id='flexSwitchCheckDefault'
+          title='Default switch checkbox input'
+          placeholder='Default switch'
+        />
+        <label className='form-check-label'>
+          Default switch checkbox input
+        </label>
+      </div>
+      <div className='form-check form-switch'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          id='flexSwitchCheckChecked'
+          checked
+          title='Checked switch checkbox input'
+        />
+        <label className='form-check-label'>
+          Checked switch checkbox input
+        </label>
+      </div>
+      <div className='form-check form-switch'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          id='flexSwitchCheckDisabled'
+          title='Disabled switch checkbox input'
+          placeholder='Disabled switch'
+          disabled
+        />
+        <label className='form-check-label'>
+          Disabled switch checkbox input
+        </label>
+      </div>
+      <div className='form-check form-switch'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          title='Disabled checked switch checkbox input'
+          id='flexSwitchCheckCheckedDisabled'
+          checked
+          disabled
+        />
+        <label className='form-check-label'>
+          Disabled checked switch checkbox input
+        </label>
+      </div>
       <p className='pb-3'>
         {storySubmission ||
           `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec

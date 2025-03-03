@@ -1,7 +1,6 @@
 import React from 'react';
 // import moment from 'moment';
 
-import { useAppDispatch, useAppSelector } from '../../stores/store';
 import HIVEStoryCard from '../../components/story-card/story-card';
 import Modal from '../../components/modal/modal';
 import PromptCard from '../../components/prompt-card/prompt-card';
@@ -10,24 +9,33 @@ import StoryView from '../story-view/story-view';
 import { useIsMobile } from '../../utils/hooks/useIsMobile';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
-// import useGetBattleStories from '../../utils/hooks/useGetBattleStories';
 
 export const BattleHIVE: React.FC = () => {
   const [feedbackText, setFeedbackText] = React.useState('');
+  const [storyNumber, setStoryNumber] = React.useState<1 | 2>(1);
+  const [isAnonymous, setIsAnonymous] = React.useState(false);
+  const [isPositive, setIsPositive] = React.useState(false);
+  const [isPublic, setIsPublic] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [selectedStory, setSelectedStory] = React.useState<string>('');
   const versus = require('../../assets/images/logo/versus-mode.png');
+
   const images = useHIVEImages();
   const isMobile = useIsMobile();
   const {
     handleChange,
     handleReset,
-    handleSubmit,
     isLoading,
     isSaved,
     isSubmitDisabled,
     statusText,
-  } = useFeedbackSubmission(feedbackText, setFeedbackText);
+  } = useFeedbackSubmission(
+    feedbackText,
+    storyNumber,
+    isAnonymous,
+    isPositive,
+    isPublic
+  );
 
   React.useEffect(() => {
     const handleKeyDown = ($e: KeyboardEvent) => {
@@ -52,6 +60,11 @@ export const BattleHIVE: React.FC = () => {
   const handleStorySelection = (prompt: string) => {
     setSelectedStory(prompt);
     console.log('Selected story:', selectedStory);
+  };
+
+  const handleSubmit = () => {
+    console.log('You hit the submit button');
+    // console.log('Submitting feedback for story:', selectedStory);
   };
 
   if (!images || images.length === 0) {
@@ -79,7 +92,10 @@ export const BattleHIVE: React.FC = () => {
                 isHover
                 width={isMobile ? '250' : '400'}
                 height={isMobile ? '250' : '400'}
-                onClick={() => handleModal('story')}
+                onClick={() => {
+                  handleModal('story');
+                  setStoryNumber(1);
+                }}
               />
             </div>
             <div className='col-12 col-md-2 d-flex justify-content-center align-items-center mt-5 mt-md-0'>
@@ -99,7 +115,10 @@ export const BattleHIVE: React.FC = () => {
                 isHover
                 width={isMobile ? '250' : '400'}
                 height={isMobile ? '250' : '400'}
-                onClick={() => handleModal('story')}
+                onClick={() => {
+                  handleModal('story');
+                  setStoryNumber(2);
+                }}
               />
             </div>
           </div>

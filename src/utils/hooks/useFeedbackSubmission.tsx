@@ -1,55 +1,69 @@
 import React from 'react';
 
-import { useAppDispatch } from '../../stores/store';
+import { useAppDispatch, useAppSelector } from '../../stores/store';
 import {
-  setVSFeedbackSelection,
-} from '../../stores/reducers/versus-feedback-submission';
+  setFeedbackStoryOneText,
+  setFeedbackStoryOneIsAnonymous,
+  setFeedbackStoryOneIsPositive,
+  setFeedbackStoryOneIsPublic,
+  setFeedbackStoryTwoText,
+  setFeedbackStoryTwoIsAnonymous,
+  setFeedbackStoryTwoIsPositive,
+  setFeedbackStoryTwoIsPublic,
+} from '../../stores/reducers/feedback-submission';
 
 export const useFeedbackSubmission = (
   feedbackText: string,
-  setFeedbackText: React.Dispatch<React.SetStateAction<string>>,
+  storyNumber: 1 | 2,
+  isAnonymous: boolean,
+  isPositive: boolean,
+  isPublic: boolean
 ) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isSaved, setIsSaved] = React.useState(false);
   const [statusText, setStatusText] = React.useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
+  const { feedbackStoryOneText, feedbackStoryTwoText } = useAppSelector(
+    (state) => state.feedbackStorySubmission
+  );
   const dispatch = useAppDispatch();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    feedbackText: string
-  ) => {
+  React.useEffect(() => {
+    if (feedbackStoryOneText || feedbackStoryTwoText) {
+      setIsSubmitDisabled(false);
+    };
+  }, [feedbackStoryOneText, feedbackStoryTwoText]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     handleSave();
 
-    if (feedbackText.length > 0) {
-      setIsSubmitDisabled(false);
-      setFeedbackText(e.target.value);
+    const text = e.target.value;
 
-      // simulate longer save time
-      setTimeout(() => {
-        setVSFeedbackSelection(feedbackText);
-      }, 2500);
+    if (storyNumber === 1) {
+      dispatch(setFeedbackStoryOneText(text));
+      dispatch(setFeedbackStoryOneIsAnonymous(isAnonymous));
+      dispatch(setFeedbackStoryOneIsPositive(isPositive));
+      dispatch(setFeedbackStoryOneIsPublic(isPublic));
+    } else {
+      dispatch(setFeedbackStoryTwoText(text));
+      dispatch(setFeedbackStoryTwoIsAnonymous(isAnonymous));
+      dispatch(setFeedbackStoryTwoIsPositive(isPositive));
+      dispatch(setFeedbackStoryTwoIsPublic(isPublic));
     }
-
-    // switch (feedbackText) {
-    //   case 1:
-    //     setFeedbackTextOne(e.target.value);
-    //     setTimeout(() => {
-    //       dispatch(setVSFeedbackOneSelection(feedbackTextOne));
-    //     }, 2500);
-    //     break;
-    //   case 2:
-    //     setStatusText('Saving...');
-    //     setFeedbackTextTwo(e.target.value);
-    //     setTimeout(() => {
-    //       dispatch(setVSFeedbackTwoSelection(feedbackTextTwo));
-    //     }, 2500);
-    //     break;
-    // }
   };
 
   const handleReset = () => {
-    setFeedbackText('');
+    if (storyNumber === 1) {
+      dispatch(setFeedbackStoryOneText(''));
+      dispatch(setFeedbackStoryOneIsAnonymous(false));
+      dispatch(setFeedbackStoryOneIsPositive(false));
+      dispatch(setFeedbackStoryOneIsPublic(false));
+    } else {
+      dispatch(setFeedbackStoryTwoText(''));
+      dispatch(setFeedbackStoryTwoIsAnonymous(false));
+      dispatch(setFeedbackStoryTwoIsPositive(false));
+      dispatch(setFeedbackStoryTwoIsPublic(false));
+    }
   };
 
   const handleSave = () => {
@@ -61,47 +75,12 @@ export const useFeedbackSubmission = (
       setIsLoading(false);
       setIsSaved(true);
       setStatusText('Saved!');
-    }, 4000); // Simulate save delay
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setIsLoading(true);
-    setIsSaved(false);
-    if (!feedbackText) {
-      return;
-    }
-
-    dispatch(setVSFeedbackSelection(feedbackText));
-
-    // try {
-    //   const response = await fetch(
-    //     'https://your-wordpress-site.com/wp-json/beta-hive/v1/submit-feedback', // update with actual URL
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({ feedbackText }),
-    //     }
-    //   );
-
-    //   if (!response.ok) {
-    //     throw new Error('Failed to submit feedback');
-    //   }
-
-    //   const result = await response.json();
-    //   console.log('Feedback submitted successfully:', result);
-    //   navigate('/confirmation'); // Uncomment if you have navigation logic
-    // } catch (error) {
-    //   console.error('Error submitting feedback:', error);
-    // }
+    }, 2500); // Simulate save delay
   };
 
   return {
     handleChange,
     handleReset,
-    handleSubmit,
     isLoading,
     isSaved,
     isSubmitDisabled,

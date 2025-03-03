@@ -5,8 +5,6 @@ import adminSubmissionReducer from './reducers/admin-submission';
 import battleHIVESubmissionReducer from './reducers/battleHIVE-submission';
 import feedbackSubmissionReducer from './reducers/feedback-submission';
 import storySubmissionReducer from './reducers/story-submission';
-import VoteSubmissionReducer from './reducers/vote-submission';
-import VSFeedbackSubmissionReducer from './reducers/versus-feedback-submission';
 
 export const store = configureStore({
   reducer: {
@@ -14,8 +12,6 @@ export const store = configureStore({
     battleHIVESubmission: battleHIVESubmissionReducer,
     feedbackStorySubmission: feedbackSubmissionReducer,
     storySubmission: storySubmissionReducer,
-    voteSubmission: VoteSubmissionReducer,
-    VSFeedbackSubmission: VSFeedbackSubmissionReducer,
   },
 });
 

@@ -16,13 +16,8 @@ export const PromptCard: React.FC<PromptCardProps> = ({
 }) => {
   const { promptSelections } = useAppSelector((state) => state.storySubmission);
 
-  const voteSubmission = useAppSelector(
-    (state) => state.voteSubmission.selectedPrompt
-  );
-
   const isSelected =
-    promptSelections.find((selection) => selection === prompt) ||
-    voteSubmission === prompt;
+    promptSelections.find((selection) => selection === prompt) !== undefined;
 
   return (
     <div
