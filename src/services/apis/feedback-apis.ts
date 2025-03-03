@@ -1,5 +1,7 @@
-import { feedbackSchema } from "../models/battleHIVE.types";
-import { FEEDBACK_SUBMISSIONS } from "../constants/admin-constants";
+import { feedbackSchema } from '../models/battleHIVE.types';
+import { FEEDBACK_SUBMISSIONS } from '../constants/admin-constants';
+
+/*** THIS WILL BE UPDATED LATER ONCE WE HAVE THE PHP WordPress READY ***/
 
 // Function to get all feedback
 export const getAllFeedback = (): feedbackSchema[] => {
@@ -63,16 +65,12 @@ export const getFeedbackById = (id: number): feedbackSchema | null => {
 
 // Function to get feedback by story
 export const getFeedbackByStoryId = (story: string): feedbackSchema[] => {
-  return FEEDBACK_SUBMISSIONS.filter(
-    (feedback) => feedback.story === story
-  );
+  return FEEDBACK_SUBMISSIONS.filter((feedback) => feedback.story === story);
 };
 
 // Function to get feedback by story name
 export const getFeedbackByStoryName = (story: string): feedbackSchema[] => {
-  return FEEDBACK_SUBMISSIONS.filter(
-    (feedback) => feedback.story === story
-  );
+  return FEEDBACK_SUBMISSIONS.filter((feedback) => feedback.story === story);
 };
 
 // Function to get feedback by author
@@ -86,21 +84,25 @@ export const getFeedbackByAuthor = (author: string): feedbackSchema[] => {
 export const getFeedbackByIsPositive = (
   isPositive: boolean
 ): feedbackSchema[] => {
-  return FEEDBACK_SUBMISSIONS.filter((feedback) => feedback.isPositive === isPositive);
+  return FEEDBACK_SUBMISSIONS.filter(
+    (feedback) => feedback.isPositive === isPositive
+  );
 };
 
 // Function to get feedback by isPublic
-export const getFeedbackByIsPublic = (
-  isPublic: boolean
-): feedbackSchema[] => {
-  return FEEDBACK_SUBMISSIONS.filter((feedback) => feedback.isPublic === isPublic);
+export const getFeedbackByIsPublic = (isPublic: boolean): feedbackSchema[] => {
+  return FEEDBACK_SUBMISSIONS.filter(
+    (feedback) => feedback.isPublic === isPublic
+  );
 };
 
 // Function to get feedback by isAnonymous
 export const getFeedbackByIsAnonymous = (
   isAnonymous: boolean
 ): feedbackSchema[] => {
-  return FEEDBACK_SUBMISSIONS.filter((feedback) => feedback.isAnonymous === isAnonymous);
+  return FEEDBACK_SUBMISSIONS.filter(
+    (feedback) => feedback.isAnonymous === isAnonymous
+  );
 };
 
 // Function to get feedback by title

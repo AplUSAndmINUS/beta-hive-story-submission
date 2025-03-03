@@ -133,3 +133,8 @@ export const getFinalStories = (): storySchema[] => {
 export const getRunningStories = (count: number): storySchema[] => {
   return STORY_SUBMISSIONS.filter((story) => story.wins - story.losses < count);
 };
+
+// Function to get top winner of the competition
+export const getTopWinner = (): storySchema | null => {
+  return getWinningStories(1)[0] || null;
+};
