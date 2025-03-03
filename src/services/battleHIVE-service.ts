@@ -1,4 +1,4 @@
-import { addStory, getAllStories, updateStory } from './apis/battleHIVE/battleHIVE-api';
+import { addStory, getAllStories, updateStory } from './apis/story-apis';
 import { storySchema } from './models/battleHIVE.types';
 
 // Function to get all stories
