@@ -60,7 +60,7 @@ export const Modal: React.FC<ModalProps> = ({
         aria-hidden='true'
         style={{ display: 'block', bottom: 0, position: 'fixed' }}
       >
-        <div className='modal-dialog modal-dialog-centered' ref={modalRef}>
+        <div className='modal-dialog modal-dialog-centered modal-dialog-widths' ref={modalRef}>
           <div className='modal-content'>
             {alertMessage && (
               <div className='modal-header'>

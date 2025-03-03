@@ -50,23 +50,32 @@ export const StoryView: React.FC<StoryViewProps> = ({
         <HIVEStoryCard isHover={false} onClick={() => {}} />
         <Selections isStoryView />
       </div>
-      <h4 className='card-title mt-1 mb-2'>Story</h4>
-      <p className='pb-3'>
+      <p className='story-text drop-cap bg-light p-4 rounded border preserve-whitewrap'>
         {storySubmission ||
-          `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
-            purus ac libero ultricies aliquam. Nullam nec purus ac libero
-            ultricies aliquam.`}
+          `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero ultricies aliquam. Nullam nec purus ac libero ultricies aliquam.
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero ultricies aliquam. Nullam nec purus ac libero ultricies aliquam.
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero ultricies aliquam. Nullam nec purus ac libero ultricies aliquam.
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero ultricies aliquam. Nullam nec purus ac libero ultricies aliquam.
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero ultricies aliquam. Nullam nec purus ac libero ultricies aliquam.
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ac libero ultricies aliquam. Nullam nec purus ac libero ultricies aliquam.`}
       </p>
-      <h4 className='card-title mt-1 mb-4'>Submit your feedback</h4>
-      <textarea
-        autoFocus
-        className='form-control ml-2'
-        rows={4}
-        placeholder='Submit your feedback on this story here'
-        value={feedbackText}
-        required
-        onChange={($e) => handleChange($e, feedbackText)}
-      />
+      <div className='mt-4'>
+        <h4 className='card-title mb-4'>Submit your feedback</h4>
+        <textarea
+          autoFocus
+          className='form-control ml-2'
+          rows={4}
+          placeholder='Submit your feedback on this story here'
+          value={feedbackText}
+          required
+          onChange={($e) => handleChange($e, feedbackText)}
+        />
+      </div>
       <SaveSpinner
         isLoading={isLoading}
         isSaved={isSaved}
@@ -82,7 +91,7 @@ export const StoryView: React.FC<StoryViewProps> = ({
           onChange={() => setIsPositiveChecked(!isPositiveChecked)}
         />
         <label className='form-check-label'>
-          This feedback is {isPositiveChecked ? 'positive' : 'negative'}
+          This feedback is positive
         </label>
       </div>
       <div className='form-check form-switch cursor-pointer-hover'>
@@ -95,8 +104,7 @@ export const StoryView: React.FC<StoryViewProps> = ({
           onChange={() => setIsAnonymousChecked(!isAnonymousChecked)}
         />
         <label className='form-check-label'>
-          Submit feedback{' '}
-          {isAnonymousChecked ? 'as anonymous' : 'with my name showing'}
+          Submit feedback anonymously
         </label>
       </div>
       <div className='form-check form-switch mb-4 cursor-pointer-hover'>
@@ -109,8 +117,7 @@ export const StoryView: React.FC<StoryViewProps> = ({
           onChange={() => setIsPublicChecked(!isPublicChecked)}
         />
         <label className='form-check-label'>
-          {isPublicChecked ? 'Show' : 'Do not show'} my feedback publicly on
-          this story
+          Allow my feedback to show on the site
         </label>
       </div>
     </div>
