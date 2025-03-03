@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  getStories,
-  getNonSensitiveContentStories,
   getCompetitionStories,
-  getWinners,
   getFinalTwoStories,
+  getNonSensitiveContentStories,
+  getStories,
   getTheWinner,
+  getWinners,
 } from '../../services/battleHIVE-service';
 import { storySchema } from '../../services/models/battleHIVE.types';
 import { useAppSelector } from '../../stores/store';
