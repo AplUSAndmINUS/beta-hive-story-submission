@@ -1,11 +1,8 @@
 import { calendarSchema } from '../../components/calendar/calendar.types';
-import { characterSchema } from '../data-interfaces/prompt-selection.types';
-import { contentWarningsSchema } from '../data-interfaces/content-warnings.types';
-import {
-  promptsSchema,
-  settingSchema,
-} from '../data-interfaces/prompt-selection.types';
-import { feedbackSchema } from '../data-interfaces/battleHIVE.types';
+import { characterSchema } from '../models/prompt-selection.types';
+import { contentWarningsSchema } from '../models/content-warnings.types';
+import { promptsSchema, settingSchema } from '../models/prompt-selection.types';
+import { feedbackSchema } from '../models/battleHIVE.types';
 
 export const CALENDAR_EVENTS: calendarSchema[] = [
   {

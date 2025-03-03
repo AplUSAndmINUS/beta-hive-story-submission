@@ -1,5 +1,5 @@
-import { betaHIVESchema } from '../../services/data-interfaces/betaHIVE-selection.types';
-import { storySchema } from '../../services/data-interfaces/battleHIVE.types';
+import { betaHIVESchema } from '../models/betaHIVE-selection.types';
+import { storySchema } from '../models/battleHIVE.types';
 import {
   CONTENT_WARNINGS,
   FEEDBACK_SUBMISSIONS,
@@ -99,7 +99,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     title: 'Story 2',
     author: 'Author 2',
     story:
-    'Once upon a time...Story 2 worked real hard and got mixed results. The end.',
+      'Once upon a time...Story 2 worked real hard and got mixed results. The end.',
     HIVE: BETAHIVE_SELECTIONS[0].name,
     prompts: [PROMPT_SELECTIONS[0].name, PROMPT_SELECTIONS[6].name],
     isContentSensitive: false,
@@ -171,7 +171,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     title: 'Story 4',
     author: 'Author 4',
     story:
-    'Once upon a time...Story 4 decided to hire a professional at Disney to write their story. They won because as we know, capitalism cheats the system and allows anyone with enough money to buy their way into anything to win. The end.',
+      'Once upon a time...Story 4 decided to hire a professional at Disney to write their story. They won because as we know, capitalism cheats the system and allows anyone with enough money to buy their way into anything to win. The end.',
     HIVE: BETAHIVE_SELECTIONS[0].name,
     prompts: [PROMPT_SELECTIONS[4].name, PROMPT_SELECTIONS[9].name],
     isContentSensitive: true,
@@ -217,6 +217,12 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     status: 'Submitted',
     feedback: [
       {
+        feedback: FEEDBACK_SUBMISSIONS[12].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[12].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[12].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[12].isAnonymous,
+      },
+      {
         feedback: FEEDBACK_SUBMISSIONS[13].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[13].isPublic,
         isPositive: FEEDBACK_SUBMISSIONS[13].isPositive,
@@ -227,12 +233,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPublic: FEEDBACK_SUBMISSIONS[14].isPublic,
         isPositive: FEEDBACK_SUBMISSIONS[14].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[14].isAnonymous,
-      },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[15].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[15].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[15].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[15].isAnonymous,
       },
     ],
     wins: 0,
@@ -253,6 +253,12 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     status: 'Submitted',
     feedback: [
       {
+        feedback: FEEDBACK_SUBMISSIONS[15].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[15].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[15].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[15].isAnonymous,
+      },
+      {
         feedback: FEEDBACK_SUBMISSIONS[16].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[16].isPublic,
         isPositive: FEEDBACK_SUBMISSIONS[16].isPositive,
@@ -263,12 +269,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPublic: FEEDBACK_SUBMISSIONS[17].isPublic,
         isPositive: FEEDBACK_SUBMISSIONS[17].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[17].isAnonymous,
-      },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[18].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[18].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[18].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[18].isAnonymous,
       },
     ],
     wins: 0,
@@ -281,13 +281,19 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     story:
       'Once upon a time...Story 7 was very engaging, but needed more background information. The end.',
     HIVE: BETAHIVE_SELECTIONS[3].name,
-    prompts: [PROMPT_SELECTIONS[4].name, PROMPT_SELECTIONS[9].name],
+    prompts: [PROMPT_SELECTIONS[4].name, PROMPT_SELECTIONS[5].name],
     isContentSensitive: false,
     contentWarnings: ['None'],
     wordCount: 1300,
     characterCount: 6500,
     status: 'Submitted',
     feedback: [
+      {
+        feedback: FEEDBACK_SUBMISSIONS[18].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[18].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[18].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[18].isAnonymous,
+      },
       {
         feedback: FEEDBACK_SUBMISSIONS[19].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[19].isPublic,
@@ -300,12 +306,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPositive: FEEDBACK_SUBMISSIONS[20].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[20].isAnonymous,
       },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[21].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[21].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[21].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[21].isAnonymous,
-      },
     ],
     wins: 0,
     losses: 0,
@@ -317,13 +317,19 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     story:
       'Once upon a time...Story 8 had fantastic world-building, but the plot was hard to follow. The end.',
     HIVE: BETAHIVE_SELECTIONS[4].name,
-    prompts: [PROMPT_SELECTIONS[5].name, PROMPT_SELECTIONS[10].name],
+    prompts: [PROMPT_SELECTIONS[5].name, PROMPT_SELECTIONS[9].name],
     isContentSensitive: false,
     contentWarnings: ['None'],
     wordCount: 1400,
     characterCount: 7000,
     status: 'Submitted',
     feedback: [
+      {
+        feedback: FEEDBACK_SUBMISSIONS[21].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[21].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[21].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[21].isAnonymous,
+      },
       {
         feedback: FEEDBACK_SUBMISSIONS[22].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[22].isPublic,
@@ -336,12 +342,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPositive: FEEDBACK_SUBMISSIONS[23].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[23].isAnonymous,
       },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[24].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[24].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[24].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[24].isAnonymous,
-      },
     ],
     wins: 0,
     losses: 0,
@@ -353,13 +353,19 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     story:
       'Once upon a time...Story 9 had a thrilling adventure that kept everyone on the edge of their seats. The end.',
     HIVE: BETAHIVE_SELECTIONS[6].name,
-    prompts: [PROMPT_SELECTIONS[1].name, PROMPT_SELECTIONS[8].name],
+    prompts: [PROMPT_SELECTIONS[1].name, PROMPT_SELECTIONS[4].name],
     isContentSensitive: false,
     contentWarnings: ['None'],
     wordCount: 1500,
     characterCount: 7500,
     status: 'Submitted',
     feedback: [
+      {
+        feedback: FEEDBACK_SUBMISSIONS[24].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[24].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[24].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[24].isAnonymous,
+      },
       {
         feedback: FEEDBACK_SUBMISSIONS[25].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[25].isPublic,
@@ -371,12 +377,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPublic: FEEDBACK_SUBMISSIONS[26].isPublic,
         isPositive: FEEDBACK_SUBMISSIONS[26].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[26].isAnonymous,
-      },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[27].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[27].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[27].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[27].isAnonymous,
       },
     ],
     wins: 0,
@@ -397,6 +397,12 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     status: 'Submitted',
     feedback: [
       {
+        feedback: FEEDBACK_SUBMISSIONS[27].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[27].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[27].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[27].isAnonymous,
+      },
+      {
         feedback: FEEDBACK_SUBMISSIONS[28].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[28].isPublic,
         isPositive: FEEDBACK_SUBMISSIONS[28].isPositive,
@@ -408,12 +414,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPositive: FEEDBACK_SUBMISSIONS[29].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[29].isAnonymous,
       },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[30].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[30].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[30].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[30].isAnonymous,
-      },
     ],
     wins: 0,
     losses: 0,
@@ -423,15 +423,21 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     title: 'Story 11',
     author: 'Author 11',
     story:
-      'Once upon a time...Story 11 had a heartwarming romance that touched everyone\'s hearts. The end.',
+      "Once upon a time...Story 11 had a heartwarming romance that touched everyone's hearts. The end.",
     HIVE: BETAHIVE_SELECTIONS[4].name,
-    prompts: [PROMPT_SELECTIONS[3].name, PROMPT_SELECTIONS[10].name],
+    prompts: [PROMPT_SELECTIONS[3].name, PROMPT_SELECTIONS[7].name],
     isContentSensitive: false,
     contentWarnings: ['None'],
     wordCount: 1700,
     characterCount: 8500,
     status: 'Submitted',
     feedback: [
+      {
+        feedback: FEEDBACK_SUBMISSIONS[30].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[30].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[30].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[30].isAnonymous,
+      },
       {
         feedback: FEEDBACK_SUBMISSIONS[31].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[31].isPublic,
@@ -444,12 +450,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPositive: FEEDBACK_SUBMISSIONS[32].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[32].isAnonymous,
       },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[33].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[33].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[33].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[33].isAnonymous,
-      },
     ],
     wins: 0,
     losses: 0,
@@ -461,13 +461,19 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     story:
       'Once upon a time...Story 12 had a mysterious plot that kept everyone intrigued. The end.',
     HIVE: BETAHIVE_SELECTIONS[3].name,
-    prompts: [PROMPT_SELECTIONS[4].name, PROMPT_SELECTIONS[11].name],
+    prompts: [PROMPT_SELECTIONS[4].name, PROMPT_SELECTIONS[6].name],
     isContentSensitive: false,
     contentWarnings: ['None'],
     wordCount: 1800,
     characterCount: 9000,
     status: 'Submitted',
     feedback: [
+      {
+        feedback: FEEDBACK_SUBMISSIONS[33].feedback,
+        isPublic: FEEDBACK_SUBMISSIONS[33].isPublic,
+        isPositive: FEEDBACK_SUBMISSIONS[33].isPositive,
+        isAnonymous: FEEDBACK_SUBMISSIONS[33].isAnonymous,
+      },
       {
         feedback: FEEDBACK_SUBMISSIONS[34].feedback,
         isPublic: FEEDBACK_SUBMISSIONS[34].isPublic,
@@ -479,12 +485,6 @@ export const STORY_SUBMISSIONS: storySchema[] = [
         isPublic: FEEDBACK_SUBMISSIONS[35].isPublic,
         isPositive: FEEDBACK_SUBMISSIONS[35].isPositive,
         isAnonymous: FEEDBACK_SUBMISSIONS[35].isAnonymous,
-      },
-      {
-        feedback: FEEDBACK_SUBMISSIONS[36].feedback,
-        isPublic: FEEDBACK_SUBMISSIONS[36].isPublic,
-        isPositive: FEEDBACK_SUBMISSIONS[36].isPositive,
-        isAnonymous: FEEDBACK_SUBMISSIONS[36].isAnonymous,
       },
     ],
     wins: 0,

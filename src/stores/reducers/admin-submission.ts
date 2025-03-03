@@ -5,12 +5,12 @@ import { BETAHIVE_SELECTIONS } from '../../services/constants/betaHIVE-constants
 import {
   CALENDAR_EVENTS,
   CONTENT_WARNINGS,
-  PROMPT_SELECTIONS
+  PROMPT_SELECTIONS,
 } from '../../services/constants/admin-constants';
-import { betaHIVESchema } from '../../services/data-interfaces/betaHIVE-selection.types';
+import { betaHIVESchema } from '../../services/models/betaHIVE-selection.types';
 import { calendarSchema } from '../../components/calendar/calendar.types';
-import { contentWarningsSchema } from '../../services/data-interfaces/content-warnings.types';
-import { promptsSchema } from '../../services/data-interfaces/prompt-selection.types';
+import { contentWarningsSchema } from '../../services/models/content-warnings.types';
+import { promptsSchema } from '../../services/models/prompt-selection.types';
 
 interface AdminSubmissionState {
   betaHIVECount: number;
