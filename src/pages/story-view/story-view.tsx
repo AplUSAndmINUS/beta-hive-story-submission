@@ -32,6 +32,10 @@ export const StoryView: React.FC<StoryViewProps> = ({
   statusText,
   onClose,
 }) => {
+  const [isPositiveChecked, setIsPositiveChecked] = React.useState(true);
+  const [isAnonymousChecked, setIsAnonymousChecked] = React.useState(false);
+  const [isPublicChecked, setIsPublicChecked] = React.useState(true);
+
   return (
     <div className='container position-relative p-4'>
       <button
@@ -41,68 +45,19 @@ export const StoryView: React.FC<StoryViewProps> = ({
         onClick={onClose}
       ></button>
 
-      {/* This will be in a modal view in the BattleHIVE page or when a story is clicked itself */}
-      <h3 className='card-title'>Story View</h3>
-      <div className='d-flex justify-content-between align-items-center'>
+      <h3 className='card-title mt-2 mb-4'>Story Title Goes Here</h3>
+      <div className='d-flex justify-content-between align-items-center mb-3'>
         <HIVEStoryCard isHover={false} onClick={() => {}} />
         <Selections isStoryView />
       </div>
-      <div className='form-check form-switch'>
-        <input
-          className='form-check-input'
-          type='checkbox'
-          id='flexSwitchCheckDefault'
-          title='Default switch checkbox input'
-          placeholder='Default switch'
-        />
-        <label className='form-check-label'>
-          Default switch checkbox input
-        </label>
-      </div>
-      <div className='form-check form-switch'>
-        <input
-          className='form-check-input'
-          type='checkbox'
-          id='flexSwitchCheckChecked'
-          checked
-          title='Checked switch checkbox input'
-        />
-        <label className='form-check-label'>
-          Checked switch checkbox input
-        </label>
-      </div>
-      <div className='form-check form-switch'>
-        <input
-          className='form-check-input'
-          type='checkbox'
-          id='flexSwitchCheckDisabled'
-          title='Disabled switch checkbox input'
-          placeholder='Disabled switch'
-          disabled
-        />
-        <label className='form-check-label'>
-          Disabled switch checkbox input
-        </label>
-      </div>
-      <div className='form-check form-switch'>
-        <input
-          className='form-check-input'
-          type='checkbox'
-          title='Disabled checked switch checkbox input'
-          id='flexSwitchCheckCheckedDisabled'
-          checked
-          disabled
-        />
-        <label className='form-check-label'>
-          Disabled checked switch checkbox input
-        </label>
-      </div>
+      <h4 className='card-title mt-1 mb-2'>Story</h4>
       <p className='pb-3'>
         {storySubmission ||
           `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
             purus ac libero ultricies aliquam. Nullam nec purus ac libero
             ultricies aliquam.`}
       </p>
+      <h4 className='card-title mt-1 mb-4'>Submit your feedback</h4>
       <textarea
         autoFocus
         className='form-control ml-2'
@@ -117,18 +72,46 @@ export const StoryView: React.FC<StoryViewProps> = ({
         isSaved={isSaved}
         innerText={statusText}
       />
-      <div className='d-flex justify-content-flex-start'>
-        <button
-          type='submit'
-          className='btn btn-primary mt-4 mr-4'
-          disabled={isSubmitDisabled}
-        >
-          Submit
-        </button>
-        &nbsp;&nbsp;
-        <button type='reset' className='btn btn-outline-danger mt-4'>
-          Clear Form
-        </button>
+      <div className='form-check form-switch cursor-pointer-hover'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          id='flexSwitchPositiveDefault'
+          title='Disabled switch checkbox input'
+          checked={isPositiveChecked}
+          onChange={() => setIsPositiveChecked(!isPositiveChecked)}
+        />
+        <label className='form-check-label'>
+          This feedback is {isPositiveChecked ? 'positive' : 'negative'}
+        </label>
+      </div>
+      <div className='form-check form-switch cursor-pointer-hover'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          id='flexSwitchAnonymousDefault'
+          title='Submit feedback as anonymous'
+          checked={isAnonymousChecked}
+          onChange={() => setIsAnonymousChecked(!isAnonymousChecked)}
+        />
+        <label className='form-check-label'>
+          Submit feedback{' '}
+          {isAnonymousChecked ? 'as anonymous' : 'with my name showing'}
+        </label>
+      </div>
+      <div className='form-check form-switch mb-4 cursor-pointer-hover'>
+        <input
+          className='form-check-input'
+          type='checkbox'
+          id='flexSwitchPublicDefault'
+          title='Show my feedback publicly on this story'
+          checked={isPublicChecked}
+          onChange={() => setIsPublicChecked(!isPublicChecked)}
+        />
+        <label className='form-check-label'>
+          {isPublicChecked ? 'Show' : 'Do not show'} my feedback publicly on
+          this story
+        </label>
       </div>
     </div>
   );

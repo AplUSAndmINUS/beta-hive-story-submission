@@ -18,7 +18,6 @@ export const Selections: React.FC<SelectionsProps> = ({
     betaHIVESelection,
     promptSelections,
     storySubmission,
-    storySubmissionCharacterCount,
     storySubmissionWordCount,
     storyTitle,
     contentSensitivities,
@@ -26,19 +25,19 @@ export const Selections: React.FC<SelectionsProps> = ({
 
   return isStoryView ? (
     <div className='container ml-auto text-start w-100'>
-      <div className='row d-flex justify-content-between align-items-center'>
-        <div className='pt-3 pb-0'>
+      <div className='row d-flex justify-content-start align-items-center'>
+        <div className='pt-0 pb-0'>
+          <p>
+            <strong>Prompts: </strong> {promptSelections || 'None selected'}{' '}
+          </p>
+        </div>
+        <div className='pb-0'>
           <p className='text-right'>
-            <strong>Beta HIVE: </strong>
-            {betaHIVESelection || 'None selected'}{' '}
+            <strong>Content Warnings: </strong>
+            {contentSensitivities || 'None selected'}{' '}
             {!isStoryView && <i className='fas fa-pencil-alt' />}
           </p>
         </div>
-      </div>
-      <div className='pt-0 pb-0'>
-        <p>
-          <strong>Prompts: </strong> {promptSelections || 'None selected'}{' '}
-        </p>
       </div>
     </div>
   ) : (

@@ -4,6 +4,7 @@ interface ModalProps {
   alertMessage?: string;
   alertMessage2?: string;
   isConfirmation?: boolean;
+  isFeedbackSubmit?: boolean;
   onConfirm?: () => void;
   onDismiss: () => void;
   children?: React.ReactNode;
@@ -13,6 +14,7 @@ export const Modal: React.FC<ModalProps> = ({
   alertMessage,
   alertMessage2,
   isConfirmation = false,
+  isFeedbackSubmit = false,
   onConfirm,
   onDismiss,
   children,
@@ -100,7 +102,8 @@ export const Modal: React.FC<ModalProps> = ({
                     onClick={onConfirm}
                   >
                     Confirm
-                  </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  </button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
                   <button
                     type='button'
                     className='btn btn-primary'
@@ -111,8 +114,24 @@ export const Modal: React.FC<ModalProps> = ({
                   </button>
                 </div>
               )}
+              {isFeedbackSubmit && (
+                <div className='d-flex justify-content-flex-start'>
+                  <button
+                    type='submit'
+                    className='btn btn-primary mr-4'
+                    // disabled={isSubmitDisabled}
+                  >
+                    Submit
+                  </button>
+                  &nbsp;&nbsp;
+                  <button type='reset' className='btn btn-outline-danger'>
+                    Clear Form
+                  </button>
+                </div>
+              )}
 
-              {((alertMessage && !isConfirmation) || (!alertMessage)) && (
+              {((alertMessage && !isConfirmation) ||
+                (!alertMessage && !isFeedbackSubmit)) && (
                 <button
                   type='button'
                   className='btn btn-primary'

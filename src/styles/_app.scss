@@ -58,6 +58,12 @@ div.w-100 > .card:hover,
   }
 }
 
+.cursor-pointer-hover {
+  :hover {
+    cursor: pointer;
+  }
+}
+
 .hover-medium:hover {
   font-weight: 500;
 }

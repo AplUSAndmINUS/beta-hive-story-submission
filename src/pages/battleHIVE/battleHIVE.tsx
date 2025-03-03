@@ -151,6 +151,7 @@ export const BattleHIVE: React.FC = () => {
       {showModal && (
         <Modal
           onDismiss={() => handleModal('story')}
+          isFeedbackSubmit
           children={
             <StoryView
               onClose={() => handleModal('story')}
