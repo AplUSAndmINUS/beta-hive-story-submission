@@ -79,6 +79,11 @@ export const getSensitiveStories = (): storySchema[] => {
   return STORY_SUBMISSIONS.filter((story) => story.isContentSensitive);
 };
 
+// Function to get stories that don't have content sensitivity
+export const getNonSensitiveStories = (): storySchema[] => {
+  return STORY_SUBMISSIONS.filter((story) => !story.isContentSensitive);
+};
+
 // Function to get stories by content warnings
 export const getStoriesByContentWarnings = (
   contentWarnings: (keyof storySchema['contentWarnings'])[]
@@ -117,4 +122,14 @@ export const getWinningStories = (count: number): storySchema[] => {
 // Function to get stories with most number of losses
 export const getLosingStories = (count: number): storySchema[] => {
   return STORY_SUBMISSIONS.filter((story) => story.losses >= count);
+};
+
+// Function to get final two stories that combat against one another in the final round
+export const getFinalStories = (): storySchema[] => {
+  return STORY_SUBMISSIONS.sort((a, b) => b.wins - a.wins).slice(0, 2);
+};
+
+// Function to get stories that are still in the running
+export const getRunningStories = (count: number): storySchema[] => {
+  return STORY_SUBMISSIONS.filter((story) => story.wins - story.losses < count);
 };

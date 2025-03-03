@@ -23,6 +23,23 @@ export const updateFeedback = (
   return FEEDBACK_SUBMISSIONS[feedbackIndex];
 };
 
+// Function to update feedback by story title
+export const updateFeedbackByStory = (
+  story: string,
+  updatedProperties: Partial<feedbackSchema>
+): feedbackSchema | null => {
+  const feedbackIndex = FEEDBACK_SUBMISSIONS.findIndex(
+    (feedback) => feedback.story === story
+  );
+  if (feedbackIndex === -1) return null;
+
+  FEEDBACK_SUBMISSIONS[feedbackIndex] = {
+    ...FEEDBACK_SUBMISSIONS[feedbackIndex],
+    ...updatedProperties,
+  };
+  return FEEDBACK_SUBMISSIONS[feedbackIndex];
+};
+
 // Function to add a new feedback
 export const addFeedback = (newFeedback: feedbackSchema) => {
   FEEDBACK_SUBMISSIONS.push(newFeedback);
