@@ -136,6 +136,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'Great story!',
     isPositive: true,
     isPublic: true,
+    isAnonymous: false,
   },
   {
     id: 2,
@@ -145,6 +146,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'Needs more detail. Please hide me!',
     isPositive: false,
     isPublic: false,
+    isAnonymous: true,
   },
   {
     id: 3,
@@ -154,6 +156,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'Loved the characters!',
     isPositive: true,
     isPublic: true,
+    isAnonymous: false,
   },
   {
     id: 4,
@@ -163,6 +166,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'Great story!',
     isPositive: true,
     isPublic: true,
+    isAnonymous: false,
   },
   {
     id: 5,
@@ -172,6 +176,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'Story two: Needs again more detail. Please hide me!',
     isPositive: false,
     isPublic: false,
+    isAnonymous: true,
   },
   {
     id: 6,
@@ -181,6 +186,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: "Loved the characters! I just do not understand the story's plot",
     isPositive: false,
     isPublic: true,
+    isAnonymous: false,
   },
   {
     id: 7,
@@ -190,6 +196,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: "I've read better...",
     isPositive: false,
     isPublic: true,
+    isAnonymous: false,
   },
   {
     id: 8,
@@ -199,6 +206,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'HUH????: Needs again more detail. Please hide me!',
     isPositive: false,
     isPublic: false,
+    isAnonymous: true,
   },
   {
     id: 9,
@@ -208,6 +216,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: "Let's retry doing better at this, shall we? Don't show me.",
     isPositive: false,
     isPublic: false,
+    isAnonymous: true,
   },
   {
     id: 10,
@@ -217,6 +226,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: "WINNER WINNER, CHIKKIN DINNER! I'm a winner!",
     isPositive: true,
     isPublic: true,
+    isAnonymous: false,
   },
   {
     id: 11,
@@ -226,6 +236,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'You win!! Please hide me.',
     isPositive: true,
     isPublic: false,
+    isAnonymous: true,
   },
   {
     id: 12,
@@ -235,5 +246,6 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     feedback: 'I am not worthy!',
     isPositive: true,
     isPublic: true,
+    isAnonymous: false,
   },
 ];

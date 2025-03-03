@@ -42,7 +42,7 @@ export const StoryView: React.FC<StoryViewProps> = ({
       ></button>
 
       {/* This will be in a modal view in the BattleHIVE page or when a story is clicked itself */}
-      <h1>Story View</h1>
+      <h3 className='card-title'>Story View</h3>
       <div className='d-flex justify-content-between align-items-center'>
         <HIVEStoryCard isHover={false} onClick={() => {}} />
         <Selections isStoryView />

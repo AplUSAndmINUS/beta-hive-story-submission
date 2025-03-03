@@ -1,20 +1,22 @@
 import React from 'react';
 // import moment from 'moment';
 
+import { useAppDispatch, useAppSelector } from '../../stores/store';
 import HIVEStoryCard from '../../components/story-card/story-card';
-import useHIVEImages from '../../utils/hooks/useHIVEImages';
-import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
 import Modal from '../../components/modal/modal';
 import PromptCard from '../../components/prompt-card/prompt-card';
 import StoryView from '../story-view/story-view';
+
 import { useIsMobile } from '../../utils/hooks/useIsMobile';
+import useHIVEImages from '../../utils/hooks/useHIVEImages';
+import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
+// import useGetBattleStories from '../../utils/hooks/useGetBattleStories';
 
 export const BattleHIVE: React.FC = () => {
   const [feedbackText, setFeedbackText] = React.useState('');
   const [showModal, setShowModal] = React.useState(false);
   const [selectedStory, setSelectedStory] = React.useState<string>('');
-  // const startTime = moment().format('MMMM Do YYYY, h:mm:ss a');
-  // const endTime = moment().add(1, 'hour').format('MMMM Do YYYY, h:mm:ss a');
+  const versus = require('../../assets/images/logo/versus-mode.png');
   const images = useHIVEImages();
   const isMobile = useIsMobile();
   const {
@@ -26,7 +28,6 @@ export const BattleHIVE: React.FC = () => {
     isSubmitDisabled,
     statusText,
   } = useFeedbackSubmission(feedbackText, setFeedbackText);
-  // const logoPath = require('../../assets/images/logo/betaHIVE.png');
 
   React.useEffect(() => {
     const handleKeyDown = ($e: KeyboardEvent) => {
@@ -82,7 +83,12 @@ export const BattleHIVE: React.FC = () => {
               />
             </div>
             <div className='col-12 col-md-2 d-flex justify-content-center align-items-center mt-5 mt-md-0'>
-              <h3 className='bd-subtitle text-center'>vs.</h3>
+              <img
+                src={versus}
+                alt='Versus'
+                className='img-fluid'
+                style={{ width: '450px' }}
+              />
             </div>
             <div className='col-12 col-md-5 d-flex align-items-center'>
               <HIVEStoryCard

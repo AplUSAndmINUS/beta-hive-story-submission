@@ -20,6 +20,7 @@ export interface feedbackSchema {
   feedback: string;
   isPositive: boolean;
   isPublic: boolean;
+  isAnonymous: boolean;
 }
 
 export interface storySchema {
@@ -34,7 +35,7 @@ export interface storySchema {
   wordCount: number;
   characterCount: number;
   status: 'Draft' | 'Submitted' | 'Approved' | 'Rejected';
-  feedback: Pick<feedbackSchema, 'feedback' | 'isPublic' | 'isPositive'>[];
+  feedback: Pick<feedbackSchema, 'feedback' | 'isPublic' | 'isPositive' | 'isAnonymous' >[];
   wins: number;
   losses: number;
 }
