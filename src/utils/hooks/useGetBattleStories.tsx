@@ -5,7 +5,7 @@ import {
   getNonSensitiveContentStories,
   getStories,
   getTheWinner,
-  getTwoRandomStories,
+  // getTwoRandomStories,
   getWinners,
 } from '../../services/battleHIVE-service';
 import { storySchema } from '../../services/models/battleHIVE.types';
@@ -48,12 +48,12 @@ const useGetBattleStories = () => {
     if (nonSensitive && Array.isArray(nonSensitive))
       setNonSensitiveStories(nonSensitive);
 
-    // Get two random stories
-    const { storyOne, storyTwo } = getTwoRandomStories();
-    if (storyOne && storyTwo && storyOne !== storyTwo) {
-      setRandomStoryOne(storyOne);
-      setRandomStoryTwo(storyTwo);
-    };
+    // // Get two random stories
+    // const { storyOne, storyTwo } = getTwoRandomStories();
+    // if (storyOne && storyTwo && storyOne !== storyTwo) {
+    //   setRandomStoryOne(storyOne);
+    //   setRandomStoryTwo(storyTwo);
+    // };
 
     // Get top three winners of the bout
     const topThree = getWinners(3) || null;

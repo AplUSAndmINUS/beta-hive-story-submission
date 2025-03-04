@@ -9,6 +9,7 @@ import StoryView from '../story-view/story-view';
 import { useIsMobile } from '../../utils/hooks/useIsMobile';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
+import StoryAPITester from '../../services/apis/tests/story-apitester';
 
 export const BattleHIVE: React.FC = () => {
   const [showModal, setShowModal] = React.useState(false);
@@ -129,7 +130,7 @@ export const BattleHIVE: React.FC = () => {
             <div className='d-flex justify-content-space-between'>
               <PromptCard
                 isStorySelection
-                prompt={story}
+                prompt='Story 1'
                 promptText='This is story 1 and its description'
                 handleSelection={() => handleStorySelection('Story 1')}
               />{' '}
@@ -148,6 +149,7 @@ export const BattleHIVE: React.FC = () => {
             </button>
           </div>
         </form>
+        <StoryAPITester />
       </div>
 
       {showModal && (

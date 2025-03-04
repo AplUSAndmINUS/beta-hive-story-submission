@@ -10,7 +10,7 @@ export const getAllFeedback = (): feedbackSchema[] => {
 
 // Function to update a feedback
 export const updateFeedback = (
-  id: number,
+  id: string,
   updatedProperties: Partial<feedbackSchema>
 ): feedbackSchema | null => {
   const feedbackIndex = FEEDBACK_SUBMISSIONS.findIndex(
@@ -49,7 +49,7 @@ export const addFeedback = (newFeedback: feedbackSchema) => {
 };
 
 // Function to delete a feedback
-export const deleteFeedback = (id: number) => {
+export const deleteFeedback = (id: string) => {
   const feedbackIndex = FEEDBACK_SUBMISSIONS.findIndex(
     (feedback) => feedback.id === id.toString()
   );
@@ -59,7 +59,7 @@ export const deleteFeedback = (id: number) => {
 };
 
 // Function to get feedback by id
-export const getFeedbackById = (id: number): feedbackSchema | null => {
+export const getFeedbackById = (id: string): feedbackSchema | null => {
   return FEEDBACK_SUBMISSIONS.find((feedback) => feedback.id === id.toString()) || null;
 };
 

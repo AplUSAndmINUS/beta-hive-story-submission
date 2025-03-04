@@ -1,6 +1,5 @@
 import { betaHIVESchema } from './betaHIVE-selection.types';
 import { promptsSchema } from './prompt-selection.types';
-import { contentWarningsSchema } from './content-warnings.types';
 
 export interface authorSchema {
   id: string;
@@ -31,11 +30,14 @@ export interface storySchema {
   HIVE: betaHIVESchema['name'];
   prompts: promptsSchema['name'][];
   isContentSensitive: boolean;
-  contentWarnings: contentWarningsSchema['name'][] | ['None'];
+  contentWarnings: string[];
   wordCount: number;
   characterCount: number;
   status: 'Draft' | 'Submitted' | 'Approved' | 'Rejected';
-  feedback: Pick<feedbackSchema, 'id' | 'feedback' | 'isPublic' | 'isPositive' | 'isAnonymous' >[];
+  feedback: Pick<
+    feedbackSchema,
+    'id' | 'feedback' | 'isPublic' | 'isPositive' | 'isAnonymous'
+  >[];
   wins: number;
   losses: number;
 }

@@ -18,7 +18,7 @@ export const getStories = (): storySchema[] => {
 };
 
 // Function to get story by id
-export const getStoryByNumber = (id: number): storySchema | null => {
+export const getStoryByNumber = (id: string): storySchema | null => {
   return getStoryById(id);
 };
 
@@ -29,7 +29,7 @@ export const getNonSensitiveContentStories = (): storySchema[] => {
 
 // Function to update a story
 export const updateStoryById = (
-  id: number,
+  id: string,
   updatedProperties: Partial<storySchema>
 ): storySchema | null => {
   return updateStory(id, updatedProperties);
@@ -66,24 +66,24 @@ export const getFinalTwoStories = (): storySchema[] => {
 };
 
 // function to get two random stories for versus mode
-export const getTwoRandomStories = (previousStories: storySchema[] = []): { storyOne: storySchema; storyTwo: storySchema } => {
-  const allStories = getAllStories();
-  let { storyOne, storyTwo } = getTwoRandomNums();
+// export const getTwoRandomStories = (previousStories: storySchema[] = []): { storyOne: storySchema; storyTwo: storySchema } => {
+//   const allStories = getAllStories();
+//   let { storyOne, storyTwo } = getTwoRandomNums();
 
-  // Ensure the new stories are different from the previous stories
-  while (
-    previousStories.includes(allStories[storyOne]) ||
-    previousStories.includes(allStories[storyTwo]) ||
-    storyOne === storyTwo
-  ) {
-    ({ storyOne, storyTwo } = getTwoRandomNums());
-  }
+//   // Ensure the new stories are different from the previous stories
+//   while (
+//     previousStories.includes(allStories[storyOne]) ||
+//     previousStories.includes(allStories[storyTwo]) ||
+//     storyOne === storyTwo
+//   ) {
+//     ({ storyOne, storyTwo } = getTwoRandomNums());
+//   }
 
-  return {
-    storyOne: getStoryById(storyOne) || allStories[0],
-    storyTwo: getStoryById(storyTwo) || allStories[1],
-  };
-};
+//   return {
+//     storyOne: getStoryById(storyOne) || allStories[0],
+//     storyTwo: getStoryById(storyTwo) || allStories[1],
+//   };
+// };
 
 // function to get the top winner
 export const getTheWinner = (): storySchema | null => {
@@ -97,7 +97,7 @@ export const getFeedback = (): feedbackSchema[] => {
 
 // function to add feedback to a story
 export const addFeedbackToStory = (
-  id: number,
+  id: string,
   title: string,
   story: string,
   feedbackAuthor: string,
@@ -128,7 +128,7 @@ export const addFeedbackToStory = (
 
 // function to update feedback on existing story
 export const updateFeedbackOnStory = (
-  id: number,
+  id: string,
   updatedProperties: Partial<feedbackSchema>
 ): feedbackSchema | null => {
   // Update the feedback entry using the updateFeedback API

@@ -1,5 +1,5 @@
 export interface betaHIVESchema {
-  id: number;
+  id: string;
   name: string;
   imgSource: string;
   description: string;

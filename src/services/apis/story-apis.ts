@@ -1,6 +1,7 @@
 import { storySchema } from '../models/battleHIVE.types';
 import { FEEDBACK_SUBMISSIONS } from '../constants/admin-constants';
 import { STORY_SUBMISSIONS } from '../constants/betaHIVE-constants';
+import { contentWarningsSchema } from '../models/content-warnings.types';
 
 // Function to get all stories
 export const getAllStories = (): storySchema[] => {
@@ -9,21 +10,29 @@ export const getAllStories = (): storySchema[] => {
 
 // Function to update a story
 export const updateStory = (
-  id: number,
+  id: string,
   updatedProperties: Partial<storySchema>
 ): storySchema | null => {
-  const storyIndex = STORY_SUBMISSIONS.findIndex((story) => story.id === id.toString());
+  const storyIndex = STORY_SUBMISSIONS.findIndex(
+    (story) => story.id === id.toString()
+  );
   if (storyIndex === -1) return null;
 
   // Update feedback in FEEDBACK_SUBMISSIONS if feedback is being updated
   if (updatedProperties.feedback) {
     updatedProperties.feedback.forEach((feedback, index) => {
-      const feedbackId = Number(STORY_SUBMISSIONS[storyIndex].feedback[index].id);
+      const feedbackId: string =
+        STORY_SUBMISSIONS[storyIndex].feedback[index].id;
       if (feedbackId) {
-        FEEDBACK_SUBMISSIONS[feedbackId] = {
-          ...FEEDBACK_SUBMISSIONS[feedbackId],
-          ...feedback,
-        };
+        const feedbackIndex = FEEDBACK_SUBMISSIONS.findIndex(
+          (feedback) => feedback.id === feedbackId
+        );
+        if (feedbackIndex !== -1) {
+          FEEDBACK_SUBMISSIONS[feedbackIndex] = {
+            ...FEEDBACK_SUBMISSIONS[feedbackIndex],
+            ...feedback,
+          };
+        }
       }
     });
   }
@@ -42,16 +51,16 @@ export const addStory = (newStory: storySchema) => {
 };
 
 // Function to delete a story
-export const deleteStory = (id: number) => {
-  const storyIndex = STORY_SUBMISSIONS.findIndex((story) => story.id === id.toString());
+export const deleteStory = (id: string) => {
+  const storyIndex = STORY_SUBMISSIONS.findIndex((story) => story.id === id);
   if (storyIndex === -1) return null;
 
   return STORY_SUBMISSIONS.splice(storyIndex, 1)[0];
 };
 
 // Function to get story by id
-export const getStoryById = (id: number): storySchema | null => {
-  return STORY_SUBMISSIONS.find((story) => Number(story.id) === id) || null;
+export const getStoryById = (id: string): storySchema | null => {
+  return STORY_SUBMISSIONS.find((story) => story.id === id) || null;
 };
 
 // Function to get story by title
@@ -70,7 +79,9 @@ export const getStoriesByHIVE = (HIVE: string): storySchema[] => {
 };
 
 // Function to get stories by status
-export const getStoriesByStatus = (status: storySchema['status']): storySchema[] => {
+export const getStoriesByStatus = (
+  status: storySchema['status']
+): storySchema[] => {
   return STORY_SUBMISSIONS.filter((story) => story.status === status);
 };
 
@@ -86,10 +97,10 @@ export const getNonSensitiveStories = (): storySchema[] => {
 
 // Function to get stories by content warnings
 export const getStoriesByContentWarnings = (
-  contentWarnings: (keyof storySchema['contentWarnings'])[]
+  contentWarnings: string[]
 ): storySchema[] => {
   return STORY_SUBMISSIONS.filter((story) =>
-    contentWarnings.some((warning) => story.contentWarnings.includes(warning as any))
+    contentWarnings.some((warning) => story.contentWarnings.includes(warning))
   );
 };
 
@@ -101,9 +112,12 @@ export const getStoriesByFeedback = (
 ): storySchema[] => {
   return STORY_SUBMISSIONS.filter((story) =>
     story.feedback.some((feedback) => {
-      const matchesPositive = isPositive === undefined || feedback.isPositive === isPositive;
-      const matchesPublic = isPublic === undefined || feedback.isPublic === isPublic;
-      const matchesAnonymous = isAnonymous === undefined || feedback.isAnonymous === isAnonymous;
+      const matchesPositive =
+        isPositive === undefined || feedback.isPositive === isPositive;
+      const matchesPublic =
+        isPublic === undefined || feedback.isPublic === isPublic;
+      const matchesAnonymous =
+        isAnonymous === undefined || feedback.isAnonymous === isAnonymous;
       return matchesPositive && matchesPublic && matchesAnonymous;
     })
   );
