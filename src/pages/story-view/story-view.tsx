@@ -9,17 +9,15 @@ interface StoryViewProps {
   isAnonymous: boolean;
   isPositive: boolean;
   isPublic: boolean;
-  handleReset: () => void;
-  handleTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleAnonymousChange: (value: boolean) => void;
   handlePositiveChange: (value: boolean) => void;
   handlePublicChange: (value: boolean) => void;
+  handleTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   isLoading: boolean;
   isSaved: boolean;
-  isSubmitDisabled: boolean;
   statusText: string;
   storyNumber: number;
-  storySubmission?: string;
+  storySubmission: string;
   onClose: () => void;
 }
 
@@ -28,16 +26,13 @@ export const StoryView: React.FC<StoryViewProps> = ({
   isAnonymous,
   isPositive,
   isPublic,
-  handleReset,
-  handleTextChange,
   handleAnonymousChange,
   handlePositiveChange,
   handlePublicChange,
+  handleTextChange,
   isLoading,
   isSaved,
-  isSubmitDisabled,
   statusText,
-  storyNumber,
   storySubmission,
   onClose,
 }) => {

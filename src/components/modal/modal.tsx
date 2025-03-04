@@ -3,20 +3,28 @@ import React from 'react';
 interface ModalProps {
   alertMessage?: string;
   alertMessage2?: string;
+  disabled?: boolean;
   isConfirmation?: boolean;
   isFeedbackSubmit?: boolean;
+  handleReset?: () => void;
+  handleSubmit?: (selectedStory: number) => void;
   onConfirm?: () => void;
   onDismiss: () => void;
+  selectedStory?: 1 | 2;
   children?: React.ReactNode;
 }
 
 export const Modal: React.FC<ModalProps> = ({
   alertMessage,
   alertMessage2,
+  disabled = false,
   isConfirmation = false,
   isFeedbackSubmit = false,
+  handleReset,
+  handleSubmit,
   onConfirm,
   onDismiss,
+  selectedStory,
   children,
 }) => {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -60,7 +68,10 @@ export const Modal: React.FC<ModalProps> = ({
         aria-hidden='true'
         style={{ display: 'block', bottom: 0, position: 'fixed' }}
       >
-        <div className='modal-dialog modal-dialog-centered modal-dialog-widths' ref={modalRef}>
+        <div
+          className='modal-dialog modal-dialog-centered modal-dialog-widths'
+          ref={modalRef}
+        >
           <div className='modal-content'>
             {alertMessage && (
               <div className='modal-header'>
@@ -119,12 +130,21 @@ export const Modal: React.FC<ModalProps> = ({
                   <button
                     type='submit'
                     className='btn btn-primary mr-4'
-                    // disabled={isSubmitDisabled}
+                    disabled={disabled}
+                    onClick={() =>
+                      selectedStory !== undefined &&
+                      handleSubmit &&
+                      handleSubmit(selectedStory)
+                    }
                   >
                     Submit
                   </button>
                   &nbsp;&nbsp;
-                  <button type='reset' className='btn btn-outline-danger'>
+                  <button
+                    type='reset'
+                    className='btn btn-outline-danger'
+                    onClick={handleReset}
+                  >
                     Clear Form
                   </button>
                 </div>

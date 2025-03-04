@@ -10,6 +10,7 @@ import {
   setFeedbackStoryTwoIsPositive,
   setFeedbackStoryTwoIsPublic,
 } from '../../stores/reducers/feedback-submission';
+import { feedbackSchema } from '../../services/models/battleHIVE.types';
 
 export const useFeedbackSubmission = (initialStoryNumber: 1 | 2 = 1) => {
   // Local UI state
@@ -80,19 +81,58 @@ export const useFeedbackSubmission = (initialStoryNumber: 1 | 2 = 1) => {
       : dispatch(setFeedbackStoryTwoIsPublic(value));
   };
 
+  const handleFeedbackSubmit = () => {
+    // Validate fields before submission
+    if (isSubmitDisabled) {
+      setStatusText('Please add feedback text before submitting');
+      return;
+    }
+
+    setStatusText('Submitting feedback...');
+    setIsLoading(true);
+
+    // Get the current state for the selected story
+    const submissionData: Pick<
+      feedbackSchema,
+      'id' | 'feedback' | 'isPublic' | 'isPositive' | 'isAnonymous'
+    > = {
+      id: new Date().toISOString(),
+      feedback: storyNumber === 1 ? feedbackStoryOneText : feedbackStoryTwoText,
+      isAnonymous: isAnonymous,
+      isPositive: isPositive,
+      isPublic: isPublic,
+    };
+
+    console.log('Submitting feedback:', submissionData);
+
+    // Simulate API submission
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSaved(true);
+      setStatusText('Feedback submitted successfully!');
+
+      // Optional: Reset form after submission
+      handleReset();
+    }, 2000);
+
+    // Here you would typically dispatch to Redux or call an API
+    // For example:
+    // dispatch(submitFeedback(submissionData));
+  };
+
   // Similar methods for isPositive and isPublic
 
   const handleReset = () => {
     if (storyNumber === 1) {
       dispatch(setFeedbackStoryOneText(''));
       dispatch(setFeedbackStoryOneIsAnonymous(false));
-      dispatch(setFeedbackStoryOneIsPositive(false));
-      dispatch(setFeedbackStoryOneIsPublic(false));
+      dispatch(setFeedbackStoryOneIsPositive(true));
+      dispatch(setFeedbackStoryOneIsPublic(true));
     } else {
       dispatch(setFeedbackStoryTwoText(''));
       dispatch(setFeedbackStoryTwoIsAnonymous(false));
-      dispatch(setFeedbackStoryTwoIsPositive(false));
-      dispatch(setFeedbackStoryTwoIsPublic(false));
+      dispatch(setFeedbackStoryTwoIsPositive(true));
+      dispatch(setFeedbackStoryTwoIsPublic(true));
     }
   };
 

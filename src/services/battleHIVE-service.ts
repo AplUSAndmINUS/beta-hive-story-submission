@@ -78,7 +78,7 @@ export const addFeedbackToStory = (
 ): storySchema | null => {
   // Create a new feedback entry
   const newFeedback: feedbackSchema = {
-    id: Date.now(), // Generate a unique ID based on the current timestamp
+    id: Date.now().toString(), // Generate a unique ID based on the current timestamp
     title: title,
     story: story,
     feedbackAuthor: feedbackAuthor, // Provide a default author or get it from the feedback input
@@ -102,7 +102,7 @@ export const updateFeedbackOnStory = (
   updatedProperties: Partial<feedbackSchema>
 ): feedbackSchema | null => {
   // Update the feedback entry using the updateFeedback API
-  const existingFeedback = getAllFeedback().find(feedback => feedback.id === id);
+  const existingFeedback = getAllFeedback().find(feedback => feedback.id === id.toString());
   if (!existingFeedback) {
     return null;
   }

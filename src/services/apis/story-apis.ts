@@ -12,13 +12,13 @@ export const updateStory = (
   id: number,
   updatedProperties: Partial<storySchema>
 ): storySchema | null => {
-  const storyIndex = STORY_SUBMISSIONS.findIndex((story) => story.id === id);
+  const storyIndex = STORY_SUBMISSIONS.findIndex((story) => story.id === id.toString());
   if (storyIndex === -1) return null;
 
   // Update feedback in FEEDBACK_SUBMISSIONS if feedback is being updated
   if (updatedProperties.feedback) {
     updatedProperties.feedback.forEach((feedback, index) => {
-      const feedbackId = STORY_SUBMISSIONS[storyIndex].feedback[index].id;
+      const feedbackId = Number(STORY_SUBMISSIONS[storyIndex].feedback[index].id);
       if (feedbackId) {
         FEEDBACK_SUBMISSIONS[feedbackId] = {
           ...FEEDBACK_SUBMISSIONS[feedbackId],
@@ -43,7 +43,7 @@ export const addStory = (newStory: storySchema) => {
 
 // Function to delete a story
 export const deleteStory = (id: number) => {
-  const storyIndex = STORY_SUBMISSIONS.findIndex((story) => story.id === id);
+  const storyIndex = STORY_SUBMISSIONS.findIndex((story) => story.id === id.toString());
   if (storyIndex === -1) return null;
 
   return STORY_SUBMISSIONS.splice(storyIndex, 1)[0];
@@ -51,7 +51,7 @@ export const deleteStory = (id: number) => {
 
 // Function to get story by id
 export const getStoryById = (id: number): storySchema | null => {
-  return STORY_SUBMISSIONS.find((story) => story.id === id) || null;
+  return STORY_SUBMISSIONS.find((story) => Number(story.id) === id) || null;
 };
 
 // Function to get story by title

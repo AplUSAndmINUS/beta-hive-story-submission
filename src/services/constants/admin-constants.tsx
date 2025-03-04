@@ -29,33 +29,33 @@ export const CALENDAR_EVENTS: calendarSchema[] = [
 
 export const CHARACTER_SELECTIONS: characterSchema[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Alice',
     description: 'A curious girl who falls into a magical world.',
   },
   {
-    id: 2,
+    id: '2',
     name: 'Sherlock Holmes',
     description: 'A brilliant detective who solves mysteries.',
   },
   {
-    id: 3,
+    id: '3',
     name: 'Dracula',
     description: 'A vampire who terrorizes the living.',
   },
   {
-    id: 4,
+    id: '4',
     name: 'Elizabeth Bennet',
     description:
       'A witty and independent woman navigating societal expectations.',
   },
   {
-    id: 5,
+    id: '5',
     name: 'Captain Ahab',
     description: 'A vengeful sea captain obsessed with a white whale.',
   },
   {
-    id: 6,
+    id: '6',
     name: 'Huckleberry Finn',
     description:
       'A mischievous boy who embarks on adventures along the Mississippi River.',
@@ -64,22 +64,22 @@ export const CHARACTER_SELECTIONS: characterSchema[] = [
 
 export const CONTENT_WARNINGS: contentWarningsSchema[] = [
   {
-    id: 1,
+    id: '1',
     name: 'Violence',
     description: 'Scenes of violence or harm to characters.',
   },
   {
-    id: 2,
+    id: '2',
     name: 'Death',
     description: 'Themes of death or dying.',
   },
   {
-    id: 3,
+    id: '3',
     name: 'Sexual Content',
     description: 'Scenes of a sexual nature.',
   },
   {
-    id: 4,
+    id: '4',
     name: 'Substance Abuse',
     description: 'References to drug or alcohol use.',
   },
@@ -87,24 +87,24 @@ export const CONTENT_WARNINGS: contentWarningsSchema[] = [
 
 export const SETTING_SELECTIONS: settingSchema[] = [
   {
-    id: 7,
+    id: '7',
     name: 'Baker Street',
     description:
       'The home of Sherlock Holmes and the site of many of his investigations.',
   },
   {
-    id: 8,
+    id: '8',
     name: 'Regency England',
     description: 'A time of elegance, manners, and social conventions.',
   },
   {
-    id: 9,
+    id: '9',
     name: 'Transylvania',
     description:
       'A mysterious and eerie region known for its supernatural occurrences.',
   },
   {
-    id: 10,
+    id: '10',
     name: 'Wonderland',
     description: 'A whimsical and nonsensical world where anything can happen.',
   },
@@ -126,7 +126,7 @@ export const PROMPT_SELECTIONS: promptsSchema[] = [
 
 export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Feedback 1',
     story: 'Story 1',
     feedbackAuthor: 'Author 1',
@@ -136,7 +136,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 2,
+    id: '2',
     title: 'Feedback 2',
     story: 'Story 1',
     feedbackAuthor: 'Author 2',
@@ -146,7 +146,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 3,
+    id: '3',
     title: 'Feedback 3',
     story: 'Story 1',
     feedbackAuthor: 'Author 3',
@@ -156,7 +156,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 4,
+    id: '4',
     title: 'Feedback 1',
     story: 'Story 2',
     feedbackAuthor: 'Author 1',
@@ -166,7 +166,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 5,
+    id: '5',
     title: 'Feedback 2',
     story: 'Story 2',
     feedbackAuthor: 'Author 2',
@@ -176,7 +176,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 6,
+    id: '6',
     title: 'Feedback 3',
     story: 'Story 2',
     feedbackAuthor: 'Author 3',
@@ -186,7 +186,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 7,
+    id: '7',
     title: 'Feedback 1',
     story: 'Story 3',
     feedbackAuthor: 'Author 1',
@@ -196,7 +196,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 8,
+    id: '8',
     title: 'Feedback 2',
     story: 'Story 3',
     feedbackAuthor: 'Author 2',
@@ -206,7 +206,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 9,
+    id: '9',
     title: 'Feedback 3',
     story: 'Story 3',
     feedbackAuthor: 'Author 3',
@@ -216,7 +216,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 10,
+    id: '10',
     title: 'Feedback 1',
     story: 'Story 4',
     feedbackAuthor: 'Author 1',
@@ -226,7 +226,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 11,
+    id: '11',
     title: 'Feedback 2',
     story: 'Story 4',
     feedbackAuthor: 'Author 2',
@@ -236,7 +236,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 12,
+    id: '12',
     title: 'Feedback 3',
     story: 'Story 4',
     feedbackAuthor: 'Author 3',
@@ -246,7 +246,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 13,
+    id: '13',
     title: 'Feedback 1',
     story: 'Story 5',
     feedbackAuthor: 'Author 1',
@@ -256,7 +256,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 14,
+    id: '14',
     title: 'Feedback 2',
     story: 'Story 5',
     feedbackAuthor: 'Author 2',
@@ -266,7 +266,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 15,
+    id: '15',
     title: 'Feedback 3',
     story: 'Story 5',
     feedbackAuthor: 'Author 3',
@@ -276,7 +276,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 16,
+    id: '16',
     title: 'Feedback 1',
     story: 'Story 6',
     feedbackAuthor: 'Author 1',
@@ -286,7 +286,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 17,
+    id: '17',
     title: 'Feedback 2',
     story: 'Story 6',
     feedbackAuthor: 'Author 2',
@@ -296,7 +296,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 18,
+    id: '18',
     title: 'Feedback 3',
     story: 'Story 6',
     feedbackAuthor: 'Author 3',
@@ -306,7 +306,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 19,
+    id: '19',
     title: 'Feedback 1',
     story: 'Story 7',
     feedbackAuthor: 'Author 1',
@@ -316,7 +316,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 20,
+    id: '20',
     title: 'Feedback 2',
     story: 'Story 7',
     feedbackAuthor: 'Author 2',
@@ -326,7 +326,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 21,
+    id: '21',
     title: 'Feedback 3',
     story: 'Story 7',
     feedbackAuthor: 'Author 3',
@@ -336,7 +336,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 22,
+    id: '22',
     title: 'Feedback 1',
     story: 'Story 8',
     feedbackAuthor: 'Author 1',
@@ -346,7 +346,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 23,
+    id: '23',
     title: 'Feedback 2',
     story: 'Story 8',
     feedbackAuthor: 'Author 2',
@@ -356,7 +356,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 24,
+    id: '24',
     title: 'Feedback 3',
     story: 'Story 8',
     feedbackAuthor: 'Author 3',
@@ -366,7 +366,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 25,
+    id: '25',
     title: 'Feedback 1',
     story: 'Story 9',
     feedbackAuthor: 'Author 1',
@@ -376,7 +376,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 26,
+    id: '26',
     title: 'Feedback 2',
     story: 'Story 9',
     feedbackAuthor: 'Author 2',
@@ -386,7 +386,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 27,
+    id: '27',
     title: 'Feedback 3',
     story: 'Story 9',
     feedbackAuthor: 'Author 3',
@@ -396,7 +396,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 28,
+    id: '28',
     title: 'Feedback 1',
     story: 'Story 10',
     feedbackAuthor: 'Author 1',
@@ -406,7 +406,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 29,
+    id: '29',
     title: 'Feedback 2',
     story: 'Story 10',
     feedbackAuthor: 'Author 2',
@@ -416,7 +416,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 30,
+    id: '30',
     title: 'Feedback 3',
     story: 'Story 10',
     feedbackAuthor: 'Author 3',
@@ -426,7 +426,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 31,
+    id: '31',
     title: 'Feedback 1',
     story: 'Story 11',
     feedbackAuthor: 'Author 1',
@@ -436,7 +436,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 32,
+    id: '32',
     title: 'Feedback 2',
     story: 'Story 11',
     feedbackAuthor: 'Author 2',
@@ -446,7 +446,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 33,
+    id: '33',
     title: 'Feedback 3',
     story: 'Story 11',
     feedbackAuthor: 'Author 3',
@@ -456,7 +456,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 34,
+    id: '34',
     title: 'Feedback 1',
     story: 'Story 12',
     feedbackAuthor: 'Author 1',
@@ -466,7 +466,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: false,
   },
   {
-    id: 35,
+    id: '35',
     title: 'Feedback 2',
     story: 'Story 12',
     feedbackAuthor: 'Author 2',
@@ -476,7 +476,7 @@ export const FEEDBACK_SUBMISSIONS: feedbackSchema[] = [
     isAnonymous: true,
   },
   {
-    id: 36,
+    id: '36',
     title: 'Feedback 3',
     story: 'Story 12',
     feedbackAuthor: 'Author 3',

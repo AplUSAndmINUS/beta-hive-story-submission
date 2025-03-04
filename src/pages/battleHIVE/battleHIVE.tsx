@@ -29,6 +29,7 @@ export const BattleHIVE: React.FC = () => {
     statusText,
     setStoryNumber,
     handleAnonymousChange,
+    // handleFeedbackSubmit,
     handlePositiveChange,
     handlePublicChange,
     handleTextChange,
@@ -60,9 +61,12 @@ export const BattleHIVE: React.FC = () => {
     console.log('Selected story:', selectedStory);
   };
 
-  const handleSubmit = () => {
-    console.log('You hit the submit button');
-    // console.log('Submitting feedback for story:', selectedStory);
+  const handleStorySubmit = (selectedStory: number) => {
+    if (selectedStory === 1) {
+      console.log('Story 1 selected');
+    } else {
+      console.log('Story 2 selected');
+    };
   };
 
   if (!images || images.length === 0) {
@@ -125,7 +129,7 @@ export const BattleHIVE: React.FC = () => {
             <div className='d-flex justify-content-space-between'>
               <PromptCard
                 isStorySelection
-                prompt='Story 1'
+                prompt={story}
                 promptText='This is story 1 and its description'
                 handleSelection={() => handleStorySelection('Story 1')}
               />{' '}
@@ -138,9 +142,9 @@ export const BattleHIVE: React.FC = () => {
             </div>
             <button
               className='btn btn-primary mt-4 w-25'
-              onClick={handleSubmit}
+              onClick={() => handleStorySubmit(storyNumber)}
             >
-              Submit
+              Submit the winner
             </button>
           </div>
         </form>
@@ -149,7 +153,11 @@ export const BattleHIVE: React.FC = () => {
       {showModal && (
         <Modal
           onDismiss={() => handleModal('story')}
+          disabled={isSubmitDisabled}
+          handleReset={handleReset}
+          // handleSubmit={handleSubmit}
           isFeedbackSubmit
+          selectedStory={storyNumber}
           children={
             <StoryView
               storyNumber={storyNumber}
@@ -158,15 +166,14 @@ export const BattleHIVE: React.FC = () => {
               isPositive={isPositive}
               isPublic={isPublic}
               onClose={() => handleModal('story')}
-              handleReset={handleReset}
               handleAnonymousChange={handleAnonymousChange}
               handlePositiveChange={handlePositiveChange}
               handlePublicChange={handlePublicChange}
               handleTextChange={$e => handleTextChange($e)}
               isLoading={isLoading}
               isSaved={isSaved}
-              isSubmitDisabled={isSubmitDisabled}
               statusText={statusText}
+              storySubmission={selectedStory}
             />
           }
         />

@@ -13,12 +13,12 @@ interface FeedbackSubmissionState {
 
 const initialState: FeedbackSubmissionState = {
   feedbackStoryOneIsAnonymous: false,
-  feedbackStoryOneIsPositive: false,
-  feedbackStoryOneIsPublic: false,
+  feedbackStoryOneIsPositive: true,
+  feedbackStoryOneIsPublic: true,
   feedbackStoryOneText: '',
   feedbackStoryTwoIsAnonymous: false,
-  feedbackStoryTwoIsPositive: false,
-  feedbackStoryTwoIsPublic: false,
+  feedbackStoryTwoIsPositive: true,
+  feedbackStoryTwoIsPublic: true,
   feedbackStoryTwoText: '',
 };
 

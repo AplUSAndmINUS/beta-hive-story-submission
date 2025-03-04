@@ -3,7 +3,7 @@ import { promptsSchema } from './prompt-selection.types';
 import { contentWarningsSchema } from './content-warnings.types';
 
 export interface authorSchema {
-  id: number;
+  id: string;
   name: string;
   email: string;
   HIVE: betaHIVESchema['name'];
@@ -13,7 +13,7 @@ export interface authorSchema {
 }
 
 export interface feedbackSchema {
-  id: number;
+  id: string;
   title: string;
   story: string;
   feedbackAuthor: string;
@@ -24,7 +24,7 @@ export interface feedbackSchema {
 }
 
 export interface storySchema {
-  id: number;
+  id: string;
   title: string;
   author: string;
   story: string;

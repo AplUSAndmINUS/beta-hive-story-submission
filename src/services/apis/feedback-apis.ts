@@ -14,7 +14,7 @@ export const updateFeedback = (
   updatedProperties: Partial<feedbackSchema>
 ): feedbackSchema | null => {
   const feedbackIndex = FEEDBACK_SUBMISSIONS.findIndex(
-    (feedback) => feedback.id === id
+    (feedback) => feedback.id === id.toString()
   );
   if (feedbackIndex === -1) return null;
 
@@ -51,7 +51,7 @@ export const addFeedback = (newFeedback: feedbackSchema) => {
 // Function to delete a feedback
 export const deleteFeedback = (id: number) => {
   const feedbackIndex = FEEDBACK_SUBMISSIONS.findIndex(
-    (feedback) => feedback.id === id
+    (feedback) => feedback.id === id.toString()
   );
   if (feedbackIndex === -1) return null;
 
@@ -60,7 +60,7 @@ export const deleteFeedback = (id: number) => {
 
 // Function to get feedback by id
 export const getFeedbackById = (id: number): feedbackSchema | null => {
-  return FEEDBACK_SUBMISSIONS.find((feedback) => feedback.id === id) || null;
+  return FEEDBACK_SUBMISSIONS.find((feedback) => feedback.id === id.toString()) || null;
 };
 
 // Function to get feedback by story

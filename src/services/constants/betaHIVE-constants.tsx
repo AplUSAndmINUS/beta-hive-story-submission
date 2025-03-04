@@ -59,7 +59,7 @@ export const BETAHIVE_SELECTIONS: betaHIVESchema[] = [
 
 export const STORY_SUBMISSIONS: storySchema[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Story 1',
     author: 'Author 1',
     story:
@@ -98,7 +98,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 2,
+    id: '2',
     title: 'Story 2',
     author: 'Author 2',
     story:
@@ -137,7 +137,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 3,
+    id: '3',
     title: 'Story 3',
     author: 'Author 3',
     story:
@@ -176,7 +176,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 4,
+    id: '4',
     title: 'Story 4',
     author: 'Author 4',
     story:
@@ -215,7 +215,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 5,
+    id: '5',
     title: 'Story 5',
     author: 'Author 5',
     story:
@@ -254,7 +254,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 6,
+    id: '6',
     title: 'Story 6',
     author: 'Author 6',
     story:
@@ -293,7 +293,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 7,
+    id: '7',
     title: 'Story 7',
     author: 'Author 7',
     story:
@@ -332,7 +332,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 8,
+    id: '8',
     title: 'Story 8',
     author: 'Author 8',
     story:
@@ -371,7 +371,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 9,
+    id: '9',
     title: 'Story 9',
     author: 'Author 9',
     story:
@@ -410,7 +410,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 10,
+    id: '10',
     title: 'Story 10',
     author: 'Author 10',
     story:
@@ -449,7 +449,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 11,
+    id: '11',
     title: 'Story 11',
     author: 'Author 11',
     story:
@@ -488,7 +488,7 @@ export const STORY_SUBMISSIONS: storySchema[] = [
     losses: 0,
   },
   {
-    id: 12,
+    id: '12',
     title: 'Story 12',
     author: 'Author 12',
     story:

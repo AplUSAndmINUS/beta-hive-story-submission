@@ -1,17 +1,17 @@
 export interface characterSchema {
-  id: number;
+  id: string;
   name: string;
   description: string;
 }
 
 export interface settingSchema {
-  id: number;
+  id: string;
   name: string;
   description: string;
 }
 
 export interface promptsSchema {
-  id: number;
+  id: string;
   name: string;
   description: string;
 }
