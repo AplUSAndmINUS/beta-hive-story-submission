@@ -35,6 +35,16 @@ export const updateStoryById = (
   return updateStory(id, updatedProperties);
 };
 
+export const getTwoRandomNums = () => {
+  let storyOne = Math.floor(Math.random() * getAllStories().length);
+  let storyTwo = Math.floor(Math.random() * getAllStories().length);
+  while (storyOne === storyTwo) {
+    storyTwo = Math.floor(Math.random() * getAllStories().length);
+  }
+
+  return { storyOne, storyTwo };
+};
+
 // Function to get final winning stories
 export const getWinners = (count: number): storySchema[] => {
   return getWinningStories(count);
@@ -53,6 +63,26 @@ export const getCompetitionStories = (count: number): storySchema[] => {
 // function to get the final two stories for the final round
 export const getFinalTwoStories = (): storySchema[] => {
   return getFinalStories();
+};
+
+// function to get two random stories for versus mode
+export const getTwoRandomStories = (previousStories: storySchema[] = []): { storyOne: storySchema; storyTwo: storySchema } => {
+  const allStories = getAllStories();
+  let { storyOne, storyTwo } = getTwoRandomNums();
+
+  // Ensure the new stories are different from the previous stories
+  while (
+    previousStories.includes(allStories[storyOne]) ||
+    previousStories.includes(allStories[storyTwo]) ||
+    storyOne === storyTwo
+  ) {
+    ({ storyOne, storyTwo } = getTwoRandomNums());
+  }
+
+  return {
+    storyOne: getStoryById(storyOne) || allStories[0],
+    storyTwo: getStoryById(storyTwo) || allStories[1],
+  };
 };
 
 // function to get the top winner
