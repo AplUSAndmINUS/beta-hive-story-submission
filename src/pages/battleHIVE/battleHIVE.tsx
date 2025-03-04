@@ -68,7 +68,7 @@ export const BattleHIVE: React.FC = () => {
       console.log('Story 1 selected');
     } else {
       console.log('Story 2 selected');
-    };
+    }
   };
 
   if (!images || images.length === 0) {
@@ -150,8 +150,10 @@ export const BattleHIVE: React.FC = () => {
             </button>
           </div>
         </form>
+
+        {/* React components that test the APIs */}
         {/* <StoryAPITester /> */}
-        <FeedbackAPITester />
+        {/* <FeedbackAPITester /> */}
       </div>
 
       {showModal && (
@@ -173,7 +175,7 @@ export const BattleHIVE: React.FC = () => {
               handleAnonymousChange={handleAnonymousChange}
               handlePositiveChange={handlePositiveChange}
               handlePublicChange={handlePublicChange}
-              handleTextChange={$e => handleTextChange($e)}
+              handleTextChange={($e) => handleTextChange($e)}
               isLoading={isLoading}
               isSaved={isSaved}
               statusText={statusText}
