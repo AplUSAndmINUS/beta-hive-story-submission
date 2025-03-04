@@ -114,12 +114,3 @@ export const getFeedbackByTitle = (title: string): feedbackSchema[] => {
 export const getFeedbackByStory = (story: string): feedbackSchema[] => {
   return FEEDBACK_SUBMISSIONS.filter((feedback) => feedback.story === story);
 };
-
-// Function to get feedback by feedbackAuthor
-export const getFeedbackByFeedbackAuthor = (
-  feedbackAuthor: string
-): feedbackSchema[] => {
-  return FEEDBACK_SUBMISSIONS.filter(
-    (feedback) => feedback.feedbackAuthor === feedbackAuthor
-  );
-};

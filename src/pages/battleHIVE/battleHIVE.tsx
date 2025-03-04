@@ -10,6 +10,7 @@ import { useIsMobile } from '../../utils/hooks/useIsMobile';
 import useHIVEImages from '../../utils/hooks/useHIVEImages';
 import useFeedbackSubmission from '../../utils/hooks/useFeedbackSubmission';
 import StoryAPITester from '../../services/apis/tests/story-apitester';
+import FeedbackAPITester from '../../services/apis/tests/feedback-apitester';
 
 export const BattleHIVE: React.FC = () => {
   const [showModal, setShowModal] = React.useState(false);
@@ -149,7 +150,8 @@ export const BattleHIVE: React.FC = () => {
             </button>
           </div>
         </form>
-        <StoryAPITester />
+        {/* <StoryAPITester /> */}
+        <FeedbackAPITester />
       </div>
 
       {showModal && (

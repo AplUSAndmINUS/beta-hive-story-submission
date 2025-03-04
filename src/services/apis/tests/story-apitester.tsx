@@ -4,7 +4,6 @@ import {
   getAllStories,
   updateStory,
   addStory,
-  deleteStory,
   getStoryById,
   getStoriesByAuthor,
   getStoriesByContentWarnings,
@@ -21,10 +20,12 @@ import {
   getTopWinner,
   getWinningStories,
 } from '../story-apis';
+import { storySchema } from '../../models/battleHIVE.types';
 
 const StoryAPITester: React.FC = () => {
   React.useEffect(() => {
-    // testing APIs
+
+    // testing GET APIs
     console.log('Get Stories by exactly four losses', getStoriesByLosses(4));
 
     console.log('All Stories:', getAllStories());
@@ -69,6 +70,45 @@ const StoryAPITester: React.FC = () => {
       'Running Stories with less than 5 wins-losses difference:',
       getRunningStories(5)
     );
+
+    console.log('Get story by title Story 4', getStoryByTitle('Story 4'));
+
+    console.log('Get Losing Stories:', getLosingStories(3));
+
+    console.log('Get Stories by Feedback:', getStoriesByFeedback(true, true, false));
+
+    // test POST APIs
+    const newStory: storySchema = {
+      id: '90',
+      title: 'New Story',
+      author: 'Author 1',
+      story: 'Once upon a time...',
+      HIVE: 'adventure',
+      prompts: ['Prompt 1', 'Prompt 2'],
+      isContentSensitive: false,
+      contentWarnings: [],
+      wordCount: 100,
+      characterCount: 500,
+      status: 'Draft',
+      feedback: [],
+      wins: 0,
+      losses: 0,
+    };
+    console.log('Add Story:', addStory(newStory));
+    console.log('All Stories after adding:', getAllStories());
+
+    // test PUT APIs
+    const updatedStory: Partial<storySchema> = {
+      id: '90',
+      title: 'Updated Story',
+      author: 'Author 2',
+    };
+    if (updatedStory.id) {
+      console.log('Update Story:', updateStory(updatedStory.id, updatedStory));
+    } else {
+      console.error('Updated story ID is undefined');
+    }
+    console.log('All Stories after updating:', getAllStories());
   }, []);
 
   return <div>Story API Tester</div>;
