@@ -24,11 +24,10 @@ import { storySchema } from '../../models/battleHIVE.types';
 
 const StoryAPITester: React.FC = () => {
   React.useEffect(() => {
-
     // testing GET APIs
     console.log('Get Stories by exactly four losses', getStoriesByLosses(4));
 
-    console.log('All Stories:', getAllStories());
+    console.log('All Stories:', getAllStories('micro-fiction'));
 
     const testStoryId = '1'; // Replace with an actual story ID from STORY_SUBMISSIONS
     console.log(`Story with ID ${testStoryId}:`, getStoryById(testStoryId));
@@ -75,7 +74,10 @@ const StoryAPITester: React.FC = () => {
 
     console.log('Get Losing Stories:', getLosingStories(3));
 
-    console.log('Get Stories by Feedback:', getStoriesByFeedback(true, true, false));
+    console.log(
+      'Get Stories by Feedback:',
+      getStoriesByFeedback(true, true, false)
+    );
 
     // test POST APIs
     const newStory: storySchema = {
@@ -87,6 +89,7 @@ const StoryAPITester: React.FC = () => {
       prompts: ['Prompt 1', 'Prompt 2'],
       isContentSensitive: false,
       contentWarnings: [],
+      battleName: 'micro-fiction',
       wordCount: 100,
       characterCount: 500,
       status: 'Draft',
@@ -95,7 +98,7 @@ const StoryAPITester: React.FC = () => {
       losses: 0,
     };
     console.log('Add Story:', addStory(newStory));
-    console.log('All Stories after adding:', getAllStories());
+    console.log('All Stories after adding:', getAllStories('micro-fiction'));
 
     // test PUT APIs
     const updatedStory: Partial<storySchema> = {
@@ -108,7 +111,7 @@ const StoryAPITester: React.FC = () => {
     } else {
       console.error('Updated story ID is undefined');
     }
-    console.log('All Stories after updating:', getAllStories());
+    console.log('All Stories after updating:', getAllStories('micro-fiction'));
   }, []);
 
   return <div>Story API Tester</div>;

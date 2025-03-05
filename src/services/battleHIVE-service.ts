@@ -14,7 +14,7 @@ import { feedbackSchema, storySchema } from './models/battleHIVE.types';
 
 // Function to get all stories
 export const getStories = (): storySchema[] => {
-  return getAllStories();
+  return getAllStories('micro-fiction');
 };
 
 // Function to get story by id
@@ -36,10 +36,16 @@ export const updateStoryById = (
 };
 
 export const getTwoRandomNums = () => {
-  let storyOne = Math.floor(Math.random() * getAllStories().length);
-  let storyTwo = Math.floor(Math.random() * getAllStories().length);
+  let storyOne = Math.floor(
+    Math.random() * getAllStories('micro-fiction').length
+  );
+  let storyTwo = Math.floor(
+    Math.random() * getAllStories('micro-fiction').length
+  );
   while (storyOne === storyTwo) {
-    storyTwo = Math.floor(Math.random() * getAllStories().length);
+    storyTwo = Math.floor(
+      Math.random() * getAllStories('micro-fiction').length
+    );
   }
 
   return { storyOne, storyTwo };
@@ -67,7 +73,7 @@ export const getFinalTwoStories = (): storySchema[] => {
 
 // function to get two random stories for versus mode
 // export const getTwoRandomStories = (previousStories: storySchema[] = []): { storyOne: storySchema; storyTwo: storySchema } => {
-//   const allStories = getAllStories();
+//   const allStories = getAllStories('micro-fiction');
 //   let { storyOne, storyTwo } = getTwoRandomNums();
 
 //   // Ensure the new stories are different from the previous stories
@@ -132,7 +138,9 @@ export const updateFeedbackOnStory = (
   updatedProperties: Partial<feedbackSchema>
 ): feedbackSchema | null => {
   // Update the feedback entry using the updateFeedback API
-  const existingFeedback = getAllFeedback().find(feedback => feedback.id === id.toString());
+  const existingFeedback = getAllFeedback().find(
+    (feedback) => feedback.id === id.toString()
+  );
   if (!existingFeedback) {
     return null;
   }

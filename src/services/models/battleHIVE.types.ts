@@ -1,5 +1,6 @@
 import { betaHIVESchema } from './betaHIVE-selection.types';
 import { promptsSchema } from './prompt-selection.types';
+import { contentWarningsSchema } from './content-warnings.types';
 
 export interface authorSchema {
   id: string;

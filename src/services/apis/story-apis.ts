@@ -99,7 +99,7 @@ export const getStoriesByContentWarnings = (
   contentWarnings: string[]
 ): storySchema[] => {
   return STORY_SUBMISSIONS.filter((story) =>
-    contentWarnings.some((warning) => story.contentWarnings.includes(warning))
+    contentWarnings.some((warning) => story.contentWarnings.includes(warning as any))
   );
 };
 
