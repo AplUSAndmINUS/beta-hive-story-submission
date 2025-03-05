@@ -3,8 +3,8 @@ import { FEEDBACK_SUBMISSIONS } from '../constants/admin-constants';
 import { STORY_SUBMISSIONS } from '../constants/betaHIVE-constants';
 
 // Function to get all stories
-export const getAllStories = (): storySchema[] => {
-  return STORY_SUBMISSIONS;
+export const getAllStories = (battleName: string): storySchema[] => {
+  return STORY_SUBMISSIONS.filter((story) => story.battleName === battleName);
 };
 
 // Function to update a story

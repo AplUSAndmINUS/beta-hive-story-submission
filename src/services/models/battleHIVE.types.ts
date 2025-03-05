@@ -30,7 +30,8 @@ export interface storySchema {
   HIVE: betaHIVESchema['name'];
   prompts: promptsSchema['name'][];
   isContentSensitive: boolean;
-  contentWarnings: string[];
+  contentWarnings: contentWarningsSchema['name'][] | ['None'];
+  battleName: string;
   wordCount: number;
   characterCount: number;
   status: 'Draft' | 'Submitted' | 'Approved' | 'Rejected';
