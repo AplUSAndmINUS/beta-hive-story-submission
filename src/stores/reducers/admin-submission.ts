@@ -35,7 +35,7 @@ const initialState: AdminSubmissionState = {
   calendarEvents: [...CALENDAR_EVENTS],
   contentWarningCount: 4,
   contentWarnings: [...CONTENT_WARNINGS],
-  countdownDate: moment().add(20, 'days').format('YYYY-MM-DD'),
+  countdownDate: moment('2025-03-21').format('YYYY-MM-DD'),
   minPromptSelections: 2,
   numOfLosses: 3,
   promptsCount: 10,

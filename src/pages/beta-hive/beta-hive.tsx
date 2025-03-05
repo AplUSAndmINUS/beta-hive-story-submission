@@ -17,10 +17,9 @@ export const BetaHIVE: React.FC = () => {
         <img src={logoPath} alt='Beta HIVE' className='w-100 h-100' />
       </div>
       <div className='row'>
-        <h1 className='bd-title pb-2'>Welcome to the HIVE</h1>
         <p className='text-muted pb-2 mt-2 mb-5 fs-5'>
-          Beta HIVE is a platform for writers to create, share, and vote on
-          stories. We're currently in development and will be launching soon.
+          This is a platform for writers to create, share, and vote on stories.
+          We're currently in development and will be launching soon.
         </p>
       </div>
       <div className='row'>

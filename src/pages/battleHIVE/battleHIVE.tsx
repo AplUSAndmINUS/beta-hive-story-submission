@@ -1,5 +1,5 @@
 import React from 'react';
-// import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 import HIVEStoryCard from '../../components/story-card/story-card';
 import Modal from '../../components/modal/modal';
@@ -15,6 +15,7 @@ import FeedbackAPITester from '../../services/apis/tests/feedback-apitester';
 export const BattleHIVE: React.FC = () => {
   const [showModal, setShowModal] = React.useState(false);
   const [selectedStory, setSelectedStory] = React.useState<string>('');
+  const [timer, setTimer] = React.useState<Moment | null>(null);
   const versus = require('../../assets/images/logo/versus-mode.png');
 
   const images = useHIVEImages();

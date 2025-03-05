@@ -28,11 +28,12 @@ export const HomePage: React.FC = () => {
         <>
           <div className='row'>
             <div className='col mt-4'>
-              <h3 className='bd-title pb-2'>Battle HIVE Coming Soon!</h3>
+              <h3 className='bd-title pb-2'>Battle HIVE will be launching soon!</h3>
               <p className='pb-2'>
-                The Battle HIVE will start soon! Keep checking back for updates.
+                Keep checking back for updates.
               </p>
-              <Countdown />
+              <Countdown isCountdown />
+              <Countdown isTimer />
             </div>
           </div>
           <div className='row'>
