@@ -16,10 +16,10 @@ function enqueue_react_app() {
     }
 
     // Check if the style is already enqueued
-    if (!wp_style_is('react-app', 'enqueued')) {
+    if (!wp_style_is('beta-hive-story-submission', 'enqueued')) {
         wp_enqueue_style(
-            'react-app',
-            get_template_directory_uri() . '/path-to-your-react-app/build/static/css/main.f2ed6db1.css',
+            'beta-hive-story-submission',
+            get_template_directory_uri() . '/htdocs/wp-content/reactpress/apps/beta-hive-story-submission/build/static/css/main.f2ed6db1.css',
             array(),
             null
         );
@@ -35,10 +35,10 @@ function pass_nonce_to_react_app() {
 }
 
 // Hook the functions to the wp_enqueue_scripts action
-add_action('wp_enqueue_scripts', 'enqueue_react_app');
+add_action('wp_enqueue_scripts', 'beta-hive-story-submission');
 add_action('wp_enqueue_scripts', 'pass_nonce_to_react_app');
 
-// now that we have the nonce, we can use it in the React app to authenticate requests to the WordPress REST API
+// Function to create custom post type for stories
 function create_story_post_type() {
     register_post_type('story',
         array(
@@ -55,6 +55,7 @@ function create_story_post_type() {
 }
 add_action('init', 'create_story_post_type');
 
+// Function to register custom REST API routes
 function register_story_routes() {
     register_rest_route('custom/v1', '/stories/(?P<id>\d+)', array(
         'methods' => 'PUT',
@@ -78,6 +79,7 @@ function register_story_routes() {
 }
 add_action('rest_api_init', 'register_story_routes');
 
+// Function to update a story
 function update_story($request) {
     $id = $request['id'];
     $params = $request->get_json_params();

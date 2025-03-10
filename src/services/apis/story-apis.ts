@@ -4,6 +4,9 @@ import { storySchema } from '../models/battleHIVE.types';
 import { FEEDBACK_SUBMISSIONS } from '../constants/admin-constants';
 import { STORY_SUBMISSIONS } from '../constants/betaHIVE-constants';
 
+// define nonce wpApiSettings globally
+declare const wpApiSettings: { nonce: string };
+
 // Creaate an axios instance with the nonce token for WP backend access
 const axiosInstance = axios.create({
   baseURL: '/wp-json/custom/v1',
