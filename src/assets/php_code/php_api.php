@@ -38,6 +38,37 @@ function pass_nonce_to_react_app() {
 add_action('wp_enqueue_scripts', 'beta-hive-story-submission');
 add_action('wp_enqueue_scripts', 'pass_nonce_to_react_app');
 
+/**** Functions start here for stories ****/
+function getAllStories() {
+    $args = array(
+        'post_type' => 'story',
+        'posts_per_page' => -1
+    );
+
+    $query = new WP_Query($args);
+    $stories = array();
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $story = array(
+                'id' => get_the_ID(),
+                'title' => get_the_title(),
+                'story' => get_the_content(),
+                'author' => get_the_author(),
+                'HIVE' => get_post_meta(get_the_ID(), 'HIVE', true),
+                'contentWarnings' => get_post_meta(get_the_ID(), 'contentWarnings', true),
+                'feedback' => get_post_meta(get_the_ID(), 'feedback', true),
+                'wins' => get_post_meta(get_the_ID(), 'wins', true),
+                'losses' => get_post_meta(get_the_ID(), 'losses', true)
+            );
+            array_push($stories, $story);
+        }
+    }
+
+    return $stories;
+}
+
 // Function to create custom post type for stories
 function create_story_post_type() {
     register_post_type('story',
