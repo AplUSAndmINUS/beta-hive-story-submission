@@ -1,14 +1,33 @@
+import axios from 'axios';
+
 import { storySchema } from '../models/battleHIVE.types';
 import { FEEDBACK_SUBMISSIONS } from '../constants/admin-constants';
 import { STORY_SUBMISSIONS } from '../constants/betaHIVE-constants';
 
+// Creaate an axios instance with the nonce token for WP backend access
+const axiosInstance = axios.create({
+  baseURL: '/wp-json/custom/v1',
+  headers: {
+    'X-WP-Nonce': wpApiSettings.nonce,
+    'Content-Type': 'application/json',
+  },
+});
+
 // Function to get all stories
-export const getAllStories = (battleName: string): storySchema[] => {
-  return STORY_SUBMISSIONS.filter((story) => story.battleName === battleName);
+export const getAllStories = async () => {
+  try {
+    const response = await axiosInstance.get('/stories');
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+
+  // return STORY_SUBMISSIONS.filter((story) => story.battleName === battleName);
 };
 
 // Function to update a story
-export const updateStory = (
+export const updateStory = async (
   id: string,
   updatedProperties: Partial<storySchema>
 ): storySchema | null => {
