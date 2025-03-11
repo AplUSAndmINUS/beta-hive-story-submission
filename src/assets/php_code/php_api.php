@@ -2,6 +2,42 @@
     // filepath where this goes: /path/to/the/theme/functions.php
     // Generated with assistance from GitHub Copilot, 2025 TerenceWaters.com
 
+// Function to enqueue React app scripts and styles
+function enqueue_react_app() {
+    // Check if the script is already enqueued
+    if (!wp_script_is('beta-hive-story-submission', 'enqueued')) {
+        wp_enqueue_script(
+            'beta-hive-story-submission',
+            get_template_directory_uri() . '/htdocs/wp-content/reactpress/apps/beta-hive-story-submission/build/static/js/main.3f655f80.js',
+            array(),
+            null,
+            true
+        );
+    }
+
+    // Check if the style is already enqueued
+    if (!wp_style_is('beta-hive-story-submission', 'enqueued')) {
+        wp_enqueue_style(
+            'beta-hive-story-submission',
+            get_template_directory_uri() . '/htdocs/wp-content/reactpress/apps/beta-hive-story-submission/build/static/css/main.f2ed6db1.css',
+            array(),
+            null
+        );
+    }
+}
+
+// Function to generate and pass nonce to the front-end
+function pass_nonce_to_react_app() {
+    // Generate a nonce and pass it to the front-end
+    wp_localize_script('beta-hive-story-submission', 'wpApiSettings', array(
+        'nonce' => wp_create_nonce('wp_rest')
+    ));
+}
+
+// Hook the functions to the wp_enqueue_scripts action
+add_action('wp_enqueue_scripts', 'enqueue_react_app');
+add_action('wp_enqueue_scripts', 'pass_nonce_to_react_app');
+
 // Function to create custom post type for stories
 function create_story_post_type() {
     register_post_type('story',
