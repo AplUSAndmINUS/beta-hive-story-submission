@@ -96,7 +96,12 @@ function get_all_stories($request) {
                 'story' => get_the_content(),
                 'author' => get_post_meta(get_the_ID(), 'author', true),
                 'HIVE' => get_post_meta(get_the_ID(), 'HIVE', true),
+                'prompts' => get_post_meta(get_the_ID(), 'prompts', true),
+                'isContentSensitive' => get_post_meta(get_the_ID(), 'isContentSensitive', true),
                 'contentWarnings' => get_post_meta(get_the_ID(), 'contentWarnings', true),
+                'battleName' => get_post_meta(get_the_ID(), 'battleName', true),
+                'wordCount' => get_post_meta(get_the_ID(), 'wordCount', true),
+                'status' => get_post_meta(get_the_ID(), 'status', true),
                 'feedback' => get_post_meta(get_the_ID(), 'feedback', true),
                 'wins' => get_post_meta(get_the_ID(), 'wins', true),
                 'losses' => get_post_meta(get_the_ID(), 'losses', true)
@@ -130,8 +135,23 @@ function add_story($request) {
     if (isset($params['HIVE'])) {
         update_post_meta($post_id, 'HIVE', $params['HIVE']);
     }
+    if (isset($params['prompts'])) {
+        update_post_meta($post_id, 'prompts', $params['prompts']);
+    }
+    if (isset($params['isContentSensitive'])) {
+        update_post_meta($post_id, 'isContentSensitive', $params['isContentSensitive']);
+    }
     if (isset($params['contentWarnings'])) {
         update_post_meta($post_id, 'contentWarnings', $params['contentWarnings']);
+    }
+    if (isset($params['battleName'])) {
+        update_post_meta($post_id, 'battleName', $params['battleName']);
+    }
+    if (isset($params['wordCount'])) {
+        update_post_meta($post_id, 'wordCount', $params['wordCount']);
+    }
+    if (isset($params['status'])) {
+        update_post_meta($post_id, 'status', $params['status']);
     }
     if (isset($params['feedback'])) {
         update_post_meta($post_id, 'feedback', $params['feedback']);
@@ -173,8 +193,23 @@ function update_story($request) {
     if (isset($params['HIVE'])) {
         update_post_meta($id, 'HIVE', $params['HIVE']);
     }
+    if (isset($params['prompts'])) {
+        update_post_meta($id, 'prompts', $params['prompts']);
+    }
+    if (isset($params['isContentSensitive'])) {
+        update_post_meta($id, 'isContentSensitive', $params['isContentSensitive']);
+    }
     if (isset($params['contentWarnings'])) {
         update_post_meta($id, 'contentWarnings', $params['contentWarnings']);
+    }
+    if (isset($params['battleName'])) {
+        update_post_meta($id, 'battleName', $params['battleName']);
+    }
+    if (isset($params['wordCount'])) {
+        update_post_meta($id, 'wordCount', $params['wordCount']);
+    }
+    if (isset($params['status'])) {
+        update_post_meta($id, 'status', $params['status']);
     }
     if (isset($params['feedback'])) {
         update_post_meta($id, 'feedback', $params['feedback']);
