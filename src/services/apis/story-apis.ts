@@ -8,7 +8,7 @@ import { storySchema } from '../models/battleHIVE.types';
 declare const wpApiSettings: { nonce: string };
 
 // Creaate an axios instance with the nonce token for WP backend access
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: '/wp-json/custom/v1',
   headers: {
     'X-WP-Nonce': wpApiSettings.nonce,

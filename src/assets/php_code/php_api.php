@@ -110,6 +110,61 @@ function register_story_routes() {
             )
         )
     ));
+
+    // Register feedback routes
+    register_rest_route('custom/v1', '/feedback', array(
+        'methods' => 'GET',
+        'callback' => 'get_all_feedback',
+        'permission_callback' => '__return_true',
+    ));
+
+    register_rest_route('custom/v1', '/feedback', array(
+        'methods' => 'POST',
+        'callback' => 'add_feedback',
+        'permission_callback' => function () {
+            return current_user_can('edit_posts');
+        },
+    ));
+
+    register_rest_route('custom/v1', '/feedback/(?P<id>\d+)', array(
+        'methods' => 'PUT',
+        'callback' => 'update_feedback',
+        'permission_callback' => function () {
+            return current_user_can('edit_posts');
+        },
+        'args' => array(
+            'id' => array(
+                'validate_callback' => function ($param, $request, $key) {
+                    return is_numeric($param);
+                }
+            ),
+            '_wpnonce' => array(
+                'validate_callback' => function ($param, $request, $key) {
+                    return wp_verify_nonce($param, 'wp_rest');
+                }
+            )
+        )
+    ));
+
+    register_rest_route('custom/v1', '/feedback/(?P<id>\d+)', array(
+        'methods' => 'DELETE',
+        'callback' => 'delete_feedback',
+        'permission_callback' => function () {
+            return current_user_can('delete_posts');
+        },
+        'args' => array(
+            'id' => array(
+                'validate_callback' => function ($param, $request, $key) {
+                    return is_numeric($param);
+                }
+            ),
+            '_wpnonce' => array(
+                'validate_callback' => function ($param, $request, $key) {
+                    return wp_verify_nonce($param, 'wp_rest');
+                }
+            )
+        )
+    ));
 }
 add_action('rest_api_init', 'register_story_routes');
 
@@ -276,5 +331,124 @@ function delete_story($request) {
     }
 
     return new WP_REST_Response('Story deleted', 200);
+}
+
+// Callback function to get all feedback
+function get_all_feedback($request) {
+    $args = array(
+        'post_type' => 'story',
+        'posts_per_page' => -1
+    );
+
+    $query = new WP_Query($args);
+    $feedback = array();
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $comments = get_comments(array(
+                'post_id' => get_the_ID(),
+                'status' => 'approve'
+            ));
+            foreach ($comments as $comment) {
+                $feedback_item = array(
+                    'id' => $comment->comment_ID,
+                    'story' => get_the_title(),
+                    'feedbackAuthor' => $comment->comment_author,
+                    'content' => $comment->comment_content,
+                    'isPositive' => get_comment_meta($comment->comment_ID, 'isPositive', true),
+                    'isPublic' => get_comment_meta($comment->comment_ID, 'isPublic', true),
+                    'isAnonymous' => get_comment_meta($comment->comment_ID, 'isAnonymous', true)
+                );
+                array_push($feedback, $feedback_item);
+            }
+        }
+    }
+
+    return new WP_REST_Response($feedback, 200);
+}
+
+// Callback function to add feedback
+function add_feedback($request) {
+    $params = $request->get_json_params();
+
+    $comment_data = array(
+        'comment_post_ID' => $params['storyId'],
+        'comment_author' => $params['feedbackAuthor'],
+        'comment_content' => $params['content'],
+        'comment_approved' => 1,
+    );
+
+    $comment_id = wp_insert_comment($comment_data);
+
+    if (is_wp_error($comment_id)) {
+        return new WP_Error('cant_create', __('Cannot create feedback'), array('status' => 500));
+    }
+
+    // Add custom fields
+    if (isset($params['isPositive'])) {
+        update_comment_meta($comment_id, 'isPositive', $params['isPositive']);
+    }
+    if (isset($params['isPublic'])) {
+        update_comment_meta($comment_id, 'isPublic', $params['isPublic']);
+    }
+    if (isset($params['isAnonymous'])) {
+        update_comment_meta($comment_id, 'isAnonymous', $params['isAnonymous']);
+    }
+
+    return new WP_REST_Response('Feedback created', 201);
+}
+
+// Callback function to update feedback
+function update_feedback($request) {
+    $id = $request['id'];
+    $params = $request->get_json_params();
+
+    // Verify nonce
+    if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
+        return new WP_Error('rest_forbidden', __('Nonce verification failed'), array('status' => 403));
+    }
+
+    $comment_data = array(
+        'comment_ID' => $id,
+        'comment_content' => $params['content'],
+    );
+
+    $updated_comment_id = wp_update_comment($comment_data);
+
+    if (is_wp_error($updated_comment_id)) {
+        return new WP_Error('cant_update', __('Cannot update feedback'), array('status' => 500));
+    }
+
+    // Update custom fields
+    if (isset($params['isPositive'])) {
+        update_comment_meta($id, 'isPositive', $params['isPositive']);
+    }
+    if (isset($params['isPublic'])) {
+        update_comment_meta($id, 'isPublic', $params['isPublic']);
+    }
+    if (isset($params['isAnonymous'])) {
+        update_comment_meta($id, 'isAnonymous', $params['isAnonymous']);
+    }
+
+    return new WP_REST_Response('Feedback updated', 200);
+}
+
+// Callback function to delete feedback
+function delete_feedback($request) {
+    $id = $request['id'];
+
+    // Verify nonce
+    if (!wp_verify_nonce($request->get_header('X-WP-Nonce'), 'wp_rest')) {
+        return new WP_Error('rest_forbidden', __('Nonce verification failed'), array('status' => 403));
+    }
+
+    $deleted = wp_delete_comment($id, true);
+
+    if (!$deleted) {
+        return new WP_Error('cant_delete', __('Cannot delete feedback'), array('status' => 500));
+    }
+
+    return new WP_REST_Response('Feedback deleted', 200);
 }
 ?>
