@@ -27,7 +27,7 @@ const StoryAPITester: React.FC = () => {
     // testing GET APIs
     console.log('Get Stories by exactly four losses', getStoriesByLosses(4));
 
-    console.log('All Stories:', getAllStories('micro-fiction'));
+    console.log('All Stories:', getAllStories());
 
     const testStoryId = '1'; // Replace with an actual story ID from STORY_SUBMISSIONS
     console.log(`Story with ID ${testStoryId}:`, getStoryById(testStoryId));
@@ -98,7 +98,7 @@ const StoryAPITester: React.FC = () => {
       losses: 0,
     };
     console.log('Add Story:', addStory(newStory));
-    console.log('All Stories after adding:', getAllStories('micro-fiction'));
+    console.log('All Stories after adding:', getAllStories());
 
     // test PUT APIs
     const updatedStory: Partial<storySchema> = {
@@ -111,7 +111,7 @@ const StoryAPITester: React.FC = () => {
     } else {
       console.error('Updated story ID is undefined');
     }
-    console.log('All Stories after updating:', getAllStories('micro-fiction'));
+    console.log('All Stories after updating:', getAllStories());
   }, []);
 
   return <div>Story API Tester</div>;

@@ -14,7 +14,7 @@ import { feedbackSchema, storySchema } from './models/battleHIVE.types';
 
 // Function to get all stories
 export const getStories = (): storySchema[] => {
-  return getAllStories('micro-fiction');
+  return getAllStories();
 };
 
 // Function to get story by id
@@ -37,14 +37,14 @@ export const updateStoryById = (
 
 export const getTwoRandomNums = () => {
   let storyOne = Math.floor(
-    Math.random() * getAllStories('micro-fiction').length
+    Math.random() * getAllStories().length
   );
   let storyTwo = Math.floor(
-    Math.random() * getAllStories('micro-fiction').length
+    Math.random() * getAllStories().length
   );
   while (storyOne === storyTwo) {
     storyTwo = Math.floor(
-      Math.random() * getAllStories('micro-fiction').length
+      Math.random() * getAllStories().length
     );
   }
 

@@ -4,7 +4,6 @@ import {
   getAllFeedback,
   addFeedback,
   getFeedbackById,
-  getFeedbackByStory,
   getFeedbackByAuthor,
   updateFeedback,
   deleteFeedback,
@@ -31,8 +30,8 @@ export const FeedbackAPITester: React.FC = () => {
 
     const testStory = 'Story 1'; // Replace with an actual story name from FEEDBACK_SUBMISSIONS
     console.log(
-      `Feedback by Story ${testStory}:`,
-      getFeedbackByStory(testStory)
+      `Feedback by Story Name ${testStory}:`,
+      getFeedbackByStoryName(testStory)
     );
 
     const testAuthor = 'Author 1'; // Replace with an actual author name from FEEDBACK_SUBMISSIONS
