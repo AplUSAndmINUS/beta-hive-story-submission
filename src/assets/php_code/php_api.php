@@ -38,6 +38,8 @@ function pass_nonce_to_react_app() {
 add_action('wp_enqueue_scripts', 'enqueue_react_app');
 add_action('wp_enqueue_scripts', 'pass_nonce_to_react_app');
 
+/**** START STORY APIs and Fnctions *****/
+
 // Function to create custom post type for stories
 function create_story_post_type() {
     register_post_type('story',
@@ -368,6 +370,9 @@ function get_all_feedback($request) {
     return new WP_REST_Response($feedback, 200);
 }
 
+/**** END STORY APIs and Fnctions *****/
+/**** START FEEDBACK APIs and Fnctions *****/
+
 // Callback function to add feedback
 function add_feedback($request) {
     $params = $request->get_json_params();
@@ -450,5 +455,167 @@ function delete_feedback($request) {
     }
 
     return new WP_REST_Response('Feedback deleted', 200);
+}
+
+/**** SNED FEEDBACK APIs and Fnctions *****/
+/**** START ADMIN APIs and Fnctions *****/
+
+// Function to ensure the wp_options table has the correct fields first
+// Register custom REST API route to get game parameters
+
+// Initialize default options in wp_options table
+function initialize_beta_hive_options() {
+    // Set default values for the options if they don't exist
+    if (get_option('content_warnings') === false) {
+        update_option('content_warnings', array());
+    }
+    if (get_option('prompts') === false) {
+        update_option('prompts', array());
+    }
+    if (get_option('hives') === false) {
+        update_option('hives', array());
+    }
+    if (get_option('calendar_events') === false) {
+        update_option('calendar_events', array());
+    }
+    if (get_option('countdown_date') === false) {
+        update_option('countdown_date', '2025-04-20T00:00:00');
+    }
+    if (get_option('min_word_count') === false) {
+        update_option('min_word_count', 500);
+    }
+    if (get_option('max_word_count') === false) {
+        update_option('max_word_count', 1000);
+    }
+    if (get_option('min_prompt_selections') === false) {
+        update_option('min_prompt_selections', 2);
+    }
+    if (get_option)'num_of_losses') === false) {
+        update_option('num_of_losses', 3);
+    }
+}
+add_action('after_setup_theme', 'initialize_beta_hive_options');
+
+// get all game content
+function get_all_game_content() {
+    $content_warnings = get_all_content_warnings();
+    $prompts = get_all_prompts();
+    $hives = get_all_hives();
+    $calendar_events = get_all_calendar_events();
+    $countdown_date = get_countdown_date();
+    $min_word_count = get_min_word_count();
+    $max_word_count = get_max_word_count();
+    $min_prompt_selections = get_min_prompt_selections();
+    $num_of_losses = get_num_of_losses();
+
+    $game_content = array(
+        'contentWarnings' => $content_warnings,
+        'prompts' => $prompts,
+        'hives' => $hives,
+        'calendarEvents' => $calendar_events,
+        'countdownDate' => $countdown_date,
+        'minWordCount' => $min_word_count,
+        'maxWordCount' => $max_word_count,
+        'minPromptSelections' => $min_prompt_selections,
+        'numOfLosses' => $num_of_losses
+    );
+
+    return new WP_REST_Response($game_content, 200);
+}
+
+// Function to get all content warnings
+function get_all_content_warnings() {
+    $content_warnings = get_option('content_warnings', array());
+    return array_unique($content_warnings);
+}
+
+// Function to get all prompts
+function get_all_prompts() {
+    $prompts = get_option('prompts', array());
+    return array_unique($prompts);
+}
+
+// Function to get all HIVEs
+function get_all_hives() {
+    $hives = get_option('hives', array());
+    return array_unique($hives);
+}
+
+// Function to get all calendar events
+function get_all_calendar_events() {
+    $events = get_option('calendar_events', array());
+    return $events;
+}
+
+// Function to get countdown date
+function get_countdown_date() {
+    $countdown_date = get_option('countdown_date', '');
+    return $countdown_date;
+}
+
+// Function to get min word count
+function get_min_word_count() {
+    $min_word_count = get_option('min_word_count', '');
+    return $min_word_count;
+}
+
+// Function to get max word count
+function get_max_word_count() {
+    $max_word_count = get_option('max_word_count', '');
+    return $max_word_count;
+}
+
+// Function to update max word count
+function update_max_word_count($request) {
+    $params = $request->get_json_params();
+    if (isset($params['max'])) {
+        update_option('max_word_count', $params['max']);
+    }
+    return new WP_REST_Response('Max word count updated', 200);
+}
+
+// Function to update minimum prompt selections
+function update_min_prompt_selections($request) {
+    $params = $request->get_json_params();
+    if (isset($params['min'])) {
+        update_option('min_prompt_selections', $params['min']);
+    }
+    return new WP_REST_Response('Minimum prompt selections updated', 200);
+}
+
+// Function to update countdown date
+function update_countdown_date($request) {
+    $params = $request->get_json_params();
+    if (isset($params['date'])) {
+        update_option('countdown_date', $params['date']);
+    }
+    return new WP_REST_Response('Countdown date updated', 200);
+}
+
+// Function to update all calendar events
+function update_calendar_events($request) {
+    $params = $request->get_json_params();
+    if (isset($params['events'])) {
+        update_option('calendar_events', $params['events']);
+    }
+    return new WP_REST_Response('Calendar events updated', 200);
+}
+
+// Function to update all HIVEs
+function update_hives($request) {
+    $params = $request->get_json_params();
+    if (isset($params['hives'])) {
+        update_option('hives', $params['hives']);
+    }
+    return new WP_REST_Response('HIVEs updated', 200);
+}
+
+// Function to update all prompts
+function update_prompts($request) {
+    $params = $request->get_json_params();
+    if (isset($params['prompts'])) {
+        update_option('prompts', $params['prompts']);
+    }
+    return new WP_REST_Response('Prompts updated', 200);
 }
 ?>
