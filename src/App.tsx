@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 
 import { routes } from './routes/routes';
 import NotFound from './pages/404/404';
-import store from './stores/store';
-import Menu from './components/menu/menu';
+import store from '../shared/stores/store';
+import Menu from '../shared/components/menu/menu';
+import ProgressBar from '../shared/components/progress-bar/progress-bar';
 
 import './styles/_app.scss';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import ProgressBar from './components/progress-bar/progress-bar';
 
 const App: React.FC = () => {
   return (

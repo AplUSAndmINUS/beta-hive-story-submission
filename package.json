@@ -31,6 +31,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "workspaces": [
+    "admin-page",
+    "enter-the-arena",
+    "story-submission",
+    "shared"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -51,5 +57,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  }
+  },
+  "author": "Terence Waters",
+  "license": "MIT"
 }
