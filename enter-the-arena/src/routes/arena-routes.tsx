@@ -3,7 +3,7 @@ import { NonIndexRouteObject } from 'react-router-dom';
 
 import { BetaHIVE } from '../pages/beta-hive/beta-hive';
 import BattleHIVE from '../pages/battleHIVE/battleHIVE';
-import { NotFound } from '../../../shared/pages/404/404';
+import { NotFound } from '../pages/404/404';
 
 export interface Routes extends NonIndexRouteObject {
   name: string;

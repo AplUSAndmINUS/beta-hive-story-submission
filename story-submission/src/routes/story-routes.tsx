@@ -6,7 +6,7 @@ import PromptSelection from '../pages/prompt-selection/prompt-selection';
 import StorySubmission from '../pages/story-submission/story-submission';
 import ContentWarnings from '../pages/content-warnings/content-warnings';
 import Confirmation from '../pages/confirmation/confirmation';
-import NotFound from '../../../shared/pages/404/404';
+import NotFound from '../pages/404/404';  
 
 export interface Routes extends NonIndexRouteObject {
   name: string;

@@ -14,7 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      "shared/*": ["shared/src/*"],
+      "admin-page/*": ["admin-page/src/*"],
+      "enter-the-arena/*": ["enter-the-arena/src/*"],
+      "story-submission/*": ["story-submission/src/*"]
+    }
   },
   "include": [
     "src",

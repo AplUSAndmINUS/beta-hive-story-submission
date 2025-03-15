@@ -2,15 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import store from '../shared/stores/store';
-import { adminRoutes } from '../admin-page/src/routes/admin-routes';
-import { arenaRoutes } from '../enter-the-arena/src/routes/routes';
-import { storyRoutes } from '../story-submission/src/routes/story-routes';
-import Menu from '../shared/components/menu/menu';
-import ProgressBar from '../shared/components/progress-bar/progress-bar';
+import store from 'shared/stores/store';
+import { adminRoutes } from 'admin-page/src/routes/admin-routes';
+import { arenaRoutes } from 'enter-the-arena/src/routes/arena-routes';
+import { storyRoutes } from 'story-submission/src/routes/story-routes';
+import Menu from 'shared/components/menu/menu';
+import ProgressBar from 'shared/components/progress-bar/progress-bar';
 
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import '../shared/styles/_app.scss';
+import 'shared/styles/_app.scss';
 
 let routes: Array<{ path: string; element: React.ReactNode }>;
 switch (process.env.REACT_APP_ENVIRONMENT) {
