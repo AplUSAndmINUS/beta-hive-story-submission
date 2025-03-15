@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link, useLocation as location } from 'react-router-dom';
-import { routes } from '../../../../../src/routes/routes';
-import { useIsMobile } from '../../../../../src/utils/hooks/useIsMobile';
+import { useIsMobile } from '../../utils/hooks/useIsMobile';
 
-export const Menu: React.FC = () => {
+interface MenuProps {
+  routes: any;
+}
+
+export const Menu: React.FC<MenuProps> = ({ routes }) => {
   const isMobile = useIsMobile();
 
   return (
@@ -41,10 +44,10 @@ export const Menu: React.FC = () => {
         <div className='offcanvas-body'>
           <ul className='nav flex-column m-0 p-0'>
             {routes
-              .filter((route) => route.path !== undefined && route.path !== '*')
-              .map((route, index) => (
+              .filter((route: any) => route.path !== undefined && route.path !== '*')
+              .map((route: any, index: number) => (
                 <li
-                  key={route.path}
+                  key={route.path + index.toString()}
                   className={`nav-item ${isMobile ? 'p-0' : 'p-2'}`}
                   style={{
                     minWidth: isMobile ? 'auto' : '175px',

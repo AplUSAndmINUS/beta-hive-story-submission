@@ -9,7 +9,7 @@ export interface Routes extends NonIndexRouteObject {
   name: string;
 }
 
-export const routes: Routes[] = [
+export const arenaRoutes: Routes[] = [
   {
     path: '/BetaHIVE',
     name: 'Beta HIVE Page',

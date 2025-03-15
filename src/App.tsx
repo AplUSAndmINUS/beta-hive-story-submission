@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store from '../shared/stores/store';
-import { Routes as RouteType } from '../admin-page/src/routes/admin-routes';
+import { adminRoutes } from '../admin-page/src/routes/admin-routes';
+import { arenaRoutes } from '../enter-the-arena/src/routes/routes';
+import { storyRoutes } from '../story-submission/src/routes/story-routes';
 import Menu from '../shared/components/menu/menu';
 import ProgressBar from '../shared/components/progress-bar/progress-bar';
 
@@ -30,10 +32,10 @@ const App: React.FC = () => {
     <Provider store={store}>
       <Router>
         <div className='App-Main'>
-          <Menu />
+          <Menu routes={routes} />
           <ProgressBar />
           <Routes>
-            {routes.map((route: RouteType, index: number) => (
+            {routes.map((route: any, index: number) => (
               <Route key={index} path={route.path} element={route.element} />
             ))}
           </Routes>
