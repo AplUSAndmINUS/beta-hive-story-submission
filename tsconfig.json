@@ -26,9 +26,9 @@
   },
   "include": [
     "src",
-    "admin-page/src",
-    "enter-the-arena/src",
-    "story-submission/src",
-    "shared/*"
+    "shared",
+    "admin-page",
+    "enter-the-arena",
+    "story-submission"
   ]
 }
