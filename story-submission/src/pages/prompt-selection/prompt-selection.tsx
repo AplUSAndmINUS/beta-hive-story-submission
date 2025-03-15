@@ -1,15 +1,15 @@
 import React from 'react';
 
-import NavigateButtons from '../../components/navigate-buttons/navigate-buttons';
-import PromptCard from '../../components/prompt-card/prompt-card';
-import Selections from '../../components/selections/selections';
-import { useAppDispatch, useAppSelector } from '../../stores/store';
+import NavigateButtons from 'shared/components/navigate-buttons/navigate-buttons';
+import PromptCard from 'shared/components/prompt-card/prompt-card';
+import Selections from 'shared/components/selections/selections';
+import { useAppDispatch, useAppSelector } from 'shared/stores/store';
 import {
   // setCharacterSelection,
   // setSettingSelection,
   setPromptSelections,
-} from '../../stores/reducers/story-submission';
-import { PROMPT_SELECTIONS } from '../../../../src/services/constants/admin-constants';
+} from 'shared/stores/reducers/story-submission';
+import { PROMPT_SELECTIONS } from 'shared/services/constants/admin-constants';
 // import { CHARACTER_SELECTIONS, SETTING_SELECTIONS } from '../../services/constants/constants';
 
 export const PromptSelection: React.FC = () => {

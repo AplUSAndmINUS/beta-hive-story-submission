@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { routes, Routes } from '../../routes/routes';
+import { routes, Routes } from 'shared/routes/routes';
 
 const useNavigation = () => {
   const navigate = useNavigate();

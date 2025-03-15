@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../stores/store';
+import { useAppDispatch, useAppSelector } from 'shared/stores/store';
 import {
   setFeedbackStoryOneText,
   setFeedbackStoryOneIsAnonymous,
@@ -9,8 +9,8 @@ import {
   setFeedbackStoryTwoIsAnonymous,
   setFeedbackStoryTwoIsPositive,
   setFeedbackStoryTwoIsPublic,
-} from '../../stores/reducers/feedback-submission';
-import { feedbackSchema } from '../../services/models/battleHIVE.types';
+} from 'shared/stores/reducers/feedback-submission';
+import { feedbackSchema } from 'shared/services/models/battleHIVE.types';
 
 export const useFeedbackSubmission = (initialStoryNumber: 1 | 2 = 1) => {
   // Local UI state

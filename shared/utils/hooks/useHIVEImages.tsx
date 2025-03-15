@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAppSelector } from '../../stores/store';
+import { useAppSelector } from 'shared/stores/store';
 
 interface Image {
   name: string;

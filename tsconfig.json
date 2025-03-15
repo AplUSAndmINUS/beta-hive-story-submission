@@ -25,10 +25,11 @@
     }
   },
   "include": [
-    "src",
+    "index.tsx",
+    "App.tsx",
     "admin-page/src",
     "enter-the-arena/src",
     "story-submission/src",
     "shared/*"
-, "admin-page/index.tsx"  ]
+  ]
 }

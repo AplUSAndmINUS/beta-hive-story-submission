@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../stores/store';
 import {
   setStorySubmission,
   setStoryTitle,
-} from '../../stores/reducers/story-submission';
+} from 'shared/stores/reducers/story-submission';
 
 export const useDraftSave = (
   storyText: string,
