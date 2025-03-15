@@ -10,7 +10,7 @@ import Menu from 'shared/components/menu/menu';
 import ProgressBar from 'shared/components/progress-bar/progress-bar';
 
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import '../shared/styles/_app.scss';
+import 'shared/styles/_app.scss';
 
 let routes: Array<{ path: string; element: React.ReactNode }>;
 switch (process.env.REACT_APP_ENVIRONMENT) {
