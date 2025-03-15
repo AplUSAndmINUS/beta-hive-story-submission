@@ -2,8 +2,12 @@
 
 # dependencies
 /node_modules
-/.pnp
 .pnp.js
+admin-page/node_modules/
+enter-the-arena/node_modules/
+story-submission/node_modules/
+shared/node_modules/
+/.pnp
 
 # testing
 /coverage
