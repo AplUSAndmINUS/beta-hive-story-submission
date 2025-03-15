@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 
-import { useAppSelector } from '../../stores/store';
-import { Calendar } from '../../components/calendar/calendar';
-import { Countdown } from '../../components/countdown/countdown';
+import { useAppSelector } from '../../../../shared/stores/store';
+import { Calendar } from '../../../../shared/components/calendar/calendar';
+import { Countdown } from '../../../../shared/components/countdown/countdown';
 
 import BattleHIVE from '../battleHIVE/battleHIVE';
 import BetaHIVE from '../beta-hive/beta-hive';

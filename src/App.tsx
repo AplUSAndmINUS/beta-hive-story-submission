@@ -12,16 +12,25 @@ import ProgressBar from '../shared/components/progress-bar/progress-bar';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import '../shared/styles/_app.scss';
 
-let routes;
+let routes: Array<{ path: string; element: React.ReactNode }>;
 switch (process.env.REACT_APP_ENVIRONMENT) {
   case 'admin':
-    routes = require('../admin-page/routes/admin-routes.tsx').adminRoutes;
+    routes = adminRoutes.filter((route) => route.path !== undefined) as Array<{
+      path: string;
+      element: React.ReactNode;
+    }>;
     break;
   case 'arena':
-    routes = require('../enter-the-arena/routes').arenaRoutes;
+    routes = arenaRoutes.filter((route) => route.path !== undefined) as Array<{
+      path: string;
+      element: React.ReactNode;
+    }>;
     break;
   case 'story':
-    routes = require('../story-submission/routes').storySubmissionRoutes;
+    routes = storyRoutes.filter((route) => route.path !== undefined) as Array<{
+      path: string;
+      element: React.ReactNode;
+    }>;
     break;
   default:
     routes = [];
@@ -35,7 +44,7 @@ const App: React.FC = () => {
           <Menu routes={routes} />
           <ProgressBar />
           <Routes>
-            {routes.map((route: any, index: number) => (
+            {routes.map((route, index: number) => (
               <Route key={index} path={route.path} element={route.element} />
             ))}
           </Routes>

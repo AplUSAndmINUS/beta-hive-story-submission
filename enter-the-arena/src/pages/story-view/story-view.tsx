@@ -1,8 +1,8 @@
 import React from 'react';
 
-import HIVEStoryCard from '../../components/story-card/story-card';
-import SaveSpinner from '../../components/draft-save-spinner/draft-save-spinner';
-import Selections from '../../components/selections/selections';
+import HIVEStoryCard from '../../../../shared/components/story-card/story-card';
+import SaveSpinner from '../../../../shared/components/draft-save-spinner/draft-save-spinner';
+import Selections from '../../../../shared/components/selections/selections';
 
 interface StoryViewProps {
   feedbackText: string;
