@@ -1,16 +1,15 @@
 import { NonIndexRouteObject } from 'react-router-dom';
 
 import { AdminPage } from '../pages/admin/admin';
-import { NotFound } from '../pages/404/404';
+import NotFound from '../../../shared/pages/404/404';
 
 export interface Routes extends NonIndexRouteObject {
   name: string;
-  storySubmission?: boolean;
 }
 
-export const routes: Routes[] = [
+export const adminRoutes: Routes[] = [
   {
-    path: '/',
+    path: '/admin-page',
     name: 'Admin',
     element: <AdminPage />,
   },

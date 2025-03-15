@@ -26,10 +26,12 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start:admin": "env-cmd -f .env.admin react-scripts start",
+    "start:arena": "env-cmd -f .env.arena react-scripts start",
+    "start:story": "env-cmd -f .env.story react-scripts start",
+    "build:admin": "env-cmd -f .env.admin react-scripts build",
+    "build:arena": "env-cmd -f .env.arena react-scripts build",
+    "build:story": "env-cmd -f .env.story react-scripts build"
   },
   "workspaces": [
     "admin-page",
@@ -56,7 +58,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "typescript": "^4.4.3"
   },
   "author": "Terence Waters",
   "license": "MIT"

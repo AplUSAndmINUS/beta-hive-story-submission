@@ -16,7 +16,7 @@ import {
   setPrompts,
   setMinWordCount,
   setMaxWordCount,
-} from '../../stores/reducers/admin-submission';
+} from '../../../stores/reducers/admin-submission';
 import Accordion from '../../components/accordion/accordion';
 import ButtonsRow from '../../components/form-elements/buttons/buttons-row';
 import InputType from '../../components/form-elements/input/input-type';
