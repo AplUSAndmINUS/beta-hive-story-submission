@@ -28,7 +28,7 @@ export const routes: Routes[] = [
     element: <NotFound />,
   },
   {
-    path: '/admin',
+    path: '/admin-page',
     name: 'Admin',
     element: <AdminPage />,
   },
