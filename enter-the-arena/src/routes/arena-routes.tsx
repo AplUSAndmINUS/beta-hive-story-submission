@@ -1,13 +1,8 @@
-// filepath: enter-the-arena/src/routes/routes.tsx
-import { NonIndexRouteObject } from 'react-router-dom';
-
+// filepath: enter-the-arena/src/routes/arena-routes.tsx
 import { BetaHIVE } from '../pages/beta-hive/beta-hive';
 import BattleHIVE from '../pages/battleHIVE/battleHIVE';
 import { NotFound } from '../pages/404/404';
-
-export interface Routes extends NonIndexRouteObject {
-  name: string;
-}
+import { Routes } from 'shared/services/models/routes.types';
 
 export const arenaRoutes: Routes[] = [
   {

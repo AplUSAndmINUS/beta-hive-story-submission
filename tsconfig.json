@@ -1,3 +1,4 @@
+// filepath: c:\Users\teren\source\repos\beta-hive-story-submission\tsconfig.json
 {
   "compilerOptions": {
     "target": "es5",
@@ -17,7 +18,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "shared/*": ["shared/src/*"],
+      "shared/*": ["shared/*"],
       "admin-page/*": ["admin-page/src/*"],
       "enter-the-arena/*": ["enter-the-arena/src/*"],
       "story-submission/*": ["story-submission/src/*"]
@@ -25,9 +26,9 @@
   },
   "include": [
     "src",
-    "shared",
     "admin-page/src",
     "enter-the-arena/src",
-    "story-submission/src"
-  ]
+    "story-submission/src",
+    "shared/*"
+, "admin-page/index.tsx"  ]
 }

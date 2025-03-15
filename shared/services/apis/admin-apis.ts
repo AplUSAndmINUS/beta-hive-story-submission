@@ -1,10 +1,10 @@
 import { axiosInstance } from './story-apis';
 
 // import { CALENDAR_EVENTS, CONTENT_WARNINGS, PROMPT_SELECTIONS } from '../constants/admin-constants';
-import { betaHIVESchema } from '../models/betaHIVE-selection.types';
-import { promptsSchema } from '../models/prompt-selection.types';
-import { contentWarningsSchema } from '../models/content-warnings.types';
-import { calendarSchema } from '../../components/calendar/calendar.types';
+import { betaHIVESchema } from 'shared/services/models/betaHIVE-selection.types';
+import { promptsSchema } from 'shared/services/models/prompt-selection.types';
+import { contentWarningsSchema } from 'shared/services/models/content-warnings.types';
+import { calendarSchema } from 'shared/services/models/calendar.types';
 
 // Function to get all game content to update the Redux store w/ wp_options table
 export const getAllGameContent = async (): Promise<boolean> => {
@@ -35,7 +35,9 @@ export const getAllPrompts = async (): Promise<promptsSchema[] | null> => {
 };
 
 // Function to get content warnings
-export const getContentWarnings = async (): Promise<contentWarningsSchema[] | null> => {
+export const getContentWarnings = async (): Promise<
+  contentWarningsSchema[] | null
+> => {
   try {
     const response = await axiosInstance.get('/content-warnings');
     return response.data;
@@ -49,7 +51,9 @@ export const getContentWarnings = async (): Promise<contentWarningsSchema[] | nu
 };
 
 // Function to get all calendar events
-export const getAllCalendarEvents = async (): Promise<calendarSchema[] | null> => {
+export const getAllCalendarEvents = async (): Promise<
+  calendarSchema[] | null
+> => {
   try {
     const response = await axiosInstance.get('/calendar');
     return response.data;
@@ -63,7 +67,9 @@ export const getAllCalendarEvents = async (): Promise<calendarSchema[] | null> =
 };
 
 // Function to update all calendar events
-export const updateCalendarEvents = async (updatedEvents: calendarSchema[]): Promise<calendarSchema[] | null> => {
+export const updateCalendarEvents = async (
+  updatedEvents: calendarSchema[]
+): Promise<calendarSchema[] | null> => {
   try {
     const response = await axiosInstance.put('/calendar', updatedEvents);
     return response.data;
@@ -78,7 +84,9 @@ export const updateCalendarEvents = async (updatedEvents: calendarSchema[]): Pro
 };
 
 // Function to update all prompts
-export const updatePrompts = async (updatedPrompts: promptsSchema[]): Promise<promptsSchema[] | null> => {
+export const updatePrompts = async (
+  updatedPrompts: promptsSchema[]
+): Promise<promptsSchema[] | null> => {
   try {
     const response = await axiosInstance.put('/prompts', updatedPrompts);
     return response.data;
@@ -93,9 +101,14 @@ export const updatePrompts = async (updatedPrompts: promptsSchema[]): Promise<pr
 };
 
 // Function to update content warnings
-export const updateContentWarnings = async (updatedWarnings: contentWarningsSchema[]): Promise<contentWarningsSchema[] | null> => {
+export const updateContentWarnings = async (
+  updatedWarnings: contentWarningsSchema[]
+): Promise<contentWarningsSchema[] | null> => {
   try {
-    const response = await axiosInstance.put('/content-warnings', updatedWarnings);
+    const response = await axiosInstance.put(
+      '/content-warnings',
+      updatedWarnings
+    );
     return response.data;
   } catch (error) {
     console.error('Error updating content warnings:', error);
@@ -107,9 +120,10 @@ export const updateContentWarnings = async (updatedWarnings: contentWarningsSche
   // return CONTENT_WARNINGS;
 };
 
-
 // Function to update number of losses
-export const updateNumOfLosses = async (numOfLosses: number): Promise<number | null> => {
+export const updateNumOfLosses = async (
+  numOfLosses: number
+): Promise<number | null> => {
   try {
     const response = await axiosInstance.put('/num-of-losses', { numOfLosses });
     return response.data;
@@ -124,9 +138,13 @@ export const updateNumOfLosses = async (numOfLosses: number): Promise<number | n
 };
 
 // Function to update countdown date
-export const updateCountdownDate = async (countdownDate: string): Promise<string | null> => {
+export const updateCountdownDate = async (
+  countdownDate: string
+): Promise<string | null> => {
   try {
-    const response = await axiosInstance.put('/countdown-date', { countdownDate });
+    const response = await axiosInstance.put('/countdown-date', {
+      countdownDate,
+    });
     return response.data;
   } catch (error) {
     console.error('Error updating countdown date:', error);
@@ -139,9 +157,13 @@ export const updateCountdownDate = async (countdownDate: string): Promise<string
 };
 
 // Function to update min word count
-export const updateMinWordCount = async (minWordCount: number): Promise<number | null> => {
+export const updateMinWordCount = async (
+  minWordCount: number
+): Promise<number | null> => {
   try {
-    const response = await axiosInstance.put('/min-word-count', { minWordCount });
+    const response = await axiosInstance.put('/min-word-count', {
+      minWordCount,
+    });
     return response.data;
   } catch (error) {
     console.error('Error updating min word count:', error);
@@ -154,9 +176,13 @@ export const updateMinWordCount = async (minWordCount: number): Promise<number |
 };
 
 // Function to update max word count
-export const updateMaxWordCount = async (maxWordCount: number): Promise<number | null> => {
+export const updateMaxWordCount = async (
+  maxWordCount: number
+): Promise<number | null> => {
   try {
-    const response = await axiosInstance.put('/max-word-count', { maxWordCount });
+    const response = await axiosInstance.put('/max-word-count', {
+      maxWordCount,
+    });
     return response.data;
   } catch (error) {
     console.error('Error updating max word count:', error);
@@ -169,7 +195,9 @@ export const updateMaxWordCount = async (maxWordCount: number): Promise<number |
 };
 
 // Function to update beta hives
-export const updateBetaHIVES = async (updatedBetaHIVES: betaHIVESchema[]): Promise<betaHIVESchema[] | null> => {
+export const updateBetaHIVES = async (
+  updatedBetaHIVES: betaHIVESchema[]
+): Promise<betaHIVESchema[] | null> => {
   try {
     const response = await axiosInstance.put('/beta-hives', updatedBetaHIVES);
     return response.data;
@@ -184,9 +212,13 @@ export const updateBetaHIVES = async (updatedBetaHIVES: betaHIVESchema[]): Promi
 };
 
 // Function to update minimum prompt selections
-export const updateMinPromptSelections = async (minPromptSelections: number): Promise<number | null> => {
+export const updateMinPromptSelections = async (
+  minPromptSelections: number
+): Promise<number | null> => {
   try {
-    const response = await axiosInstance.put('/min-prompt-selections', { minPromptSelections });
+    const response = await axiosInstance.put('/min-prompt-selections', {
+      minPromptSelections,
+    });
     return response.data;
   } catch (error) {
     console.error('Error updating minimum prompt selections:', error);
@@ -197,4 +229,3 @@ export const updateMinPromptSelections = async (minPromptSelections: number): Pr
   // const minPromptSelections = 4;
   // return minPromptSelections; --> Cannot be done from APIs due to store reducer needed
 };
-

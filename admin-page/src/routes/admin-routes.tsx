@@ -1,11 +1,6 @@
-import { NonIndexRouteObject } from 'react-router-dom';
-
 import { AdminPage } from '../pages/admin/admin';
-import NotFound from '../pages/404/404';
-
-export interface Routes extends NonIndexRouteObject {
-  name: string;
-}
+import { Routes } from 'shared/services/models/routes.types';
+import NotFound from 'shared/pages/404/404';
 
 export const adminRoutes: Routes[] = [
   {
